@@ -1,0 +1,15 @@
+<?php
+
+echo "Hello World. Today is " . date('d/m/Y');
+echo " and it's " . date('H:i:s');
+
+echo "      . Test: " . date("H:i:s a") . " " . date("M");
+
+# y means short year:  19
+# Y means full year: 2019
+# m means month number. M means month name abbreviated.
+# H means 24 hours format.
+# i means minutes.
+# Apparently it is OK to use double quotes.
+# a will display am or pm.
+# A will display AM or PM.
