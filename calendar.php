@@ -1,22 +1,51 @@
 <?php
+	date_default_timezone_set ("America/Bahia");
+	
 	function greetings()
 	{
 		echo "Good ";
 		$time = date("H");
 		$date = date("d/m/Y");
 		
-		if ($time >= 12) echo "Afternoon.";
-		elseif ($time >= 18) echo "Evening.";
-		else echo "Morning.";
+		if ($time <= 12) echo "Morning";
+		elseif ($time <= 18) echo "Afternoon";
+		else echo "Evening";
 		
-		echo "<br>Today is $date.";
+		echo ".<br>Today is $date.<br><h3>January</h3>";
 	}
 	
 	function line($week)
 	{
 		# get current day
 		$day = date("d");
+		$total = 7;
+		$boldS = "<b>";
+		$boldE = "</b>";
 		
+		echo "<tr>";
+		for ($i = 0; $i < $total; $i++)
+		{
+			if (isset($week[$i]) && $week[$i] > 0)
+			{
+				echo "<td align='center'>";
+				if ($week[$i] == $day)
+					echo "<b>";
+				
+				if ($i == 0) // Sundays
+					echo "<font color='red'>{$week[$i]}</font>";
+				elseif ($i == $total -1) // Saturdays
+					echo "<font color='blue'>{$week[$i]}</font>";
+				else
+					echo "{$week[$i]}";
+				
+				if ($week[$i] == $day)
+					echo "</b>";
+				echo "</td>"; 
+			}
+			else
+				echo "<td></td>";
+		}
+		/*
 		$ac = 0;
 		echo "<tr>";
 		
@@ -43,14 +72,14 @@
 			}
 		}
 		echo "</tr>";
+		*/
 	}
 	
 	function calendar()
 	{
-		$day = 1;
 		$week = array();
 		
-		while ($day <= 31)
+		for ($day = -1; $day <= 31; $day++)
 		{
 			array_push($week, $day);
 			
@@ -59,8 +88,8 @@
 				line($week);
 				$week = array();
 			}
-			$day++;
-		}
+		}			
+		
 		line($week);
 	}
 	
