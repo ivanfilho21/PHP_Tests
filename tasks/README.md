@@ -10,7 +10,7 @@ For readability purposes, one should not use curly braces to open or close PHP c
 ```php
 ...
 <?php foreach ($array as $a) : ?>
-  <h3><php? echo "Content: " . $a; ?></h3>
+  <h3><?php echo "Content: " . $a; ?></h3>
 <?php endforeach; ?>
 ```
 > Example of the same code with curly braces:
