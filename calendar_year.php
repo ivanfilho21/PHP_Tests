@@ -26,9 +26,15 @@
 		{
 			if (isset($week[$i]) && $week[$i] > 0)
 			{
-				echo "<td align='center'>";
-				if ($week[$i] == $day && $month == $current_month)
+				// If the day equals the current day and month, background blue and bold text
+				$day_month_condition = $week[$i] == $day && $month == $current_month;
+				if ($day_month_condition)
+				{
+					echo "<td align='center' bgcolor='#CEE3F6'>";
 					echo "<b>";
+				}
+				else
+					echo "<td align='center'>";
 				
 				if ($i == 0) // Sundays
 					echo "<font color='red'>{$week[$i]}</font>";
@@ -37,7 +43,7 @@
 				else
 					echo "{$week[$i]}";
 				
-				if ($week[$i] == $day)
+				if ($day_month_condition)
 					echo "</b>";
 				echo "</td>"; 
 			}
@@ -103,12 +109,10 @@
 	
 	for ($i = 0; $i < count($months); $i++)
 	{
-		echo "<h3>{$months[$i][0]}</h3><br>";
+		echo "<h3>{$months[$i][0]}</h3>";
 		echo "<table border='1'>";
 		names_of_day(true);
-		$starting_day = calendar(1 - $starting_day, $months[$i][1], ($i + 1));
-		#echo "<br> {$starting_day}";
-		
+		$starting_day = calendar(1 - $starting_day, $months[$i][1], ($i + 1));		
 		echo "</table>";
 	}
 ?>
