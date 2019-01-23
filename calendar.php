@@ -19,8 +19,6 @@
 		# get current day
 		$day = date("d");
 		$total = 7;
-		$boldS = "<b>";
-		$boldE = "</b>";
 		
 		echo "<tr>";
 		for ($i = 0; $i < $total; $i++)
@@ -45,34 +43,6 @@
 			else
 				echo "<td></td>";
 		}
-		/*
-		$ac = 0;
-		echo "<tr>";
-		
-		while ($ac < count($week))
-		{
-			echo "<th>";
-			
-			if ($ac == 0)
-				echo "<font color='red'>$week[$ac]</font>";
-			elseif ($ac == 6)
-				echo "<font color='blue'>$week[$ac]</font>";
-			else
-				echo "$week[$ac]";
-			
-			echo "</th>";
-			$ac++;
-		}
-		if ($ac != 0)
-		{
-			while ($ac < 7)
-			{
-				echo "<th></th>";
-				$ac++;
-			}
-		}
-		echo "</tr>";
-		*/
 	}
 	
 	function calendar()
