@@ -2,7 +2,29 @@
 > Short description of used commands and concepts:
 
 ### Foreach
-* This command goes through all indexes of an array variable. It assigns each index to a temporary variable.
+This command goes through all indexes of an array variable. It assigns each index to a temporary variable.
+
+### SuperGlobals
+There are some global variables that can be accessed by any page, function, class, etc. in PHP. They are called "superglobals". $_GET and $_SESSION are two of the superglobals used in "tasks.php".
+
+#### $_GET:
+* It is an array of variables passed to the current PHP script via the URL parameters.
+#### $_SESSION:
+* It is an array of variables available to the current script.
+##### Example:
+```php
+<?php
+  session_start(); # This initializes the session array.
+  
+  ...
+  
+  # To assign values
+  if (isset($_GET['task_name']))
+  {
+    $_SESSION['session'][] = $_GET['task_name']; # Session is assigned with the $_GET array values.
+  }
+?>
+```
 
 ### Good practices:
 For readability purposes, one should not use curly braces to open or close PHP commands when these codes are mixed with HTML markup codes.
