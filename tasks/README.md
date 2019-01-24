@@ -1,5 +1,5 @@
 # Task Manager
-> Short description of used commands and concepts:
+> Short description of commands, concepts and good practices used in "tasks.php".
 
 ### Foreach
 This command goes through all indexes of an array variable. It assigns each index to a temporary variable.
@@ -7,10 +7,10 @@ This command goes through all indexes of an array variable. It assigns each inde
 ### SuperGlobals
 There are some global variables that can be accessed by any page, function, class, etc. in PHP. They are called "superglobals". $_GET and $_SESSION are two of the superglobals used in "tasks.php".
 
-#### $_GET:
-* It is an array of variables passed to the current PHP script via the URL parameters.
-#### $_SESSION:
-* It is an array of variables available to the current script.
+#### $_GET
+* An array of variables passed to the current PHP script via the URL parameters.
+#### $_SESSION
+* An array of variables available to the current script. This uses cookies to store sessions.
 ##### Example:
 ```php
 <?php
@@ -44,3 +44,6 @@ For readability purposes, one should not use curly braces to open or close PHP c
   }
 ?>
 ```
+
+## Author:
+> Ivanfilho21
