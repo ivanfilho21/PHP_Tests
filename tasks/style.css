@@ -15,26 +15,26 @@ h1
 
 label
 {
-	display: block;
+	display: inline-block;
+	margin: 0 12px 0 0;
 }
 
 input[type=text],
 textarea
 {
-	width: 100%;
 	border: 0px;
 	margin: 6px auto;
 	padding: 6px;
 	border-radius: 8px;
-	
 }
 
 input[type=submit]
 {
-	float: right;
-	clear: both;
 	padding: 6px 12px 6px 12px;
 	margin: 8px 0 0 0;
+	display: block;
+	float: right;
+	clear: both;
 }
 
 table
