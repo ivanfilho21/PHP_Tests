@@ -37,9 +37,7 @@ For readability purposes, one should not use curly braces to open or close PHP c
 ```
 > Example of the same code with curly braces:
 ```php
-
 ...
-
 <?php
   foreach ($array as $a) {
     echo "<h3>Content: {$a}</h3>";
