@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <html>
 	<head>
 		<title>Task Manager</title>
@@ -19,11 +20,16 @@
 		</form>
 		
 		<?php
-			$task_list = array();
-			
 			if (isset($_GET['task_name']))
 			{
-				$task_list[] = $_GET['task_name'];
+				$_SESSION['task_list'][] = $_GET['task_name'];
+			}
+		
+			$task_list = array();
+			
+			if (isset($_SESSION['task_list']))
+			{
+				$task_list = $_SESSION['task_list'];
 			}
 		?>
 		
@@ -37,6 +43,7 @@
 					<td><?php echo $task; ?></td>
 				</tr>
 			<?php endforeach; ?>
+			
 		</table>
 		
 	</body>
