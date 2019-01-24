@@ -1,0 +1,54 @@
+body
+{
+	font-family: "Segoe UI Semibold", Verdana, Sans-serif;
+	margin: 5% auto;
+	width: 80%;
+	background-color: #deecef;
+}
+
+h1
+{
+	color: navy;
+	text-align: center;
+	font-weight: bold;
+}
+
+label
+{
+	display: block;
+}
+
+input[type=text],
+textarea
+{
+	width: 100%;
+	border: 0px;
+	margin: 6px auto;
+	padding: 6px;
+	border-radius: 8px;
+	
+}
+
+input[type=submit]
+{
+	float: right;
+	clear: both;
+	padding: 6px 12px 6px 12px;
+	margin: 8px 0 0 0;
+}
+
+table
+{
+	width: 100%;
+}
+
+table th
+{
+	font-size: 24px;
+	background-color: #97b9c1;
+}
+
+table td
+{
+	border-bottom: 1px solid #333333;
+}

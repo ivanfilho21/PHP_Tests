@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<title>Task Manager</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 
 	<body>
@@ -35,7 +36,7 @@
 		
 		<table>
 			<tr>
-				<th>Your Task</th>
+				<th>Created Tasks</th>
 			</tr>
 			
 			<?php foreach ($task_list as $task) : ?>
