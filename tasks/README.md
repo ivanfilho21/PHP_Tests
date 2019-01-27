@@ -1,5 +1,5 @@
 # Task Manager
-> Short description of commands, concepts and good practices I used in "tasks.php".
+> A very simple PHP script I made to learn some basic commands, concepts ands good practices.
 
 ## What I learned:
 1. Basic Commands.
