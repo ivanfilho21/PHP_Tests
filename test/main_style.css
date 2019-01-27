@@ -1,11 +1,20 @@
-* { box-sizing: border-box; }
+html
+{
+	margin: 0;
+}
 
 body
 {
+	background-color: lightBlue;
+	margin: 0;
+}
+
+.content
+{
 	background-color: white;/*#222;*/
 	color: #222;
-	width: 90%;
-	margin: 0 auto;
+	margin: 0;
+	padding-top: 12px;
 }
 
 h1
@@ -45,17 +54,42 @@ input[type=submit]
 	border-style: solid;
 	border-width: 0px;
 }
+input[type=submit]:hover
+{
+	background-color: dodgerblue;
+	color: #EEE;
+	cursor: pointer;
+}
+
+footer
+{
+	background-color: lightBlue;
+	padding: 1rem;
+	margin-top: 60px;
+	height: 160px;
+}
 
 .buttonHolder
 {
 	text-align: center;
-	margin: 12px auto 0px auto;
+	margin: 12px auto;
+}
+
+.optionsHolder
+{
+	text-align: center;
+}
+
+.optionsHolder p
+{
+	display: inline-block;
+	margin: 12px 18px;
 }
 
 .iconCredits
 {
-	text-align: center;
 	font-size: 80%;
+	text-align: center;
 }
 
 

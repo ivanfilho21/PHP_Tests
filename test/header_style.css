@@ -1,0 +1,47 @@
+*
+{
+	font-family: Segoe UI, Consolas, Verdana;
+	box-sizing: border-box;
+}
+
+a
+{
+	color: dodgerblue;
+	text-decoration: none;
+}
+a:visited
+{
+	color: dodgerblue;
+}
+
+ul
+{
+	list-style-type: none; /* Removes the bullets */
+	text-align: center;
+	margin: 0 0 0px 0;
+	padding: 0;
+	width: 100%;
+	background-color: lightBlue;
+}
+
+li
+{
+	display: inline-block; /* Horizontal Alignment */
+	margin-left: -4px;
+	margin-right: -1px;
+}
+
+li a
+{
+	display: block; /* Makes the whole link clickable */
+	text-align: center;
+	padding: 20px 32px;
+	text-decoration: none;
+	color: #555;
+}
+
+li a:hover
+{
+	background-color: dodgerblue;
+	color: white;
+}
