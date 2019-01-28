@@ -9,10 +9,14 @@ body
 	margin: 0;
 }
 
+.error
+{
+	color: red;
+}
+
 .content
 {
-	background-color: white;/*#222;*/
-	color: #222;
+	background-color: white;
 	margin: 0;
 	padding-top: 12px;
 }
@@ -47,17 +51,19 @@ input[type=password]
 
 input[type=submit]
 {
-	background-color: lightBlue;
-	color: #555;
+	background-color: dodgerblue;
+	color: white;
 	padding: 8px 38px;
 	border-radius: 16px;
 	border-style: solid;
 	border-width: 0px;
+	transition: .2s;
+	transition-timing-function: ease-in-out;
 }
 input[type=submit]:hover
 {
-	background-color: dodgerblue;
-	color: #EEE;
+	background-color: lightBlue;
+	color: #555;
 	cursor: pointer;
 }
 

@@ -6,12 +6,12 @@
 
 a
 {
-	color: dodgerblue;
+	color: blue;
 	text-decoration: none;
 }
 a:visited
 {
-	color: dodgerblue;
+	color: blue;
 }
 
 ul
@@ -38,6 +38,8 @@ li a
 	padding: 20px 32px;
 	text-decoration: none;
 	color: #555;
+	transition: .3s;
+	transition-timing-function: ease-out;
 }
 
 li a:hover
