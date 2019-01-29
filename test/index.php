@@ -2,9 +2,9 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	
+	<link rel="stylesheet" href="main_style.css">
 </head>
 <body>
-	<h1>Testing</h1>
+	<h2>Testing</h2>
 </body>
 </html>
