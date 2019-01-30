@@ -1,0 +1,29 @@
+.dataHolder
+{
+	width: 80%;
+	margin: 0 auto;
+}
+
+table
+{
+	border-collapse: collapse;
+	margin: 12px 0;
+}
+
+thead
+{
+	background-color: #799b9e;
+	color: white;
+	text-align: center;
+}
+
+th
+{
+	padding: 1%;
+	width: 200px;
+}
+
+.spRow
+{
+	background-color: #d3e9ea;
+}

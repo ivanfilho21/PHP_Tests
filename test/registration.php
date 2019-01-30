@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="main_style.css">
+	<link rel="stylesheet" type="text/css" href="styles/main_style.css">
 </head>
 <body>
 	<?php
@@ -83,16 +83,7 @@
 	<p><a href="login.php">Login to Your Account</a></p>
 	</div>
 	
-	<footer class=clear>
-		<!-- Credits -->
-		<div class="iconCredits">
-			<br>
-			Icons made by
-			<a href="https://www.freepik.com/" title="Freepik">Freepik</a>
-			from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-			is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
-		</div>
-	</footer>
+	<?php include "footer.html"; ?>
 	</div>
 </body>
 </html>
