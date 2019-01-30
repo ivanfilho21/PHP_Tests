@@ -1,0 +1,29 @@
+body
+{
+	font-family: "Segoe UI", "open-sans", tahoma, arial;
+}
+  
+table
+{
+	border-collapse: collapse;
+	text-align: center;
+}
+ 
+thead
+{
+	background-color: #dd064e;
+	color: white;
+}
+ 
+th
+{
+	padding: 12px 24px;
+	border: none;
+}
+ 
+#currentDay
+{
+	background-color: #efd5de;
+	font-weight: bold;
+	text-align: center;
+}
