@@ -1,4 +1,4 @@
 # Test
-> A simple CRUD and Registration/Login website with PHP.
+> A simple CRUD and Registration/Login website with PHP and MySQL.
 
 ### Still in development.
