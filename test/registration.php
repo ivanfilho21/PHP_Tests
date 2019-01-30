@@ -31,7 +31,7 @@
 	
 	function format_input($data)
 	{
-		$data = trim($data); # Removes additional blank spaces.
+		$data = trim($data); # Removes additional blank spaces;
 		$data = stripslashes($data); # Removes slashes (\);
 		$data = htmlspecialchars($data); # Removes special characters.
 		return $data;
