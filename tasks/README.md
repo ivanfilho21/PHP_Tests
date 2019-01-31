@@ -82,5 +82,5 @@ For readability purposes, one should not use curly braces to open or close PHP c
 ?>
 ```
 
-## Author:
+### Author:
 > Ivan Filho
