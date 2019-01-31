@@ -1,8 +1,6 @@
 # Task Manager
 > A very simple PHP script I made to learn some basic commands, concepts ands good practices.
 
-### (Observation: This is not complete yet)
-
 ## What I learned:
 1. Basic Commands.
 1. Concepts.
