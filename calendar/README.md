@@ -1,5 +1,5 @@
 # Calendar
-A simple calendar of 2019 made with HTML, CSS and PHP.
+> A simple calendar of 2019 made with HTML, CSS and PHP.
 
 <div align="center">
   <h3> Screenshot of "calendar_year.php" </h3>
