@@ -127,13 +127,5 @@
 		}
 	?>
 
-	<?php names_of_day(true); ?>
-		
-	<?php
-		for ($i = 0; $i < 12; $i++)
-		{
-			calendar("Jan");
-		}
-	?>
 </body>
 </html>
