@@ -3,7 +3,7 @@
 
 <div align="center">
   <h3> Screenshot of "calendar_year.php" </h3>
-  <img src="https://i.postimg.cc/7LNDFHH8/calendar2019.png" </img> 
+  <img src="https://i.postimg.cc/7LNDFHH8/calendar2019.png" alt="Calendar"/> 
 </div>
 
 ### Author:
