@@ -1,10 +1,8 @@
 <?php
-session_start();
+$fields = array("name", "date_creation", "deadline", "priority", "description", "finished");
 include "database.php";
+include "template_db.php";
 
-$fields = array("name", "date_creation", "deadline",
-			"priority", "description", "finished");
-	
 if (isset($_GET["name"]) && $_GET["name"] != "")
 {
 	$task = array();
@@ -13,8 +11,7 @@ if (isset($_GET["name"]) && $_GET["name"] != "")
 	{
 		if (isset($_GET[$field]))
 		{
-			echo $_GET[$field] . " ";
-			
+			# echo $_GET[$field] . " ";
 			$task[$field] = $_GET[$field];
 		}
 		else
@@ -32,8 +29,5 @@ if (isset($_GET["name"]) && $_GET["name"] != "")
 	}
 	#
 	
-	# $_SESSION['tasks'][] = $task;
 	save_task($connection, $task);
 }
-
-include "template_db.php";
