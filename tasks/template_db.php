@@ -19,25 +19,20 @@
 				
 				<label>
 					Created in:
-					<input type="text" name="date_of_creation" />
+					<input type="date" name="date_creation" value="<?php echo date("Y-m-d"); ?>" />
 				</label>
 				
 				<label>
 					Deadline:
-					<input type="text" name="deadline" />
+					<input type="date" name="deadline" value="<?php echo date("Y-m-d"); ?>" />
 				</label>
 				
 				<fieldset>
 					<legend>Priority:</legend>
 					<label>
-						<input type="radio" name="priority" value="low" checked />
-						Low
-						
-						<input type="radio" name="priority" value="medium" />
-						Medium
-						
-						<input type="radio" name="priority" value="high" />
-						High
+						<input type="radio" name="priority" value="0" checked />Low
+						<input type="radio" name="priority" value="1" />Medium		
+						<input type="radio" name="priority" value="2" />High
 					</label>
 				</fieldset>
 				
@@ -47,7 +42,7 @@
 				</label>
 				
 				<label>
-					<input type="checkbox" name="finished" value="yes" />
+					<input type="checkbox" name="finished" value="1" />
 					Task is Already Finished.
 				</label>
 				
@@ -86,6 +81,14 @@
 						case 2: $value = "High"; break; 
 					}
 					$tasks[$i]["priority"] = $value;
+					
+					$dateArray = explode("-", $tasks[$i]["date_creation"]);
+					if (count($dateArray) > 1)
+						$tasks[$i]["date_creation"] = $dateArray[2] . "/" . $dateArray[1] . "/" . $dateArray[0];
+					
+					$dateArray = explode("-", $tasks[$i]["deadline"]);
+					if (count($dateArray) > 1)
+						$tasks[$i]["deadline"] = $dateArray[2] . "/" . $dateArray[1] . "/" . $dateArray[0];
 				}
 				
 				return $tasks;
@@ -101,9 +104,10 @@
 			<?php endforeach; ?>
 			</tr>
 			
+			
 			<?php foreach ($task_list as $task) : ?>
 				<tr>
-				<?php foreach ($fields as $field)  : ?>
+				<?php foreach ($fields as $field) : ?>
 					<td><?php echo $task[$field]; ?></td>
 				<?php endforeach; ?>
 				</tr>
