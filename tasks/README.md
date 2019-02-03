@@ -8,6 +8,8 @@ A simple PHP and MySQL project.
 ## What needs to be done?
 * Update a task.
 * Delete a task.
+* A function to create the database if it doesn't exist.
+* A function to create tables if they don't exist.
 
 ### Screenshot
 <div align="center">
