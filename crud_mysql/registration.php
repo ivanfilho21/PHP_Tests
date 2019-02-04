@@ -1,4 +1,4 @@
-<?php include "header.html"; ?>
+<?php include "header.html"; include "database/database.php"; ?>
 
 <!DOCTYPE html!>
 <html>
@@ -12,19 +12,65 @@
 	$fields = array("username", "password", "password_confirm");
 	$user_info = array();
 	
+	# SAVING DATA
 	if ($_SERVER["REQUEST_METHOD"] == "POST")
 	{
-		foreach ($fields as $fd)
-		{
-			$data = $_POST[$fd];
+		# Debugging $_POST;
+		/*
+		foreach ($_POST as $p)
+			echo $p . " ";
+		*/
 			
-			if (empty($data))
+		$res = true;
+		$name = format_input($_POST["username"]);
+		
+		if (empty($name))
+		{
+			$error_msgs["username"] = "Username cannot be empty.";
+			$res = false;
+		}
+		if (strlen($name) > 10)
+		{
+			$error_msgs["username"] = "Username is too long.";
+			$res = false;
+		}
+		
+		$pass = format_input($_POST["password"]);
+		
+		if (empty($pass))
+		{
+			$error_msgs["password"] = "Password cannot be empty.";
+			$res = false;
+		}
+		if (strlen($pass) > 20)
+		{
+			$error_msgs["password"] = "Password is too long.";
+			$res = false;
+		}
+		
+		$passConf = format_input($_POST["password_confirm"]);
+		
+		if (empty($passConf))
+		{
+			$error_msgs["password_confirm"] = "Password cannot be empty.";
+			$res = false;
+		}
+		
+		if ($res)
+		{
+			if ($pass == $passConf)
 			{
-				$error_msgs[$fd] = "This field should not be empty.";
+				$user_info = array();
+				$user_info["username"] = $name;
+				$user_info["password"] = $pass;
+				
+				# Add user in database
+				save_user($user_info);
 			}
 			else
 			{
-				$user_array[$fd] = format_input($data);
+				$error_msgs["password_confirm"] = "Passwords do not match.";
+				$res = false;
 			}
 		}
 	}

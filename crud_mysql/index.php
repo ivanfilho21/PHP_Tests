@@ -1,4 +1,4 @@
-<?php include "header.html"; ?>
+<?php include "header.html"; include "database/database.php"; ?>
 
 <!DOCTYPE html!>
 <html>
