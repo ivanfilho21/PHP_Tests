@@ -1,4 +1,4 @@
-<?php include "header.html"; include "database/database.php"; ?>
+<?php include "header.html"; include "database/database.php"; include "util.php"; ?>
 
 <!DOCTYPE html!>
 <html>
@@ -12,7 +12,6 @@
 	$fields = array("username", "password", "password_confirm");
 	$user_info = array();
 	
-	# SAVING DATA
 	if ($_SERVER["REQUEST_METHOD"] == "POST")
 	{
 		# Debugging $_POST;
@@ -20,15 +19,31 @@
 		foreach ($_POST as $p)
 			echo $p . " ";
 		*/
-			
-		$res = true;
 		$name = format_input($_POST["username"]);
+		$pass = format_input($_POST["password"]);
+		$passConf = format_input($_POST["password_confirm"]);
 		
-		if (empty($name))
+		$res = validation($name, $pass, $passConf);
+		
+		if ($res)
 		{
-			$error_msgs["username"] = "Username cannot be empty.";
-			$res = false;
+			$user_info = array();
+			$user_info["username"] = $name;
+			$user_info["password"] = $pass;
+				
+			# Add user in database
+			save_user($connection, $user_info);
 		}
+	}
+	
+	function validation($name, $pass, $passConf)
+	{
+		global $error_msgs, $fields;
+		$res = true;
+		
+		$res = check_empty_fields($fields);
+		
+		# Check username length - max 10
 		if (strlen($name) > 10)
 		{
 			$error_msgs["username"] = "Username is too long.";
@@ -36,71 +51,30 @@
 		}
 		else
 		{
-			$res = check_username($connection, $name);
+			$res = !check_username($name);
+			
+			# Check if username exists
 			if (!$res)
 				$error_msgs["username"] = "This username is already taken.";
 		}
 		
-		$pass = format_input($_POST["password"]);
-		
-		if (empty($pass))
-		{
-			$error_msgs["password"] = "Password cannot be empty.";
-			$res = false;
-		}
+		# Check password length - max 20
 		if (strlen($pass) > 20)
 		{
 			$error_msgs["password"] = "Password is too long.";
 			$res = false;
 		}
 		
-		$passConf = format_input($_POST["password_confirm"]);
-		
-		if (empty($passConf))
+		# Check if passwords match
+		if ($res && ($pass != $passConf))
 		{
-			$error_msgs["password_confirm"] = "Password cannot be empty.";
+			$error_msgs["password_confirm"] = "Passwords do not match.";
 			$res = false;
 		}
 		
-		if ($res)
-		{
-			if ($pass == $passConf)
-			{
-				$user_info = array();
-				$user_info["username"] = $name;
-				$user_info["password"] = $pass;
-				
-				# Add user in database
-				save_user($connection, $user_info);
-			}
-			else
-			{
-				$error_msgs["password_confirm"] = "Passwords do not match.";
-				$res = false;
-			}
-		}
+		return $res;
 	}
 	
-	function check_username($connection, $name)
-	{
-		$users = get_users($connection);
-		
-		for ($i = 0; $i < count($users); $i++)
-		{
-			if ($users[$i]["username"] == $name)
-				return false;
-		}
-		
-		return true;
-	}
-	
-	function format_input($data)
-	{
-		$data = trim($data); # Removes additional blank spaces;
-		$data = stripslashes($data); # Removes slashes (\);
-		$data = htmlspecialchars($data); # Removes special characters.
-		return $data;
-	}
 	?>
 
 	<div class="content">

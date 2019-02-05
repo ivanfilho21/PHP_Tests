@@ -1,4 +1,4 @@
-<?php include "header.html"; ?>
+<?php include "header.html"; include "database/database.php"; include "util.php"; ?>
 
 <!DOCTYPE html!>
 <html>
@@ -9,33 +9,30 @@
 <body>
 	<?php
 	
-	$err_username = $err_password = "";
-	$username = $password = "";
+	$error_msgs = array();
+	$fields = array("username", "password");
+	$name = $_POST["username"];
+	$pass = $_POST["password"];
 	
-	if ($_SERVER["REQUEST_METHOD"] == "POST")
+	$res = validation($name, $pass);
+	
+	function validation($name, $pass)
 	{
-		if (empty($_POST["username"]))
-			$err_username = "Username is required.";
-		else
+		global $error_msgs, $fields;
+		$res = true;
+		
+		if ($_SERVER["REQUEST_METHOD"] == "POST")
 		{
-			$username = format_input($_POST["username"]);
+			$res = check_empty_fields($fields);
 		}
 		
-		if (empty($_POST["password"]))
-			$err_password = "Password is required.";
-		else
-		{
-			$password = format_input($_POST["password"]);
-		}
-	}
-	
-	function format_input($data)
-	{
-		$data = trim($data); # Removes additional blank spaces.
-		$data = stripslashes($data); # Removes slashes (\);
-		$data = htmlspecialchars($data); # Removes special characters.
-		return $data;
-	}
+		$res = check_username($name);
+		if (!$res)
+			$error_msgs["username"] = "Username does not exist.";
+		
+
+		return $res;
+	}	
 	?>
 
 	<div class="content">
@@ -48,11 +45,19 @@
 			<legend>Sign In</legend>
 			
 			<p><label>Username:</label></p>
-			<span class="error"><?php echo $err_username; ?></span>
+			<span class="error">
+			<?php
+			if (isset($error_msgs["username"]))
+				echo $error_msgs["username"]; ?>
+			</span>
 			<input type="text" name="username">
 			
 			<p><label>Password:</label></p>
-			<span class="error"><?php echo $err_password; ?></span>
+			<span class="error">
+			<?php
+			if (isset($error_msgs["password"]))
+				echo $error_msgs["password"]; ?>
+			</span>
 			<input type="password" name="password">
 			
 			<br>
