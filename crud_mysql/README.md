@@ -2,10 +2,11 @@
 > A simple CRUD and Registration/Login website with PHP and MySQL.
 
 ### What am I working on:
-* Sign Up page (already can Add users).
+* Sign In/Login page (needs to check if username and password are correct).
 
 ### Things I am learning:
 * Super global variable $_POST.
 * Inserting data into MySQL Database.
+* Retrieving data from MySQL Database.
 
 ### Still in development.
