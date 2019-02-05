@@ -6,6 +6,7 @@
 
 ### Things I am learning:
 * Super global variable $_POST.
+* global variables.
 * Inserting data into MySQL Database.
 * Retrieving data from MySQL Database.
 
