@@ -15,7 +15,7 @@ if (mysqli_connect_errno($connection))
 
 function save_task($connection, $task)
 {	
-	$fields = array("name", "date_creation", "deadline", "priority", "description", "finished");
+	global $fields; # fields was declared in 'tasks_db.php'
 			
 	$values = "";
 	$size = count($fields);
@@ -44,15 +44,6 @@ function save_task($connection, $task)
 		);
 	";
 	
-	# Old
-	/*
-			'{$task["name"]}',
-			CAST('{$task["date_creation"]}' AS DATE),
-			CAST('{$task["deadline"]}' AS DATE),
-			{$task["priority"]},
-			'{$task["description"]}',
-			{$task["finished"]}
-			*/
-	
-	mysqli_query($connection, $sql) or die(mysql_error());
+	mysqli_query($connection, $sql) or die("Query Failed.");
 }
+?>
