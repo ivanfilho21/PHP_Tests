@@ -34,6 +34,12 @@
 			$error_msgs["username"] = "Username is too long.";
 			$res = false;
 		}
+		else
+		{
+			$res = check_username($connection, $name);
+			if (!$res)
+				$error_msgs["username"] = "This username is already taken.";
+		}
 		
 		$pass = format_input($_POST["password"]);
 		
@@ -65,7 +71,7 @@
 				$user_info["password"] = $pass;
 				
 				# Add user in database
-				save_user($user_info);
+				save_user($connection, $user_info);
 			}
 			else
 			{
@@ -75,6 +81,19 @@
 		}
 	}
 	
+	function check_username($connection, $name)
+	{
+		$users = get_users($connection);
+		
+		for ($i = 0; $i < count($users); $i++)
+		{
+			if ($users[$i]["username"] == $name)
+				return false;
+		}
+		
+		return true;
+	}
+	
 	function format_input($data)
 	{
 		$data = trim($data); # Removes additional blank spaces;
@@ -82,7 +101,6 @@
 		$data = htmlspecialchars($data); # Removes special characters.
 		return $data;
 	}
-	
 	?>
 
 	<div class="content">
