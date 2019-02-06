@@ -1,7 +1,7 @@
 
 # Coding Style in PHP
 
-Websites that I use to learn more about basic coding styles used in PHP.
+Websites that I use to learn more about basic coding styles in PHP.
 
 ## Coding conventions/PHP
 <a href="https://www.mediawiki.org/wiki/Manual:Coding_conventions/PHP">
