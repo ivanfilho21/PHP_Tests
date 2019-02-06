@@ -10,26 +10,42 @@
 	<?php
 	
 	$error_msgs = array();
-	$fields = array("username", "password");
-	$name = $_POST["username"];
-	$pass = $_POST["password"];
-	
-	$res = validation($name, $pass);
-	
-	function validation($name, $pass)
+	$fields = array( "username", "password" );
+	$name = $pass = "";
+
+	if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" )
 	{
-		global $error_msgs, $fields;
+		$name = $_POST["username"];
+		$pass = $_POST["password"];
+	
+		$res = validation( $name, $pass );
+
+		if ( $res )
+		{
+			# TODO:
+			# set user data in a global.
+			# open Home page.
+			# Home page needs to check if user is logged.
+		}
+	}
+
+	
+	
+	function validation( $name, $pass )
+	{
+		global $connection, $error_msgs, $fields;
 		$res = true;
 		
-		if ($_SERVER["REQUEST_METHOD"] == "POST")
+		$res = check_empty_fields( $fields );
+
+		$user = check_login( $connection, $name, $pass );
+		if (isset($user))
 		{
-			$res = check_empty_fields($fields);
+			$loggedUserName = $user["username"];
+			$userIsLogged = true;
+
+			echo "<h3>Logged User: {$loggedUserName}</h3>";
 		}
-		
-		$res = check_username($name);
-		if (!$res)
-			$error_msgs["username"] = "Username does not exist.";
-		
 
 		return $res;
 	}	

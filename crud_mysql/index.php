@@ -1,4 +1,4 @@
-<?php include "header.html"; include "database/database.php"; ?>
+<?php include "header.html"; include "database/database.php"; include "util.php"; ?>
 
 <!DOCTYPE html!>
 <html>
@@ -10,7 +10,7 @@
 <body>
 	<div class="content">
 	
-		<h3>Logged User: Foobar<?php # TODO ?></h3>
+		<h3>Logged User: <?php echo "Foobar"; ?></h3>
 	
 		<h1>List</h1>
 		

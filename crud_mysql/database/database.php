@@ -13,6 +13,17 @@ if (mysqli_connect_errno($connection))
 	die();
 }
 
+function check_login($connection, $name, $pass)
+{
+	$sql = "SELECT * FROM users WHERE username = '{$name}' AND password = '{$pass}';";
+	
+	# debugging
+	# echo "<br>" . $sql;
+
+	$res = mysqli_query($connection, $sql);
+	return mysqli_fetch_assoc($res);
+}
+
 function get_users($connection)
 {	
 	$sql = "SELECT * FROM users";
@@ -21,7 +32,7 @@ function get_users($connection)
 	
 	if ($res == false) return $users;
 	
-	while ($u = mysqli_fetch_assoc($res))
+	while ( $u = mysqli_fetch_assoc($res) )
 	{
 		$users[] = $u;
 	}
@@ -62,4 +73,3 @@ function save_user($connection, $user)
 	
 	mysqli_query($connection, $sql) or die();
 }
-?>
