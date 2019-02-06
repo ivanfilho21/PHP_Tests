@@ -5,10 +5,10 @@
 * User registration/sign up (it adds a new user in database).
 * User login/sign in (it checks if username and password exist in database).
 
-### What am I working on:
+### What I'm working on:
 * Index page (Should be shown only when the user is signed up).
 
-### Things I am learning:
+### Things I'm learning:
 * Super global variable $_POST.
 * global variables.
 * Inserting data into MySQL Database (insert command).
