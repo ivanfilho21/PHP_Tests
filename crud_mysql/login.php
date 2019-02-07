@@ -29,14 +29,12 @@
 		}
 	}
 
-	
-	
 	function validation( $name, $pass )
 	{
 		global $connection, $error_msgs, $fields;
 		$res = true;
 		
-		$res = check_empty_fields( $fields );
+		# $res = check_empty_fields( $fields );
 
 		$user = check_login( $connection, $name, $pass );
 		if (isset($user))
@@ -45,6 +43,10 @@
 			$userIsLogged = true;
 
 			echo "<h3>Logged User: {$loggedUserName}</h3>";
+		}
+		else
+		{
+			$error_msgs["login"] = "Wrong username or password.";
 		}
 
 		return $res;
@@ -76,6 +78,12 @@
 			</span>
 			<input type="password" name="password">
 			
+			<span class="error">
+			<?php
+			if (isset($error_msgs["login"]))
+				echo $error_msgs["login"]; ?>
+			</span>
+
 			<br>
 			<div class="buttonHolder">
 				<input type="submit" value="Sign In">
