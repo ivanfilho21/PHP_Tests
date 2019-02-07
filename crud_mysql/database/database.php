@@ -13,6 +13,17 @@ if (mysqli_connect_errno($connection))
 	die();
 }
 
+# Returns true if the username exists in the database, false otherwise.
+function check_username_db($connection, $name)
+{
+	$sql = "SELECT * FROM users WHERE username = '{$name}';";
+	$res = mysqli_query($connection, $sql);
+	
+	if ( mysqli_fetch_assoc($res) != false) return true;
+	return false;
+}
+
+# Returns true if the user exists in the database, false otherwise.
 function check_login($connection, $name, $pass)
 {
 	$sql = "SELECT * FROM users WHERE username = '{$name}' AND password = '{$pass}';";
@@ -32,7 +43,7 @@ function get_users($connection)
 	
 	if ($res == false) return $users;
 	
-	while ( $u = mysqli_fetch_assoc($res) )
+	while ($u = mysqli_fetch_assoc($res))
 	{
 		$users[] = $u;
 	}
@@ -72,4 +83,11 @@ function save_user($connection, $user)
 	# echo $sql;
 	
 	mysqli_query($connection, $sql) or die();
+}
+
+function createTable($conn, $table, $fields)
+{
+	$sql = "CREATE TABLE {$table}";
+	echo $sql;
+	mysqli_query($conn, $sql) or die("<h2>Error creating table {$table}.</h2>");
 }

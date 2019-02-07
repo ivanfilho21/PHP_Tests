@@ -4,6 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<title>My Website - Sign Up</title>
 	<link rel="stylesheet" type="text/css" href="styles/main_style.css">
 </head>
 <body>
@@ -23,9 +24,9 @@
 		$pass = format_input($_POST["password"]);
 		$passConf = format_input($_POST["password_confirm"]);
 		
-		$res = validation($name, $pass, $passConf);
+		#$res = validation($name, $pass, $passConf);
 		
-		if ($res)
+		if (validate_login($name, $pass, $passConf))
 		{
 			$user_info = array();
 			$user_info["username"] = $name;
@@ -33,16 +34,19 @@
 				
 			# Add user in database
 			save_user($connection, $user_info);
+			echo "<h3>User added.</h3>";
 		}
 	}
-	
-	function validation($name, $pass, $passConf)
+
+	function validate_login($name, $pass, $passConf)
 	{
-		global $error_msgs, $fields;
+		global $connection, $error_msgs, $fields;
 		$res = true;
-		
+
 		$res = check_empty_fields($fields);
-		
+
+		# if (!$res) return false;
+
 		# Check username length - max 10
 		if (strlen($name) > 10)
 		{
@@ -51,30 +55,40 @@
 		}
 		else
 		{
-			$res = !check_username($name);
-			
-			# Check if username exists
-			if (!$res)
+			if (check_username_db($connection, $name))
+			{
+				# User already exists
 				$error_msgs["username"] = "This username is already taken.";
+				$res = false;
+			}				
 		}
-		
+
 		# Check password length - max 20
 		if (strlen($pass) > 20)
 		{
 			$error_msgs["password"] = "Password is too long.";
 			$res = false;
 		}
-		
-		# Check if passwords match
-		if ($res && ($pass != $passConf))
-		{
-			$error_msgs["password_confirm"] = "Passwords do not match.";
-			$res = false;
+		else {
+			# Check if password is the same as username or contains the username.
+			if ($pass == $name || (strpos($pass, $name) != false))
+			{
+				$error_msgs["password"] = "Your password may not contain your username.";
+				$res = false;
+			}
+			else
+			{
+				# Check if passwords match
+				if ($pass != $passConf)
+				{
+					$error_msgs["password_confirm"] = "Passwords do not match.";
+					$res = false;
+				}
+			}
 		}
 		
 		return $res;
 	}
-	
 	?>
 
 	<div class="content">
