@@ -1,7 +1,7 @@
 <?php
 
 $dbHost = "127.0.0.1";
-$dbUser = "tasksys";
+$dbUser = "ivan";
 $dbPass = "root";
 $dbName = "test_db";
 
@@ -90,8 +90,7 @@ function createTable($conn, $table, $fields)
 	$values = "";
 	foreach ($fields as $f)
 	{
-		if (!empty($f))
-			$values .= $f . ", ";
+		$values .= $f . ", ";
 	}
 	$values = substr($values, 0, strlen($values) - strlen(", "));
 	$sql = "CREATE TABLE {$table} ($values);";

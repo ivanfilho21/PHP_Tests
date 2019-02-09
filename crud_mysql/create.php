@@ -43,7 +43,7 @@
 		else
 		{
 			# Validation
-			if (validation())
+			if (validation() && count($attributes) > 0)
 			{
 				echo "<h2>Validation OK{$name}</h2>";
 				createTable($connection, $name, $attributes);
@@ -54,18 +54,95 @@
 
 	function validation()
 	{
-		global $name, $attributes, $error_msgs;
+		global $name, $attributes, $columns, $error_msgs;
 
 		$res = true;
 		$name = $_POST["table_name"];
+		$fields = array("name", "type", "length", "null", "pk");
+		echo "  TABLE: " . $name . "   ";
 		# ...
 
 		$res = checkEmptyFields(array("table_name"));
 		
 		# test
 		$col = array();
-		$col = $_POST["column"];
+		for ($i = 0; $i < $columns; $i++)
+		{
+			$col[] = $_POST["column".$i];			
+		}
+		foreach ($col as $index=>$value)
+		{
+			echo "[{$index}]:  ";
+			foreach ($value as $ind=>$v)
+				echo " {$ind}: " . $v;
+			echo "<br>";
+		}
 
+		foreach ($col as $index=>$value)
+		{
+			echo "<br>";
+			if (empty($value["name"]))
+			{
+				$res = false;
+				$error_msgs["name"] = "Can't be empty.";
+			}
+			else
+				$col[$index]["name"] = strtoupper($value["name"]) . " ";
+
+			#debug
+			#echo $value["name"] . "  ";
+
+			$col[$index]["type"] = strtoupper($value["type"]);
+			
+			#debug
+			#echo $value["type"] . "  ";
+
+			if ((int)$value["length"] < 0)
+			{
+				$res = false;
+				# err
+			}
+			else if ((int)$value["length"] == 0)
+				$col[$index]["length"] = "";
+			else
+				$col[$index]["length"] = "(" . $value["length"] . ")";
+
+			#debug
+			#echo $value["length"] . "  ";
+
+			if (isset($value["null"]))
+				$col[$index]["null"] = " NOT NULL";
+
+			if (isset($value["auto"]))
+				$col[$index]["auto"] = " AUTO_INCREMENT";
+
+			if (isset($value["pk"]))
+				$col[$index]["pk"] = " PRIMARY KEY";
+
+			#debug
+			#if (isset($value["null"]))
+			#	echo $value["null"] . "  ";
+			#if (isset($value["pk"]))
+			#	echo $value["pk"] . "  ";
+		}
+
+
+		foreach ($col as $index=>$value)
+		{
+			$txt = "";
+			foreach ($value as $i=>$v)
+			{
+				$txt .= $v . " ";
+			}
+			$txt = substr($txt, 0, strlen($txt) - strlen(" "));
+			echo "<br>" . $txt;
+
+			$attributes[] = $txt;
+		}
+
+		return $res;
+
+		/*
 		if (empty($col[0]))
 		{
 			$res = false;
@@ -91,7 +168,9 @@
 			$col[4] = " PRIMARY KEY";
 
 		$attributes = $col;
-		return $res;
+		
+		return $res;*/
+
 	}
 	?>
 
@@ -122,7 +201,8 @@
 							<th>Type</th>
 							<th>Length</th>
 							<th>Can be Null</th>
-							<th>PK</th>
+							<th>Auto Increment</th>
+							<th>Primary Key</th>
 						</thead>
 						
 						<!-- Table Rows -->
@@ -134,12 +214,12 @@
 									</td>
 									
 									<td id="tdName">
-										<input type="text" name="column[]">
+										<input type="text" name="column<?php echo $i . "[name]"; ?>">
 										<span class="error"><?php showError("name"); ?></span>
 									</td>
 
 									<td>
-										<select name="column[]">
+										<select name="column<?php echo $i . "[type]"; ?>">
 											<option value="int">Int</option>
 											<option value="varchar">Varchar</option>
 											<option value="real">Real</option>
@@ -149,21 +229,29 @@
 									</td>
 
 									<td>
-										<input type="text" name="column[]">
+										<input type="text" name="column<?php echo $i . "[length]"; ?>">
 										<span class="error"><?php showError("length"); ?></span>
 									</td>
 
 									<td align="center">
 										<label>
-											<input type="checkbox" name="column[]" value="0" />No
+											<input type="checkbox" name="column<?php echo $i . "[null]"; ?>" value="0" <?php if ($i == 0) echo "checked='true'"; ?> />No
+										</label>
+									</td>
+
+									<?php if ($i == 0) : ?>
+									<td align="center">
+										<label>
+											<input type="checkbox" name="column<?php echo $i . "[auto]"; ?>" value="0" checked="true" />Yes
 										</label>
 									</td>
 
 									<td align="center">
 										<label>
-											<input type="checkbox" name="column[]" value="0" />Yes
+											<input type="checkbox" name="column<?php echo $i . "[pk]"; ?>" value="0" checked="true" />Yes
 										</label>
 									</td>
+									<?php endif; ?>
 
 								</tr>
 							<?php endfor; ?>
