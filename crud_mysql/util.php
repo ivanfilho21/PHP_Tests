@@ -19,6 +19,8 @@ function checkEmptyFields($fieldNames)
 	$res = true;
 	foreach ($fieldNames as $field)
 	{
+		if (! isset($_POST[$field])) continue;
+
 		$value = format_input($_POST[$field]);
 		if (empty($value))
 		{
@@ -27,4 +29,12 @@ function checkEmptyFields($fieldNames)
 		}
 	}
 	return $res;
+}
+
+# Shows the error message for the given Field
+function showError($field)
+{
+	global $error_msgs;
+	if (isset($error_msgs[$field]))
+		echo $error_msgs[$field];
 }

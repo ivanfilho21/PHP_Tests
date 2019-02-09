@@ -23,7 +23,17 @@ th
 	width: 200px;
 }
 
+tbody
+{
+	text-align: center;
+}
+
 .spRow
 {
 	background-color: #d3e9ea;
+}
+
+#tdName
+{
+	width: 220px;
 }

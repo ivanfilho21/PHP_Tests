@@ -87,7 +87,32 @@ function save_user($connection, $user)
 
 function createTable($conn, $table, $fields)
 {
-	$sql = "CREATE TABLE {$table}";
+	$values = "";
+	foreach ($fields as $f)
+	{
+		if (!empty($f))
+			$values .= $f . ", ";
+	}
+	$values = substr($values, 0, strlen($values) - strlen(", "));
+	$sql = "CREATE TABLE {$table} ($values);";
+
+
 	echo $sql;
 	mysqli_query($conn, $sql) or die("<h2>Error creating table {$table}.</h2>");
+	echo "<h2>Created table {$table}.</h2>";
 }
+
+/*
+
+
+CREATE TABLE tarefas (
+id INTEGER AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(20) NOT NULL,
+descricao TEXT,
+prazo DATE,
+prioridade INTEGER(1),
+concluida BOOLEAN
+);
+
+
+*/

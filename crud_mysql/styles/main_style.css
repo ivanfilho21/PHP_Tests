@@ -28,7 +28,7 @@ h1
 
 fieldset
 {
-	width: 360px;
+	width: 480px;
 	margin: 0 auto;
 }
 
@@ -39,7 +39,7 @@ p
 
 input
 {
-	margin: 12px 0 0 0;
+	margin: 0px 0 0 0;
 }
 
 input[type=text],
@@ -97,4 +97,13 @@ footer
 	text-align: center;
 }
 
+.smallButton
+{
+	text-align: center;
+	padding: 0;
+}
 
+#createFieldSet
+{
+	width: 640px;
+}

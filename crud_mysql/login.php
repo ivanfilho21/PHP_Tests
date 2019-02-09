@@ -35,8 +35,6 @@
 		global $connection, $error_msgs, $fields;
 		$res = true;
 		
-		# $res = check_empty_fields( $fields );
-
 		$user = check_login($connection, $name, $pass);
 		if (isset($user))
 		{
@@ -64,27 +62,12 @@
 				<legend>Sign In</legend>
 				
 				<p><label>Username:</label></p>
-				<span class="error">
-				<?php
-				if (isset($error_msgs["username"]))
-					echo $error_msgs["username"]; ?>
-				</span>
 				<input type="text" name="username">
 				
 				<p><label>Password:</label></p>
-				<span class="error">
-				<?php
-				if (isset($error_msgs["password"]))
-					echo $error_msgs["password"]; ?>
-				</span>
 				<input type="password" name="password">
 				
-				<span class="error">
-				<?php
-				if (isset($error_msgs["login"]))
-					echo $error_msgs["login"]; ?>
-				</span>
-
+				<span class="error"><?php showError("login"); ?></span>
 				<br>
 				<div class="buttonHolder">
 					<input type="submit" value="Sign In">

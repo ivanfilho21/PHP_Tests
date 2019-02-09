@@ -26,7 +26,7 @@
 		
 		#$res = validation($name, $pass, $passConf);
 		
-		if (validate_login($name, $pass, $passConf))
+		if (validateLogin($name, $pass, $passConf))
 		{
 			$user_info = array();
 			$user_info["username"] = $name;
@@ -38,12 +38,12 @@
 		}
 	}
 
-	function validate_login($name, $pass, $passConf)
+	function validateLogin($name, $pass, $passConf)
 	{
 		global $connection, $error_msgs, $fields;
 		$res = true;
 
-		$res = check_empty_fields($fields);
+		$res = checkEmptyFields($fields);
 
 		# if (!$res) return false;
 
@@ -101,27 +101,15 @@
 			<legend>Sign In</legend>
 						
 			<p><label>Username:</label></p>
-			<span class="error">
-			<?php
-			if (isset($error_msgs["username"]))
-				echo $error_msgs["username"]; ?>
-			</span>
+			<span class="error"><?php showError("username"); ?></span>
 			<input type="text" name="username">
 			
 			<p><label>Password:</label></p>
-			<span class="error">
-			<?php
-			if (isset($error_msgs["password"]))
-				echo $error_msgs["password"]; ?>
-			</span>
+			<span class="error"><?php showError("password"); ?></span>
 			<input type="password" name="password">
 			
 			<p><label>Confirm Password:</label></p>
-			<span class="error">
-			<?php
-			if (isset($error_msgs["password_confirm"]))
-				echo $error_msgs["password_confirm"]; ?>
-			</span>
+			<span class="error"><?php showError("password_confirm"); ?></span>
 			<input type="password" name="password_confirm">
 			
 			<br>

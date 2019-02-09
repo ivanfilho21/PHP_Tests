@@ -13,8 +13,8 @@
 
 	$error_msgs = array();
 	$columns = 0;
-	$fields = array("table_name");
 	$name = "";
+	$attributes = array();
 
 	# Get Columns from Session
 	if (isset($_SESSION["columns"]))
@@ -24,10 +24,10 @@
 	if ($_SERVER["REQUEST_METHOD"] == "POST")
 	{
 		# Add/Del column button clicked
-		$colSrc = $_POST["columns"];
-		if (isset($colSrc))
+		
+		if (isset($_POST["columns"]))
 		{
-			switch ($colSrc) {
+			switch ($_POST["columns"]) {
 				case "+":
 					$columns++;
 					break;
@@ -42,16 +42,56 @@
 		# Create button clicked
 		else
 		{
-			$name = $_POST[$fields[0]];
-
-			# Validate all Fields
-			if (checkEmptyFields($fields))
+			# Validation
+			if (validation())
 			{
-				#createTable($connection, $name);
-				# todo.
+				echo "<h2>Validation OK{$name}</h2>";
+				createTable($connection, $name, $attributes);
 			}
+			else echo "<h2>Validation Failed</h2>";
 		}
+	}
+
+	function validation()
+	{
+		global $name, $attributes, $error_msgs;
+
+		$res = true;
+		$name = $_POST["table_name"];
+		# ...
+
+		$res = checkEmptyFields(array("table_name"));
 		
+		# test
+		$col = array();
+		$col = $_POST["column"];
+
+		if (empty($col[0]))
+		{
+			$res = false;
+			$error_msgs["name"] = "Name can't be empty.";
+		}
+		else
+			$col[0] = strtoupper($col[0]) . " ";
+
+		$col[1] = strtoupper($col[1]);
+
+		if ($col[2] < 0)
+		{
+			$res = false;
+			$error_msgs["length"] = "Invalid length.";
+		}
+		else
+			$col[2] = "(" . $col[2] . ")";
+
+		if (isset($col[3]))
+			$col[3] = " NOT NULL";
+
+		if (isset($col[4]))
+			$col[4] = " PRIMARY KEY";
+
+		$attributes = $col;
+		return $res;
 	}
 	?>
 
@@ -61,39 +101,75 @@
 
 		<!-- Form -->
 		<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-			<fieldset>
-				<p><label>Name:</label></p>
-				<span class="error">
-				<?php
-				if (isset($error_msgs["table_name"]))
-					echo $error_msgs["table_name"];
-				?>
-				</span>
-				<input type="text" name="table_name">
-
-				<?php if ($columns > 0) : ?>
-					<p>
-						<label>Attribute Name,</label>
-						<label>Type,</label>
-						<label>Value,</label>
-						<label>Not null?,</label>
-						<label>Primary Key?,</label>
-						<label>Auto Increment?</label>
-					</p>
-				<?php endif; ?>
-				<?php for ($i = 0; $i < $columns; $i++) : ?>
-					<p>
-						<?php echo ($i + 1) ?>
-						<input type="text" name="attribute_name[]">
-						<input type="text" name="attribute_value[]">
-					</p>
-				<?php endfor; ?>
-
+			<fieldset id="createFieldSet">
 				<p>
+					<label>Name:</label>
+					<input name="table_name">
+
 					<label>Columns: <?php echo $columns; ?></label>
-					<input type="submit" name="columns" value="+">
-					<input type="submit" name="columns" value="-">
+					<input class="smallButton" type="submit" name="columns" value="+">
+					<input class="smallButton" type="submit" name="columns" value="-">
+				
 				</p>
+				<span class="error"><?php showError("table_name"); ?></span>
+				
+				<?php if ($columns > 0) : ?>
+					<table>
+						<!-- Table Headings -->
+						<thead id="r01">
+							<th>Nº</th>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Length</th>
+							<th>Can be Null</th>
+							<th>PK</th>
+						</thead>
+						
+						<!-- Table Rows -->
+						<tbody>
+							<?php for ($i = 0; $i < $columns; $i++) : ?>
+								<tr>
+									<td>
+										<?php echo ($i + 1); ?>
+									</td>
+									
+									<td id="tdName">
+										<input type="text" name="column[]">
+										<span class="error"><?php showError("name"); ?></span>
+									</td>
+
+									<td>
+										<select name="column[]">
+											<option value="int">Int</option>
+											<option value="varchar">Varchar</option>
+											<option value="real">Real</option>
+											<option value="text">Text</option>
+											<option value="date">Date</option>
+										</select>
+									</td>
+
+									<td>
+										<input type="text" name="column[]">
+										<span class="error"><?php showError("length"); ?></span>
+									</td>
+
+									<td align="center">
+										<label>
+											<input type="checkbox" name="column[]" value="0" />No
+										</label>
+									</td>
+
+									<td align="center">
+										<label>
+											<input type="checkbox" name="column[]" value="0" />Yes
+										</label>
+									</td>
+
+								</tr>
+							<?php endfor; ?>
+						</tbody>
+					</table>
+				<?php endif; ?>
 
 				<div class="buttonHolder">
 					<input type="submit" name="create_table" value="Create">
