@@ -101,6 +101,21 @@ function createTable($conn, $table, $fields)
 	echo "<h2>Created table {$table}.</h2>";
 }
 
+function getTableList($conn)
+{
+	$sql = "SHOW TABLES;";
+	$res = mysqli_query($conn, $sql) or die("<h2>Error in query: {$sql}</h2>");
+	$list = array();
+	
+	if ($res == false) return $list;
+	
+	while ($data = mysqli_fetch_assoc($res))
+	{
+		$list[] = $data;
+	}
+	return $list;
+}
+
 /*
 
 

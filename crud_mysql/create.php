@@ -141,36 +141,6 @@
 		}
 
 		return $res;
-
-		/*
-		if (empty($col[0]))
-		{
-			$res = false;
-			$error_msgs["name"] = "Name can't be empty.";
-		}
-		else
-			$col[0] = strtoupper($col[0]) . " ";
-
-		$col[1] = strtoupper($col[1]);
-
-		if ($col[2] < 0)
-		{
-			$res = false;
-			$error_msgs["length"] = "Invalid length.";
-		}
-		else
-			$col[2] = "(" . $col[2] . ")";
-
-		if (isset($col[3]))
-			$col[3] = " NOT NULL";
-
-		if (isset($col[4]))
-			$col[4] = " PRIMARY KEY";
-
-		$attributes = $col;
-		
-		return $res;*/
-
 	}
 	?>
 

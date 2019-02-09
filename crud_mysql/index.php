@@ -21,7 +21,32 @@
 			# Show this content only if user is logged as Admin.
 			# Show table if data exists in Database.
 
+			$tables = getTableList($connection);
+			# debugging
+			/*
+			foreach ($tables as $key => $value) {
+				foreach ($value as $k => $v) {
+					echo $v;
+				}
+			}*/
+
 			?>
+
+			<table>
+				<caption>Tables in Database</caption>
+
+				<thead>
+					<th>Table</th>
+				</thead>
+
+				<tbody>
+					<?php foreach ($tables as $value) : ?>
+						<?php foreach ($value as $name) : ?>
+							<tr><td><?php echo $name; ?></td></tr>
+						<?php endforeach; ?>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
 			
 			<table>
 				<!-- Table Headings -->
