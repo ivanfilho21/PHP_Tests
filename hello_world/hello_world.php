@@ -5,6 +5,7 @@ echo "Hello World. Today is " . date('d/m/Y');
 echo " and it's " . date('H:i:s');
 
 echo "      . Test: " . date("H:i:s a") . " " . date("M");
+echo "  end";
 
 # y means short year:  19
 # Y means full year: 2019
