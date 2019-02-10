@@ -1,4 +1,4 @@
-<?php include "header.html"; include "database/database.php"; include "util.php"; ?>
+<?php include "header.html"; include "database/database.php"; include "util.php"; session_start(); ?>
 
 <!DOCTYPE html!>
 <html>
@@ -10,14 +10,19 @@
 </head>
 <body>
 	<div class="content">
-	
-		<h3>Logged User: <?php echo "Foobar"; ?></h3>
-		<h1>List</h1>
-		
 		<div class="dataHolder">
-			<input type="submit" name="add" value="Add">
-			
+						
 			<?php
+			$user = null;
+			$userIsLogged = false;
+
+			if (isset($_SESSION["connected_user"]))
+			{
+				$user = $_SESSION["connected_user"];
+				$userIsLogged = true;
+			}
+			
+
 			# Show this content only if user is logged as Admin.
 			# Show table if data exists in Database.
 
@@ -38,27 +43,22 @@
 			*/
 			?>
 
-			<table>
-				<caption>Tables in Database</caption>
-
-				<thead>
-					<th>Table</th>
-				</thead>
-
-				<tbody>
-					<?php foreach ($tables as $value) : ?>
-						<?php foreach ($value as $name) : ?>
-							<tr><td><?php echo $name; ?></td></tr>
-						<?php endforeach; ?>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
+			<?php if ($userIsLogged) : ?>
+			<br>
+			<h3>Logged User: <?php echo $user["username"]; ?></h3>
+			<input type="submit" name="add" value="Create Table" onClick="parent.location='create.php'">
+			
+			<h1>Tables in Database</h1>
 
 			<?php foreach ($tables as $value) : ?>
 				<?php foreach ($value as $name) : ?>
+
+					<h4><?php echo $name; ?></h4>
+
 					<table>
-						<caption><?php echo $name; ?></caption>
+
 						<?php $columns = getTableColumns($connection, $name); ?>
+
 						<thead>
 							<?php foreach ($columns as $column) : ?>
 								<?php foreach ($column as $cName) : ?>
@@ -66,6 +66,7 @@
 								<?php endforeach; ?>
 							<?php endforeach; ?>
 						</thead>
+
 						<tbody>
 							<?php $rows = getTableContent($connection, $name); ?>
 							<tr>
@@ -116,6 +117,7 @@
 				</tbody>
 			
 			</table>
+			<?php endif; ?>
 		</div> <!-- DataHolder -->
 		
 		<?php include "footer.html"; ?>

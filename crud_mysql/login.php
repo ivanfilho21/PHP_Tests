@@ -1,4 +1,4 @@
-<?php include "header.html"; include "database/database.php"; include "util.php"; ?>
+<?php include "header.html"; include "database/database.php"; include "util.php"; session_start(); ?>
 
 <!DOCTYPE html!>
 <html>
@@ -27,6 +27,7 @@
 			# set user data in a global.
 			# open Home page.
 			# Home page needs to check if user is logged.
+			$_SESSION["loggedUser"] = true;
 		}
 	}
 
@@ -38,10 +39,7 @@
 		$user = check_login($connection, $name, $pass);
 		if (isset($user))
 		{
-			$loggedUserName = $user["username"];
-			$userIsLogged = true;
-
-			echo "<h3>Logged User: {$loggedUserName}</h3>";
+			$_SESSION["connected_user"] = $user;
 		}
 		else
 		{

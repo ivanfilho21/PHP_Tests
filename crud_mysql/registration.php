@@ -45,8 +45,6 @@
 
 		$res = checkEmptyFields($fields);
 
-		# if (!$res) return false;
-
 		# Check username length - max 10
 		if (strlen($name) > 10)
 		{
@@ -60,7 +58,7 @@
 				# User already exists
 				$error_msgs["username"] = "This username is already taken.";
 				$res = false;
-			}				
+			}			
 		}
 
 		# Check password length - max 20

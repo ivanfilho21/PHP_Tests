@@ -87,7 +87,7 @@
 				$error_msgs["name"] = "Can't be empty.";
 			}
 			else
-				$col[$index]["name"] = strtoupper($value["name"]) . " ";
+				$col[$index]["name"] = strtolower($value["name"]) . " ";
 
 			#debug
 			#echo $value["name"] . "  ";

@@ -1,8 +1,5 @@
 <?php
 
-$userIsLogged = false;
-$loggedUserName = "";
-
 # Removes some unimportant characters from the passed string.
 function format_input($data)
 {
