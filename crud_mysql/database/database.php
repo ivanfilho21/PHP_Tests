@@ -85,6 +85,7 @@ function save_user($connection, $user)
 	mysqli_query($connection, $sql) or die();
 }
 
+# Creates a table in database
 function createTable($conn, $table, $fields)
 {
 	$values = "";
@@ -101,10 +102,9 @@ function createTable($conn, $table, $fields)
 	echo "<h2>Created table {$table}.</h2>";
 }
 
-function getTableList($conn)
+# Returns a list of data from a database query. If query is false, returns empty list.
+function getDataList($res)
 {
-	$sql = "SHOW TABLES;";
-	$res = mysqli_query($conn, $sql) or die("<h2>Error in query: {$sql}</h2>");
 	$list = array();
 	
 	if ($res == false) return $list;
@@ -116,17 +116,31 @@ function getTableList($conn)
 	return $list;
 }
 
-/*
+# Returns all tables in database.
+function getTableList($conn)
+{
+	$sql = "SHOW TABLES;";
+	$res = mysqli_query($conn, $sql) or die("<h2>Error in query: {$sql}</h2>");
+	
+	return getDataList($res);
+}
 
+# Returns all columns in a table.
+function getTableColumns($conn, $table)
+{
+	$sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'{$table}';";
+	$res = mysqli_query($conn, $sql) or die("<h2>Error in query: {$sql}</h2>");
+	$list = array();
 
-CREATE TABLE tarefas (
-id INTEGER AUTO_INCREMENT PRIMARY KEY,
-nome VARCHAR(20) NOT NULL,
-descricao TEXT,
-prazo DATE,
-prioridade INTEGER(1),
-concluida BOOLEAN
-);
+	return getDataList($res);
+}
 
+# Returns all rows in a table.
+function getTableContent($conn, $table)
+{
+	$sql = "SELECT * FROM {$table};";
+	$res = mysqli_query($conn, $sql) or die("<h2>Error in query: {$sql}</h2>");
+	$list = array();
 
-*/
+	return getDataList($res);
+}
