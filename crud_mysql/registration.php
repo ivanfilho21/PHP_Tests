@@ -1,4 +1,4 @@
-<?php include "header.html"; include "database/database.php"; include "util.php"; ?>
+<?php include "header.html"; include "database/database_admin.php"; include "util.php"; ?>
 
 <!DOCTYPE html!>
 <html>
@@ -45,8 +45,8 @@
 
 		$res = checkEmptyFields($fields);
 
-		# Check username length - max 10
-		if (strlen($name) > 10)
+		# Check username length - max 15
+		if (strlen($name) > 15)
 		{
 			$error_msgs["username"] = "Username is too long.";
 			$res = false;

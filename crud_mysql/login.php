@@ -1,4 +1,4 @@
-<?php include "header.html"; include "database/database.php"; include "util.php"; session_start(); ?>
+<?php include "header.html"; include "database/database_admin.php"; include "util.php"; session_start(); ?>
 
 <!DOCTYPE html!>
 <html>
@@ -10,6 +10,7 @@
 <body>
 	<?php
 	
+	$user = null;
 	$error_msgs = array();
 	$fields = array("username", "password");
 	$name = $pass = "";
@@ -23,29 +24,25 @@
 
 		if ($res)
 		{
-			# TODO:
-			# set user data in a global.
-			# open Home page.
-			# Home page needs to check if user is logged.
-			$_SESSION["loggedUser"] = true;
+			if (isset($user))
+			{
+				$_SESSION["connected_user"] = $user;
+				header("Location:index.php");
+				exit();
+			}
+			else
+			{
+				$error_msgs["login"] = "Wrong username or password.";
+			}
 		}
 	}
 
 	function validation($name, $pass)
 	{
-		global $connection, $error_msgs, $fields;
+		global $connection, $error_msgs, $fields, $user;
 		$res = true;
 		
 		$user = check_login($connection, $name, $pass);
-		if (isset($user))
-		{
-			$_SESSION["connected_user"] = $user;
-		}
-		else
-		{
-			$error_msgs["login"] = "Wrong username or password.";
-		}
-
 		return $res;
 	}	
 	?>

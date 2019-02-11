@@ -11,8 +11,10 @@
 <body>
 	<div class="content">
 		<div class="dataHolder">
-						
 			<?php
+			# TODO:
+			# Show sign out button in nav bar
+
 			$user = null;
 			$userIsLogged = false;
 
@@ -21,10 +23,6 @@
 				$user = $_SESSION["connected_user"];
 				$userIsLogged = true;
 			}
-			
-
-			# Show this content only if user is logged as Admin.
-			# Show table if data exists in Database.
 
 			$tables = getTableList($connection);
 			# debugging
@@ -43,12 +41,12 @@
 			*/
 			?>
 
+			<h1>CRUD MySQL</h1>
+
 			<?php if ($userIsLogged) : ?>
 			<br>
 			<h3>Logged User: <?php echo $user["username"]; ?></h3>
-			<input type="submit" name="add" value="Create Table" onClick="parent.location='create.php'">
-			
-			<h1>Tables in Database</h1>
+			<input type="submit" value="Create Table" onClick="parent.location='create.php'">
 
 			<?php foreach ($tables as $value) : ?>
 				<?php foreach ($value as $name) : ?>
@@ -118,8 +116,15 @@
 			
 			</table>
 			<?php else : ?>
-				<h3>You are not signed in.</h3>
-				
+				<h2>Description</h2>
+				<p>
+					This project consists of a simple Web Application where you may Create, Read, Update, and Delete entities from a Database. 
+				</p>
+
+				<br>
+				<h3>You must have an account and be logged in to use this website.</h3>
+				<input type="submit" value="Create Account" onClick="parent.location='registration.php'">
+				<input type="submit" value="Login" onClick="parent.location='login.php'">
 			<?php endif; ?>
 		</div> <!-- DataHolder -->
 		
