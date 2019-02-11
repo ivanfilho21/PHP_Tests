@@ -117,6 +117,9 @@
 				</tbody>
 			
 			</table>
+			<?php else : ?>
+				<h3>You are not signed in.</h3>
+				
 			<?php endif; ?>
 		</div> <!-- DataHolder -->
 		

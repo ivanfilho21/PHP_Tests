@@ -1,9 +1,9 @@
 <?php
 
 $dbHost = "127.0.0.1";
-$dbUser = "ivan";
+$dbUser = "ivan-admin";
 $dbPass = "root";
-$dbName = "test_db";
+$dbName = "crud_mysql";
 $usersTable = "users_table";
 
 $connection = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
