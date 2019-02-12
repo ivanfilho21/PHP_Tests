@@ -1,55 +1,41 @@
-html
-{
-	margin: 0;
+html {
+	margin: 0px;
 }
 
-body
-{
+body {
 	background-color: lightBlue;
 	margin: 0;
 }
 
-.error
-{
-	color: red;
-}
-
-.content
-{
+.container {
 	background-color: white;
 	margin: 0;
 }
 
-h1
-{
-	text-align: center;
-	color: lightBlue;
+.error {
+	color: red;
 }
 
-fieldset
-{
+h1 {
+	text-align: center;
+	color: dodgerBlue;
+}
+
+fieldset {
 	width: 480px;
 	margin: 0 auto;
 }
 
-p
-{
-	margin: 12px 0 0 0;
-}
-
-input
-{
+input {
 	margin: 0px 0 0 0;
 }
 
 input[type=text],
-input[type=password]
-{
+input[type=password] {
 	width: 100%;
 }
 
-input[type=submit]
-{
+input[type=submit] {
 	background-color: dodgerblue;
 	color: white;
 	padding: 8px 38px;
@@ -59,51 +45,38 @@ input[type=submit]
 	transition: .2s;
 	transition-timing-function: ease-in-out;
 }
-input[type=submit]:hover
-{
-	background-color: lightBlue;
-	color: #555;
+input[type=submit]:hover {
+	background-color: darkBlue;
+	color: #ffffff;
 	cursor: pointer;
 }
 
-footer
-{
-	background-color: lightBlue;
-	padding: 1rem;
-	margin-top: 60px;
-	height: 160px;
-}
 
-.buttonHolder
-{
+
+.buttonHolder {
 	text-align: center;
 	margin: 12px auto;
 }
 
-.optionsHolder
-{
+.optionsHolder {
 	text-align: center;
 }
 
-.optionsHolder p
-{
+.optionsHolder p {
 	display: inline-block;
 	margin: 12px 18px;
 }
 
-.iconCredits
-{
+.iconCredits {
 	font-size: 80%;
 	text-align: center;
 }
 
-.smallButton
-{
+.smallButton {
 	text-align: center;
 	padding: 0;
 }
 
-#createFieldSet
-{
+#createFieldSet {
 	width: 640px;
 }

@@ -144,7 +144,7 @@
 	}
 	?>
 
-	<div class="content">
+	<div class="container">
 		<!-- Title -->
 		<h1>Create a Table</h1>
 

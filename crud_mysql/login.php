@@ -1,4 +1,8 @@
-<?php include "header.html"; include "database/database_admin.php"; include "util.php"; session_start(); ?>
+<?php
+include "header.html";
+include "database/database_admin.php";
+include "util.php"; session_start();
+?>
 
 <!DOCTYPE html!>
 <html>
@@ -47,7 +51,7 @@
 	}	
 	?>
 
-	<div class="content">
+	<div class="container">
 		<!-- Title -->
 		<h1>Sign In</h1>
 		

@@ -89,7 +89,7 @@
 	}
 	?>
 
-	<div class="content">
+	<div class="container">
 	<!-- Title -->
 	<h1>Sign Up</h1>
 	

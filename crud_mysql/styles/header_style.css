@@ -1,49 +1,37 @@
-*
-{
-	font-family: Segoe UI, Consolas, Verdana;
+* {
+	font-family: Segoe UI, Consolas, Verdana, sans-serif;
 	box-sizing: border-box;
 }
 
-a
-{
-	color: blue;
-	text-decoration: none;
-}
-a:visited
-{
-	color: blue;
+.menuNav {
+	background-color: #2a5d84;
 }
 
-ul
-{
+.menuNav ul {
 	list-style-type: none; /* Removes the bullets */
 	text-align: center;
-	margin: 0 0 0px 0;
+	margin: 0;
 	padding: 0;
 	width: 100%;
-	background-color: lightBlue;
+	font-size: 0;
 }
 
-li
-{
+#menuList li {
 	display: inline-block; /* Horizontal Alignment */
-	margin-left: -4px;
-	margin-right: -1px;
+	font-size: 14px;
 }
 
-li a
-{
+#menuList li a {
 	display: block; /* Makes the whole link clickable */
 	text-align: center;
 	padding: 20px 32px;
 	text-decoration: none;
-	color: #555;
+	color: #ffffff;
 	transition: .3s;
 	transition-timing-function: ease-out;
 }
 
-li a:hover
-{
-	background-color: dodgerblue;
+#menuList li a:hover {
+	background-color: #3f3f86;//#414175;
 	color: white;
 }

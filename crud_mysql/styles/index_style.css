@@ -1,7 +1,7 @@
 .dataHolder
 {
 	width: 80%;
-	margin: 0 auto;
+	margin: auto;
 }
 
 table
@@ -37,3 +37,52 @@ tbody
 {
 	width: 220px;
 }
+
+.optionsNav {
+	position: relative;
+	top: 0;
+}
+
+.optionsNav ul {
+	margin: 0;
+	list-style-type: none;
+}
+
+.contentLeft {
+	width: 20%;
+	height: 80%;
+	float: left;
+	padding: 16px;
+	overflow: hidden;
+	background: #c2d2e2;
+}
+
+.contentLeft
+.optionsList { padding: 0; }
+
+.contentLeft
+.optionsList ul { padding: 8px; }
+
+.contentLeft
+.optionsList ul li { padding: 0px; }
+
+.contentLeft li { padding-top: 8px; }
+
+.contentLeft a { color: #2a5d84; text-decoration: none; }
+.contentLeft a:hover { color: blue; }
+
+.contentRight {
+	width: 80%;
+	margin: auto;
+	padding: 24px;
+}
+
+.clearFix {
+	clear: both;
+}
+
+/* Footer */
+footer { margin: 0; background-color: #555; color: #CCC; }
+footer a { color: #EEE; text-decoration: none; }
+footer .icons { text-align: center; }
+footer .copyright { text-align: center; }
