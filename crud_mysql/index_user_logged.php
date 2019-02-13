@@ -1,4 +1,4 @@
-<h3>Logged User: <?php echo $user["username"]; ?></h3>
+
 <input type="submit" value="Create Table" onClick="parent.location='create.php'">
 
 <?php foreach ($tables as $value) : ?>

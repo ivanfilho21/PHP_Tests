@@ -7,7 +7,7 @@
 table
 {
 	border-collapse: collapse;
-	margin: 12px 0;
+	margin: 24px auto;
 }
 
 thead
@@ -48,9 +48,11 @@ tbody
 	list-style-type: none;
 }
 
+.content { height: 80%; }
+
 .contentLeft {
 	width: 20%;
-	height: 80%;
+	height: 100%;
 	float: left;
 	padding: 16px;
 	overflow: hidden;
@@ -68,13 +70,20 @@ tbody
 
 .contentLeft li { padding-top: 8px; }
 
-.contentLeft a { color: #2a5d84; text-decoration: none; }
+.contentLeft a { color: #2a5d84; text-decoration: none; line-height: 26px; }
 .contentLeft a:hover { color: blue; }
+.contentLeft a img { vertical-align: center; margin-right: 6px; }
+
+#listTable a:hover { color: dodgerBlue; }
+#createTable a:hover { color: green; }
+#deleteTable a:hover { color: orangeRed; }
+#updateTable a:hover { color: darkOrange; }
 
 .contentRight {
 	width: 80%;
 	margin: auto;
 	padding: 24px;
+	text-align: center;
 }
 
 .clearFix {
@@ -82,7 +91,7 @@ tbody
 }
 
 /* Footer */
-footer { margin: 0; background-color: #555; color: #CCC; }
+footer { background-color: #555; color: #CCC; width: 100%; height: 15%; padding: 12px; }
 footer a { color: #EEE; text-decoration: none; }
 footer .icons { text-align: center; }
 footer .copyright { text-align: center; }

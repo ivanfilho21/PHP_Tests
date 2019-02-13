@@ -7,8 +7,15 @@ $userIsLogged = false;
 
 if (isset($_SESSION["connected_user"]))
 {
-	$user = $_SESSION["connected_user"];
-	$userIsLogged = true;
+	if (isset($_GET["list_me"]))
+	{
+		$_SESSION["connected_user"] = null;
+	}
+	else
+	{
+		$user = $_SESSION["connected_user"];
+		$userIsLogged = true;
+	}
 }
 
 $tables = getTableList($connection);
