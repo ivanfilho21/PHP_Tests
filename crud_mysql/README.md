@@ -4,9 +4,11 @@
 ### What is working:
 * User registration/sign up (it adds a new user in database).
 * User login/sign in (it checks if username and password exist in database).
+* Index page, showing a list of tables in the database.
+* Create Table.
 
 ### What I'm working on:
-* Index page (Should be shown only when the user is signed up).
+* Create Table page.
 
 ### Things I'm learning:
 * Super global variable $_POST.
