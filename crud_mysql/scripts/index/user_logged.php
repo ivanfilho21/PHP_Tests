@@ -1,5 +1,5 @@
 
-<input type="submit" value="Create Table" onClick="parent.location='create.php'">
+<input type="submit" value="Create Table" onClick="parent.location='create-table.php'">
 
 <?php foreach ($tables as $value) : ?>
 	<?php foreach ($value as $name) : ?>

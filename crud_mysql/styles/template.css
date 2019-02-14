@@ -1,0 +1,96 @@
+* {
+	font-family: sans-serif;
+}
+
+body {
+	background: #1c4f65;
+	margin: 0;
+}
+
+body a {
+	text-decoration: none;
+	color: blue;
+}
+
+.header-container {
+	margin: 0 auto;
+	max-width: 80%;
+}
+.header-container a { color: #00d8ff; }
+
+/* Header */
+
+header {
+	padding-top: 48px;
+	/* Debugging */
+	/* background: gray; */
+}
+
+.app-name a {
+	float: left;
+	color: white;
+	font-size: 24px;
+	font-weight: 700;
+	text-shadow: 2px 2px 0 #000;
+	text-transform: uppercase;
+}
+
+nav {
+	float: right;
+	margin-top: 4px;
+	text-align: center;
+}
+
+nav ul { padding: 0; margin: 0; }
+
+nav li {
+	display: inline-block;
+	margin: 0 0 0 1em;
+}
+
+nav li a {
+	text-transform: uppercase;
+}
+
+nav li a:hover {
+	color: white;
+	transition: .15s;
+}
+
+/* Clear Fix */
+
+.clear-fix { clear: both; padding-bottom: 48px; }
+
+/* Main */
+
+main {
+	background: white;
+	clear: both;
+	/* height: 460px; */
+}
+
+.page-content {
+	padding: 2em;
+}
+
+.page-content h1 { margin: 0; text-align: center; }
+
+/* Footer */
+
+footer {
+	color: white;
+	text-align: center;
+	padding-top: 12px;
+}
+
+footer ul { padding: 0; }
+
+footer li {
+	display: inline-block;
+	margin: 0 0 0 1em;
+}
+footer a { color: #00d8ff; }
+footer li a:hover {
+	color: white;
+	transition: .15s;
+}

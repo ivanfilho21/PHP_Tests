@@ -1,0 +1,71 @@
+.page-content {
+	text-align: center;
+}
+
+input[type=submit] {
+	background-color: dodgerblue;
+	color: white;
+	padding: 8px 38px;
+	border-radius: 16px;
+	border-style: solid;
+	border-width: 0px;
+	transition: .2s;
+}
+input[type=submit]:hover {
+	background-color: darkBlue;
+	color: #ffffff;
+	cursor: pointer;
+}
+/* Special Buttons */
+#add-row {
+	font-size: 18px;
+	padding: 8px 20px;
+	background-color: mediumSeaGreen;
+}
+#add-row:hover {
+	background-color: seaGreen;
+}
+
+#delete-row {
+	font-size: 18px;
+	padding: 8px 22px;
+	background-color: tomato;
+}
+#delete-row:hover {
+	background-color: orangeRed;
+}
+
+/* Table Style */
+table
+{
+	border-collapse: collapse;
+	margin: 24px auto;
+}
+
+thead
+{
+	background-color: #799b9e;
+	color: white;
+	text-align: center;
+}
+
+th
+{
+	padding: 1%;
+	width: 200px;
+}
+
+tbody
+{
+	text-align: center;
+}
+
+.spRow
+{
+	background-color: #d3e9ea;
+}
+
+#tdName
+{
+	width: 220px;
+}

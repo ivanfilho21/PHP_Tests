@@ -7,7 +7,7 @@ $userIsLogged = false;
 
 if (isset($_SESSION["connected_user"]))
 {
-	if (isset($_GET["list_me"]))
+	if (isset($_GET["sign_out"]))
 	{
 		$_SESSION["connected_user"] = null;
 	}
