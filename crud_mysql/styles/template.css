@@ -94,3 +94,8 @@ footer li a:hover {
 	color: white;
 	transition: .15s;
 }
+
+/* Error */
+.error {
+	color: orangeRed;
+}

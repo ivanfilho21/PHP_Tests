@@ -1,9 +1,10 @@
 <?php
-
 $error_msgs = array();
 $columns = 0;
-$name = "";
 $attributes = array();
+
+$COL = array();
+$SELECT = array("int", "varchar", "real", "text", "date");
 
 # Get Columns from Session
 if (isset($_SESSION["columns"]))
@@ -12,8 +13,15 @@ if (isset($_SESSION["columns"]))
 # User clicked a submit button
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
+
+	for ($i = 0; $i < $columns; $i++)
+	{
+		$col[] = $_POST["column".$i];
+	}
+
+	$COL = $col;
+
 	# Add/Del column button clicked
-	
 	if (isset($_POST["columns"]))
 	{
 		switch ($_POST["columns"]) {
@@ -43,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 function validation()
 {
-	global $name, $attributes, $columns, $error_msgs;
+	global $name, $attributes, $columns, $error_msgs, $COL;
 
 	$res = true;
 	$name = $_POST["table_name"];
@@ -52,13 +60,20 @@ function validation()
 	# ...
 
 	$res = checkEmptyFields(array("table_name"));
+
+	if ($columns == 0)
+	{
+		$error_msgs["columns"] = "A table must have at least one column.";
+		$res = false;
+	}
 	
-	# test
 	$col = array();
 	for ($i = 0; $i < $columns; $i++)
 	{
 		$col[] = $_POST["column".$i];			
 	}
+
+	# test
 	foreach ($col as $index=>$value)
 	{
 		echo "[{$index}]:  ";
@@ -73,7 +88,7 @@ function validation()
 		if (empty($value["name"]))
 		{
 			$res = false;
-			$error_msgs["name"] = "Can't be empty.";
+			$error_msgs["column_name"] = "Can't be empty.";
 		}
 		else
 			$col[$index]["name"] = strtolower($value["name"]) . " ";
@@ -86,15 +101,23 @@ function validation()
 		#debug
 		#echo $value["type"] . "  ";
 
-		if ((int)$value["length"] < 0)
+		if (is_numeric($value["length"]))
+		{
+		    if ($value["length"] > 0)
+		    	$col[$index]["length"] = "(" . $value["length"] . ")";
+		    else if ($value["length"] == 0)
+		    	$col[$index]["length"] = "";
+		    else
+		    {
+		    	$res = false;
+		    	$error_msgs["column_length"] = "Negative number.";
+		    }
+		}
+		else
 		{
 			$res = false;
-			# err
+			$error_msgs["column_length"] = "Invalid number.";
 		}
-		else if ((int)$value["length"] == 0)
-			$col[$index]["length"] = "";
-		else
-			$col[$index]["length"] = "(" . $value["length"] . ")";
 
 		#debug
 		#echo $value["length"] . "  ";
@@ -126,6 +149,12 @@ function validation()
 		echo "<br>" . $txt;
 
 		$attributes[] = $txt;
+	}
+
+	$COL = $col;
+
+	foreach ($COL as $key => $value) {
+		echo "". $key;
 	}
 
 	return $res;
