@@ -8,7 +8,7 @@ body {
 }
 
 body a {
-	text-decoration: none;	
+	text-decoration: none;
 }
 
 .header-container {
@@ -21,7 +21,6 @@ body a {
 
 header {
 	padding-top: 48px;
-	/* Debugging */
 	/* background: gray; */
 }
 

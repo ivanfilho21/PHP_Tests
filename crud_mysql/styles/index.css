@@ -41,6 +41,8 @@ table
 {
 	border-collapse: collapse;
 	margin: 24px auto;
+	table-layout: fixed;
+    width: 1px; /* required for table-layout */
 }
 
 thead
@@ -70,3 +72,41 @@ tbody
 {
 	width: 220px;
 }
+
+/* Sidebar */
+
+main {
+	background: #321;
+}
+
+.sidebar {
+	float: left;
+	width: 15%;
+	
+    white-space: nowrap;
+    overflow-x: auto;
+}
+.sidebar li {
+	list-style-type: none;
+}
+.sidebar li a {
+	color: white;
+}
+.sidebar img {
+	margin: .1em .5em 0 0;
+}
+.sidebar .list-section {
+	font-weight: bold;
+}
+
+.page-content {
+	float: right;
+	width: 75%;
+    overflow-x: auto;
+    background: white;
+    white-space: nowrap;
+
+	border-left: dotted 1px;
+}
+
+.clear-fix-main { clear: both; }

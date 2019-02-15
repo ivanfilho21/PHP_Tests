@@ -22,7 +22,15 @@
 
 	<main>
 		<?php if ($userIsLogged) : ?>
-			<!-- Show sidebar -->
+			<aside class="sidebar">
+				<ul>
+					<li class="list-section"><a href="">Table Operations</a></li>
+					<li id="listTable"><a href="?list_tables"><img width="20" src="icon/menu.svg">List</a></li>
+					<li id="createTable"><a href="create.php"><img width="20" src="icon/add.svg">Create</a></li>
+					<li id="deleteTable"><a href=""><img width="20" src="icon/garbage.svg">Remove</a></li>
+					<li id="updateTable"><a href=""><img width="20" src="icon/edit.svg">Update</a></li>
+				</ul>
+			</aside>
 		<?php endif; ?>
 
 		<div class="page-content">
@@ -33,6 +41,9 @@
 				include "user_not_logged.html";
 			?>
 		</div>
+
+		<div class="clear-fix-main"></div>
+
 	</main><!-- end main -->
 
 	<?php include "footer.php"; ?>
