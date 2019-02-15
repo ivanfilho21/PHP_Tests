@@ -26,14 +26,15 @@
 				<ul>
 					<li class="list-section"><a href="">Table Operations</a></li>
 					<li id="listTable"><a href="?list_tables"><img width="20" src="icon/menu.svg">List</a></li>
-					<li id="createTable"><a href="create.php"><img width="20" src="icon/add.svg">Create</a></li>
+					<li id="createTable"><a href="create-table.php"><img width="20" src="icon/add.svg">Create</a></li>
 					<li id="deleteTable"><a href=""><img width="20" src="icon/garbage.svg">Remove</a></li>
 					<li id="updateTable"><a href=""><img width="20" src="icon/edit.svg">Update</a></li>
 				</ul>
 			</aside>
-		<?php endif; ?>
-
 		<div class="page-content">
+		<?php else : ?>
+		<div class="page-content" style="width: 100%;">
+		<?php endif; ?>
 			<?php
 			if ($userIsLogged)
 				include "scripts/index/user_logged.php";
