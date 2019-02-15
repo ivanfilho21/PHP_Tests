@@ -13,13 +13,15 @@ if (isset($_SESSION["columns"]))
 # User clicked a submit button
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
-
-	for ($i = 0; $i < $columns; $i++)
+	if ($columns > 0)
 	{
-		$col[] = $_POST["column".$i];
-	}
+		for ($i = 0; $i < $columns; $i++)
+		{
+			$col[] = $_POST["column".$i];
+		}
 
-	$COL = $col;
+		$COL = $col;
+	}
 
 	# Add/Del column button clicked
 	if (isset($_POST["columns"]))
@@ -64,7 +66,7 @@ function validation()
 	if ($columns == 0)
 	{
 		$error_msgs["columns"] = "A table must have at least one column.";
-		$res = false;
+		return false;
 	}
 	
 	$col = array();
@@ -81,6 +83,8 @@ function validation()
 			echo " {$ind}: " . $v;
 		echo "<br>";
 	}
+	
+	$COL = $col;
 
 	foreach ($col as $index=>$value)
 	{
@@ -88,7 +92,8 @@ function validation()
 		if (empty($value["name"]))
 		{
 			$res = false;
-			$error_msgs["column_name"] = "Can't be empty.";
+			$error_msgs[$index]["name"] = "Name can't be empty.";
+			#$error_msgs["column_name"] = "Can't be empty.";
 		}
 		else
 			$col[$index]["name"] = strtolower($value["name"]) . " ";
@@ -103,20 +108,26 @@ function validation()
 
 		if (is_numeric($value["length"]))
 		{
-		    if ($value["length"] > 0)
+		    if ((int)$value["length"] > 0)
 		    	$col[$index]["length"] = "(" . $value["length"] . ")";
-		    else if ($value["length"] == 0)
+		    else if ((int)$value["length"] == 0)
 		    	$col[$index]["length"] = "";
 		    else
 		    {
 		    	$res = false;
-		    	$error_msgs["column_length"] = "Negative number.";
+		    	#$error_msgs["column_length"] = "Negative number.";
+		    	$error_msgs[$index]["length"] = "Negative number.";
 		    }
+		}
+		else if (empty($value["length"]))
+		{
+			$col[$index]["length"] = "";
 		}
 		else
 		{
 			$res = false;
-			$error_msgs["column_length"] = "Invalid number.";
+			#$error_msgs["column_length"] = "Invalid number.";
+		    $error_msgs[$index]["length"] = "Invalid number.";
 		}
 
 		#debug
@@ -149,12 +160,6 @@ function validation()
 		echo "<br>" . $txt;
 
 		$attributes[] = $txt;
-	}
-
-	$COL = $col;
-
-	foreach ($COL as $key => $value) {
-		echo "". $key;
 	}
 
 	return $res;

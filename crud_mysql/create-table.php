@@ -77,15 +77,20 @@
 												echo "value='". $COL[$i]["name"] ."'";
 											?>
 											>
-
-											<span class="error"><?php showError("column_name"); ?></span>
+											<span class="error">
+												<?php if (isset($error_msgs[$i]["name"])) echo $error_msgs[$i]["name"]; ?>
+											</span>
 										</td>
 
 										<td>
 											<select name="column<?php echo $i . "[type]"; ?>">
-
 												<?php foreach ($SELECT as $k => $v) : ?>
-												<option value="<?php echo $v; ?>"><?php echo $v; ?></option>
+												<option value="<?php echo $v; ?>" 
+													<?php
+													if (isset($COL[$i]["type"]))
+														if ($v == $COL[$i]["type"])
+															echo "selected='selected'";
+													?>><?php echo $v; ?></option>
 												<?php endforeach; ?>
 											</select>
 										</td>
@@ -97,7 +102,10 @@
 												echo "value='". $COL[$i]["length"] ."'";
 											?>
 											>
-											<span class="error"><?php showError("column_length"); ?></span>
+											
+											<span class="error">
+												<?php if (isset($error_msgs[$i]["length"])) echo $error_msgs[$i]["length"]; ?>
+											</span>
 										</td>
 
 										<td align="center">
