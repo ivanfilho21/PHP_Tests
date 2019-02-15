@@ -8,15 +8,14 @@ body {
 }
 
 body a {
-	text-decoration: none;
-	color: blue;
+	text-decoration: none;	
 }
 
 .header-container {
 	margin: 0 auto;
 	max-width: 80%;
 }
-.header-container a { color: #00d8ff; }
+.header-container a { color: #00d8ff; font-weight: bold; }
 
 /* Header */
 
@@ -69,6 +68,9 @@ main {
 	/* height: 460px; */
 }
 
+main a { color: color: blue; }
+main a:hover { color: dodgerBlue; }
+
 .page-content {
 	padding: 2em;
 }
@@ -90,7 +92,7 @@ footer li {
 	margin: 0 0 0 1em;
 }
 footer a { color: #00d8ff; }
-footer li a:hover {
+footer a:hover {
 	color: white;
 	transition: .15s;
 }

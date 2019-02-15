@@ -48,7 +48,7 @@
 			</form><!-- end form -->
 			
 			<div class="options-holder">
-			<p><a href="login.php">Login to Your Account</a></p>
+			<p><a href="login.php">Log In to Your Account</a></p>
 			</div><!-- end options-holder -->
 		</div><!-- end page content -->
 	</main><!-- end main -->

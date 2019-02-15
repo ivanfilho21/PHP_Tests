@@ -11,7 +11,6 @@ input[type=submit] {
 	border-radius: 16px;
 	border-style: solid;
 	border-width: 0px;
-	transition: .2s;
 }
 input[type=submit]:hover {
 	background-color: darkBlue;

@@ -83,7 +83,7 @@ function validation()
 			echo " {$ind}: " . $v;
 		echo "<br>";
 	}
-	
+
 	$COL = $col;
 
 	foreach ($col as $index=>$value)
@@ -121,7 +121,13 @@ function validation()
 		}
 		else if (empty($value["length"]))
 		{
-			$col[$index]["length"] = "";
+			if ($col[$index]["type"] == "VARCHAR")
+			{
+				$res = false;
+				$error_msgs[$index]["length"] = "Must specify.";
+			}
+			else
+				$col[$index]["length"] = "";
 		}
 		else
 		{

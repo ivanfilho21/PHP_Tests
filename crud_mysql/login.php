@@ -44,7 +44,7 @@
 			
 			<div class="options-holder">
 				<p><a href="registration.php">Create an Account</a></p>
-				<p><a href="">Forgot your password?</a></p>
+				
 			</div><!-- end options-holder -->
 		</div><!-- end page content -->
 	</main><!-- end main -->

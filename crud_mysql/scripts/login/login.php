@@ -9,9 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	$name = $_POST["username"];
 	$pass = $_POST["password"];
 
-	$res = validation($name, $pass);
-
-	if ($res)
+	if (validation($name, $pass))
 	{
 		if (isset($user))
 		{

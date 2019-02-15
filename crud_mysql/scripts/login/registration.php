@@ -24,7 +24,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 			
 		# Add user in database
 		save_user($connection, $user_info);
-		echo "<h3>User added.</h3>";
+
+		$_SESSION["connected_user"] = $user_info;
+		header("Location:index.php");
+		exit();
+
 	}
 }
 
