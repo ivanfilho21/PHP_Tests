@@ -24,8 +24,21 @@
 		<?php if ($userIsLogged) : ?>
 			<aside class="sidebar">
 				<?php
+				$sidebarTables = array();
+
 				if (isset($_POST["list-tables"]))
-					header("Location:index.php");
+				{
+					if (count($tables) > 0)
+					{
+						foreach ($tables as $t) {
+							foreach ($t as $name) {
+								$sidebarTables[] = $name;
+							}
+						}
+					}
+
+					#header("Location:index.php");
+				}
 				else if (isset($_POST["create-table"]))
 					header("Location:create-table.php");
 				else if (isset($_POST["delete-table"]))
@@ -37,6 +50,11 @@
 					<div>
 						<img src="icon/menu.svg" width="18px">
 						<input type="submit" name="list-tables" value="List" class="button-as-li">
+						<ul style="margin: .5em 2.5em;">
+							<?php foreach ($sidebarTables as $value) : ?>
+								<li><a href="#"><?php echo $value; ?></a></li>
+							<?php endforeach; ?>
+						</ul>
 					</div>
 					
 					<div>

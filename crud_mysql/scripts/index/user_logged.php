@@ -20,7 +20,7 @@ function deleteTable()
 }
 ?>
 
-<h1>Tables</h1>
+<h1 style="margin-bottom: 1em; ">Tables</h1>
 
 <input class="button" id="create-table" type="submit" value="Create Table" onClick="parent.location='create-table.php'">
 
