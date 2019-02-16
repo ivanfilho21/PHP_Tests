@@ -67,8 +67,8 @@ main {
 	/* height: 460px; */
 }
 
-main a { color: color: blue; }
-main a:hover { color: dodgerBlue; }
+main a { color: dodgerBlue; }
+main a:hover { color: darkblue; }
 
 .page-content {
 	padding: 2em;

@@ -52,7 +52,7 @@ thead
 
 th
 {
-	padding: 1%;
+	padding: 12px 6px;
 	width: 200px;
 }
 
@@ -63,15 +63,10 @@ tbody
 
 .spRow
 {
-	background-color: #d3e9ea;
-}
-
-#tdName
-{
-	width: 220px;
+	background-color: aliceBlue;
 }
 
 td { 
-	padding: 18px 12px;
+	padding: 8px 2px;
 	vertical-align: top;
 }

@@ -4,22 +4,58 @@
 
 label { font-size: 18px; font-weight: bold; }
 
-input[type=submit] {
-	background-color: mediumSeaGreen;
-	color: white;
-	padding: 8px 38px;
+.button {
+	background-color: dodgerBlue;
 	border-radius: 16px;
+	padding: 8px 38px;
+	color: white;
+}
+.button:hover {
+	background-color: darkBlue;
+}
+
+input[type=submit] {
 	border-style: solid;
 	border-width: 0px;
-
-	margin: 2em 0;
 }
 input[type=submit]:hover {
-	background-color: seaGreen;
 	color: #ffffff;
 	cursor: pointer;
 }
+
+/* Form as Unordered List */
+.form-as-ul {
+	display: grid;
+}
+.form-as-ul img {
+	padding: 0 0 0 2.5em;
+}
+
+.button-as-li {
+
+	background: none;
+	text-align: left;
+	margin: .5em 0 0 0;
+
+	color: white;
+}
+
+.list-section {
+	margin: 1em 1em;
+	padding: 0 .5em;
+	color: #00d8ff;
+}
+
 /* Special Buttons */
+#create-table {
+	background-color: mediumSeaGreen;
+
+}
+
+#create-table:hover {
+	background-color: seaGreen;
+}
+
 #update-table {
 	padding: 5px 12px; /*8px 22px;*/
 	background-color: dodgerblue;
@@ -52,7 +88,7 @@ table
 
 thead
 {
-	background-color: #799b9e;
+	background-color: #1c6b8e;
 	color: white;
 	text-align: center;
 }
@@ -60,6 +96,7 @@ thead
 th
 {
 	width: 300px;
+	padding: 12px 6px;
 }
 
 tbody
@@ -67,9 +104,8 @@ tbody
 	text-align: center;
 }
 
-.spRow
-{
-	background-color: #d3e9ea;
+tr {
+	border: solid 1px #ccc;
 }
 
 td {

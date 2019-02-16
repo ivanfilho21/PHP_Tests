@@ -72,3 +72,10 @@ function getTableContent($conn, $table)
 
 	return getDataList($res);
 }
+
+#Deletes the specified table.
+function dropTable($conn, $name)
+{
+	$sql = "DROP TABLE {$name};";
+	$res = mysqli_query($conn, $sql) or die("<h2>Error in query: {$sql}</h2>");
+}
