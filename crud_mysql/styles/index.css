@@ -90,10 +90,7 @@ main {
 
 .sidebar {
 	float: left;
-	width: 15%;
-	
     white-space: nowrap;
-    overflow-x: auto;
 }
 .sidebar li {
 	list-style-type: none;

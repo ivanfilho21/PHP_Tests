@@ -44,10 +44,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		# Validation
 		if (validation() && count($attributes) > 0)
 		{
-			echo "<h2>Validation OK{$name}</h2>";
+			#echo "<h2>Validation OK{$name}</h2>";
 			createTable($connection, $name, $attributes);
 		}
-		else echo "<h2>Validation Failed</h2>";
+		#else echo "<h2>Validation Failed</h2>";
 	}
 }
 
@@ -56,12 +56,19 @@ function validation()
 	global $name, $attributes, $columns, $error_msgs, $COL;
 
 	$res = true;
-	$name = $_POST["table_name"];
+	$name = format_input($_POST["table_name"]);
 	$fields = array("name", "type", "length", "null", "pk");
-	echo "  TABLE: " . $name . "   ";
+	
+	#echo "  TABLE: " . $name . "   ";
 	# ...
 
-	$res = checkEmptyFields(array("table_name"));
+	#$res = checkEmptyFields(array("table_name"));
+
+	if (empty($name))
+	{
+		$res = false;
+		$error_msgs["table_name"] = "Table name can't be empty.";
+	}
 
 	if ($columns == 0)
 	{
@@ -76,27 +83,30 @@ function validation()
 	}
 
 	# test
+	/*
 	foreach ($col as $index=>$value)
 	{
 		echo "[{$index}]:  ";
 		foreach ($value as $ind=>$v)
 			echo " {$ind}: " . $v;
 		echo "<br>";
-	}
+	}*/
 
 	$COL = $col;
 
 	foreach ($col as $index=>$value)
 	{
-		echo "<br>";
-		if (empty($value["name"]))
+		#echo "<br>";
+
+		$colName = format_input($value["name"]);
+		if (empty($colName))
 		{
 			$res = false;
 			$error_msgs[$index]["name"] = "Name can't be empty.";
 			#$error_msgs["column_name"] = "Can't be empty.";
 		}
 		else
-			$col[$index]["name"] = strtolower($value["name"]) . " ";
+			$col[$index]["name"] = strtolower($colName) . " ";
 
 		#debug
 		#echo $value["name"] . "  ";
@@ -106,11 +116,12 @@ function validation()
 		#debug
 		#echo $value["type"] . "  ";
 
-		if (is_numeric($value["length"]))
+		$colLength = format_input($value["length"]);
+		if (is_numeric($colLength))
 		{
-		    if ((int)$value["length"] > 0)
-		    	$col[$index]["length"] = "(" . $value["length"] . ")";
-		    else if ((int)$value["length"] == 0)
+		    if ((int)$colLength > 0)
+		    	$col[$index]["length"] = "(" . $colLength . ")";
+		    else if ((int)$colLength == 0)
 		    	$col[$index]["length"] = "";
 		    else
 		    {
@@ -119,7 +130,7 @@ function validation()
 		    	$error_msgs[$index]["length"] = "Negative number.";
 		    }
 		}
-		else if (empty($value["length"]))
+		else if (empty($colLength))
 		{
 			if ($col[$index]["type"] == "VARCHAR")
 			{
@@ -163,7 +174,7 @@ function validation()
 			$txt .= $v . " ";
 		}
 		$txt = substr($txt, 0, strlen($txt) - strlen(" "));
-		echo "<br>" . $txt;
+		#echo "<br>" . $txt;
 
 		$attributes[] = $txt;
 	}

@@ -70,3 +70,8 @@ tbody
 {
 	width: 220px;
 }
+
+td { 
+	padding: 18px 12px;
+	vertical-align: top;
+}
