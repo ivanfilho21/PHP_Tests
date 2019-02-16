@@ -5,53 +5,49 @@
 label { font-size: 18px; font-weight: bold; }
 
 input[type=submit] {
-	background-color: dodgerblue;
+	background-color: mediumSeaGreen;
 	color: white;
 	padding: 8px 38px;
 	border-radius: 16px;
 	border-style: solid;
 	border-width: 0px;
+
+	margin: 2em 0;
 }
 input[type=submit]:hover {
-	background-color: darkBlue;
+	background-color: seaGreen;
 	color: #ffffff;
 	cursor: pointer;
 }
 /* Special Buttons */
-#add-row {
-	font-size: 18px;
-	padding: 8px 20px;
-	background-color: mediumSeaGreen;
+#update-table {
+	padding: 5px 12px; /*8px 22px;*/
+	background-color: dodgerblue;
+	margin: 0;
+	
+	border-radius: 8px;
 }
-#add-row:hover {
-	background-color: seaGreen;
+#update-table:hover {
+	background-color: darkBlue;
 }
 
-#delete-row {
-	font-size: 12px;/* 18px; */
+#delete-table {
 	padding: 5px 12px; /*8px 22px;*/
 	background-color: tomato;
+	margin: 0;
+	
+	border-radius: 8px;
 }
-#delete-row:hover {
+#delete-table:hover {
 	background-color: orangeRed;
 }
 
 /* Table Style */
 
-.table-holder {
-    display: inline-block;
-	display: inline-block;
-	vertical-align: center;
-}
-
 table
 {
 	border-collapse: collapse;
-	margin: 24px auto;
-	table-layout: fixed;
-    width: 1px; /* required for table-layout */
-
-    display: inline-table;
+	margin: 12px auto;
 }
 
 thead
@@ -63,8 +59,7 @@ thead
 
 th
 {
-	padding: 1%;
-	width: 200px;
+	width: 300px;
 }
 
 tbody
@@ -77,9 +72,8 @@ tbody
 	background-color: #d3e9ea;
 }
 
-#tdName
-{
-	width: 220px;
+td {
+	padding: 6px 0;
 }
 
 /* Sidebar */
