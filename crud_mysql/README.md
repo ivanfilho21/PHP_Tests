@@ -9,12 +9,12 @@
 
 ### What I'm working on:
 * Index page (listing tables, deleting tables).
+* View-table page (list, insert, and delete records of a table).
 
 ### Things I'm learning:
-* Super global variable $_POST.
-* global variables.
-* Inserting data into MySQL Database (insert command).
-* Retrieving data from MySQL Database (select command).
+* Super global variables $_GET, $_POST, and $_SESSION.
+* Global variables.
+* SQL basic commands.
 
 ### Still in development.
 
