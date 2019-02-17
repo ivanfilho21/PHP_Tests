@@ -20,6 +20,7 @@
 * Super global variables $_GET, $_POST, and $_SESSION.
 * Global variables.
 * SQL basic commands.
+* A bit of front-end.
 
 ### Still in development.
 
