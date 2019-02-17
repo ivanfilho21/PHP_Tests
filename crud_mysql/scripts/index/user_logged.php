@@ -31,22 +31,6 @@ function deleteTable()
 		<th>Name</th>
 		<th>Action</th>
 	</thead>
-	<?php else : ?>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
 	<?php endif; ?>
 
 	<tbody>
@@ -56,7 +40,7 @@ function deleteTable()
 				<tr>
 					<td>
 
-						<a href=""><?php echo $name; ?></a>
+						<a href="view-table.php?table[<?php echo $name; ?>]"><?php echo $name; ?></a>
 
 						<table style="display: none;">
 							<?php $columns = getTableColumns($connection, $name); ?>

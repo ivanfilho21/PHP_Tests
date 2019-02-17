@@ -30,6 +30,42 @@ function createTable($conn, $table, $fields)
 	echo "<h2>Created table {$table}.</h2>";
 }
 
+#Inserts data into a table
+function insertIntoTable($conn, $table, $columns, $data)
+{
+	$fields = "";
+	$comma = ", ";
+
+	foreach ($columns as $i => $columnName) {
+		$fields .= $columnName . $comma;
+	}
+	$fields = substr($fields, 0, strlen($fields) - strlen($comma));
+
+	$values = "";
+	
+	foreach ($data as $d)
+	{
+		$values .= "'" . $d . "'" . $comma;
+	}
+
+	$values = substr($values, 0, strlen($values) - strlen($comma));
+	
+	$sql = "
+		INSERT INTO {$table}
+		(
+		{$fields}
+		)
+		VALUES
+		(
+		{$values}
+		);
+	";
+
+	echo "<br>" . $sql;
+	
+	mysqli_query($conn, $sql) or die();
+}
+
 # Returns a list of data from a database query. If query is false, returns empty list.
 function getDataList($res)
 {
