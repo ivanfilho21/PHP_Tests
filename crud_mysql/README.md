@@ -8,12 +8,12 @@
 * Creating Tables.
 
 ### What I'm working on:
-* Index page (listing tables, deleting tables).
-* View-table page (list, insert, and delete records of a table).
+* Index page (updating tables).
+* View-table page (list, insert, and delete records of a table, and altering and droping table).
 
 ### Screenshots
-![Screenshot](https://i.postimg.cc/K8g6KSyz/Screenshot-from-2019-02-17-10-41-22.png)
-![Screenshot](https://i.postimg.cc/KYSdBqZ5/Screenshot-from-2019-02-17-10-41-56.png)
+![Screenshot](https://i.postimg.cc/pXHmQXnF/Screenshot-from-2019-02-18-12-16-46.png)
+![Screenshot](https://i.postimg.cc/KcLKgg4b/Screenshot-from-2019-02-18-12-17-13.png)
 
 
 ### Things I'm learning:
