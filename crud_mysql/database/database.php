@@ -109,9 +109,21 @@ function getTableColumns($conn, $table)
 {
 	$sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'{$table}';";
 	$res = mysqli_query($conn, $sql) or die("<h2>Error in query: {$sql}</h2>");
-	$list = array();
 
-	return getDataList($res);
+	$list = getDataList($res);
+	$columns = array();
+
+	#echo "<br> Debugging Database Table Columns <br>";
+
+	foreach ($list as $key => $value) {
+		#echo "<br> " . $key . ": ";
+		foreach ($value as $k => $v) {
+			#echo $k . " " . $v . ", ";
+			$columns[] = $v;
+		}
+	}
+
+	return $columns;
 }
 
 # Returns all rows in a table.
@@ -119,8 +131,7 @@ function getTableContent($conn, $table)
 {
 	$sql = "SELECT * FROM {$table};";
 	$res = mysqli_query($conn, $sql) or die("<h2>Error in query: {$sql}</h2>");
-	$list = array();
-
+	
 	return getDataList($res);
 }
 
@@ -131,9 +142,6 @@ function getColumnInformation($conn, $table, $column)
 
 	$sql = "SELECT DATA_TYPE, IS_NULLABLE, EXTRA FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '{$table}' AND COLUMN_NAME = '{$column}';";
 
-	#echo "<br>" . $sql;
-
-	#$res = executeQuery($conn, $sql);
 	$res = mysqli_query($conn, $sql);
 
 	$list = getDataList($res);
@@ -148,4 +156,19 @@ function getColumnInformation($conn, $table, $column)
 	}
 
 	return $information;
+}
+
+# Returns the primary key name, else returns empty list.
+function getPrimaryKey($conn, $table)
+{
+	$sql = "SELECT COLUMN_KEY, COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '{$table}';";
+	$res = mysqli_query($conn, $sql);
+
+	foreach (getDataList($res) as $value) {
+		
+		if (!empty($value["COLUMN_KEY"]))
+			return $value["COLUMN_NAME"];
+	}
+
+	return "";
 }

@@ -32,7 +32,6 @@ input[type=submit]:hover {
 }
 
 .button-as-li {
-
 	background: none;
 	text-align: left;
 	margin: .5em 0 0 0;
@@ -49,22 +48,32 @@ input[type=submit]:hover {
 /* Special Buttons */
 #create-table {
 	background-color: mediumSeaGreen;
-
 }
 
 #create-table:hover {
 	background-color: seaGreen;
 }
 
-#update-table {
+#read-table {
 	padding: 5px 12px; /*8px 22px;*/
 	background-color: dodgerblue;
 	margin: 0;
 	
 	border-radius: 8px;
 }
+#read-table:hover {
+	background-color: blue;
+}
+
+#update-table {
+	padding: 5px 12px; /*8px 22px;*/
+	background-color: orange;
+	margin: 0;
+	
+	border-radius: 8px;
+}
 #update-table:hover {
-	background-color: darkBlue;
+	background-color: darkOrange;
 }
 
 #delete-table {
@@ -75,7 +84,7 @@ input[type=submit]:hover {
 	border-radius: 8px;
 }
 #delete-table:hover {
-	background-color: orangeRed;
+	background-color: red;
 }
 
 /* Table Style */

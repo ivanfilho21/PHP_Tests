@@ -39,38 +39,19 @@ function deleteTable()
 				
 				<tr>
 					<td>
-
 						<a href="view-table.php?table[<?php echo $name; ?>]"><?php echo $name; ?></a>
-
-						<table style="display: none;">
-							<?php $columns = getTableColumns($connection, $name); ?>
-
-							<thead>
-								<?php foreach ($columns as $column) : ?>
-									<?php foreach ($column as $cName) : ?>
-										<th><?php echo $cName; ?></th>
-									<?php endforeach; ?>
-								<?php endforeach; ?>
-							</thead>
-
-							<tbody>
-								<?php $rows = getTableContent($connection, $name); ?>
-								<tr>
-									<?php foreach ($rows as $row) : ?>
-										<?php foreach ($row as $rName) : ?>
-											<td><?php echo $rName; ?></td>
-										<?php endforeach; ?>
-									<?php endforeach; ?>
-								</tr>
-							</tbody>
-						</table>
 					</td>
 
 					<td>
-						<!--
-						<input type="submit" value="Update" onclick="" id="update-table">
-						<div style="display: inline-block; height: 16px; border-left: 1px solid #a09d9d; vertical-align: middle;"></div>-->
-						<input class="button" type="submit" value="Delete" onClick="parent.location='index.php?delete-table[<?php echo $name; ?>]'" id="delete-table">
+						<input class="button" id="read-table" type="submit" value="Read" onclick="parent.location='view-table.php?table[<?php echo $name; ?>]'">
+						
+						<div style="display: inline-block; height: 16px; border-left: 1px solid #a09d9d; vertical-align: middle;"></div>
+						
+						<input class="button" id="update-table" type="submit" value="Update" onclick="">
+						
+						<div style="display: inline-block; height: 16px; border-left: 1px solid #a09d9d; vertical-align: middle;"></div>
+						
+						<input class="button" id="delete-table" type="submit" value="Delete" onClick="parent.location='index.php?delete-table[<?php echo $name; ?>]'">
 					</td>
 				</tr>
 			<?php endforeach; ?>

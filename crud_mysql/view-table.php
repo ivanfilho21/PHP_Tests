@@ -29,6 +29,7 @@
 		<?php endif; ?>
 			
 			<?php
+
 			if (isset($_GET["table"]))
 			{
 				foreach ($_GET["table"] as $key => $value) {
@@ -38,8 +39,9 @@
 				echo "<h1>Table {$name}</h1>";
 			}
 
-			# Insert button clicked
+			$columns = getTableColumns($connection, $name);
 
+			# Insert button clicked
 			if (isset($_POST["insert"])) {
 				if (isset($_POST["data"]))
 				{
@@ -48,28 +50,22 @@
 					$columnNames = array();
 					$data = array();
 
-					$columns = getTableColumns($connection, $name);
+					#$columns = getTableColumns($connection, $name);
 					$notNullColumns = array();
 
 					foreach ($columns as $column) {
-						$cn = $column["COLUMN_NAME"];
-
-						$info = getColumnInformation($connection, $name, $cn);
-
-						/*foreach ($info as $key => $value) {
-							echo "<br>" . $cn . ": " . $key . " = " . $value . ".";
-						}*/
+						
+						$info = getColumnInformation($connection, $name, $column);
 
 						if ($info["IS_NULLABLE"] == "NO")
-							$notNullColumns[$cn] = "NO";
+							$notNullColumns[$column] = "NO";
 
-						# if EXTRA is empty the column has no extra info (auto_increment, etc.) 
-						# TODO
-						if ($cn != "id")
+						# if EXTRA is empty the column has no extra info (auto_increment, etc.)
+
+						if ($info["EXTRA"] != "auto_increment")
 						{
-							$columnNames[] = $cn;
+							$columnNames[] = $column;
 						}
-						
 					}
 
 					if (validation())
@@ -86,8 +82,18 @@
 						$value = $key;
 						break;
 					}
+
+					# Gets primary key in current table
+					$pk = getPrimaryKey($connection, $name);
+
+					# If empty, first column name is used as pk (might not work with some tables)
+					if (empty($pk))
+						$cr = array_reverse($columns);
+						$pk = array_pop($cr);
+
+					#echo $pk;
 					
-					deleteFromTable($connection, $name, "id", $value);
+					deleteFromTable($connection, $name, $pk, $value);
 				}
 			}
 
@@ -97,6 +103,7 @@
 				$res = true;
 
 				foreach ($_POST["data"] as $key => $value) {
+					
 					if (isset($notNullColumns[$key]))
 					{
 						if (empty($value))
@@ -114,34 +121,28 @@
 			?>
 
 			<table>
-				<?php $columns = getTableColumns($connection, $name); ?>
-
 				<thead>
 					<?php foreach ($columns as $column) : ?>
-						<?php foreach ($column as $cName) : ?>
-							<th style="width: auto;"><?php echo $cName; ?></th>
-						<?php endforeach; ?>
+						<th style="width: auto;"><?php echo $column; ?></th>
 					<?php endforeach; ?>
 
 					<th style="width: 32px;"></th>
-
 				</thead>
 
 				<tbody>
 					<tr>
 						<form action="" method="post">
-							<?php foreach ($columns as $column) : $cName = $column["COLUMN_NAME"]; ?>
+							<?php foreach ($columns as $column) : ?>
 
-								<?php if ($cName == "id") : ?>
+								<!-- TODO: check primary key instead -->
+								<?php if ($column == "id") : ?>
 									<td></td>
 								<?php else: ?>
 									<td>
-										<input type="text" name="data[<?php echo $cName; ?>]">
-										<span class="error"><?php showError($cName); ?></span>
+										<input type="text" name="data[<?php echo $column; ?>]">
+										<span class="error"><?php showError($column); ?></span>
 									</td>
-								
 								<?php endif; ?>
-								
 							<?php endforeach; ?>
 
 							<td>
@@ -154,14 +155,16 @@
 					
 						<?php foreach ($rows as $key => $row) : ?>
 							<tr>
-								<form action="" method="post">
-									<?php foreach ($row as $k => $rName) : ?>
-										<td><?php echo $rName; ?></td>
-									<?php endforeach; ?>
+								<?php foreach ($row as $k => $rowName) : ?>
+									<td><?php echo $rowName; ?></td>
+								<?php endforeach; ?>
 
+								<form action="" method="post">
 									<?php if (count($rows) > 0) : ?>
 										<td>
-											<input type="submit" name="delete-row[<?php echo $rows[$key]['id']; ?>]" value="-">
+											<input type="submit" name="delete-row[<?php echo $rows[$key][$pk]; ?>]" value="-">
+
+
 											<!-- TODO: get the primary key instead of hard-coded 'id' -->
 										</td>
 									<?php endif; ?>
@@ -173,7 +176,7 @@
 			</table>
 
 			<td>
-				<input class="button" type="submit" value="Delete" onClick="parent.location='index.php?delete-table[<?php echo $name; ?>]'" id="delete-table" style="margin-top: 3em;">
+				<input class="button" type="submit" value="Drop Table" onClick="parent.location='index.php?delete-table[<?php echo $name; ?>]'" id="delete-table" style="margin-top: 3em;">
 			</td>
 
 		</div>
