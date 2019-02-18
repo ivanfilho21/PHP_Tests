@@ -25,9 +25,8 @@ function createTable($conn, $table, $fields)
 	$sql = "CREATE TABLE {$table} ($values);";
 
 
-	echo $sql;
+	#echo $sql;
 	mysqli_query($conn, $sql) or die("<h2>Error creating table {$table}.</h2>");
-	echo "<h2>Created table {$table}.</h2>";
 }
 
 #Inserts data into a table
@@ -107,7 +106,7 @@ function getTableList($conn)
 # Returns all columns in a table.
 function getTableColumns($conn, $table)
 {
-	$sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'{$table}';";
+	$sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = N'{$table}';";
 	$res = mysqli_query($conn, $sql) or die("<h2>Error in query: {$sql}</h2>");
 
 	$list = getDataList($res);
@@ -140,7 +139,7 @@ function getColumnInformation($conn, $table, $column)
 	# SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'tbl_name' AND COLUMN_NAME = 'col_name';
 	# More info at https://dev.mysql.com/doc/refman/8.0/en/columns-table.html
 
-	$sql = "SELECT DATA_TYPE, IS_NULLABLE, EXTRA FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '{$table}' AND COLUMN_NAME = '{$column}';";
+	$sql = "SELECT COLUMN_NAME, DATA_TYPE, COLUMN_TYPE, IS_NULLABLE, EXTRA, COLUMN_KEY FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '{$table}' AND COLUMN_NAME = '{$column}';";
 
 	$res = mysqli_query($conn, $sql);
 
@@ -152,7 +151,6 @@ function getColumnInformation($conn, $table, $column)
 			#echo $v;
 			$information[$k] = $v;
 		}
-		
 	}
 
 	return $information;

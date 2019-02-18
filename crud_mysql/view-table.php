@@ -75,28 +75,10 @@
 					}
 				}
 			}
-			else {
-				if (isset($_POST["delete-row"]))
-				{
-					foreach ($_POST["delete-row"] as $key => $v) {
-						$value = $key;
-						break;
-					}
 
-					# Gets primary key in current table
-					$pk = getPrimaryKey($connection, $name);
-
-					# If empty, first column name is used as pk (might not work with some tables)
-					if (empty($pk))
-						$cr = array_reverse($columns);
-						$pk = array_pop($cr);
-
-					#echo $pk;
-					
-					deleteFromTable($connection, $name, $pk, $value);
-				}
-			}
-
+			primaryKey();
+			delete();
+			
 			function validation()
 			{
 				global $data, $notNullColumns, $error_msgs;
@@ -117,6 +99,45 @@
 				}
 
 				return $res;
+			}
+
+			function primaryKey()
+			{
+				global $pk, $connection, $name, $columns;
+
+				# Gets primary key in current table
+				$pk = getPrimaryKey($connection, $name);
+
+				# If empty, first column name is used as pk (might not work with some tables)
+
+				if (empty($pk))
+				{
+					$cr = array_reverse($columns);
+					$pk = array_pop($cr);
+				}
+
+				#echo $pk;
+			}
+
+			function delete()
+			{
+				global $connection, $name, $pk;
+
+				if (isset($_POST["delete-row"]))
+				{
+					$value = "";
+					foreach ($_POST["delete-row"] as $key => $v) {
+						#echo "key " . $key . ". value " . $v;
+						$value = $key;
+						break;
+					}
+
+					#echo $pk;
+					
+					deleteFromTable($connection, $name, $pk, $value);
+
+					# Untracked bug arround here in deletion.
+				}
 			}
 			?>
 
