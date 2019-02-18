@@ -40,29 +40,76 @@
 
 			# Insert button clicked
 
-			if (isset($_POST["data"])) {
-				echo "HELLO ...";
+			if (isset($_POST["insert"])) {
+				if (isset($_POST["data"]))
+				{
+					# data
+					$error_msgs = array();
+					$columnNames = array();
+					$data = array();
 
-				$columnNames = array();
-				$columns = getTableColumns($connection, $name);
+					$columns = getTableColumns($connection, $name);
+					$notNullColumns = array();
 
-				# data
-				$data = array();
+					foreach ($columns as $column) {
+						$cn = $column["COLUMN_NAME"];
 
-				foreach ($columns as $column) {
-					$cn = $column["COLUMN_NAME"];
-					if ($cn != "id")
-						$columnNames[] = $cn;
-					echo " [{$cn}]";
+						$info = getColumnInformation($connection, $name, $cn);
+
+						/*foreach ($info as $key => $value) {
+							echo "<br>" . $cn . ": " . $key . " = " . $value . ".";
+						}*/
+
+						if ($info["IS_NULLABLE"] == "NO")
+							$notNullColumns[$cn] = "NO";
+
+						# if EXTRA is empty the column has no extra info (auto_increment, etc.) 
+						# TODO
+						if ($cn != "id")
+						{
+							$columnNames[] = $cn;
+						}
+						
+					}
+
+					if (validation())
+					{
+						insertIntoTable($connection, $name, $columnNames, $data);
+						header("Location:view-table.php?table[{$name}]");
+					}
 				}
+			}
+			else {
+				if (isset($_POST["delete-row"]))
+				{
+					foreach ($_POST["delete-row"] as $key => $v) {
+						$value = $key;
+						break;
+					}
+					
+					deleteFromTable($connection, $name, "id", $value);
+				}
+			}
+
+			function validation()
+			{
+				global $data, $notNullColumns, $error_msgs;
+				$res = true;
 
 				foreach ($_POST["data"] as $key => $value) {
+					if (isset($notNullColumns[$key]))
+					{
+						if (empty($value))
+						{
+							$res = false;
+							$error_msgs[$key] = "Can't be empty.";
+						}
+					}
+					
 					$data[] = format_input($value);
 				}
 
-				# After Validation
-				insertIntoTable($connection, $name, $columnNames, $data);
-				header("Location:view-table.php?table[{$name}]");
+				return $res;
 			}
 			?>
 
@@ -88,9 +135,13 @@
 								<?php if ($cName == "id") : ?>
 									<td></td>
 								<?php else: ?>
-									<td><input type="text" name="data[<?php echo $cName; ?>]"></td>
-									
+									<td>
+										<input type="text" name="data[<?php echo $cName; ?>]">
+										<span class="error"><?php showError($cName); ?></span>
+									</td>
+								
 								<?php endif; ?>
+								
 							<?php endforeach; ?>
 
 							<td>
@@ -101,22 +152,22 @@
 
 					<?php $rows = getTableContent($connection, $name); ?>
 					
-						<?php foreach ($rows as $row) : ?>
+						<?php foreach ($rows as $key => $row) : ?>
 							<tr>
-								<?php foreach ($row as $rName) : ?>
-									<td><?php echo $rName; ?></td>
-								<?php endforeach; ?>
+								<form action="" method="post">
+									<?php foreach ($row as $k => $rName) : ?>
+										<td><?php echo $rName; ?></td>
+									<?php endforeach; ?>
 
-								<?php if (count($rows) > 0) : ?>
-									<td>
-										<input type="submit" name="delete-row" value="-">
-									</td>
-								<?php endif; ?>
+									<?php if (count($rows) > 0) : ?>
+										<td>
+											<input type="submit" name="delete-row[<?php echo $rows[$key]['id']; ?>]" value="-">
+											<!-- TODO: get the primary key instead of hard-coded 'id' -->
+										</td>
+									<?php endif; ?>
+								</form>
 							</tr>
 						<?php endforeach; ?>
-
-						<!-- TODO: delete record from table -->
-						<!-- DELETE FROM `dogs` WHERE `dogs`.`id` = 1; -->
 
 				</tbody>
 			</table>

@@ -66,6 +66,21 @@ function insertIntoTable($conn, $table, $columns, $data)
 	mysqli_query($conn, $sql) or die();
 }
 
+#Deletes the specified table.
+function dropTable($conn, $name)
+{
+	$sql = "DROP TABLE {$name};";
+	$res = mysqli_query($conn, $sql) or die("<h2>Error in query: {$sql}</h2>");
+}
+
+#Removes an entry from the specified table.
+function deleteFromTable($conn, $table, $field, $value)
+{
+	$sql = "DELETE FROM {$table} WHERE {$table}.{$field} = '{$value}';";
+	#echo $sql;
+	$res = mysqli_query($conn, $sql) or die("<h2>Error in query: {$sql}</h2>");
+}
+
 # Returns a list of data from a database query. If query is false, returns empty list.
 function getDataList($res)
 {
@@ -109,9 +124,28 @@ function getTableContent($conn, $table)
 	return getDataList($res);
 }
 
-#Deletes the specified table.
-function dropTable($conn, $name)
+function getColumnInformation($conn, $table, $column)
 {
-	$sql = "DROP TABLE {$name};";
-	$res = mysqli_query($conn, $sql) or die("<h2>Error in query: {$sql}</h2>");
+	# SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'tbl_name' AND COLUMN_NAME = 'col_name';
+	# More info at https://dev.mysql.com/doc/refman/8.0/en/columns-table.html
+
+	$sql = "SELECT DATA_TYPE, IS_NULLABLE, EXTRA FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '{$table}' AND COLUMN_NAME = '{$column}';";
+
+	#echo "<br>" . $sql;
+
+	#$res = executeQuery($conn, $sql);
+	$res = mysqli_query($conn, $sql);
+
+	$list = getDataList($res);
+	$information = array();
+
+	foreach ($list as $key => $value) {
+		foreach ($value as $k => $v) {
+			#echo $v;
+			$information[$k] = $v;
+		}
+		
+	}
+
+	return $information;
 }
