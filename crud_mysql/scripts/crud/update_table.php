@@ -72,3 +72,87 @@ foreach ($columns as $key => $column) {
 		if ($columnInfo[$key]["COLUMN_KEY"] == "PRI")
 			$COL[$key]["pk"] = "yes";
 }
+
+
+if (isset($_POST["alter"]))
+{
+	$tableName = "";
+	$columnName = "";
+	$operation = "";
+	$type = "";
+
+	
+	$array = $_POST["alter"];
+	$tableName = key($array);
+
+	$array = $array[$tableName];
+	$operation = key($array);
+
+	$array = $array[$operation];
+	$columnName = key($array);
+
+	if ($operation == "modify")
+	{
+		echo "<br>...<br>";
+		#get type and length
+		$array = $array[$columnName];
+		$i = key($array);
+		
+		$col = $_POST["column".$i];
+
+		if (isset($col["type"]))
+		{
+			$type = $col["type"];
+			#echo "<br>set type: " . $type;
+		}
+		else
+		{
+			$array = $array[$i];
+			$type = key($array);
+			#echo "<br>NOT set type: " . $type;
+		}
+
+		if (isset($col["length"]))
+		{
+			###
+			$colLength = format_input($col["length"]);
+			if (is_numeric($colLength))
+			{
+			    if ((int)$colLength > 0)
+			    	$type .= "(" . $colLength . ")";
+			    else if ((int)$colLength == 0)
+			    {
+					$type .= "";
+			    	#$col[$index]["length"] = "";
+			    }
+			    else
+			    {
+			    	$res = false;
+			    	#$error_msgs["column_length"] = "Negative number.";
+			    	$error_msgs[$i]["length"] = "Negative number.";
+			    }
+			}
+			else if (empty($colLength))
+			{
+				if ($type == "varchar")
+				{
+					$res = false;
+					$error_msgs[$i]["length"] = "Must specify.";
+				}
+				else
+					$type .= "";
+			}
+			else
+			{
+				$res = false;
+				#$error_msgs["column_length"] = "Invalid number.";
+			    $error_msgs[$i]["length"] = "Invalid number.";
+			}
+
+			#$type .= "(" . $col["length"] . ")";
+		}
+	}
+
+	# alterTable($connection, $tableName, $columnName, $operation, $type);
+	#header("Location:update-table.php?table[{$tableName}]");
+}

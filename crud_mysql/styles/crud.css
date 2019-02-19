@@ -17,6 +17,12 @@ input[type=submit]:hover {
 	color: #ffffff;
 	cursor: pointer;
 }
+select {
+	border-radius: 8px;
+	padding: 2px 4px;
+	background: white;
+}
+
 /* Special Buttons */
 #add-row {
 	font-size: 18px;
@@ -69,4 +75,8 @@ tbody
 td { 
 	padding: 8px 2px;
 	vertical-align: top;
+}
+
+.disabled {
+	color: #999;
 }

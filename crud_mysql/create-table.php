@@ -139,6 +139,9 @@
 													<input type="checkbox" name="column<?php echo $i . "[pk]"; ?>" value="0" checked="true" />Yes
 												</label>
 											</td>
+										<?php else: ?>
+											<td></td>
+											<td></td>
 										<?php endif; ?>
 
 									</tr>

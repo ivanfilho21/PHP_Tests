@@ -38,7 +38,7 @@
 					<p>
 						<label>Columns: <?php echo count($columns); ?></label>
 						<input id="add-row" type="submit" name="columns" value="+">
-						<input id="delete-row" type="submit" name="columns" value="-">
+						<!--<input id="delete-row" type="submit" name="columns" value="-">-->
 					</p>
 
 					<p>
@@ -56,6 +56,8 @@
 								<th>Can be Null</th>
 								<th>Auto Increment</th>
 								<th>Primary Key</th>
+								<th></th>
+								<th></th>
 							</thead>
 							
 							<!-- Table Rows -->
@@ -101,6 +103,7 @@
 											if (isset($COL[$i]["length"]))
 												echo "value='". $COL[$i]["length"] ."'";
 											?>
+											style="width: 50px;"
 											>
 											
 											<span class="error">
@@ -109,8 +112,8 @@
 										</td>
 
 										<td align="center">
-											<label>
-												<input type="checkbox" name="column<?php echo $i . "[null]"; ?>" value="0"
+											<label class="disabled">
+												<input disabled="disabled" type="checkbox" name="column<?php echo $i . "[null]"; ?>" value="0"
 												<?php
 												
 
@@ -124,8 +127,8 @@
 
 										<?php if ($i == 0) : ?>
 											<td align="center">
-												<label>
-													<input type="checkbox" name="column<?php echo $i . "[auto]"; ?>" value="0"
+												<label class="disabled">
+													<input disabled="disabled" type="checkbox" name="column<?php echo $i . "[auto]"; ?>" value="0"
 													<?php
 													if ( isset($COL[$i]["auto"]) )
 														echo "checked='true'";
@@ -134,23 +137,34 @@
 											</td>
 
 											<td align="center">
-												<label>
-													<input type="checkbox" name="column<?php echo $i . "[pk]"; ?>" value="0"
+												<label class="disabled">
+													<input disabled="disabled" type="checkbox" name="column<?php echo $i . "[pk]"; ?>" value="0"
 													<?php
 													if ( isset($COL[$i]["pk"]) )
 														echo "checked='true'";
 													?> />Yes
 												</label>
 											</td>
+										<?php else : ?>
+											<td></td>
+											<td></td>
 										<?php endif; ?>
 
+										<td>
+											<input type="submit" name="alter[<?php echo $tableName; ?>][drop][<?php echo $column; ?>]" value="-" id="delete-row">
+										</td>
+
+										<td>
+											<input type="submit" name="alter[<?php echo $tableName; ?>][modify][<?php echo $column; ?>][<?php echo $i; ?>][<?php echo $COL[$i]["type"]; ?>]" value="Update">
+										</td>
 									</tr>
 								<?php endforeach; ?>
+
 							</tbody>
 						</table>
 					<?php endif; ?>
 
-					<input type="submit" name="update_table" value="Update">
+					<!--<input type="submit" name="update_table" value="Update">-->
 				</fieldset>
 			</form><!-- end form -->
 		</div>

@@ -80,6 +80,13 @@ function deleteFromTable($conn, $table, $field, $value)
 	$res = mysqli_query($conn, $sql) or die("<h2>Error in query: {$sql}</h2>");
 }
 
+function alterTable($conn, $table, $column, $operation, $type)
+{
+	$sql = "ALTER TABLE {$table} {$operation} COLUMN {$column} $type;";
+	#echo $sql;
+	$res = mysqli_query($conn, $sql) or die("<h2>Error in query: {$sql}</h2>");
+}
+
 # Returns a list of data from a database query. If query is false, returns empty list.
 function getDataList($res)
 {
