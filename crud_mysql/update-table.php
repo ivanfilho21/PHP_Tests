@@ -28,141 +28,141 @@
 					
 					<p>
 						<label>Table Name:</label>
-						<input name="table_name" <?php if (isset($_POST["table_name"])) echo "value='{$_POST["table_name"]}'"; ?>>
+						<input type="text" name="table_name" <?php if (isset($tableName)) echo "value='{$tableName}'"; ?>>
+						<input type="submit" name="alter-name[<?php echo $tableName; ?>]" value="Rename">
 					</p>
 
 					<p>
 						<span class="error"><?php showError("table_name"); ?></span>
 					</p>
 					
+					<!--
 					<p>
-						<label>Columns: <?php echo count($columns); ?></label>
-						<input id="add-row" type="submit" name="columns" value="+">
-						<!--<input id="delete-row" type="submit" name="columns" value="-">-->
-					</p>
+						<label>Columns: <?php echo $totalOfColumns; ?></label>
+						<input id="add-row" type="submit" name="add-column[<?php echo $tableName; ?>]" value="+">
+						
+					</p>-->
 
 					<p>
 						<span class="error"><?php showError("columns"); ?></span>
 					</p>
-					
-					<?php if ($columns > 0) : ?>
-						<table>
-							<!-- Table Headings -->
-							<thead id="r01">
-								<th>Nº</th>
-								<th>Name</th>
-								<th>Type</th>
-								<th>Length</th>
-								<th>Can be Null</th>
-								<th>Auto Increment</th>
-								<th>Primary Key</th>
-								<th></th>
-								<th></th>
-							</thead>
-							
-							<!-- Table Rows -->
-							<tbody>
-								<?php foreach ($columns as $i => $column) : ?>
-									<?php if ($i % 2 != 0) : ?>
-									<tr class="spRow">
-									<?php else : ?>
-									<tr>
-									<?php endif; ?>
-										<td>
-											<?php echo ($i + 1); ?>
-										</td>
+
+					<table>
+						<!-- Table Headings -->
+						<thead id="r01">
+							<th>Nº</th>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Length</th>
+							<th>Can be Null</th>
+							<th>Auto Increment</th>
+							<th>Primary Key</th>
+							<th></th>
+							<th></th>
+						</thead>
+						
+						<!-- Table Rows -->
+						<tbody>
+							<?php foreach ($columns as $i => $column) : ?>
+								<?php if ($i % 2 != 0) : ?>
+								<tr class="spRow">
+								<?php else : ?>
+								<tr>
+								<?php endif; ?>
+									<td>
+										<?php echo ($i + 1); ?>
+									</td>
+									
+									<td id="tdName">
+										<input type="text" name="column<?php echo $i . "[name]";?>"
+										<?php
+										if (isset($COL[$i]["name"]))
+											echo "value='". $COL[$i]["name"] ."'";
+										?>
+										>
+										<span class="error">
+											<?php if (isset($error_msgs[$i]["name"])) echo $error_msgs[$i]["name"]; ?>
+										</span>
+									</td>
+
+									<td>
+										<select name="column<?php echo $i . "[type]"; ?>">
+											<?php foreach ($columnTypes as $k => $v) : ?>
+											<option value="<?php echo $v; ?>" 
+												<?php
+												if (isset($COL[$i]["type"]))
+													if ($v == $COL[$i]["type"])
+														echo "selected='selected'";
+												?>><?php echo $v; ?></option>
+											<?php endforeach; ?>
+										</select>
+									</td>
+
+									<td>
+										<input type="text" name="column<?php echo $i . "[length]"; ?>"
+										<?php
+										if (isset($COL[$i]["length"]))
+											echo "value='". $COL[$i]["length"] ."'";
+										?>
+										style="width: 50px;"
+										>
 										
-										<td id="tdName">
-											<input type="text" name="column<?php echo $i . "[name]";?>"
-											<?php
-											if (isset($COL[$i]["name"]))
-												echo "value='". $COL[$i]["name"] ."'";
-											?>
-											>
-											<span class="error">
-												<?php if (isset($error_msgs[$i]["name"])) echo $error_msgs[$i]["name"]; ?>
-											</span>
-										</td>
+										<span class="error">
+											<?php if (isset($error_msgs[$i]["length"])) echo $error_msgs[$i]["length"]; ?>
+										</span>
+									</td>
 
-										<td>
-											<select name="column<?php echo $i . "[type]"; ?>">
-												<?php foreach ($columnTypes as $k => $v) : ?>
-												<option value="<?php echo $v; ?>" 
-													<?php
-													if (isset($COL[$i]["type"]))
-														if ($v == $COL[$i]["type"])
-															echo "selected='selected'";
-													?>><?php echo $v; ?></option>
-												<?php endforeach; ?>
-											</select>
-										</td>
-
-										<td>
-											<input type="text" name="column<?php echo $i . "[length]"; ?>"
+									<td align="center">
+										<label class="disabled">
+											<input disabled="disabled" type="checkbox" name="column<?php echo $i . "[null]"; ?>" value="0"
 											<?php
-											if (isset($COL[$i]["length"]))
-												echo "value='". $COL[$i]["length"] ."'";
-											?>
-											style="width: 50px;"
-											>
 											
-											<span class="error">
-												<?php if (isset($error_msgs[$i]["length"])) echo $error_msgs[$i]["length"]; ?>
-											</span>
+
+											if ( isset($COL[$i]["null"]) )
+												echo "checked='true'";
+
+											?>
+											/> No
+										</label>
+									</td>
+
+									<?php if ($i == 0) : ?>
+										<td align="center">
+											<label class="disabled">
+												<input disabled="disabled" type="checkbox" name="column<?php echo $i . "[auto]"; ?>" value="0"
+												<?php
+												if ( isset($COL[$i]["auto"]) )
+													echo "checked='true'";
+												?> />Yes
+											</label>
 										</td>
 
 										<td align="center">
 											<label class="disabled">
-												<input disabled="disabled" type="checkbox" name="column<?php echo $i . "[null]"; ?>" value="0"
+												<input disabled="disabled" type="checkbox" name="column<?php echo $i . "[pk]"; ?>" value="0"
 												<?php
-												
-
-												if ( isset($COL[$i]["null"]) )
+												if ( isset($COL[$i]["pk"]) )
 													echo "checked='true'";
-
-												?>
-												/> No
+												?> />Yes
 											</label>
 										</td>
+									<?php else : ?>
+										<td></td>
+										<td></td>
+									<?php endif; ?>
 
-										<?php if ($i == 0) : ?>
-											<td align="center">
-												<label class="disabled">
-													<input disabled="disabled" type="checkbox" name="column<?php echo $i . "[auto]"; ?>" value="0"
-													<?php
-													if ( isset($COL[$i]["auto"]) )
-														echo "checked='true'";
-													?> />Yes
-												</label>
-											</td>
+									<td>
+										<input type="submit" name="alter[<?php echo $tableName; ?>][drop][<?php echo $column; ?>]" value="-" id="delete-row">
+									</td>
 
-											<td align="center">
-												<label class="disabled">
-													<input disabled="disabled" type="checkbox" name="column<?php echo $i . "[pk]"; ?>" value="0"
-													<?php
-													if ( isset($COL[$i]["pk"]) )
-														echo "checked='true'";
-													?> />Yes
-												</label>
-											</td>
-										<?php else : ?>
-											<td></td>
-											<td></td>
-										<?php endif; ?>
+									<td>
+										<input type="submit" name="alter[<?php echo $tableName; ?>][modify][<?php echo $column; ?>][<?php echo $i; ?>][<?php echo $COL[$i]["type"]; ?>]" value="Update">
+									</td>
+								</tr>
+							<?php endforeach; ?>
 
-										<td>
-											<input type="submit" name="alter[<?php echo $tableName; ?>][drop][<?php echo $column; ?>]" value="-" id="delete-row">
-										</td>
-
-										<td>
-											<input type="submit" name="alter[<?php echo $tableName; ?>][modify][<?php echo $column; ?>][<?php echo $i; ?>][<?php echo $COL[$i]["type"]; ?>]" value="Update">
-										</td>
-									</tr>
-								<?php endforeach; ?>
-
-							</tbody>
-						</table>
-					<?php endif; ?>
+						</tbody>
+					</table>
 
 					<!--<input type="submit" name="update_table" value="Update">-->
 				</fieldset>

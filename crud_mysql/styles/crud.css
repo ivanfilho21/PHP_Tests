@@ -4,6 +4,12 @@
 
 label { font-size: 18px; font-weight: bold; }
 
+input {
+	border-radius: 6px;
+	padding: 6px 4px;
+	border: solid 1px #aaa;
+
+}
 input[type=submit] {
 	background-color: dodgerblue;
 	color: white;
@@ -18,8 +24,9 @@ input[type=submit]:hover {
 	cursor: pointer;
 }
 select {
-	border-radius: 8px;
-	padding: 2px 4px;
+	border-radius: 6px;
+	padding: 6px 4px;
+	border: solid 1px #aaa;
 	background: white;
 }
 

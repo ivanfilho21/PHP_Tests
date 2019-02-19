@@ -80,9 +80,16 @@ function deleteFromTable($conn, $table, $field, $value)
 	$res = mysqli_query($conn, $sql) or die("<h2>Error in query: {$sql}</h2>");
 }
 
-function alterTable($conn, $table, $column, $operation, $type)
+function alterTable($conn, $table, $column, $newColumn, $operation, $type)
 {
-	$sql = "ALTER TABLE {$table} {$operation} COLUMN {$column} $type;";
+	$sql = "ALTER TABLE {$table} {$operation} COLUMN {$column} {$newColumn} $type;";
+	#echo $sql;
+	$res = mysqli_query($conn, $sql) or die("<h2>Error in query: {$sql}</h2>");
+}
+
+function alterTableName($conn, $tableName, $newName)
+{
+	$sql = "ALTER TABLE {$tableName} RENAME TO {$newName};";
 	#echo $sql;
 	$res = mysqli_query($conn, $sql) or die("<h2>Error in query: {$sql}</h2>");
 }
