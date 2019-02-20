@@ -36,12 +36,11 @@
 						<span class="error"><?php showError("table_name"); ?></span>
 					</p>
 					
-					<!--
 					<p>
 						<label>Columns: <?php echo $totalOfColumns; ?></label>
 						<input id="add-row" type="submit" name="add-column[<?php echo $tableName; ?>]" value="+">
 						
-					</p>-->
+					</p>
 
 					<p>
 						<span class="error"><?php showError("columns"); ?></span>
@@ -63,7 +62,10 @@
 						
 						<!-- Table Rows -->
 						<tbody>
-							<?php foreach ($columns as $i => $column) : ?>
+							<?php for ($i = 0; $i < $totalOfColumns; $i++) : ?>
+								<?php #foreach ($columns as $i => $column) : ?>
+								<?php if (isset($columns[$i])) $column = $columns[$i]; ?>
+							
 								<?php if ($i % 2 != 0) : ?>
 								<tr class="spRow">
 								<?php else : ?>
@@ -156,10 +158,10 @@
 									</td>
 
 									<td>
-										<input type="submit" name="alter[<?php echo $tableName; ?>][modify][<?php echo $column; ?>][<?php echo $i; ?>][<?php echo $COL[$i]["type"]; ?>]" value="Update">
+										<input type="submit" name="alter[<?php echo $tableName; ?>][<?php if (isset($columns[$i])) echo "modify"; else echo "ADD"; ?>][<?php if (isset($columns[$i])) echo $column; ?>][<?php echo $i; ?>]<?php if (isset($columns[$i])) echo "[{$COL[$i]}]['type']"; ?>" value="Update">
 									</td>
 								</tr>
-							<?php endforeach; ?>
+							<?php endfor; ?>
 
 						</tbody>
 					</table>

@@ -5,15 +5,6 @@
 
 	if (isset($_POST["list-tables"]))
 	{
-		/*
-		if (count($tables) > 0)
-		{
-			foreach ($tables as $t) {
-				foreach ($t as $name) {
-					$sidebarTables[] = $name;
-				}
-			}
-		}*/
 		header("Location:index.php");
 	}
 	else if (isset($_POST["create-table"]))
@@ -26,31 +17,13 @@
 
 		<div>
 			<img src="icon/menu.svg" width="18px">
-			<input type="submit" name="list-tables" value="List" class="button-as-li">
-
-			<!--
-			<ul style="margin: .5em 2.5em;">
-				<?php foreach ($sidebarTables as $value) : ?>
-					<li><a href="view-table.php?table[<?php echo $value; ?>]"><?php echo $value; ?></a></li>
-				<?php endforeach; ?>
-			</ul> -->
+			<input type="submit" name="list-tables" value="Home Page" class="button-as-li">
 		</div>
 		
 		<div>
 			<img src="icon/add.svg" width="18px">
-			<input type="submit" name="create-table" value="Create" class="button-as-li">
+			<input type="submit" name="create-table" value="Create Table" class="button-as-li">
 		</div>
-		
-		<div>
-			<img src="icon/garbage.svg" width="18px">
-			<input type="submit" name="delete-table" value="Delete" class="button-as-li">
-		</div>
-		
-		<div>
-			<img src="icon/edit.svg" width="18px">
-			<input type="submit" name="update-table" value="Update" class="button-as-li">	
-		</div>
-		
 		<!--
 		<ul>
 			<li class="list-section"><a href="">Table Operations</a></li>

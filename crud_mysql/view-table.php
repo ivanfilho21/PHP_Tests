@@ -197,7 +197,8 @@
 			</table>
 
 			<td>
-				<input class="button" type="submit" value="Drop Table" onClick="parent.location='index.php?delete-table[<?php echo $name; ?>]'" id="delete-table" style="margin-top: 3em;">
+				<input class="button" type="submit" value="Update" onClick="parent.location='update-table.php?table[<?php echo $name; ?>]'" id="update-table" style="margin-top: 3em;">
+				<input class="button" type="submit" value="Drop" onClick="parent.location='index.php?delete-table[<?php echo $name; ?>]'" id="delete-table" style="margin-top: 3em;">
 			</td>
 
 		</div>

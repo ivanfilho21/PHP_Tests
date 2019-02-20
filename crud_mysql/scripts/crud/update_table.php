@@ -13,7 +13,6 @@ if (isset($_GET["table"]))
 		$tableName = $key;
 		break;
 	}
-	echo "<h1>Table {$tableName}</h1>";
 }
 
 # Initialize
@@ -33,6 +32,19 @@ if (isset($_POST["alter-name"]))
 	}
 }
 
+# Add column
+if (isset($_POST["add-column"]))
+{
+	$array = $_POST["add-column"];
+	$tableName = key($array);
+	init();
+
+	echo "name: {$tableName} total: " . $totalOfColumns;
+
+	$_SESSION[$tableName]["additional-column"] = $totalOfColumns + 1;
+	header("Location:update-table.php?table[{$tableName}]");
+}
+
 # Remove or Modify Column
 if (isset($_POST["alter"]))
 {
@@ -48,7 +60,6 @@ if (isset($_POST["alter"]))
 	}
 	else
 	{
-		echo "failed alter";
 		init();
 	}
 }
@@ -123,6 +134,13 @@ function init()
 			if ($columnInfo[$key]["COLUMN_KEY"] == "PRI")
 				$COL[$key]["pk"] = "yes";
 	}
+
+
+	# Add column
+	if (isset($_SESSION[$tableName]["additional-column"]))
+	{
+		$totalOfColumns = $_SESSION[$tableName]["additional-column"];
+	}
 }
 
 # Validations
@@ -149,7 +167,7 @@ function validateTableName()
 
 function validateColumns()
 {
-	global $error_msgs, $tableName, $columnName, $columnNewName, $operation, $type, $COL;
+	global $error_msgs, $tableName, $columnName, $columnNewName, $operation, $type, $COL, $columns;
 	$res = true;
 
 	$array = $_POST["alter"];
@@ -163,11 +181,12 @@ function validateColumns()
 
 	if ($operation == "modify")
 	{
-		echo "<br>...<br>";
+		echo "<br>Modify Set<br>";
 
 		
 		$array = $array[$columnName];
 		$i = key($array);
+
 
 		$col = $_POST["column".$i];
 
@@ -233,6 +252,80 @@ function validateColumns()
 			#$type .= "(" . $col["length"] . ")";
 		}
 	}
+	if ($operation == "ADD")
+	{
+		echo "<br>ADD Set<br>";
 
+		$array = $array[$columnName];
+		$i = key($array);
+
+		$col = $_POST["column".$i];
+
+		if (empty($col["name"]))
+		{
+			$res = false;
+			$error_msgs[$i]["name"] = "Can't be empty.";
+		}
+		else
+			$columnName = format_input($col["name"]);
+
+		# get type and length
+		if (isset($col["type"]))
+		{
+			$type = $col["type"];
+			#echo "<br>set type: " . $type;
+		}
+		else
+		{
+			$array = $array[$i];
+			$type = key($array);
+			#echo "<br>NOT set type: " . $type;
+		}
+
+		if (isset($col["length"]))
+		{
+			###
+			$colLength = format_input($col["length"]);
+			if (is_numeric($colLength))
+			{
+			    if ((int)$colLength > 0)
+			    	$type .= "(" . $colLength . ")";
+			    else if ((int)$colLength == 0)
+			    {
+					$type .= "";
+			    }
+			    else
+			    {
+			    	$res = false;
+			    	$error_msgs[$i]["length"] = "Negative number.";
+			    }
+			}
+			else if (empty($colLength))
+			{
+				if ($type == "varchar")
+				{
+					$res = false;
+					$error_msgs[$i]["length"] = "Must specify.";
+				}
+				else
+					$type .= "";
+			}
+			else
+			{
+				$res = false;
+			    $error_msgs[$i]["length"] = "Invalid number.";
+			}
+		}
+	}
+	if ($operation == "drop")
+	{
+		if (count($columns) <= 1)
+		{
+			echo "<br><h3>Can't drop last column.</h3>";
+			$res = false;
+		}
+		else echo "ok";
+	}
+	
 	return $res;
 }
