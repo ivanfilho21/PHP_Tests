@@ -32,7 +32,7 @@ function saveTask($connection, $task)
 	$sql = "
 		INSERT INTO tasks
 		(name, date_creation, deadline, priority, description, finished)
-		VALUES ({$values});
+		VALUES ({$values})
 	";
 
 	#echo $sql;
@@ -93,5 +93,11 @@ function editTask($connection, $task)
 function deleteTask($connection, $id)
 {
 	$sql = "DELETE FROM tasks WHERE id = '{$id}'";
+	mysqli_query($connection, $sql);
+}
+
+function deleteAllTasks($connection)
+{
+	$sql = "DROP TABLE tasks";
 	mysqli_query($connection, $sql);
 }

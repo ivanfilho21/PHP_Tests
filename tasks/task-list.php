@@ -26,3 +26,10 @@
 	<?php endforeach; ?>
 	
 </table>
+
+<div class="hor-divider" style="width: 100%; margin: 12px auto; height: 1px; background: white;"></div>
+
+<div style="text-align: center;">
+	<h4>Danger Zone</h4>
+	<a href="operations/delete.php?all=true" style="color: coral;">Delete All Tasks</a>
+</div>
