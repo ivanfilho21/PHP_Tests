@@ -1,5 +1,5 @@
 <?php
-$view_mode = true; #false;
+$view_mode = true;#false;
 $fields = array("name", "date_creation", "deadline", "priority", "description", "finished");
 
 $task = array(
@@ -17,12 +17,11 @@ include "template_db.php";
 
 if (isset($_GET["name"]) && $_GET["name"] != "")
 {
-	
 	foreach ($fields as $field)
 	{
 		if (isset($_GET[$field]))
 		{
-			# echo $_GET[$field] . " ";
+			echo $_GET[$field] . ", ";
 			$task[$field] = $_GET[$field];
 		}
 		else

@@ -45,4 +45,5 @@ if (isset($_GET["name"]) && $_GET["name"] != "")
 	#
 	
 	editTask($connection, $task);
+	header("Location: tasks_db.php");
 }
