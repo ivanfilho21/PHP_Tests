@@ -19,7 +19,8 @@
 
 			<td>
 				<a href="task-edit.php?id=<?php echo $task['id']; ?>">Edit</a>
-				<a href="task-delete.php?id=<?php echo $task['id']; ?>">Delete</a>
+				<a href="operations/delete.php?id=<?php echo $task['id']; ?>">Delete</a>
+				<a href="operations/duplicate.php?id=<?php echo $task['id']; ?>">Duplicate</a>
 			</td>
 		</tr>
 	<?php endforeach; ?>

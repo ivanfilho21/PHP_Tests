@@ -1,6 +1,6 @@
 <?php
 $view_mode = false;
-$fields = array("name", "date_creation", "deadline", "priority", "description", "finished");
+#$fields = array("name", "date_creation", "deadline", "priority", "description", "finished");
 
 $task = array(
 	"id" => 0,
@@ -12,6 +12,7 @@ $task = array(
 	"finished" => ""
 );
 
+include "util.php";
 include "database.php";
 
 $task = getTask($connection, $_GET["id"]);

@@ -1,6 +1,6 @@
 <?php
 $view_mode = true;
-$fields = array("name", "date_creation", "deadline", "priority", "description", "finished");
+#$fields = array("name", "date_creation", "deadline", "priority", "description", "finished");
 
 $task = array(
 	"id" => 0,
@@ -12,6 +12,7 @@ $task = array(
 	"finished" => ""
 );
 
+include "util.php";
 include "database.php";
 include "template_db.php";
 
@@ -40,7 +41,7 @@ if (isset($_GET["name"]) && $_GET["name"] != "")
 	#
 	
 	saveTask($connection, $task);
-	header("Location: tasks.php");
+	header("Location: tasks_db.php");
 	die();
 }
 
