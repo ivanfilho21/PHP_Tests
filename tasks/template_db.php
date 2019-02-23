@@ -10,7 +10,7 @@
 		<?php include "form.php"; ?>
 
 		<?php if ($view_mode) : ?>
-			<?php include "task-list.php"; ?>
+			<?php include "task-list.php"; include "cancel.php"; ?>
 		<?php endif; ?>
 		
 		

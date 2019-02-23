@@ -41,9 +41,16 @@
 			<input type="checkbox" name="finished" value="<?php echo $task['finished']; ?>">
 			Task is Already Finished.
 		</label>
-		
+
 		<div class="button">
 			<input type="submit" value="Save Task">
 		</div>
+
+		<?php if (! $view_mode) : ?>
+			<div class="button">
+				<input type="submit" value="Cancel">
+			</div>
+		<?php endif; ?>
+		
 	</fieldset>
 </form>

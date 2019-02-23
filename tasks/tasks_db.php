@@ -1,5 +1,5 @@
 <?php
-$view_mode = true;#false;
+$view_mode = true;
 $fields = array("name", "date_creation", "deadline", "priority", "description", "finished");
 
 $task = array(
@@ -40,9 +40,11 @@ if (isset($_GET["name"]) && $_GET["name"] != "")
 	#
 	
 	saveTask($connection, $task);
-	#header("Location: tasks.php");
+	header("Location: tasks.php");
+	die();
 }
-	
+
+# Get tasks from database and format some of the data to display.
 function get_tasks_from_db($connection)
 {
 	$tasks = getTaskList($connection);
