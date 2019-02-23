@@ -18,57 +18,11 @@ function saveTask($connection, $task)
 	global $fields; # fields declared in 'tasks_db.php'
 			
 	$values = "";
-	$size = count($fields);
 	$comma = ", ";
-	
-	for ($i = 0; $i < $size; $i++)
-	{
-		$f = $fields[$i];
-		$qt = "'";
-		
-		if ($i == 3 || $i == 5) # won't use quotes if field is "priority" or "finished"
-			$qt = "";
-		
-		$values .= $qt . $task[$f] . $qt . $comma;
-	}
-
-	$values = substr($values, 0, strlen($values) - strlen($comma));
-	# echo $values;
-	
-	$sql = "
-		INSERT INTO tasks
-		(name, date_creation, deadline, priority, description, finished)
-		VALUES
-		(
-			{$values}
-		);
-	";
-
-	echo $sql;
-	
-	mysqli_query($connection, $sql) or die("Query Failed. Wrong statement or <strong>table doesn't exist</strong>.");
-}
-
-function saveTaskTest($connection, $task)
-{	
-	global $fields; # fields declared in 'tasks_db.php'
-			
-	$values = "";
-	$size = count($fields);
-	$comma = ", ";
+	$qt = "'";
 	
 	foreach ($fields as $f)
-	{
-		# code...
-	#}
-	#for ($i = 0; $i < $size; $i++)
-	#{
-		#$f = $fields[$i];
-		$qt = "'";
-		
-		#if ($i == 3 || $i == 5) # won't use quotes if field is "priority" or "finished"
-		#	$qt = "";
-		
+	{		
 		$values .= $qt . $task[$f] . $qt . $comma;
 	}
 

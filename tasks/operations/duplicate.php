@@ -5,7 +5,7 @@ include "../database.php";
 
 $task = getTask($connection, $_GET['id']);
 
-saveTaskTest($connection, $task);
+saveTask($connection, $task);
 
-header('Location: ../tasks_db.php');
+header("Location: ../tasks_db.php");
 die();

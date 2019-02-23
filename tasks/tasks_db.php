@@ -1,18 +1,10 @@
 <?php
 $view_mode = true;
-#$fields = array("name", "date_creation", "deadline", "priority", "description", "finished");
-
-$task = array(
-	"id" => 0,
-	"name" => "",
-	"date_creation" => "",
-	"deadline" => "",
-	"priority" => 2,
-	"description" => "",
-	"finished" => ""
-);
 
 include "util.php";
+
+$task = generateEmptyTask();
+
 include "database.php";
 include "template_db.php";
 
@@ -22,7 +14,7 @@ if (isset($_GET["name"]) && $_GET["name"] != "")
 	{
 		if (isset($_GET[$field]))
 		{
-			echo $_GET[$field] . ", ";
+			#echo $_GET[$field] . ", ";
 			$task[$field] = $_GET[$field];
 		}
 		else
@@ -41,8 +33,6 @@ if (isset($_GET["name"]) && $_GET["name"] != "")
 	#
 	
 	saveTask($connection, $task);
-	header("Location: tasks_db.php");
-	die();
 }
 
 # Get tasks from database and format some of the data to display.

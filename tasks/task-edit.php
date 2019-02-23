@@ -1,18 +1,10 @@
 <?php
 $view_mode = false;
-#$fields = array("name", "date_creation", "deadline", "priority", "description", "finished");
-
-$task = array(
-	"id" => 0,
-	"name" => "",
-	"date_creation" => "",
-	"deadline" => "",
-	"priority" => 2,
-	"description" => "",
-	"finished" => ""
-);
 
 include "util.php";
+
+$task = generateEmptyTask();
+
 include "database.php";
 
 $task = getTask($connection, $_GET["id"]);
