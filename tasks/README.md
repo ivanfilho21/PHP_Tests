@@ -2,14 +2,10 @@
 A simple PHP and MySQL project.
 
 ## What can it do?
-* Create a task.
-* List all tasks.
+* Create, List, Edit, Duplicate, and Delete tasks.
 
 ## What needs to be done?
-* Update a task.
-* Delete a task.
-* A function to create the database if it doesn't exist.
-* A function to create tables if they don't exist.
+* Form validation before adding/editing a task.
 
 ### Screenshot
 <div align="center">
