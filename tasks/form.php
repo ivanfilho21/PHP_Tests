@@ -1,12 +1,13 @@
-<form>
+<form method="POST">
 	<fieldset>
 		<legend>New Task</legend>
 
 		<input type="hidden" name="id" value="<?php echo $task['id']; ?>">
 		
 		<label>
-			Task Name:
+			Task Name (*):
 			<input type="text" name="name" value="<?php echo $task['name']; ?>">
+			<span class="error" style="color: coral;"><?php displayError("name"); ?></span>
 		</label>
 		
 		<label>
@@ -24,21 +25,21 @@
 		</label>
 		
 		<fieldset>
-			<legend>Priority:</legend>
+			<legend>Priority (*):</legend>
 			<label>
-				<input type="radio" name="priority" value="0" <?php echo ($task["priority"] == 1) ? "checked" : ""; ?>>Low
-				<input type="radio" name="priority" value="1" <?php echo ($task["priority"] == 2) ? "checked" : ""; ?>>Medium		
-				<input type="radio" name="priority" value="2" <?php echo ($task["priority"] == 3) ? "checked" : ""; ?>>High
+				<input type="radio" name="priority" value="1" <?php echo ($task["priority"] == 1) ? "checked" : ""; ?>>Low
+				<input type="radio" name="priority" value="2" <?php echo ($task["priority"] == 2) ? "checked" : ""; ?>>Medium		
+				<input type="radio" name="priority" value="3" <?php echo ($task["priority"] == 3) ? "checked" : ""; ?>>High
 			</label>
 		</fieldset>
 		
 		<label>
-			Description (Optional):
-			<textarea name="description" value="<?php echo $task['description']; ?>"></textarea>
+			Description:
+			<input type="text" name="description" value="<?php echo $task['description']; ?>"></textarea>
 		</label>
 		
 		<label>
-			<input type="checkbox" name="finished" value="<?php echo $task['finished']; ?>">
+			<input type="checkbox" name="finished" <?php echo "value='" . $task["finished"] . "'"; if ($task["finished"]) echo "checked"; ?>>
 			Task is Already Finished.
 		</label>
 

@@ -2,55 +2,46 @@
 $view_mode = true;
 
 include "util.php";
-
-$task = generateEmptyTask();
-
 include "database.php";
-include "template_db.php";
+
+$validationErrors = array();
 
 # Uncomment this to create database and table
 # createDatabase($connection);
 # createTableTasks($connection);
 
-if (isset($_GET["name"]) && $_GET["name"] != "")
+$task = array(
+	"id" => (isset($_POST["id"])) ? $_POST["id"] : 0,
+	"name" => (isset($_POST["name"])) ? $_POST["name"] : "",
+	"date_creation" => (isset($_POST["date_creation"])) ? $_POST["date_creation"] : "",
+	"deadline" => (isset($_POST["deadline"])) ? $_POST["deadline"] : "",
+	"priority" => (isset($_POST["priority"])) ? $_POST["priority"] : 2,
+	"description" => (isset($_POST["description"])) ? $_POST["description"] : "",
+	"finished" => (isset($_POST["finished"])) ? "1" : "0"
+);
+
+if (postSet())
 {
-	foreach ($fields as $field)
+	if (validation($task))
 	{
-		if (isset($_GET[$field]))
-		{
-			#echo $_GET[$field] . ", ";
-			$task[$field] = $_GET[$field];
-		}
-		else
-			$task[$field] = "";
+		saveTask($connection, $task);
+		header("Location: tasks_db.php");
 	}
-	
-	# Test
-	
-	if (isset($task[$fields[5]])) # task finished
-	{
-		if ($task[$fields[5]] == "")
-			$task[$fields[5]] = 0;
-		else
-			$task[$fields[5]] = 1; # "Yes";
-	}
-	#
-	
-	saveTask($connection, $task);
-	header("Location: tasks_db.php");
 }
 
-# Get tasks from database and format some of the data to display.
-function get_tasks_from_db($connection)
+include "template_db.php";
+
+# Get tasks from database and format some of the data to display in Task List.
+function getTasksFromDB($connection)
 {
 	$tasks = getTaskList($connection);
 	
 	for ($i = 0; $i < count($tasks); $i++)
 	{
-		if ($tasks[$i]["finished"] == 0)
-			$tasks[$i]["finished"] = "No";
-		else
+		if ($tasks[$i]["finished"])
 			$tasks[$i]["finished"] = "Yes";
+		else
+			$tasks[$i]["finished"] = "No";
 		
 		$value = "";
 		switch ($tasks[$i]["priority"])
@@ -71,4 +62,19 @@ function get_tasks_from_db($connection)
 	}
 	
 	return $tasks;
+}
+
+function validation($task)
+{
+	global $validationErrors;
+	$noErrors = true;
+
+	if (empty($task["name"]))
+	{
+		$noErrors = false;
+		$validationErrors["name"] = "You must specify the Task name.";
+	}
+
+	return $noErrors;
+
 }
