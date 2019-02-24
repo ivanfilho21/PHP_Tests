@@ -13,7 +13,7 @@ A simple PHP and MySQL project.
 
 ### Screenshot
 <div align="center">
-  <img src="https://i.postimg.cc/6qLnSvtG/task-man.png" alt="Task Manager" /> 
+  <img src="https://i.postimg.cc/j5vgXPsq/Screenshot-from-2019-02-24-05-54-25.png" /> 
 </div>
 
 ### Author
