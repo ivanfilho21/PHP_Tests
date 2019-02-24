@@ -1,13 +1,11 @@
-<?php $task_list = get_tasks_from_db($connection); ?>
-<?php if (count($task_list) == 0) die(); ?>
+
+
 <table>
-	
 	<?php $col_names = array("Name", "Created In", "Deadline", "Priority", "Description", "Finished"); ?>
 	<tr>
 		<?php foreach ($col_names as $field) : ?>
 				<th><?php echo $field; ?></th>
 		<?php endforeach; ?>
-		
 		<th>Options</th>
 	</tr>
 

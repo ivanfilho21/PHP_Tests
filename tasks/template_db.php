@@ -10,9 +10,12 @@
 		<?php include "form.php"; ?>
 
 		<?php if ($view_mode) : ?>
-			<?php include "task-list.php"; include "operations/cancel.php"; ?>
+			<?php $task_list = get_tasks_from_db($connection); ?>
+			<?php if (count($task_list) > 0) : ?>
+				<?php include "task-list.php"; ?>
+			<?php endif; ?>
+		<?php else : ?>
+			<?php include "operations/cancel.php"; ?>
 		<?php endif; ?>
-		
-		
 	</body>
 </html>

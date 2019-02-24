@@ -8,6 +8,10 @@ $task = generateEmptyTask();
 include "database.php";
 include "template_db.php";
 
+# Uncomment this to create database and table
+# createDatabase($connection);
+# createTableTasks($connection);
+
 if (isset($_GET["name"]) && $_GET["name"] != "")
 {
 	foreach ($fields as $field)
@@ -33,6 +37,7 @@ if (isset($_GET["name"]) && $_GET["name"] != "")
 	#
 	
 	saveTask($connection, $task);
+	header("Location: tasks_db.php");
 }
 
 # Get tasks from database and format some of the data to display.

@@ -9,6 +9,8 @@ if (isset($_GET["id"]))
 }
 if (isset($_GET["all"]))
 {
+	include "../util.php";
+	
 	deleteAllTasks($connection);
 	header("Location: ../tasks_db.php");
 	die();

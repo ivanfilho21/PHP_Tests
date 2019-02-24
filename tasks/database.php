@@ -1,5 +1,4 @@
 <?php
-
 $dbHost = "127.0.0.1";
 $dbUser = "root";
 $dbPass = "";
@@ -11,6 +10,35 @@ if (mysqli_connect_errno($connection))
 {
 	echo "Error: There is a problem connecting to the database.";
 	die();
+}
+
+function createDatabase($connection)
+{
+	mysqli_query($connection, "CREATE DATABASE tasks") or die("failed creating database");
+}
+
+function createTableTasks($connection)
+{
+	global $fields;
+	$types = array("text", "date", "date", "int(1)", "text", "int(1)");
+	$values = "id int not null auto_increment primary key, ";
+	$comma = ", ";
+	$size = count($fields);
+
+	for ($i = 0; $i < $size; $i++)
+	{
+		$name = $fields[$i];
+		$type = $types[$i];
+
+		$values .= $name . " " . $type . $comma;
+	}
+
+	$values = substr($values, 0, strlen($values) - strlen($comma));
+
+	$sql = "CREATE TABLE tasks ({$values})";
+
+	#echo $sql;
+	mysqli_query($connection, $sql) or die("failed creating table");
 }
 
 function saveTask($connection, $task)
@@ -37,7 +65,7 @@ function saveTask($connection, $task)
 
 	#echo $sql;
 	
-	mysqli_query($connection, $sql) or die("Query Failed. Wrong statement or <strong>table doesn't exist</strong>.");
+	mysqli_query($connection, $sql) or die("Query Failed. Wrong statement or <strong>table doesn't exist</strong>.<br><br>SQL Query: " . $sql);
 }
 
 function getTaskList($connection)
@@ -100,4 +128,6 @@ function deleteAllTasks($connection)
 {
 	$sql = "DROP TABLE tasks";
 	mysqli_query($connection, $sql);
+
+	createTableTasks($connection);
 }
