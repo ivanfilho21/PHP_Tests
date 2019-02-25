@@ -73,7 +73,6 @@
 										<td>
 											<input type="submit" name="delete-row[<?php echo $rows[$key][$pk]; ?>]" value="-">
 
-
 											<!-- TODO: get the primary key instead of hard-coded 'id' -->
 										</td>
 									<?php endif; ?>
