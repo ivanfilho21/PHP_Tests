@@ -1,4 +1,4 @@
-<?php include "scripts/crud/delete-table.php"; ?>
+<?php include "scripts/crud/delete_table.php"; ?>
 
 <h1 style="margin-bottom: 1em; ">Tables</h1>
 
