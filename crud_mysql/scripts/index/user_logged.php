@@ -27,7 +27,7 @@
 						
 						<div style="display: inline-block; height: 16px; border-left: 1px solid #a09d9d; vertical-align: middle;"></div>
 						
-						<input class="button" id="update-table" type="submit" value="Update" onclick="parent.location='crud/update-table.php?table[<?php echo $name; ?>]'">
+						<input class="button" id="update-table" type="submit" value="Update" onclick="parent.location='crud/update-table.php?id=<?php echo $name; ?>'">
 						
 						<div style="display: inline-block; height: 16px; border-left: 1px solid #a09d9d; vertical-align: middle;"></div>
 						

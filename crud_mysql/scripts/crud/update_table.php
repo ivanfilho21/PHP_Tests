@@ -7,13 +7,19 @@ $columnInfo = array();
 $COL = array();
 $tableName = "";
 
+if (isset($_GET["id"]))
+{
+	$tableName = $_GET["id"];
+}
+
+/*
 if (isset($_GET["table"]))
 {
 	foreach ($_GET["table"] as $key => $value) {
 		$tableName = $key;
 		break;
 	}
-}
+}*/
 
 # Initialize
 init();
@@ -28,7 +34,8 @@ if (isset($_POST["alter-name"]))
 	if (validateTableName())
 	{
 		alterTableName($connection, $tableName, $newName);
-		header("Location:update-table.php?table[{$newName}]");
+		header("Location: update-table.php?table[{$newName}]");
+		die();
 	}
 }
 
@@ -42,7 +49,8 @@ if (isset($_POST["add-column"]))
 	echo "name: {$tableName} total: " . $totalOfColumns;
 
 	$_SESSION[$tableName]["additional-column"] = $totalOfColumns + 1;
-	header("Location:update-table.php?table[{$tableName}]");
+	header("Location: update-table.php?table[{$tableName}]");
+	die();
 }
 
 # Remove or Modify Column
@@ -167,7 +175,7 @@ function validateTableName()
 
 function validateColumns()
 {
-	global $error_msgs, $tableName, $columnName, $columnNewName, $operation, $type, $COL, $columns;
+	global $error_msgs, $tableName, $columnName, $columnNewName, $operation, $type, $COL, $columns, $totalOfColumns;
 	$res = true;
 
 	$array = $_POST["alter"];
@@ -319,12 +327,31 @@ function validateColumns()
 	}
 	if ($operation == "drop")
 	{
-		if (count($columns) <= 1)
+		$columnIndex = key($array);
+		#echo "Row " . $columnIndex . "<br>";
+
+		init();
+
+		# Numeric: delete last column in session
+		if (is_numeric($columnIndex))
 		{
-			echo "<br><h3>Can't drop last column.</h3>";
-			$res = false;
+			
+			#echo "Total of columns: " . $totalOfColumns;
+
+			$_SESSION[$tableName]["additional-column"] = $totalOfColumns - 1;
+			header("Location: update-table.php?table[{$tableName}]");
+			die();
 		}
-		else echo "ok";
+		# Non numeric: delete column in database
+		else
+		{
+			echo "Columns: " . count($columns);
+			if (count($columns) <= 1)
+			{
+				echo "<br><h3>Can't drop last column.</h3>";
+				$res = false;
+			}
+		}
 	}
 	
 	return $res;

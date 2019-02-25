@@ -159,7 +159,7 @@
 									<?php endif; ?>
 
 									<td>
-										<input type="submit" name="alter[<?php echo $tableName; ?>][drop][<?php echo $column; ?>]" value="-" id="delete-row">
+										<input type="submit" name="alter[<?php echo $tableName; ?>][drop][<?php echo (isset($columns[$i])) ? $columns[$i] : $i; ?>]" value="-" id="delete-row">
 									</td>
 
 									<td>
