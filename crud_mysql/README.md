@@ -17,9 +17,10 @@
 
 
 ### Things I'm learning:
-* Super global variables $_GET, $_POST, and $_SESSION.
+* $_GET,  $_POST,  and  $_SESSION  Super global variables.
 * Global variables.
 * Redirecting (header command).
+* Basic form validation.
 * SQL basic commands.
 * A bit of front-end.
 
