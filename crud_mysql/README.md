@@ -4,12 +4,12 @@
 ### What is working:
 * User registration/sign up (it adds a new user in database).
 * User login/sign in (it checks if username and password exist in database).
-* Index page, showing the list of tables from the database.
-* Creating Tables.
+* Creating, Listing, Updating, and Dropping tables.
+* Inserting, Listing and Deleting records from tables.
 
 ### What I'm working on:
-* Index page (updating tables).
-* View-table page (list, insert, and delete records of a table, and altering and droping table).
+* A stylesheet for pages that create, update and view tables.
+* A page to Update records from tables.
 
 ### Screenshots
 ![Screenshot](https://i.postimg.cc/pXHmQXnF/Screenshot-from-2019-02-18-12-16-46.png)
