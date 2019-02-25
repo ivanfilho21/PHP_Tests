@@ -105,7 +105,5 @@ function delete()
 		#echo $pk;
 		
 		deleteFromTable($connection, $name, $pk, $value);
-
-		# Untracked bug arround here in deletion.
 	}
 }
