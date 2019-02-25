@@ -1,7 +1,4 @@
 <?php
-# TODO:
-# Show sign out button in nav bar
-
 $user = null;
 $userIsLogged = false;
 
@@ -10,6 +7,7 @@ if (isset($_SESSION["connected_user"]))
 	if (isset($_GET["sign_out"]))
 	{
 		$_SESSION["connected_user"] = null;
+		header("Location: " . $PATH . "index.php");
 	}
 	else
 	{
@@ -17,6 +15,8 @@ if (isset($_SESSION["connected_user"]))
 		$userIsLogged = true;
 	}
 }
+
+# what is this doing here alone?
 
 $tables = getTableList($connection);
 # debugging

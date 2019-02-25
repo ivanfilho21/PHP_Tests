@@ -46,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		{
 			#echo "<h2>Validation OK{$name}</h2>";
 			createTable($connection, $name, $attributes);
+			header("Location: " . $PATH . "index.php");
 		}
 		#else echo "<h2>Validation Failed</h2>";
 	}

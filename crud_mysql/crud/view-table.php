@@ -1,35 +1,33 @@
+<?php $PATH = "../"; ?>
+
 <!doctype html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<title>CRUD MySQL - View Table</title>
 	
-	<?php include "header_elements.php"; ?>
+	<?php include $PATH . "header_elements.php"; ?>
 
-	<link rel="stylesheet" type="text/css" href="styles/index.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $PATH; ?>styles/index.css">
 </head>
 <body>
 	<?php
-	include "database/database.php";
-	include "scripts/util.php";
+	include $PATH . "database/database.php";
+	include $PATH . "scripts/util.php";
 	session_start();
-	include "scripts/verify_user_session.php";
+	include $PATH . "scripts/verify_user_session.php";
+	include $PATH . "scripts/verify_user_logged.php";
 	?>
 
 	<div class="header-container">
-		<?php include "header.php"; ?>
+		<?php include $PATH . "header.php"; ?>
 	</div><!-- end header container -->
 
 	<main>
-		<?php if ($userIsLogged) : ?>
-			<?php include "sidebar.php"; ?>
-		<div class="page-content">
-		<?php else : ?>
-		<div class="page-content" style="width: 100%;">
-		<?php endif; ?>
-			
-			<?php
+		<?php include $PATH . "sidebar.php"; ?>
 
+		<div class="page-content">
+			<?php
 			if (isset($_GET["table"]))
 			{
 				foreach ($_GET["table"] as $key => $value) {
@@ -71,7 +69,7 @@
 					if (validation())
 					{
 						insertIntoTable($connection, $name, $columnNames, $data);
-						header("Location:view-table.php?table[{$name}]");
+						header("Location: view-table.php?table[{$name}]");
 					}
 				}
 			}
@@ -197,16 +195,15 @@
 			</table>
 
 			<td>
-				<input class="button" type="submit" value="Update" onClick="parent.location='update-table.php?table[<?php echo $name; ?>]'" id="update-table" style="margin-top: 3em;">
-				<input class="button" type="submit" value="Drop" onClick="parent.location='index.php?delete-table[<?php echo $name; ?>]'" id="delete-table" style="margin-top: 3em;">
+				<input class="button" type="submit" value="Update" onclick="parent.location='update-table.php?table[<?php echo $name; ?>]'" id="update-table" style="margin-top: 3em;">
+				<input class="button" type="submit" value="Drop" onclick="parent.location='<?php echo $PATH; ?>index.php?delete-table[<?php echo $name; ?>]'" id="delete-table" style="margin-top: 3em;">
 			</td>
-
 		</div>
 
 		<div class="clear-fix-main"></div>
 
 	</main><!-- end main -->
 
-	<?php include "footer.php"; ?>
+	<?php include $PATH . "footer.php"; ?>
 </body>
 </html>

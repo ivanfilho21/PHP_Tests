@@ -14,8 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		if (isset($user))
 		{
 			$_SESSION["connected_user"] = $user;
-			header("Location:index.php");
-			exit();
+			header("Location: ../index.php");
+			die();
 		}
 		else
 		{

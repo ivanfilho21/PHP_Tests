@@ -26,8 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		save_user($connection, $user_info);
 
 		$_SESSION["connected_user"] = $user_info;
-		header("Location:index.php");
-		exit();
+		header("Location: ../index.php");
+		die();
 
 	}
 }

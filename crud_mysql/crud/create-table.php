@@ -1,27 +1,32 @@
+<?php $PATH = "../"; ?>
+
 <!doctype html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<title>CRUD MySQL - Create Table</title>
 	
-	<?php include "header_elements.php"; ?>
+	<?php include $PATH . "header_elements.php"; ?>
 
-	<link rel="stylesheet" type="text/css" href="styles/crud.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $PATH; ?>styles/index.css">
 </head>
 <body>
 	<?php
-	include "database/database.php";
-	include "scripts/util.php";
+	include $PATH . "database/database.php";
+	include $PATH . "scripts/util.php";
 	session_start();
-	include "scripts/verify_user_session.php";
+	include $PATH . "scripts/verify_user_session.php";
+	include $PATH . "scripts/verify_user_logged.php";
 	?>
 
 	<div class="header-container">
-		<?php include "header.php"; ?>
+		<?php include $PATH . "header.php"; ?>
 	</div><!-- end header container -->
 
 	<main>
-		<?php include "scripts/crud/create_table.php"; ?>
+		<?php include $PATH . "scripts/crud/create_table.php"; ?>
+		<?php include $PATH . "sidebar.php"; ?>
+
 		<div class="page-content">
 			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 				<fieldset id="createFieldSet">
@@ -154,8 +159,10 @@
 				</fieldset>
 			</form><!-- end form -->
 		</div>
+
+		<div class="clear-fix-main"></div>
 	</main><!-- end main -->
 
-	<?php include "footer.php"; ?>
+	<?php include $PATH . "footer.php"; ?>
 </body>
 </html>

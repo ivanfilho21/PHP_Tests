@@ -1,3 +1,5 @@
+<?php $PATH = ""; ?>
+
 <!doctype html>
 <html>
 <head>
@@ -27,12 +29,22 @@
 		<?php else : ?>
 		<div class="page-content" style="width: 100%;">
 		<?php endif; ?>
-			<?php
-			if ($userIsLogged)
-				include "scripts/index/user_logged.php";
-			else
-				include "user_not_logged.html";
-			?>
+
+			<?php if ($userIsLogged) : ?>
+				<?php include "scripts/index/user_logged.php"; ?>
+			<?php else : ?>
+				<h1>Create and Manage tables in your Database.</h1>
+
+				<p>
+					With this Web Application you may <strong>Create</strong>, <strong>Read</strong>, <strong>Update</strong>, and <strong>Delete</strong> entities from the <strong>MySQL Database</strong>.
+				</p>
+
+				<br>
+				<h3>You must have an account and be logged in to use this website.</h3>
+				<input class="button" type="submit" value="Sign In" onClick="parent.location='auth/login.php'">
+				or
+				<input class="button" type="submit" value="Create Your Account" onClick="parent.location='auth/registration.php'">
+			<?php endif; ?>
 		</div>
 
 		<div class="clear-fix-main"></div>

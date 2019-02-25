@@ -5,23 +5,23 @@
 
 	if (isset($_POST["list-tables"]))
 	{
-		header("Location:index.php");
+		header("Location: " . $PATH . "index.php");
 	}
 	else if (isset($_POST["create-table"]))
-		header("Location:create-table.php");
-	else if (isset($_POST["delete-table"]))
-		header("Location:index.php");
+	{
+		header("Location: " . $PATH . "crud/create-table.php");
+	}
 	?>
 	<form action="" method="post" class="form-as-ul">
 		<input type="submit" name="table-operations" value="Table Operations" class="button-as-li list-section">
 
 		<div>
-			<img src="icon/menu.svg" width="18px">
+			<img src="<?php echo $PATH; ?>icon/menu.svg" width="18px">
 			<input type="submit" name="list-tables" value="Home Page" class="button-as-li">
 		</div>
 		
 		<div>
-			<img src="icon/add.svg" width="18px">
+			<img src="<?php echo $PATH; ?>icon/add.svg" width="18px">
 			<input type="submit" name="create-table" value="Create Table" class="button-as-li">
 		</div>
 		<!--

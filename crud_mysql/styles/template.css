@@ -72,6 +72,7 @@ main a:hover { color: darkblue; }
 
 .page-content {
 	padding: 2em;
+	min-height: 440px;
 }
 
 .page-content h1 { margin: 0; text-align: center; }
