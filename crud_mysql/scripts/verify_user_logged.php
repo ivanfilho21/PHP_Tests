@@ -1,7 +1,6 @@
 <?php
 if (! $userIsLogged)
 {
-	#header("Location: README.md");
-	header("Location: index.php");
+	header("Location: " . $PATH . "index.php");
 	die();
 }
