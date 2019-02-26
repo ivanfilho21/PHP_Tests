@@ -34,7 +34,7 @@
 					<p>
 						<label>Table Name:</label>
 						<input type="text" name="table_name" <?php if (isset($tableName)) echo "value='{$tableName}'"; ?>>
-						<input type="submit" name="alter-name[<?php echo $tableName; ?>]" value="Rename">
+						<input class="button" type="submit" name="alter-name[<?php echo $tableName; ?>]" value="Rename">
 					</p>
 
 					<p>
@@ -43,7 +43,7 @@
 					
 					<p>
 						<label>Columns: <?php echo $totalOfColumns; ?></label>
-						<input id="add-row" type="submit" name="add-column[<?php echo $tableName; ?>]" value="+">
+						<input class="button" id="create" type="submit" name="add-column[<?php echo $tableName; ?>]" value="+">
 						
 					</p>
 
@@ -159,11 +159,11 @@
 									<?php endif; ?>
 
 									<td>
-										<input type="submit" name="alter[<?php echo $tableName; ?>][drop][<?php echo (isset($columns[$i])) ? $columns[$i] : $i; ?>]" value="-" id="delete-row">
+										<input class="button" id="delete" type="submit" name="alter[<?php echo $tableName; ?>][drop][<?php echo (isset($columns[$i])) ? $columns[$i] : $i; ?>]" value="-" id="delete-row">
 									</td>
 
 									<td>
-										<input type="submit" name="alter[<?php echo $tableName; ?>][<?php if (isset($columns[$i])) echo "modify"; else echo "ADD"; ?>][<?php if (isset($columns[$i])) echo $column; ?>][<?php echo $i; ?>]<?php if (isset($columns[$i])) echo "[{$COL[$i]}]['type']"; ?>" value="Update">
+										<input class="button" id="update" type="submit" name="alter[<?php echo $tableName; ?>][<?php if (isset($columns[$i])) echo "modify"; else echo "ADD"; ?>][<?php if (isset($columns[$i])) echo $column; ?>][<?php echo $i; ?>]<?php if (isset($columns[$i])) echo "[{$COL[$i]}]['type']"; ?>" value="Update">
 									</td>
 								</tr>
 							<?php endfor; ?>

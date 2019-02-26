@@ -4,16 +4,6 @@
 
 label { font-size: 18px; font-weight: bold; }
 
-.button {
-	background-color: dodgerBlue;
-	border-radius: 16px;
-	padding: 8px 38px;
-	color: white;
-}
-.button:hover {
-	background-color: darkBlue;
-}
-
 input[type=submit] {
 	border-style: solid;
 	border-width: 0px;
@@ -43,48 +33,6 @@ input[type=submit]:hover {
 	margin: 1em 1em;
 	padding: 0 .5em;
 	color: #00d8ff;
-}
-
-/* Special Buttons */
-#create-table {
-	background-color: mediumSeaGreen;
-}
-
-#create-table:hover {
-	background-color: seaGreen;
-}
-
-#read-table {
-	padding: 5px 12px; /*8px 22px;*/
-	background-color: dodgerblue;
-	margin: 0;
-	
-	border-radius: 8px;
-}
-#read-table:hover {
-	background-color: blue;
-}
-
-#update-table {
-	padding: 5px 12px; /*8px 22px;*/
-	background-color: orange;
-	margin: 0;
-	
-	border-radius: 8px;
-}
-#update-table:hover {
-	background-color: darkOrange;
-}
-
-#delete-table {
-	padding: 5px 12px; /*8px 22px;*/
-	background-color: tomato;
-	margin: 0;
-	
-	border-radius: 8px;
-}
-#delete-table:hover {
-	background-color: red;
 }
 
 /* Table Style */

@@ -42,8 +42,8 @@
 					
 					<p>
 						<label>Columns: <?php echo $columns; ?></label>
-						<input id="add-row" type="submit" name="columns" value="+">
-						<input id="delete-row" type="submit" name="columns" value="-">
+						<input class="button" id="create" type="submit" name="columns" value="+">
+						<input class="button" id="delete" type="submit" name="columns" value="-">
 					</p>
 
 					<p>
@@ -155,7 +155,7 @@
 						</table>
 					<?php endif; ?>
 
-					<input type="submit" name="create_table" value="Create">
+					<input class="button" type="submit" name="create_table" value="Create">
 				</fieldset>
 			</form><!-- end form -->
 		</div>

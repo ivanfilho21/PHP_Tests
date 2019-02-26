@@ -56,7 +56,7 @@
 					</tbody>
 				</table>
 
-				<input type="submit" name="insert" value="Add <?php echo (substr($name,-1) == "s") ? substr($name, 0, -1) : $name; ?>">
+				<input class="button" id="create" type="submit" name="insert" value="Add <?php echo (substr($name,-1) == "s") ? substr($name, 0, -1) : $name; ?>">
 			</form>
 
 			<?php $rows = getTableContent($connection, $name); ?>
@@ -66,7 +66,7 @@
 				<h2>List of <?php echo $name; ?></h2>
 				
 				<form action="" method="post">
-					<input type="submit" name="edit-mode" value="Edit Fields">
+					<input class="button" type="submit" name="edit-mode" value="Edit Fields">
 				</form>
 
 				<table>
@@ -91,7 +91,7 @@
 												<?php if ($editMode) : ?>
 													<input type="text" name="<?php echo $k; ?>" value="<?php echo $value; ?>">
 
-													<input type="submit" name="edit-row[<?php echo $rows[$key][$pk]; ?>][<?php echo $k; ?>]" value="Edit">
+													<input class="button" id="update" type="submit" name="edit-row[<?php echo $rows[$key][$pk]; ?>][<?php echo $k; ?>]" value="Edit">
 												<?php else : ?>
 													<?php echo $value; ?>
 												<?php endif; ?>
@@ -114,7 +114,7 @@
 								<form action="" method="post">
 									<?php if (count($rows) > 0) : ?>
 										<td>
-											<input type="submit" name="delete-row[<?php echo $rows[$key][$pk]; ?>]" value="Delete">
+											<input class="button" id="delete" type="submit" name="delete-row[<?php echo $rows[$key][$pk]; ?>]" value="Delete">
 										</td>
 									<?php endif; ?>
 								</form>
@@ -128,8 +128,8 @@
 			<h3 style="margin-top: 3em;">Table Options</h3>
 
 			<td>
-				<input class="button" type="submit" value="Update" onclick="parent.location='update-table.php?table[<?php echo $name; ?>]'" id="update-table">
-				<input class="button" type="submit" value="Drop" onclick="parent.location='<?php echo $PATH; ?>index.php?delete-table[<?php echo $name; ?>]'" id="delete-table">
+				<input class="button" id="update" type="submit" value="Update" onclick="parent.location='update-table.php?table[<?php echo $name; ?>]'" id="update-table">
+				<input class="button" id="delete" type="submit" value="Drop" onclick="parent.location='<?php echo $PATH; ?>index.php?delete-table[<?php echo $name; ?>]'" id="delete-table">
 			</td>
 		</div>
 

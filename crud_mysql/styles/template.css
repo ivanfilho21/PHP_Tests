@@ -101,3 +101,54 @@ footer a:hover {
 .error {
 	color: orangeRed;
 }
+
+/* Buttons */
+.button {
+	background-color: dodgerBlue;
+	color: white;
+	border-radius: 8px;
+	padding: 6px 12px;
+}
+.button:hover {
+	background-color: darkBlue;
+}
+
+/* Special Buttons */
+.round-button {
+	background-color: dodgerBlue;
+	color: white;
+	border-radius: 16px;
+	padding: 8px 32px;
+}
+.round-button:hover {
+	background-color: darkBlue;
+}
+
+#create {
+	background-color: mediumSeaGreen;
+}
+
+#create:hover {
+	background-color: seaGreen;
+}
+
+#read {
+	background-color: dodgerblue;
+}
+#read:hover {
+	background-color: blue;
+}
+
+#update {
+	background-color: orange;
+}
+#update:hover {
+	background-color: darkOrange;
+}
+
+#delete {
+	background-color: tomato;
+}
+#delete:hover {
+	background-color: crimson;
+}
