@@ -9,7 +9,6 @@
 
 ### What I'm working on:
 * A stylesheet for pages that create, update and view tables.
-* A page to Update records from tables.
 
 ### Screenshots
 ![Screenshot](https://i.postimg.cc/pXHmQXnF/Screenshot-from-2019-02-18-12-16-46.png)
