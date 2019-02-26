@@ -19,7 +19,7 @@
 				
 				<tr>
 					<td>
-						<a href="view-table.php?table[<?php echo $name; ?>]"><?php echo $name; ?></a>
+						<a href="crud/view-table.php?table[<?php echo $name; ?>]"><?php echo $name; ?></a>
 					</td>
 
 					<td>

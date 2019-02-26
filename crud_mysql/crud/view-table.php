@@ -28,23 +28,22 @@
 
 		<div class="page-content">
 			<?php include $PATH . "scripts/crud/read_table.php"; ?>
+			<?php include $PATH . "scripts/crud/update_row.php"; ?>
 
-			<table>
-				<thead>
-					<?php foreach ($columns as $column) : ?>
-						<th style="width: auto;"><?php echo $column; ?></th>
-					<?php endforeach; ?>
-
-					<th style="width: 32px;"></th>
-				</thead>
-
-				<tbody>
-					<tr>
-						<form action="" method="post">
+			<form action="" method="post">
+				<table>
+					<thead>
+						<tr>
 							<?php foreach ($columns as $column) : ?>
+								<th style="width: auto;"><?php echo $column; ?></th>
+							<?php endforeach; ?>
+						</tr>
+					</thead>
 
-								<!-- TODO: check primary key instead -->
-								<?php if ($column == "id") : ?>
+					<tbody>
+						<tr>
+							<?php foreach ($columns as $column) : ?>
+								<?php if ($column == $pk) : ?>
 									<td></td>
 								<?php else: ?>
 									<td>
@@ -53,39 +52,72 @@
 									</td>
 								<?php endif; ?>
 							<?php endforeach; ?>
+						</tr>
+					</tbody>
+				</table>
 
-							<td>
-								<input type="submit" name="insert" value="+">
-							</td>
-						</form>
-					</tr>
+				<input type="submit" name="insert" value="Add <?php echo (substr($name,-1) == "s") ? substr($name, 0, -1) : $name; ?>">
+			</form>
 
-					<?php $rows = getTableContent($connection, $name); ?>
-					
+			<?php $rows = getTableContent($connection, $name); ?>
+			
+			<?php if (count($rows) > 0) : ?>
+
+				<h2>List of <?php echo $name; ?></h2>
+				
+				<form action="" method="post">
+					<input type="submit" name="edit-mode" value="Enable Edit Fields">
+				</form>
+
+				<table>
+					<thead>
+						<tr>
+							<?php foreach ($columns as $column) : ?>
+								<th style="width: auto;"><?php echo $column; ?></th>
+							<?php endforeach; ?>
+
+							<th>Operations</th>
+						</tr>
+					</thead>
+
+					<tbody>
 						<?php foreach ($rows as $key => $row) : ?>
 							<tr>
-								<?php foreach ($row as $k => $rowName) : ?>
-									<td><?php echo $rowName; ?></td>
-								<?php endforeach; ?>
+								<form action="" method="post">
+									<?php foreach ($row as $k => $value) : ?>
+										<td>
+											<?php if ($k != $pk) : ?>
+												<input type="text" name="<?php echo $k; ?>" value="<?php echo $value; ?>">
+												
+												<?php if ($editMode) : ?>
+													<input type="submit" name="edit-row[<?php echo $rows[$key][$pk]; ?>][<?php echo $k; ?>]" value="Edit">
+												<?php endif; ?>
+
+											<?php else : ?>
+												<input type="text" name="id" value="<?php echo $value; ?>" readonly style="width: 32px; text-align: center;">
+											<?php endif; ?>
+										</td>
+									<?php endforeach; ?>
+								</form>
 
 								<form action="" method="post">
 									<?php if (count($rows) > 0) : ?>
 										<td>
-											<input type="submit" name="delete-row[<?php echo $rows[$key][$pk]; ?>]" value="-">
-
-											<!-- TODO: get the primary key instead of hard-coded 'id' -->
+											<input type="submit" name="delete-row[<?php echo $rows[$key][$pk]; ?>]" value="Delete">
 										</td>
 									<?php endif; ?>
 								</form>
 							</tr>
 						<?php endforeach; ?>
+					</tbody>
+				</table>
+			<?php endif; ?>
 
-				</tbody>
-			</table>
+			<h3 style="margin-top: 3em;">Danger Zone</h3>
 
 			<td>
-				<input class="button" type="submit" value="Update" onclick="parent.location='update-table.php?table[<?php echo $name; ?>]'" id="update-table" style="margin-top: 3em;">
-				<input class="button" type="submit" value="Drop" onclick="parent.location='<?php echo $PATH; ?>index.php?delete-table[<?php echo $name; ?>]'" id="delete-table" style="margin-top: 3em;">
+				<input class="button" type="submit" value="Update" onclick="parent.location='update-table.php?table[<?php echo $name; ?>]'" id="update-table">
+				<input class="button" type="submit" value="Drop" onclick="parent.location='<?php echo $PATH; ?>index.php?delete-table[<?php echo $name; ?>]'" id="delete-table">
 			</td>
 		</div>
 

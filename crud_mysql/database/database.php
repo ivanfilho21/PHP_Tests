@@ -94,6 +94,14 @@ function alterTableName($conn, $tableName, $newName)
 	$res = mysqli_query($conn, $sql) or die("<h2>Error in query: {$sql}</h2>");
 }
 
+# Updates a value in a table
+function updateTable($conn, $tableName, $columnName, $newValue, $pkName, $pkValue)
+{
+	$sql = "UPDATE {$tableName} SET {$columnName} = '{$newValue}' WHERE {$pkName} = '{$pkValue}'";
+	#echo $sql;
+	$res = mysqli_query($conn, $sql) or die("<h2>Error in query: {$sql}</h2>");
+}
+
 # Returns a list of data from a database query. If query is false, returns empty list.
 function getDataList($res)
 {

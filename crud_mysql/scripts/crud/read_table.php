@@ -41,7 +41,7 @@ if (isset($_POST["insert"])) {
 		if (validation())
 		{
 			insertIntoTable($connection, $name, $columnNames, $data);
-			header("Location: view-table.php?table[{$name}]");
+			header("Location: " . $PATH . "crud/view-table.php?table[{$name}]");
 		}
 	}
 }
