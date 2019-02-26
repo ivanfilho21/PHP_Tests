@@ -28,7 +28,7 @@
 
 		<div class="page-content">
 			<?php include $PATH . "scripts/crud/read_table.php"; ?>
-			<?php include $PATH . "scripts/crud/update_row.php"; ?>
+			<?php include $PATH . "scripts/crud/update_column.php"; ?>
 
 			<form action="" method="post">
 				<table>
@@ -66,7 +66,7 @@
 				<h2>List of <?php echo $name; ?></h2>
 				
 				<form action="" method="post">
-					<input type="submit" name="edit-mode" value="Enable Edit Fields">
+					<input type="submit" name="edit-mode" value="Edit Fields">
 				</form>
 
 				<table>
@@ -87,14 +87,25 @@
 									<?php foreach ($row as $k => $value) : ?>
 										<td>
 											<?php if ($k != $pk) : ?>
-												<input type="text" name="<?php echo $k; ?>" value="<?php echo $value; ?>">
 												
 												<?php if ($editMode) : ?>
+													<input type="text" name="<?php echo $k; ?>" value="<?php echo $value; ?>">
+
 													<input type="submit" name="edit-row[<?php echo $rows[$key][$pk]; ?>][<?php echo $k; ?>]" value="Edit">
+												<?php else : ?>
+													<?php echo $value; ?>
 												<?php endif; ?>
 
+												<span class="error"><?php
+												if (isset($editID)) {
+													if (isset($error_msgs[$editID][$k]))
+													{
+														echo $error_msgs[$editID][$k];
+													}
+												} ?></span>
+
 											<?php else : ?>
-												<input type="text" name="id" value="<?php echo $value; ?>" readonly style="width: 32px; text-align: center;">
+												<?php echo $value; ?>
 											<?php endif; ?>
 										</td>
 									<?php endforeach; ?>
@@ -107,13 +118,14 @@
 										</td>
 									<?php endif; ?>
 								</form>
+
 							</tr>
 						<?php endforeach; ?>
 					</tbody>
 				</table>
 			<?php endif; ?>
 
-			<h3 style="margin-top: 3em;">Danger Zone</h3>
+			<h3 style="margin-top: 3em;">Table Options</h3>
 
 			<td>
 				<input class="button" type="submit" value="Update" onclick="parent.location='update-table.php?table[<?php echo $name; ?>]'" id="update-table">
