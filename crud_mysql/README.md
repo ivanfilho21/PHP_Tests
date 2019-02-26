@@ -11,8 +11,8 @@
 * A stylesheet for pages that create, update and view tables.
 
 ### Screenshots
-![Screenshot](https://i.postimg.cc/pXHmQXnF/Screenshot-from-2019-02-18-12-16-46.png)
-![Screenshot](https://i.postimg.cc/KcLKgg4b/Screenshot-from-2019-02-18-12-17-13.png)
+![Screenshot](https://i.postimg.cc/fR7Pkp19/part1.png)
+![Screenshot](https://i.postimg.cc/T1ySwwXd/part2.png)
 
 
 ### Things I'm learning:
