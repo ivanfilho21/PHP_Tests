@@ -34,7 +34,7 @@
 		<div class="page-content">
 			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 				<fieldset>
-					<legend>Sign In</legend>
+					<legend>Sign Up</legend>
 								
 					<p><label>Username:</label></p>
 					<span class="error"><?php showError("username"); ?></span>

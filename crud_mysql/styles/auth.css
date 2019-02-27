@@ -40,3 +40,10 @@ input[type=submit]:hover {
 	margin: 12px 18px;
 }
 
+.page-content {
+	text-align: left;
+}
+
+label {
+	font-weight: normal;
+}
