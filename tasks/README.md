@@ -3,10 +3,7 @@ A simple PHP and MySQL project.
 
 ## What can it do?
 * Create, List, Edit, Duplicate, and Delete tasks.
-* Manual Form Validation (without regular expressions).
-
-## What needs to be done?
-* Form validation using Regular Expressions.
+* Form Validation.
 
 ### Screenshot
 <div align="center">
