@@ -30,27 +30,6 @@ select {
 	background: white;
 }
 
-/* Special Buttons */
-/*
-#add-row {
-	font-size: 18px;
-	padding: 8px 20px;
-	background-color: mediumSeaGreen;
-}
-#add-row:hover {
-	background-color: seaGreen;
-}
-
-#delete-row {
-	font-size: 18px;
-	padding: 8px 22px;
-	background-color: tomato;
-}
-#delete-row:hover {
-	background-color: orangeRed;
-}
-*/
-
 /* Table Style */
 table
 {

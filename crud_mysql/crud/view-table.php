@@ -44,7 +44,7 @@
 						<tr>
 							<?php foreach ($columns as $column) : ?>
 								<?php if ($column == $pk) : ?>
-									<td></td>
+									<td>Auto</td>
 								<?php else: ?>
 									<td>
 										<input type="text" name="data[<?php echo $column; ?>]">
@@ -128,7 +128,7 @@
 			<h3 style="margin-top: 3em;">Table Options</h3>
 
 			<td>
-				<input class="button" id="update" type="submit" value="Update" onclick="parent.location='update-table.php?table[<?php echo $name; ?>]'" id="update-table">
+				<input class="button" id="update" type="submit" value="Update" onclick="parent.location='update-table.php?id=<?php echo $name; ?>'" id="update-table">
 				<input class="button" id="delete" type="submit" value="Drop" onclick="parent.location='<?php echo $PATH; ?>index.php?delete-table[<?php echo $name; ?>]'" id="delete-table">
 			</td>
 		</div>
