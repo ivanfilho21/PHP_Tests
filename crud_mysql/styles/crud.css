@@ -1,0 +1,38 @@
+/* Table Style */
+table
+{
+	border-collapse: collapse;
+	margin: 12px auto;
+}
+
+thead
+{
+	background-color: #1c6b8e;
+	color: white;
+	text-align: center;
+}
+
+th
+{
+	min-width: 48px;
+	padding: 12px;
+}
+
+tbody
+{
+	text-align: center;
+}
+
+tr {
+	border: solid 1px #ccc;
+}
+
+td {
+	padding: 12px 12px 12px 0;
+	min-width: 48px;
+	width: auto;
+}
+
+td:first-child {
+	padding-left: 12px;
+}

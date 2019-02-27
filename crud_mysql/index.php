@@ -8,7 +8,8 @@
 	
 	<?php include "header_elements.php"; ?>
 
-	<link rel="stylesheet" type="text/css" href="styles/index.css">
+	<link rel="stylesheet" type="text/css" href="styles/crud.css">
+	<link rel="stylesheet" type="text/css" href="styles/sidebar.css">
 </head>
 <body>
 	<?php

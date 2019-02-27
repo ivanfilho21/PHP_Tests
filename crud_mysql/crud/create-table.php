@@ -8,7 +8,8 @@
 	
 	<?php include $PATH . "header_elements.php"; ?>
 
-	<link rel="stylesheet" type="text/css" href="<?php echo $PATH; ?>styles/index.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $PATH; ?>styles/crud.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $PATH; ?>styles/sidebar.css">
 </head>
 <body>
 	<?php
