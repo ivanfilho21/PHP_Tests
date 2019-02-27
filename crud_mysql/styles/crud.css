@@ -36,3 +36,9 @@ td {
 td:first-child {
 	padding-left: 12px;
 }
+
+/* Index */
+#td-table-name {
+	min-width: 120px;
+	width: 320px;
+}

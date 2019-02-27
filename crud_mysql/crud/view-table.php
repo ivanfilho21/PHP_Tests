@@ -65,10 +65,6 @@
 			<?php if (count($rows) > 0) : ?>
 
 				<h2>List of <?php echo $name; ?></h2>
-				
-				<form action="" method="post">
-					<input class="button" type="submit" name="edit-mode" value="Edit Fields">
-				</form>
 
 				<table>
 					<thead>
@@ -124,6 +120,11 @@
 						<?php endforeach; ?>
 					</tbody>
 				</table>
+				
+				<form action="" method="post">
+					<input class="button" type="submit" name="edit-mode[<?php echo $editMode; ?>]" value="Toggle Edit">
+				</form>
+
 			<?php endif; ?>
 
 			<h3 style="margin-top: 3em;">Table Options</h3>

@@ -15,15 +15,16 @@
 	<form action="" method="post" class="form-as-ul">
 		<input type="submit" name="table-operations" value="Table Operations" class="button-as-li list-section">
 
-		<div>
+		<div class="button-holder">
 			<img src="<?php echo $PATH; ?>icon/menu.svg" width="18px">
 			<input type="submit" name="list-tables" value="Home Page" class="button-as-li">
 		</div>
 		
-		<div>
+		<div class="button-holder">
 			<img src="<?php echo $PATH; ?>icon/add.svg" width="18px">
 			<input type="submit" name="create-table" value="Create Table" class="button-as-li">
 		</div>
+		
 		<!--
 		<ul>
 			<li class="list-section"><a href="">Table Operations</a></li>

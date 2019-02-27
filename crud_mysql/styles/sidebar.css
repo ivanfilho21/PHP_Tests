@@ -4,13 +4,19 @@
 	display: grid;
 }
 .form-as-ul img {
-	padding: 0 0 0 2.5em;
+	padding: 0 0 0 0em;
+}
+
+.button-holder {
+	margin: 0 0 12px 2.5em;
+}
+.button-holder:hover {
+	cursor: pointer;
 }
 
 .button-as-li {
 	background: none;
     text-align: left;
-    margin: 0 0 .5em 0;
     color: white;
 }
 
@@ -50,7 +56,7 @@ main {
     background: white;
     white-space: nowrap;
 
-	border-left: dotted 1px;
+	/* border-left: dotted 1px; */
 }
 
 .clear-fix-main { clear: both; }

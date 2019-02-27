@@ -3,7 +3,9 @@ $editMode = false;
 
 if (isset($_POST["edit-mode"]))
 {
-	$editMode = true;
+	#echo ($editMode) ? "true" : "false";
+
+	$editMode = ! key($_POST["edit-mode"]);
 }
 
 if (isset($_POST["edit-row"]))

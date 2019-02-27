@@ -1,11 +1,12 @@
 <?php include "scripts/crud/delete_table.php"; ?>
 
-<h1 style="margin-bottom: 1em; ">Tables</h1>
-
-<input class="button" id="create" type="submit" value="Create Table" onclick="parent.location='crud/create-table.php'">
+<div style="margin-bottom: 2em;">
+	<h1>Tables</h1>
+	<br>
+	<input class="button" id="create" type="submit" value="Create Table" onclick="parent.location='crud/create-table.php'">
+</div>
 
 <table>
-	
 	<?php if (count($tables) > 0) : ?>
 	<thead>
 		<th>Name</th>
@@ -18,7 +19,7 @@
 			<?php foreach ($value as $name) : ?>
 				
 				<tr>
-					<td>
+					<td id="td-table-name">
 						<a href="crud/view-table.php?table[<?php echo $name; ?>]"><?php echo $name; ?></a>
 					</td>
 
