@@ -28,7 +28,7 @@
 			<?php include "sidebar.php"; ?>
 		<div class="page-content">
 		<?php else : ?>
-		<div class="page-content" style="width: 100%;">
+		<div class="page-content" style="width: -webkit-fill-available; white-space: unset;">
 		<?php endif; ?>
 
 			<?php if ($userIsLogged) : ?>
@@ -37,7 +37,7 @@
 				<h1>Create and Manage tables in your Database.</h1>
 
 				<p>
-					With this Web Application you may <strong>Create</strong>, <strong>Read</strong>, <strong>Update</strong>, and <strong>Delete</strong> entities from the <strong>MySQL Database</strong>.
+					With this Web Application you may <strong>Create</strong>, <strong>Read</strong>, <strong>Update</strong>, and <strong>Delete</strong> tables and records from the <strong>MySQL Database</strong>.
 				</p>
 
 				<br>
