@@ -8,11 +8,12 @@
 * Inserting, Listing and Deleting records from tables.
 
 ### What I'm working on:
-* A stylesheet for pages that create, update and view tables.
+* Validations.
 
 ### Screenshots
-![Screenshot](https://i.postimg.cc/fR7Pkp19/part1.png)
-![Screenshot](https://i.postimg.cc/T1ySwwXd/part2.png)
+![Screenshot](https://i.postimg.cc/1zY0ZvTL/index-not-logged.png)
+![Screenshot](https://i.postimg.cc/hjzL49Rh/index.png)
+![Screenshot](https://i.postimg.cc/k55NZ0jQ/read.png)
 
 
 ### Things I'm learning:
