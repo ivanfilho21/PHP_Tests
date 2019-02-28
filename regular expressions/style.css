@@ -125,3 +125,7 @@ footer {
     background: darkSlateGray;
     color: white;
 }
+
+footer a {
+    color: #00bcd4;
+}

@@ -57,7 +57,7 @@ function validateCPF()
     if (empty($cpf))
     {
         #$message = "CPF vazio.";
-        $_SESSION["message"] = "CPF vazio";
+        $_SESSION["message"] = "CPF vazio.";
         $_SESSION["valid"] = false;
         return false;
     }
