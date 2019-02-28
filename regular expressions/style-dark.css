@@ -1,5 +1,5 @@
 body {
-    background: url("img/pattern.png"); 
+    background: url("img/mosaic.png"); 
     margin: 0;
     font-family: sans-serif;
 }
@@ -11,7 +11,7 @@ a {
 /* Header */
 
 header {
-    background: lightGray;
+    background: #1d211d;
     padding: 1em 2em;
     font-size: 20px;
     font-weight: bold;
@@ -23,11 +23,11 @@ header ul {
 }
 
 header li a {
-    color: black;
+    color: white;
 }
 
 header li a:hover {
-    color: blue;
+    color: lightBlue;
 }
 .top-nav {
     float: left;
@@ -36,7 +36,7 @@ header li a:hover {
     float: right;
 }
 .dark-theme img {
-    content: url("img/sun-dark.svg");
+    content: url("img/sun-light.svg");
 }
 /* Main Content */
 
@@ -44,7 +44,8 @@ header li a:hover {
     width: 768px;
     margin: 0 auto;
     padding: 1em 3em;
-    background: white;
+    background: #151515;
+    color: #e4e4e4;
 }
 
 .page-content h1 {
@@ -63,7 +64,7 @@ header li a:hover {
 }
 
 .page-content li a {
-    color: blue;
+    color: #00BCD4;
 }
 
 .page-content li a:hover {
@@ -94,6 +95,8 @@ label {
 input[type=text] {
     font-size: 16px;
     padding: 2px 0px;
+    background: #384348;
+    color: white;
 }
 input[type=submit] {
     font-size: 14px;
@@ -110,11 +113,11 @@ input[type=submit]:hover {
 }
 
 .error-msg {
-    color: red;
+    color: #FF5722;
 }
 
 .success-msg {
-    color: darkgreen;
+    color: #8bc34a;
 }
 
 /* Footer */

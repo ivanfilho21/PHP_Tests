@@ -1,17 +1,25 @@
-<!doctype html>
+<?php  session_start(); include "validation.php"; ?><!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
     <title>Formulário com Regex</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <?php if ($dark_theme) : ?>
+        <link rel="stylesheet" type="text/css" href="style-dark.css">
+    <?php else : ?>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    <?php endif; ?>
 </head>
 <body>
     <header>
-        <nav>
+        <nav class="top-nav">
             <ul>
                 <li><a href="form.php">Index</a></li>
             </ul>
         </nav>
+
+        <a class="dark-theme" href="?dark-theme"><img width="32px"></a>
+
+        <div class="clear-fix" style="clear: both;"></div>
     </header>
     
     <div class="page-content">
@@ -48,8 +56,6 @@
         <p>
             Utilize o formulário abaixo para testar se seu CPF é válido, isto é, se ele segue o padrão.
         </p>
-        
-        <?php include "validation.php"; ?>
 
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <fieldset>

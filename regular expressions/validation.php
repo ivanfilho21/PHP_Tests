@@ -1,6 +1,25 @@
 <?php
 $valid = false;
 $message = "";
+$dark_theme = false;
+
+if ($_SERVER["REQUEST_METHOD"] == "GET")
+{
+    if (isset($_GET["dark-theme"]))
+    {
+        if (isset($_SESSION["dark-theme"]))
+            $_SESSION["dark-theme"] = ! $_SESSION["dark-theme"];
+        else
+            $_SESSION["dark-theme"] = true;
+
+        header("Location: form.php");
+    }
+}
+
+if (isset($_SESSION["dark-theme"]))
+{
+    $dark_theme = $_SESSION["dark-theme"];
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
