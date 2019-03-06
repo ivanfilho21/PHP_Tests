@@ -71,3 +71,7 @@ fieldset
 a {
 	color: lightBlue;
 }
+
+.error {
+	color: coral;
+}

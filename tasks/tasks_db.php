@@ -31,39 +31,6 @@ if (postSet())
 
 include "template_db.php";
 
-# Get tasks from database and format some of the data to display in Task List.
-function getTasksFromDB($connection)
-{
-	$tasks = getTaskList($connection);
-	
-	for ($i = 0; $i < count($tasks); $i++)
-	{
-		if ($tasks[$i]["finished"])
-			$tasks[$i]["finished"] = "Yes";
-		else
-			$tasks[$i]["finished"] = "No";
-		
-		$value = "";
-		switch ($tasks[$i]["priority"])
-		{
-			case 0: $value = "Low"; break; 
-			case 1: $value = "Medium"; break; 
-			case 2: $value = "High"; break; 
-		}
-		$tasks[$i]["priority"] = $value;
-		
-		$dateArray = explode("-", $tasks[$i]["date_creation"]);
-		if (count($dateArray) > 1)
-			$tasks[$i]["date_creation"] = $dateArray[2] . "/" . $dateArray[1] . "/" . $dateArray[0];
-		
-		$dateArray = explode("-", $tasks[$i]["deadline"]);
-		if (count($dateArray) > 1)
-			$tasks[$i]["deadline"] = $dateArray[2] . "/" . $dateArray[1] . "/" . $dateArray[0];
-	}
-	
-	return $tasks;
-}
-
 function validation($task)
 {
 	global $validationErrors;

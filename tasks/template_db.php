@@ -1,13 +1,13 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 	<meta charset="utf-8">
 	<title>Task Manager</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-	<h1>Task Manager</h1>
+	<a href="tasks_db.php"><h1>Task Manager</h1></a>
 	
 	<?php include "form.php"; ?>
 

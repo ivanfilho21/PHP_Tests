@@ -41,6 +41,19 @@ function createTableTasks($connection)
 	mysqli_query($connection, $sql) or die("failed creating table");
 }
 
+function createTableAttachment($connection)
+{
+	$sql = "CREATE TABLE attachment (
+		id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		task_id INT NOT NULL,
+		name VARCHAR(255) NOT NULL,
+		file VARCHAR(255) NOT NULL,
+    	FOREIGN KEY (task_id) REFERENCES tasks(id)
+	)";
+
+	mysqli_query($connection, $sql) or die("failed creating table");
+}
+
 function saveTask($connection, $task)
 {	
 	global $fields; # fields declared in 'tasks_db.php'
@@ -130,4 +143,33 @@ function deleteAllTasks($connection)
 	mysqli_query($connection, $sql);
 
 	createTableTasks($connection);
+}
+
+function addAttachmentToTask($connection, $att)
+{
+	$sql = "INSERT INTO attachment (task_id, name, file) VALUES ({$att['task_id']}, '{$att['name']}', '{$att['file']}')";
+
+	mysqli_query($connection, $sql) or die("Error in query: " . $sql);
+}
+
+function getAttachments($connection, $taskId)
+{
+	$sql = "SELECT * FROM attachment WHERE task_id = {$taskId}";
+	$res = mysqli_query($connection, $sql);
+
+	if ($res == false)
+		return array();
+
+	$list = array();
+	while ($att = mysqli_fetch_assoc($res)) {
+		$list[] = $att;
+	}
+
+	return $list;
+}
+
+function deleteAttachment($connection, $id)
+{
+	$sql = "DELETE FROM attachment WHERE id = {$id}";
+	mysqli_query($connection, $sql) or die("Error in query: " . $sql);
 }
