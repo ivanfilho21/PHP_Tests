@@ -4,56 +4,56 @@ $colNames = array("Name", "Created In", "Deadline", "Priority", "Description", "
 
 function postSet()
 {
-	if (count($_POST) > 0)
-		return true;
-	return false;
+    if (count($_POST) > 0)
+        return true;
+    return false;
 }
 
 # Outputs an error message if it exists in the specified index.
 function displayError($index)
 {
-	global $validationErrors;
+    global $validationErrors;
 
-	if (isset($validationErrors[$index]))
-		echo $validationErrors[$index];
+    if (isset($validationErrors[$index]))
+        echo $validationErrors[$index];
 }
 
 # Get tasks from database and format some of the data to display in Task List.
 function getTasksFromDB($connection)
 {
-	$tasks = getTaskList($connection);
-	
-	foreach ($tasks as $key => $task)
-	{
-		$tasks[$key] = translateTaskFields($task);
-	}
-	
-	return $tasks;
+    $tasks = getTaskList($connection);
+    
+    foreach ($tasks as $key => $task)
+    {
+        $tasks[$key] = translateTaskFields($task);
+    }
+    
+    return $tasks;
 }
 
 function translateTaskFields($task)
 {
-	if ($task["finished"])
-		$task["finished"] = "Yes";
-	else
-		$task["finished"] = "No";
-	
-	$value = "";
-	switch ($task["priority"])
-	{
-		case 1: $value = "Low"; break; 
-		case 2: $value = "Medium"; break; 
-		case 3: $value = "High"; break; 
-	}
-	$task["priority"] = $value;
-	
-	$dateArray = explode("-", $task["date_creation"]);
-	if (count($dateArray) > 1)
-		$task["date_creation"] = $dateArray[2] . "/" . $dateArray[1] . "/" . $dateArray[0];
-	
-	$dateArray = explode("-", $task["deadline"]);
-	if (count($dateArray) > 1)
-		$task["deadline"] = $dateArray[2] . "/" . $dateArray[1] . "/" . $dateArray[0];
+    if ($task["finished"])
+        $task["finished"] = "Yes";
+    else
+        $task["finished"] = "No";
+    
+    $value = "";
+    switch ($task["priority"])
+    {
+        case 1: $value = "Low"; break; 
+        case 2: $value = "Medium"; break; 
+        case 3: $value = "High"; break; 
+    }
+    $task["priority"] = $value;
+    
+    $dateArray = explode("-", $task["date_creation"]);
+    if (count($dateArray) > 1)
+        $task["date_creation"] = $dateArray[2] . "/" . $dateArray[1] . "/" . $dateArray[0];
+    
+    $dateArray = explode("-", $task["deadline"]);
+    if (count($dateArray) > 1)
+        $task["deadline"] = $dateArray[2] . "/" . $dateArray[1] . "/" . $dateArray[0];
 
-	return $task;
+    return $task;
 }
