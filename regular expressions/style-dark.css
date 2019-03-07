@@ -1,85 +1,111 @@
-body {
-    background: url("img/mosaic.png"); 
+/* Reset */
+html, body, div, span, h1, h3, p, a, img, fieldset, form, label, legend, tr, th, td, header, footer, nav, ul, li {
     margin: 0;
+    padding: 0;
     font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background: url("img/mosaic.png");
 }
 
 a {
     text-decoration: none;
 }
 
+h1 {
+    padding: .5em 0;
+}
+
+h3 {
+    padding: .25em 0;
+
+}
+
+#sec-1, #sec-2, #sec-3 {
+    margin: 0;
+    padding: .5em 0;
+}
+
+p {
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
+
 /* Header */
 
-header {
+.header {
     background: #1d211d;
-    padding: 1em 2em;
+    padding: 1em 1.5em;
     font-size: 20px;
     font-weight: bold;
 }
 
 header ul {
-    margin: 0;
     list-style: none;
 }
 
-header li a {
-    color: white;
-}
-
-header li a:hover {
-    color: lightBlue;
-}
 .top-nav {
+    padding-top: .5em;
     float: left;
 }
+
+.top-nav a {
+    color: white;
+}
+.top-nav a:hover {
+    color: cyan;
+}
+
 .dark-theme {
     float: right;
 }
+
 .dark-theme img {
     content: url("img/sun-light.svg");
 }
+
 /* Main Content */
 
 .page-content {
-    width: 768px;
-    margin: 0 auto;
-    padding: 1em 3em;
+    /*width: 768px;*/
+    /*margin: auto;*/
+    padding: .5em 1.65em 1em 1.65em;
     background: #151515;
     color: #e4e4e4;
 }
-
-.page-content h1 {
-    margin-top: 0;
-    padding: .5em 0 0 0;
-}
-
 .page-content p {
+    font-size: 1.1em;
     text-indent: 2.5em;
     text-align: justify;
-    font-size: 18px;
 }
 
-.page-content li {
-    font-size: 18px;
+.page-index {
+    padding-left: 3em;
 }
 
-.page-content li a {
-    color: #00BCD4;
+.page-index li {
+    margin: .5em 0;
 }
 
-.page-content li a:hover {
-    color: dodgerBlue;
+.page-index li a {
+    color: white;
+    font-size: 1.15em;
+}
+
+.page-index li a:hover {
+    color: cyan;
 }
 
 /* Form */
 
 form {
-    text-align: center;
-    padding: 0 0 1em 0;
+    margin-top: 1em;
+    padding-bottom: 1em;
 }
 
 fieldset {
-
     padding: 1em;
 }
 
@@ -90,18 +116,20 @@ legend {
 label {
     font-weight: bold;
     display: block;
-    margin: 0 0 1em 0;
+    margin-bottom: 1em;
+    text-align: center;
+    margin: 1em;
 }
 input[type=text] {
-    font-size: 16px;
-    padding: 2px 0px;
-    background: #384348;
-    color: white;
+    font-size: 1em;
+    padding: .15em;
+    border: 1px solid rgba(0, 0, 0, .5);
 }
 input[type=submit] {
-    font-size: 14px;
-    padding: 6px 16px;
-    margin: 0 0 0 1em;
+    font-size: 1em;
+    padding: .65em 1em;
+    margin: 1em;
+    border: none;
     border-radius: 2em;
     background: dodgerBlue;
     color: white;
@@ -111,24 +139,48 @@ input[type=submit]:hover {
     background: blue;
     cursor: pointer;
 }
+.msg {
+    text-align: center;
+    font-weight: 700;
+}
 
 .error-msg {
-    color: #FF5722;
+    color: coral;
 }
 
 .success-msg {
-    color: #8bc34a;
+    color: #4caf50;
 }
 
 /* Footer */
 
-footer {
+.footer {
     text-align: center;
-    padding: .5em;
+    padding: 2em 1em;
     background: darkSlateGray;
     color: white;
+    font-size: .9em;
 }
 
-footer a {
-    color: #00BCD4;
+.credits a {
+    color: #00bcd4;
+}
+
+/* Enhancement for Bigger Screens */
+@media (min-width: 960px) {
+    .header-content {
+        max-width: 90%;
+        margin: auto;
+    }
+    .page-content {
+        width: 90%;
+        margin: auto;
+    }
+}
+
+@media (min-width: 2000px) {
+    .page-content {
+        width: 1920px;
+        margin: auto;
+    }
 }

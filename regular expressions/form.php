@@ -1,8 +1,10 @@
-<?php  session_start(); include "validation.php"; ?><!doctype html>
-<html>
+<?php  session_start(); include "validation.php"; ?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <title>Formulário com Regex</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php if ($dark_theme) : ?>
         <link rel="stylesheet" type="text/css" href="style-dark.css">
     <?php else : ?>
@@ -10,30 +12,30 @@
     <?php endif; ?>
 </head>
 <body>
-    <header>
-        <nav class="top-nav">
-            <ul>
-                <li><a href="form.php">Index</a></li>
-            </ul>
-        </nav>
+    <header class="header">
+        <div class="header-content">
+            <nav class="top-nav">
+                <ul>
+                    <li><a href="form.php">Index</a></li>
+                </ul>
+            </nav>
 
-        <a class="dark-theme" href="?dark-theme"><img width="32px"></a>
+            <a class="dark-theme" href="?dark-theme"><img width="32px"></a>
 
-        <div class="clear-fix" style="clear: both;"></div>
+            <div class="clear-fix" style="clear: both;"></div>
+        </div>
     </header>
     
     <div class="page-content">
 
         <h1>Formulário com Regex</h1>
 
-        <nav>
-            <h3>Índice:</h3>
-            <ul>
-                <li><a href="#sec-1">O que é Regex?</a></li>
-                <li><a href="#sec-2">Validação de CPF</a></li>
-                <li><a href="#sec-3">Formulário</a></li>
-            </ul>
-        </nav>
+        <h3>Índice:</h3>
+        <ul class="page-index">
+            <li><a href="#sec-1">O que é Regex?</a></li>
+            <li><a href="#sec-2">Validação de CPF</a></li>
+            <li><a href="#sec-3">Formulário</a></li>
+        </ul>
 
         <h2 id="sec-1">O que é Regex?</h2>
         
@@ -67,15 +69,29 @@
                     <input type="submit" name="submit" value="Testar CPF">
                 </label>
 
-                <span class="<?php echo ($valid) ? 'success' : 'error'; ?>-msg"><?php echo $message; ?></span>
+                <div class="msg">
+                    <span class="<?php echo ($valid) ? 'success' : 'error'; ?>-msg"><?php echo $message; ?></span>
+                </div>
+                
 
             </fieldset>
         </form>
     </div>
 
-    <footer>
-        <div>Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"              title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"              title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-        <p>Copyright © 2019 - Ivan Filho</p>
+    <footer class="footer">
+        <div class="credits">Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"              title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"              title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+        <p>© Copyright 2019 - Ivan Filho</p>
     </footer>
+
+    <!-- <script>
+        var btn_theme = document.getElementById("btn-theme");
+
+        btn_theme.onclick = function() {
+
+            document.getElementsByTagName("head")[0].insertAdjacentHTML(
+                "beforeend",
+                "<link rel=\"stylesheet\" href=\"style-dark.css\" />");
+        }
+    </script> -->
 </body>
 </html>
