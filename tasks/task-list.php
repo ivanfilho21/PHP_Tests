@@ -31,7 +31,7 @@
     
 </table>
 
-<div class="hor-divider" style="width: 100%; margin: 12px auto; height: 1px; background: white;"></div>
+<div class="hor-divider"></div>
 
 <div style="text-align: center;">
     <h4>Danger Zone</h4>

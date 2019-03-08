@@ -43,6 +43,13 @@
             Task is Already Finished.
         </label>
 
+        <div class="hor-divider"></div>
+
+        <label>
+            <input type="checkbox" name="send" value="1">
+            Send a copy by E-mail.
+        </label>
+
         <div class="button">
             <input type="submit" value="Save Task">
         </div>
