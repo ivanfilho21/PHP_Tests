@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ajax Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <h1>Password Strength Checker</h1>
+    <form method="POST">
+        <fieldset>
+            <legend>Form</legend>
+            <input type="Password" name="password" placeholder="Enter a Password" onkeydown="checkPassword(this.value)">
+            <span id="response-from-server"></span>
+        </fieldset>
+    </form>
+
+    <script>
+        // AJAX
+        function checkPassword(password) {
+            var response = document.getElementById("response-from-server");
+
+            if (password.length == 0) { 
+                response.innerHTML = "";
+                return;
+            }
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    response.innerHTML = this.responseText;
+                }
+            };
+            xmlhttp.open("GET", "script.php?q=" + password, true);
+            xmlhttp.send();
+        }
+    </script>
+</body>
+</html>
