@@ -1,0 +1,31 @@
+body {
+	font-family: sans-serif;
+}
+
+h1 {
+	text-align: center;
+}
+
+form {
+	width: 100%;
+	margin: auto;
+
+	font-size: 1.25em;
+}
+
+input[type=password] {
+	width: 100%;
+	font-size: 1em;
+}
+
+#response-from-server {
+	margin-top: 1em;
+	text-align: center;
+}
+
+@media (min-width: 480px) {
+	body {
+		max-width: 480px;
+		margin: auto;
+	}
+}
