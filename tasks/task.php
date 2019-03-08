@@ -1,6 +1,7 @@
 <?php
-include "database.php";
+include "config.php";
 include "util.php";
+include "database.php";
 
 $validationErrors = array();
 

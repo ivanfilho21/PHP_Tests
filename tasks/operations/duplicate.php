@@ -1,5 +1,6 @@
 <?php
 
+include "../config.php";
 include "../util.php";
 include "../database.php";
 

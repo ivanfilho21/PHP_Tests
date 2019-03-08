@@ -1,8 +1,9 @@
 <?php
-$view_mode = true;
-
+include "config.php";
 include "util.php";
 include "database.php";
+
+$view_mode = true;
 
 $validationErrors = array();
 
@@ -25,7 +26,13 @@ if (postSet())
     if (validation($task))
     {
         saveTask($connection, $task);
+
+        if (isset($_POST["send"])) {
+            sendEmail($task);
+        }
+
         header("Location: tasks_db.php");
+        die();
     }
 }
 

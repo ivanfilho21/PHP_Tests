@@ -1,10 +1,10 @@
 <?php
-$dbHost = "127.0.0.1";
+/*$dbHost = "127.0.0.1";
 $dbUser = "root";
 $dbPass = "";
-$dbName = "tasks";
+$dbName = "tasks";*/
 
-$connection = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
+$connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB);
 
 if (mysqli_connect_errno($connection))
 {

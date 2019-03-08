@@ -1,6 +1,7 @@
 <?php
 $view_mode = false;
 
+include "config.php";
 include "util.php";
 include "database.php";
 
@@ -32,6 +33,11 @@ if (isset($_POST["name"]) && $_POST["name"] != "")
     }
     
     editTask($connection, $task);
+
+    if (isset($_POST["send"])) {
+        sendEmail($task);
+    }
+
     header("Location: tasks_db.php");
     die();
 }
