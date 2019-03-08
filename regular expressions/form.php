@@ -1,16 +1,15 @@
-<?php  session_start(); include "validation.php"; include "toggle-theme.php"; ?>
+<?php  session_start(); include "validation.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <title>Formulário com Regex</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php #if ($dark_theme) : ?>
-        <!-- <link rel="stylesheet" type="text/css" href="style-dark.css"> -->
-    <?php #else : ?>
-        <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
-    <?php #endif; ?>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <?php if ($dark_theme) : ?>
+        <link rel="stylesheet" type="text/css" href="style-dark.css">
+    <?php else : ?>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    <?php endif; ?>
 </head>
 <body>
     <header class="header">
@@ -21,15 +20,14 @@
                 </ul>
             </nav>
 
-            <!-- <a id="btn-theme" class="dark-theme" href="?dark-theme"><img width="32px"></a> -->
-
-            <button onclick="toggleTheme()" class="dark-theme"><img width="32px"></button>
+            <a class="dark-theme" href="?dark-theme"><img width="32px"></a>
 
             <div class="clear-fix" style="clear: both;"></div>
         </div>
     </header>
     
     <div class="page-content">
+
         <h1>Formulário com Regex</h1>
 
         <h3>Índice:</h3>
@@ -78,8 +76,6 @@
 
             </fieldset>
         </form>
-
-        <input type="hidden" id="current-theme" value="<?php echo (isset($dark_theme)) ? $dark_theme : 0; ?>"></input>
     </div>
 
     <footer class="footer">
@@ -87,36 +83,15 @@
         <p>© Copyright 2019 - Ivan Filho</p>
     </footer>
 
-    <!-- Script to toggle theme -->
-    <script>
-        function toggleTheme() {
+    <!-- <script>
+        var btn_theme = document.getElementById("btn-theme");
 
-            // AJAX
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    var response = document.getElementById("response");
-                    var themeType = (this.responseText == "1") ? "-dark" : "";
+        btn_theme.onclick = function() {
 
-                    // window.alert("." + this.responseText + ".");
-
-                    //document.getElementById("response").innerHTML = this.responseText + " Theme: " + themeType;
-
-                    /*document.getElementsByTagName("head")[0].insertAdjacentHTML(
-                        "beforeend",
-                        "<link rel=\"stylesheet\" href=\"style" + themeType + ".css\" >");
-                    */
-
-                    var oldlink = document.getElementsByTagName("link").item(0);
-                    oldlink.href = "style" + themeType + ".css";
-                }
-            };
-            var currentTheme = document.getElementById("current-theme").value;
-
-            xmlhttp.open("GET", "toggle-theme.php?theme=" + currentTheme, true);
-            xmlhttp.send();
+            document.getElementsByTagName("head")[0].insertAdjacentHTML(
+                "beforeend",
+                "<link rel=\"stylesheet\" href=\"style-dark.css\" />");
         }
-
-    </script>
+    </script> -->
 </body>
 </html>

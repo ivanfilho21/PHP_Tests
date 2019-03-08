@@ -1,5 +1,4 @@
 <?php
-include "libs/PHPMailer/PHPMailerAutoload.php";
 $fields = array("name", "date_creation", "deadline", "priority", "description", "finished");
 $colNames = array("Name", "Created In", "Deadline", "Priority", "Description", "Finished");
 
@@ -57,27 +56,4 @@ function translateTaskFields($task)
         $task["deadline"] = $dateArray[2] . "/" . $dateArray[1] . "/" . $dateArray[0];
 
     return $task;
-}
-
-function sendEmail($task, $attachments = array())
-{
-    $emailBody = prepareEmailBody($task, $attachments);
-}
-
-function prepareEmailBody()
-{
-    # get processed content from 'email_tamplate.php'
-
-    # tells PHP not to send processing to browser
-    ob_start();
-
-    include "email-template.php";
-
-    # store 'email template' content inside a variable
-    $body = ob_get_contents();
-
-    # tells PHP that browser can now receive contents
-    ob_end_clean();
-
-    return $body; 
 }

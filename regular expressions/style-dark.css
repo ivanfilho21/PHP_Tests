@@ -54,16 +54,12 @@ header ul {
 .top-nav a {
     color: white;
 }
-
 .top-nav a:hover {
     color: cyan;
 }
 
 .dark-theme {
     float: right;
-    background: none;
-    border: none;
-    cursor: pointer;
 }
 
 .dark-theme img {

@@ -60,9 +60,6 @@ header ul {
 
 .dark-theme {
     float: right;
-    background: none;
-    border: none;
-    cursor: pointer;
 }
 
 .dark-theme img {

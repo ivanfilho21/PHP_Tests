@@ -75,10 +75,3 @@ a {
 .error {
     color: coral;
 }
-
-.hor-divider {
-    width: 100%;
-    margin: 12px auto;
-    height: 1px;
-    background: white;
-}
