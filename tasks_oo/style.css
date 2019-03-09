@@ -1,0 +1,84 @@
+body
+{
+    font-family: "Segoe UI Semibold", Verdana, Sans-serif;
+    margin: 5% auto;
+    width: 80%;
+    background-color: #222222;/*#deecef;*/
+    color: #fff;
+}
+
+h1
+{
+    text-align: center;
+    font-weight: bold;
+}
+
+.button
+{
+    margin: 0 auto;
+    width: 100px;
+}
+
+label
+{
+    display: block;
+    margin: 6px 6px 12px 6px;
+}
+
+input[type=text],
+textarea
+{
+    border: 0px;
+    margin: 6px auto;
+    padding: 6px;
+    border-radius: 8px;
+    width: 100%;
+    background-color: #b7b7b7;
+    color: #000;
+    resize: vertical;
+}
+
+input[type=submit]
+{
+    padding: 6px 12px 6px 12px;
+    margin: 8px 0 0 0;
+    display: block;
+}
+
+table
+{
+    width: 100%;
+}
+
+table th
+{
+    font-size: 24px;
+    background-color: #97b9c1;
+}
+
+table td
+{
+    border-bottom: 1px solid #333333;
+    text-align: center;
+    vertical-align: middle;
+}
+
+fieldset
+{
+    margin: 6px 6px 12px 6px;
+}
+
+a {
+    color: lightBlue;
+}
+
+.error {
+    color: coral;
+}
+
+.hor-divider {
+    width: 100%;
+    margin: 12px auto;
+    height: 1px;
+    background: white;
+}
