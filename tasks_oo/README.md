@@ -1,14 +1,15 @@
-# Task Manager with Database
-A simple PHP and MySQL project.
+# Object Oriented Task Manager with Database
+A simple Object Oriented PHP and MySQL project.
 
 ## What can it do?
 * Create, List, Edit, Duplicate, and Delete tasks.
-* Form Validation.
+* Upload and Download of Attachments for any task.
+
+## Link of Demo
+[OO Task Manager](https://ivanfilho21.000webhostapp.com)
 
 ### Screenshot
-<div align="center">
-  <img src="https://i.postimg.cc/j5vgXPsq/Screenshot-from-2019-02-24-05-54-25.png" /> 
-</div>
+[Screenshot](screenshot/screenshot.png)
 
 ### Author
 > Ivan Filho.
