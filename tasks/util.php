@@ -57,10 +57,16 @@ function translateTaskFields($task)
 
     return $task;
 }
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 function sendEmail($task, $attachments = array())
 {
-    include "libs/PHPMailer/PHPMailerAutoload.php";
+    /*require "libs/PHPMailer/src/Exception.php";
+    require "libs/PHPMailer/src/PHPMailer.php";
+    require "libs/PHPMailer/src/SMTP.php";*/
+
+    require '../../../../phpmyadmin/vendor/autoload.php';
 
     $emailBody = prepareEmailBody($task, $attachments);
 
