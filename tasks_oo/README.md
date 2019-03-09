@@ -6,10 +6,10 @@ A simple Object Oriented PHP and MySQL project.
 * Upload and Download of Attachments for any task.
 
 ## Link of Demo
-[OO Task Manager](https://ivanfilho21.000webhostapp.com)
+[https://ivanfilho21.000webhostapp.com](https://ivanfilho21.000webhostapp.com)
 
 ### Screenshot
-[Screenshot](screenshot/screenshot.png)
+[!Screenshot](screenshot/screenshot-1.png)
 
 ### Author
 > Ivan Filho.
