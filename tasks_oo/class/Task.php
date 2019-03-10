@@ -4,6 +4,7 @@ class Task
     public $mysqli;
     public $taskList = array();
     public $task = array();
+    public $attachments = array();
 
     public function __construct($mysqli)
     {
@@ -32,7 +33,7 @@ class Task
         
         if ($res == false) {
             echo "<strong>Failed getting task from Database.</strong>";
-            return array();
+            return;
         }
         $this->task = mysqli_fetch_assoc($res);
     }
@@ -75,6 +76,47 @@ class Task
 
         #echo $sql;
         $this->mysqli->query($sql) or die("Query Failed. Wrong statement or <strong>table doesn't exist</strong>.<br><br>SQL Query: ");
+    }
+
+    function deleteTaskFromDB($id)
+    {
+        $sql = "DELETE FROM " . DB_TABLE_TASKS . " WHERE id = '{$id}'";
+        $this->mysqli->query($sql);
+    }
+
+    function deleteAllTasksFromDB()
+    {
+        $sql = "DROP TABLE {DB_TABLE_TASKS}";
+        $this->mysqli->query($sql);
+
+        createTableTasks($mysqli);
+    }
+
+    function addAttachmentToTaskInDB($att)
+    {
+        $sql = "INSERT INTO " . DB_TABLE_ATTACHMENTS . " (task_id, name, file) VALUES ({$att['task_id']}, '{$att['name']}', '{$att['file']}')";
+
+        $this->mysqli->query($sql) or die("Error in query: " . $sql);
+    }
+
+    function getAttachmentsFromDB($taskId)
+    {
+        $sql = "SELECT * FROM " . DB_TABLE_ATTACHMENTS . " WHERE task_id = {$taskId}";
+        $res = $this->mysqli->query($sql);
+
+        if ($res == false)
+            return;
+
+        $this->attachments = array();
+        while ($att = mysqli_fetch_assoc($res)) {
+            $this->attachments[] = $att;
+        }
+    }
+
+    function deleteAttachmentFromDB($id)
+    {
+        $sql = "DELETE FROM " . DB_TABLE_ATTACHMENTS . " WHERE id = {$id}";
+        $this->mysqli->query($sql) or die("Error in query: " . $sql);
     }
 
 }

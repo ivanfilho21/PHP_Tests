@@ -29,7 +29,7 @@ if (postSet()) {
             $att["name"] = $_FILES["attachment"]["name"];
             $att["file"] = $_FILES["attachment"]["name"];
 
-            addAttachmentToTask($mysqli, $att);
+            $task_object->addAttachmentToTaskInDB($att);
         } else {
             $validationErrors["attach"] = "Wrong type of file";
         }
@@ -38,7 +38,9 @@ if (postSet()) {
 $task_object->getTaskFromDB($_GET["id"]);
 $task = $task_object->task;
 $task = translateTaskFields($task);
-$attachments = getAttachments($mysqli, $task["id"]);
+
+$task_object->getAttachmentsFromDB($task["id"]);
+$attachments = $task_object->attachments;
 
 include "task-template.php";
 
