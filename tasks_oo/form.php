@@ -6,7 +6,7 @@
         
         <label>
             Task Name (*):
-            <input type="text" name="name" value="<?php echo $task['name']; ?>">
+            <input type="text" name="name" value="<?php echo htmlspecialchars($task['name']); ?>">
             <span class="error" style="color: coral;"><?php displayError("name"); ?></span>
         </label>
         
@@ -35,7 +35,7 @@
         
         <label>
             Description:
-            <input type="text" name="description" value="<?php echo $task['description']; ?>"></textarea>
+            <input type="text" name="description" value="<?php echo htmlspecialchars($task['description']); ?>"></textarea>
         </label>
         
         <label>

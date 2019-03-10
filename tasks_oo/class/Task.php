@@ -45,7 +45,7 @@ class Task
         $qt = "'";
         
         foreach ($fields as $f) {       
-            $values .= $qt . $task[$f] . $qt . $comma;
+            $values .= $qt . $this->mysqli->escape_string($task[$f]) . $qt . $comma;
         }
 
         $values = substr($values, 0, strlen($values) - strlen($comma));
@@ -65,9 +65,10 @@ class Task
     {
         $values = "";
         $comma = ", ";
+        $qt = "'";
 
         foreach ($fields as $field) {
-            $values .= $field . " = '{$task[$field]}'" . $comma;
+            $values .= $field . " = " . $qt . $this->mysqli->escape_string($task[$field]) . $qt . $comma;
         }
         $values = substr($values, 0, strlen($values) - strlen($comma));
 
