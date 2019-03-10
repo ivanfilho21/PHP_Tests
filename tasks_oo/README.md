@@ -3,7 +3,7 @@ A simple Object Oriented PHP and MySQL project.
 
 ## What can it do?
 * Create, List, Edit, Duplicate, and Delete tasks.
-* Upload and Download of Attachments for any task.
+* Upload and Download Attachments from any tasks.
 
 ## Link of Demo
 [https://ivanfilho21.000webhostapp.com](https://ivanfilho21.000webhostapp.com)
