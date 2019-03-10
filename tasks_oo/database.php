@@ -42,9 +42,13 @@ function createTableAttachments($mysqli)
         id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         task_id INT NOT NULL,
         name VARCHAR(255) NOT NULL,
-        file VARCHAR(255) NOT NULL,
-        FOREIGN KEY (task_id) REFERENCES tasks(id)
+        file VARCHAR(255) NOT NULL
     )";
+
+    /*
+    ,
+        FOREIGN KEY (task_id) REFERENCES tasks(id)
+        */
 
     $mysqli->query($sql) or die("failed creating table");
 }

@@ -86,10 +86,10 @@ class Task
 
     function deleteAllTasksFromDB()
     {
-        $sql = "DROP TABLE {DB_TABLE_TASKS}";
-        $this->mysqli->query($sql);
+        $sql = "DROP TABLE " .  DB_TABLE_TASKS;
+        $this->mysqli->query($sql) or die("Error in " . $sql);
 
-        createTableTasks($mysqli);
+        createTableTasks($this->mysqli);
     }
 
     function addAttachmentToTaskInDB($att)
