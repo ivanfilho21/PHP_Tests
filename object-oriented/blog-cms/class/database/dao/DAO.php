@@ -1,8 +1,8 @@
 <?php
-require "class/Column.php";
-require "class/database/Database.php";
 
-abstract class DAO extends Database
+require "class/Column.php";
+
+abstract class DAO
 {
     protected $tableName = "";
     protected $columns = array();

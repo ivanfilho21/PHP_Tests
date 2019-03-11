@@ -1,5 +1,15 @@
 <?php
 
+# SQL Types
+define("INT", "INT");
+define("VARCHAR", "VARCHAR");
+define("MD5", "MD5");
+
+# Useful characters
+define("COMMA", ", ");
+define("QT_A", "`");
+define("QT", "'");
+
 class DatabaseUtils
 {
     # Returns all column names, but the primary key when false
