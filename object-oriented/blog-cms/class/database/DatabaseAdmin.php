@@ -22,7 +22,7 @@ class DatabaseAdmin
         $this->pageDAO->createTable($this->mysqli);
 
         # Test inserting new user to db
-        $this->userDAO->createUser($this->mysqli, "admin", "admin");
+        # $this->userDAO->createUser($this->mysqli, "admin", "admin");
     }
 
     public function getDatabase()
