@@ -9,5 +9,7 @@
 </head>
 <body>
     <h1>Simple Blog CMS</h1>
+
+    <button>Login</button>
 </body>
 </html>
