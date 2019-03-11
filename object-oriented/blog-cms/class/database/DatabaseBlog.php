@@ -4,12 +4,16 @@ require "class/database/dao/PostDAO.php";
 
 class DatabaseBlog
 {
-    private $database;
     private $postDAO;
 
     public function __construct()
     {
-        $this->database = new Database(DB_ADMIN_SERVER, DB_ADMIN_USER, DB_ADMIN_PASS, DB_ADMIN_NAME);
+        $this->mysqli = new mysqli(DB_BLOG_SERVER, DB_BLOG_USER, DB_BLOG_PASS, DB_BLOG_NAME);
+
+        if ($this->mysqli->connect_errno) {
+            echo "Failed to connect to MySQL: (" . $this->mysqli->connect_errno . ") " . $this->mysqli->connect_error;
+            die();
+        }
 
         $this->postDAO = new PostDAO();
     }

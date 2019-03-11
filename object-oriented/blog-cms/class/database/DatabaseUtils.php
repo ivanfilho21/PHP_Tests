@@ -12,7 +12,7 @@ class DatabaseUtils
         #for ($i = $start; $i < count($columns); $i++) {
             if ($column->getKey() == "PRIMARY KEY") continue;
 
-            $fields .= $column->getName() . COMMA;
+            $fields .= QT_A . $column->getName() . QT_A . COMMA;
         }
         $fields = substr($fields, 0, strlen($fields) - strlen(COMMA));
 
@@ -20,7 +20,7 @@ class DatabaseUtils
     }
     
     # Expects object of class Column
-    public static function getTableFieldsFull($columns)
+    public static function getTableColumnsInline($columns)
     {
         $fields = "";
 

@@ -4,26 +4,25 @@ require "class/database/dao/PageDAO.php";
 
 class DatabaseAdmin
 {
-    private $dbServer = "127.0.0.1";
-    private $dbUser = "root";
-    private $dbPass = "";
-    private $dbName = "blog_admin_db";
-    
+    private $mysqli;
 
     public function __construct()
     {
-        $this->database = new Database(DB_ADMIN_SERVER, DB_ADMIN_USER, DB_ADMIN_PASS, DB_ADMIN_NAME);
+        $this->mysqli = new mysqli(DB_ADMIN_SERVER, DB_ADMIN_USER, DB_ADMIN_PASS, DB_ADMIN_NAME);
+
+        if ($this->mysqli->connect_errno) {
+            echo "Failed to connect to MySQL: (" . $this->mysqli->connect_errno . ") " . $this->mysqli->connect_error;
+            die();
+        }
 
         $this->userDAO = new UserDAO();
         $this->pageDAO = new PageDAO();
 
-        $mysqli = $this->database->getMysqli();
+        $this->userDAO->createTable($this->mysqli);
+        $this->pageDAO->createTable($this->mysqli);
 
-        $this->userDAO->createTable($mysqli);
-        $this->pageDAO->createTable($mysqli);
-
-        # Test create user
-        $this->userDAO->createUser("admin", "admin");
+        # Test inserting new user to db
+        $this->userDAO->createUser($this->mysqli, "admin", "admin");
     }
 
     public function getDatabase()

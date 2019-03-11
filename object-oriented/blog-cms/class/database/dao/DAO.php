@@ -6,19 +6,14 @@ abstract class DAO extends Database
 {
     protected $tableName = "";
     protected $columns = array();
+    protected $errorA = "Error in query";
+    protected $errorB = "<br><br>Possible Causes:<br><ul><li>Table does not exist.</li><li>Database does not exist.</li></ul>";
 
     public function __construct() { }
 
     protected function createTableInDatabase($mysqli)
     {
-        /*$fields = "";
-
-        foreach ($this->columns as $column) {
-            $fields .= $column->getColumnInformation() . COMMA;
-        }
-        $fields = substr($fields, 0, strlen($fields) - strlen(COMMA));*/
-
-        $fields = DatabaseUtils::getTableFieldsFull($this->columns);
+        $fields = DatabaseUtils::getTableColumnsInline($this->columns);
 
         $sql = "CREATE TABLE IF NOT EXISTS `" . $this->tableName . "` (" . $fields . ")";
         # echo $sql;
@@ -37,5 +32,14 @@ abstract class DAO extends Database
     public abstract function createTable($mysqli);
     public abstract function dropTable($mysqli);
     
-    # Todo: other methods of CRUD
+    # Todo Methods: update and delete
+
+    protected function insert($mysqli, $values)
+    {
+        $fields = DatabaseUtils::getTableFields($this->columns, false);
+        
+        $sql = "INSERT INTO " . QT_A . $this->tableName . QT_A . " (" . $fields . ") VALUES (" . $values . ")";
+        # echo $sql;
+        $mysqli->query($sql) or die("Error in query \"" . $sql . "\"" . $this->errorB);
+    }
 }

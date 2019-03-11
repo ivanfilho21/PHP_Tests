@@ -13,24 +13,22 @@ class UserDAO extends DAO
     # Override
     public function createTable($mysqli)
     {
-        $this->createTableInDatabase($mysqli);
+        parent::createTableInDatabase($mysqli);
     }
 
     # Override
     public function dropTable($mysqli)
     {
-        $this->dropTableInDatabase($mysqli);
+        parent::dropTableInDatabase($mysqli);
     }
 
     # CRUD
 
-    public function createUser($username, $password)
+    public function createUser($mysqli, $username, $password)
     {
-        $fields = DatabaseUtils::getTableFields($this->columns, false);
         $values = "";
         $values .= QT . $username . QT . COMMA . MD5 . "(" . QT . $password . QT . ")";
 
-        $sql = "INSERT INTO " . QT_A . $this->tableName . QT_A . " (" . $fields . ") VALUES (" . $values . ")";
-        echo $sql;
+        parent::insert($mysqli, $values);
     }
 }
