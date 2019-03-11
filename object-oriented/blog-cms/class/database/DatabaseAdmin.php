@@ -1,32 +1,38 @@
 <?php
-require "class/database/UserDAO.php";
+require "class/database/dao/UserDAO.php";
+require "class/database/dao/PageDAO.php";
 
 class DatabaseAdmin
 {
-	private $database = null;
-	private $userDAO = null;
+    private $dbServer = "127.0.0.1";
+    private $dbUser = "root";
+    private $dbPass = "";
+    private $dbName = "blog_admin_db";
+    
 
-	public function __construct()
-	{
-		$mysqli = new mysqli(DBA_SERVER, DBA_USER, DBA_PASS, DBA_NAME);
+    public function __construct()
+    {
+        $this->database = new Database(DB_ADMIN_SERVER, DB_ADMIN_USER, DB_ADMIN_PASS, DB_ADMIN_NAME);
 
-		if ($mysqli->connect_errno) {
-			echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-			die();
-		}
-		$this->database = new Database($mysqli);
+        $this->userDAO = new UserDAO();
+        $this->pageDAO = new PageDAO();
 
-		$this->userDAO = new UserDAO();
-		$this->userDAO->createTable($this->database->getMysqli());
-	}
+        $mysqli = $this->database->getMysqli();
 
-	public function getDatabaseAdmin()
-	{
-		return $this->database;
-	}
+        $this->userDAO->createTable($mysqli);
+        $this->pageDAO->createTable($mysqli);
 
-	public function setDatabaseAdmin($database)
-	{
-		$this->database = $database;
-	}
+        # Test create user
+        $this->userDAO->createUser("admin", "admin");
+    }
+
+    public function getDatabase()
+    {
+        return $this->database;
+    }
+
+    public function setDatabase($database)
+    {
+        $this->database = $database;
+    }
 }
