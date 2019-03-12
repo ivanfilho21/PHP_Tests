@@ -1,7 +1,7 @@
 <?php require "main.php"; ?>
 
 <!DOCTYPE html>
-<html lang="pt">
+<html>
 <head>
     <meta charset="utf-8">
     <title>PBlog</title>
@@ -13,7 +13,3 @@
     <a href="auth/login.php">Login Here</a>
 </body>
 </html>
-
-<?php
-	if (isset($_GET[""])) echo "ooo";
-?>
