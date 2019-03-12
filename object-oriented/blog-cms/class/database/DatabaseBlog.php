@@ -1,6 +1,7 @@
 <?php
 
-require "../class/database/dao/PostDAO.php";
+#require "../class/database/dao/PostDAO.php";
+require dirname(__FILE__) . "/dao/PostDAO.php";
 
 class DatabaseBlog
 {
@@ -8,23 +9,20 @@ class DatabaseBlog
 
     public function __construct()
     {
-        $this->mysqli = new mysqli(DB_BLOG_SERVER, DB_BLOG_USER, DB_BLOG_PASS, DB_BLOG_NAME);
+        $db = $this->connectToDatabase();
 
-        if ($this->mysqli->connect_errno) {
-            echo "Failed to connect to MySQL: (" . $this->mysqli->connect_errno . ") " . $this->mysqli->connect_error;
-            die();
-        }
-
-        $this->postDAO = new PostDAO();
+        $this->postDAO = new PostDAO($db);
     }
 
-    public function getDatabase()
+    private function connectToDatabase()
     {
-        return $this->database;
-    }
+        # Configuring database with PDO
 
-    public function setDatabase($database)
-    {
-        $this->database = $database;
+        $dsn = DB_TYPE . ":dbname=" . DB_ADMIN_NAME . ";host=" . DB_HOST;
+        $dbuser = DB_USER;
+        $dbpass = DB_PASS;
+        # echo "<br>".$dsn."<br>".$dbuser."<br>".$dbpass;
+
+        return DatabaseUtils::getDatabaseConnection($dsn, $dbuser, $dbpass);
     }
 }

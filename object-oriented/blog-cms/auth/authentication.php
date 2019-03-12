@@ -1,13 +1,38 @@
 <?php
 
-# Login
+#require "../class/User.php";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	# echo "ok";
+	# Authentication object
 	$auth = new Authentication($dbAdmin);
-	$auth->login(new User(0, "admin", "123"));
+
+	# Login
+	if (isset($_POST["login"])) {
+		$username = formatInput($_POST["username"]);
+		$password = formatInput($_POST["password"]);
+		$user = new User(0, $username, $password);
+
+		$auth->login($user, false);
+	}
+
+	# Register
+	if (isset($_POST["register"])) {
+		$username = formatInput($_POST["username"]);
+		$password = formatInput($_POST["password"]);
+
+		# todo
+	}
 }
 
-# Register
+function formatInput($data)
+{
+	$data = trim($data);
+	$data = stripslashes($data);
+	$data = htmlspecialchars($data);
+	return $data;
+}
+
+# Authentication class
 
 class Authentication
 {
@@ -18,22 +43,29 @@ class Authentication
 		$this->dbAdmin = $dbAdmin;
 	}
 
-	public function login($user)
+	public function login(User $user, bool $keepLogged)
 	{
-		$cols = array("username", "password");
-		$cols = DatabaseUtils::getTableFields($this->dbAdmin->getUserDAO(), false);
-		$this->dbAdmin->getUserDAO()->select($cols);
+		if ($this->checkLogin($user)) {
+			# Do login
+			echo "<br>User Logged.";
+		} else {
+			echo "<br>Wrong username or password.";
+		}
 	}
 
 	# Returns true if the user exists in the database, false otherwise.
 	private function checkLogin($user)
 	{
-		/*$sql = "SELECT * FROM {$usersTable} WHERE username = '{$name}' AND password = '{$pass}';";
-		
-		$res = mysqli_query($connection, $sql);
-		
-		if ($res == false) return null;
+		$tableName = $this->dbAdmin->getUserDAO()->getTableName();
+		$sql = "SELECT * FROM " . $tableName . " WHERE " . QT_A . "username" . QT_A . " = " . QT . $user->getUsername() . QT . " AND " . QT_A . "password" . QT_A . " = " . MD5 . "(" . QT . $user->getPassword() . QT . ")";
 
-		return mysqli_fetch_assoc($res);*/
+		echo $sql;
+
+		$res = $this->dbAdmin->getUserDAO()->query($sql);
+		echo "rows " . $res->rowCount();
+		if ($res->rowCount() == 1) {
+			return true;
+		}
+		return false;
 	}
 }

@@ -2,22 +2,23 @@
 
 class PageDAO extends DAO
 {
-    public function __construct()
+    public function __construct($db)
     {
+        parent::__construct($db);
         $this->tableName = "pages";
         $this->columns[] = new Column("id", INT, 11, false, "AUTO_INCREMENT", "PRIMARY KEY");
         $this->columns[] = new Column("title", VARCHAR, 11, false, "", "");
     }
 
     # Override
-    public function createTable($mysqli)
+    public function createTable()
     {
-        $this->createTableInDatabase($mysqli);
+        $this->createTableInDatabase();
     }
 
     # Override
-    public function dropTable($mysqli)
+    public function dropTable()
     {
-        $this->dropTableInDatabase($mysqli);
+        $this->dropTableInDatabase();
     }
 }

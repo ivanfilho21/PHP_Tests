@@ -12,6 +12,20 @@ define("QT", "'");
 
 class DatabaseUtils
 {
+    # Connects to database and returns the connection
+    public static function getDatabaseConnection($dsn, $dbuser, $dbpass)
+    {
+        $pdo = null;
+
+        try {
+            $pdo = new PDO($dsn, $dbuser, $dbpass);
+            # echo "Connected to Database via PDO<br>";
+        } catch(PDOException $e) {
+            echo "Warning: Failed connecting to database.<br><strong>Returned Error:</strong> " .$e->getMessage() . "<br>";
+        }
+        return $pdo;
+    }
+
     # Returns a string containing all column names
     # from a given array of class/Columns.php got from
     # a given DAO table.

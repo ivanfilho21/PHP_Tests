@@ -2,15 +2,19 @@
 
 class PostDAO extends DAO
 {
-    # Override
-    public function createTable($mysqli)
+    public function __construct($db)
     {
-        $this->createTableInDatabase($mysqli);
+        parent::__construct($db);
+    }
+    # Override
+    public function createTable()
+    {
+        $this->createTableInDatabase();
     }
     
     # Override
-    public function dropTable($mysqli)
+    public function dropTable()
     {
-        $this->dropTableInDatabase($mysqli);
+        $this->dropTableInDatabase();
     }
 }

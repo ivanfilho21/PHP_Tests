@@ -1,5 +1,6 @@
 <?php require "../main.php"; ?>
 <?php require "authentication.php"; ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,11 +10,11 @@
 	<meta name="viewport" content="width=display-width, initial-scale=1">
 </head>
 <body>
-	<form method="POST" action="">
+	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 		<fieldset>
 			<legend>Login to your Account</legend>
 
-			<input type="email" name="email">
+			<input type="text" name="username">
 			<input type="password" name="password">
 
 			<input type="submit" name="login" value="Login">

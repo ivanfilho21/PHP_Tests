@@ -1,38 +1,39 @@
 <?php
-require "../class/database/dao/UserDAO.php";
-require "../class/database/dao/PageDAO.php";
+#require "../class/database/dao/UserDAO.php";
+#require "../class/database/dao/PageDAO.php";
+require dirname(__FILE__) . "/dao/UserDAO.php";
+require dirname(__FILE__) . "/dao/PageDAO.php";
 
 class DatabaseAdmin
 {
-    private $mysqli;
+    private $userDAO;
+    private $pageDAO;
 
     public function __construct()
     {
-        $this->mysqli = new mysqli(DB_ADMIN_SERVER, DB_ADMIN_USER, DB_ADMIN_PASS, DB_ADMIN_NAME);
+        $db = $this->connectToDatabase();
 
-        if ($this->mysqli->connect_errno) {
-            echo "Failed to connect to MySQL: (" . $this->mysqli->connect_errno . ") " . $this->mysqli->connect_error;
-            die();
-        }
+        $this->userDAO = new UserDAO($db);
+        $this->pageDAO = new PageDAO($db);
 
-        $this->userDAO = new UserDAO();
-        $this->pageDAO = new PageDAO();
-
-        $this->userDAO->createTable($this->mysqli);
-        $this->pageDAO->createTable($this->mysqli);
+        # Create tables
+        $this->userDAO->createTable();
+        $this->pageDAO->createTable();
 
         # Test inserting new user to db
         # $this->userDAO->createUser($this->mysqli, "admin", "admin");
     }
 
-    public function getDatabase()
+    private function connectToDatabase()
     {
-        return $this->database;
-    }
+        # Configuring database with PDO
 
-    public function setDatabase($database)
-    {
-        $this->database = $database;
+        $dsn = DB_TYPE . ":dbname=" . DB_ADMIN_NAME . ";host=" . DB_HOST;
+        $dbuser = DB_USER;
+        $dbpass = DB_PASS;
+        # echo "<br>".$dsn."<br>".$dbuser."<br>".$dbpass;
+
+        return DatabaseUtils::getDatabaseConnection($dsn, $dbuser, $dbpass);
     }
 
     public function getUserDAO()

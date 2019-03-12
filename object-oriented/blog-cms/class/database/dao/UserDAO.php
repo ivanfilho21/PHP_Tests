@@ -1,52 +1,59 @@
 <?php
 
+require dirname(__FILE__) . "/../../../class/User.php";
+
 class UserDAO extends DAO
 {
-    public function __construct()
+    public function __construct($db)
     {
+        parent::__construct($db);
+
         $this->tableName = "users";
         $this->columns[] = new Column("id", INT, 11, false, "AUTO_INCREMENT", "PRIMARY KEY");
-        $this->columns[] = new Column("username", VARCHAR, 255, false, "", "");
-        $this->columns[] = new Column("password", VARCHAR, 255, false, "", "");
+        $this->columns[] = new Column("username", VARCHAR, 18, false, "", "");
+        $this->columns[] = new Column("password", VARCHAR, 32, false, "", "");
     }
 
     # Override
-    public function createTable($mysqli)
+    public function createTable()
     {
-        parent::createTableInDatabase($mysqli);
+        parent::createTableInDatabase();
     }
 
     # Override
-    public function dropTable($mysqli)
+    public function dropTable()
     {
-        parent::dropTableInDatabase($mysqli);
+        parent::dropTableInDatabase();
     }
 
     # CRUD
 
-    public function createUser($mysqli, $username, $password)
+    public function createUser($username, $password)
     {
         $values = "";
         $values .= QT . $username . QT . COMMA . MD5 . "(" . QT . $password . QT . ")";
 
-        parent::insert($mysqli, $values);
+        parent::insert($values);
     }
 
-    public function select($columnNames = "*", $where = "")
+    public function select($columns = "*", $whereColumns = "", $whereValues = "")
     {
-        $columns = "";
+        $whereClause = "";
+        if (! empty($whereColumns)) {
+            $whereClause .= "WHERE ";
 
-        if (is_array($columnNames)) {
-            foreach ($columnNames as $k => $name) {
-                $columns .= QT_A . $name . QT_A . COMMA;
+            foreach ($whereColumns as $k => $v) {
+                $whereClause .= QT_A . $v . QT_A . " = " . QT . $whereValues[$k] . QT;
             }
-            $columns = substr($columns, 0, strlen($columns) - strlen(COMMA));
-        } else {
-            $columns = $columnNames;
         }
-        echo $columns;
 
-        $sql = "SELECT " . $columns . " FROM " . QT_A . $this->tableName . QT_A . "";
+        $sql = "SELECT " . $columns . " FROM " . QT_A . $this->tableName . QT_A . $whereClause;
+        echo $sql;
 
+    }
+
+    public function query($sql)
+    {
+        return $this->db->query($sql);
     }
 }
