@@ -1,4 +1,5 @@
-<?php require "config/main.php"; ?>
+<?php # require "main.php"; ?>
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -9,7 +10,10 @@
 </head>
 <body>
     <h1>Simple Blog CMS</h1>
-
-    <button>Login</button>
+    <a href="auth/login.php">Login Here</a>
 </body>
 </html>
+
+<?php
+	if (isset($_GET[""])) echo "ooo";
+?>

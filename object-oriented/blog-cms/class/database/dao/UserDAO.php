@@ -31,4 +31,22 @@ class UserDAO extends DAO
 
         parent::insert($mysqli, $values);
     }
+
+    public function select($columnNames = "*", $where = "")
+    {
+        $columns = "";
+
+        if (is_array($columnNames)) {
+            foreach ($columnNames as $k => $name) {
+                $columns .= QT_A . $name . QT_A . COMMA;
+            }
+            $columns = substr($columns, 0, strlen($columns) - strlen(COMMA));
+        } else {
+            $columns = $columnNames;
+        }
+        echo $columns;
+
+        $sql = "SELECT " . $columns . " FROM " . QT_A . $this->tableName . QT_A . "";
+
+    }
 }

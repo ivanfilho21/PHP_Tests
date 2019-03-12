@@ -1,6 +1,6 @@
 <?php
-require "class/database/dao/UserDAO.php";
-require "class/database/dao/PageDAO.php";
+require "../class/database/dao/UserDAO.php";
+require "../class/database/dao/PageDAO.php";
 
 class DatabaseAdmin
 {
@@ -33,5 +33,10 @@ class DatabaseAdmin
     public function setDatabase($database)
     {
         $this->database = $database;
+    }
+
+    public function getUserDAO()
+    {
+        return $this->userDAO;
     }
 }

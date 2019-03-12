@@ -12,14 +12,25 @@ define("QT", "'");
 
 class DatabaseUtils
 {
+    # Returns a string containing all column names
+    # from a given array of class/Columns.php got from
+    # a given DAO table.
+    # The primary key column name is ignored when false
+    # Expects array of objects of class class/Column.php
+    public static function getTableFields(DAO $table, bool $includePK)
+    {
+        $columnArray = $table->getColumns();
+        return DatabaseUtils::getColumnNamesInline($columnArray, $includePK);
+    }
+
     # Returns all column names, but the primary key when false
-    # Expects object of class Column
-    public static function getTableFields($columns, $includePK)
+    # Expects array of objects of class class/Column.php
+    public static function getColumnNamesInline(array $columnArray, bool $includePK)
     {
         $fields = "";
 
-        foreach ($columns as $column) {
-        #for ($i = $start; $i < count($columns); $i++) {
+        foreach ($columnArray as $column) {
+        #for ($i = $start; $i < count($columnArray); $i++) {
             if ($column->getKey() == "PRIMARY KEY") continue;
 
             $fields .= QT_A . $column->getName() . QT_A . COMMA;
@@ -29,12 +40,13 @@ class DatabaseUtils
         return $fields;
     }
     
-    # Expects object of class Column
-    public static function getTableColumnsInline($columns)
+    # Returns a string containing all column information
+    # from a given array of class/Columns.php
+    public static function getColumnsInformationInline(array $columnArray)#getTableColumnsInline(array $columnArray)
     {
         $fields = "";
 
-        foreach ($columns as $column) {
+        foreach ($columnArray as $column) {
             $fields .= $column->getColumnInformation() . COMMA;
         }
         $fields = substr($fields, 0, strlen($fields) - strlen(COMMA));

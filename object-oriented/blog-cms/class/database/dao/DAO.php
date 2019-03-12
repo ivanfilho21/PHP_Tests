@@ -1,6 +1,6 @@
 <?php
 
-require "class/Column.php";
+require "../class/Column.php";
 
 abstract class DAO
 {
@@ -11,9 +11,17 @@ abstract class DAO
 
     public function __construct() { }
 
+    # Getters and Setters
+    public function getColumns()
+    {
+        return $this->columns;
+    }
+
+    # Other methods
+
     protected function createTableInDatabase($mysqli)
     {
-        $fields = DatabaseUtils::getTableColumnsInline($this->columns);
+        $fields = DatabaseUtils::getColumnsInformationInline($this->columns);
 
         $sql = "CREATE TABLE IF NOT EXISTS `" . $this->tableName . "` (" . $fields . ")";
         # echo $sql;
@@ -36,7 +44,7 @@ abstract class DAO
 
     protected function insert($mysqli, $values)
     {
-        $fields = DatabaseUtils::getTableFields($this->columns, false);
+        $fields = DatabaseUtils::getColumnNamesInline($this->columns, false);
         
         $sql = "INSERT INTO " . QT_A . $this->tableName . QT_A . " (" . $fields . ") VALUES (" . $values . ")";
         # echo $sql;

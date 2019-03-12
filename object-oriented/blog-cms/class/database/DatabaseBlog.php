@@ -1,6 +1,6 @@
 <?php
 
-require "class/database/dao/PostDAO.php";
+require "../class/database/dao/PostDAO.php";
 
 class DatabaseBlog
 {
