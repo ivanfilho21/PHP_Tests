@@ -1,6 +1,6 @@
 <?php
     # Root Path Constant
-    define("ROOT_PATH", "" . $_SERVER["DOCUMENT_ROOT"] . "/dev/php-tests/object-oriented/blog-cms");
+    define("ROOT_PATH", $_SERVER["DOCUMENT_ROOT"] . "/dev/php-tests/object-oriented/blog-cms");
 ?>
 <?php require ROOT_PATH . "/main.php"; ?>
 <!DOCTYPE html>

@@ -4,7 +4,6 @@
 }
 
 h1 {
-
 	color: dodgerblue;
 }
 
@@ -22,6 +21,9 @@ input[type=text],[type=password] {
 	border-bottom: 1px solid dodgerblue;
 	margin-top: 1em;
 	color: dodgerblue;
+	max-width: 90%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 input[type=submit] {
@@ -51,10 +53,9 @@ input::-ms-input-placeholder { /* Microsoft Edge */
   	font-weight: 700;
 }
 
-
 .options-link {
-	text-align: center;
 	margin-top: 1em;
+	margin-bottom: 1em;
 }
 
 #link-A, #link-B {
@@ -63,16 +64,14 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 	padding-top: 0.5em;
 }
 
-.clear-fix { clear: both; }
+/*.clear-fix { clear: both; }*/
 
 /* Breakpoints */
 
 @media (min-width: 320px) {
 	.login-holder {
-		padding: 1em;
 		text-align: center;
-		margin-top: 3em;
-		margin-bottom: 3em;
+		padding: 0 1em;
 	}
 
 	/* Form */
@@ -86,8 +85,7 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 
 	.options-link {
 		max-width: 80%;
-		margin-left: auto;
-		margin-right: auto;
+		margin: 1em auto;
 	}
 
 	#link-A, #link-B {
