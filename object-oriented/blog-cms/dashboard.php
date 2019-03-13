@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-    <?php include "template/header.php"; ?>
-    <h1>Welcome to your Dashboard</h1>
-    <?php include "template/footer.php"; ?>
-</body>
-</html>
+<?php $pageTitle = "Dashboard"; ?>
+<?php require "template/page-top.php"; ?>
+
+<!-- Main Content -->
+<h1>Simple Blog CMS - Dashboard</h1>
+<!-- End of Main -->
+
+<?php require "template/page-bottom.php"; ?>
