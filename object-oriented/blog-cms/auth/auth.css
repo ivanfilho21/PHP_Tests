@@ -1,0 +1,105 @@
+.login-holder {
+	padding: 0.5em;
+	text-align: center;
+}
+
+h1 {
+
+	color: dodgerblue;
+}
+
+/* Form */
+input {
+	display: block;
+	width: 100%;
+	font-size: 0.75em;
+	padding: 0.5em;
+}
+
+input[type=text],[type=password] {
+	outline: none;
+	border: none;
+	border-bottom: 1px solid dodgerblue;
+	margin-top: 1em;
+	color: dodgerblue;
+}
+
+input[type=submit] {
+	margin-top: 2em;
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+	border: none;
+	border-radius: 0.25em;
+	background: dodgerblue;
+	color: white;
+	cursor: pointer;
+}
+
+input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+	color: dodgerblue;
+	opacity: 1; /* Firefox */
+	font-weight: 700;
+}
+input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+	color: dodgerblue;
+	font-weight: 700;
+}
+
+input::-ms-input-placeholder { /* Microsoft Edge */
+  	color: dodgerblue;
+  	font-weight: 700;
+}
+
+
+.options-link {
+	text-align: center;
+	margin-top: 1em;
+}
+
+#link-A, #link-B {
+	display: block;
+	font-size: 0.85em;
+	padding-top: 0.5em;
+}
+
+.clear-fix { clear: both; }
+
+/* Breakpoints */
+
+@media (min-width: 320px) {
+	.login-holder {
+		padding: 1em;
+		text-align: center;
+		margin-top: 3em;
+		margin-bottom: 3em;
+	}
+
+	/* Form */
+	input {
+		font-size: 1em;
+	}
+
+	input[type=submit] {
+		
+	}
+
+	.options-link {
+		max-width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	#link-A, #link-B {
+		display: inline-block;
+		font-size: 0.85em;
+	}
+
+	#link-A {
+		float: left;
+	}
+
+	#link-B {
+		float: right;
+	}
+}
