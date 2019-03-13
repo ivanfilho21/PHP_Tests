@@ -1,4 +1,5 @@
 <?php $pageTitle = "Dashboard"; ?>
+<?php $pageDescription = ""; ?>
 <?php require "template/page-top.php"; ?>
 
 <!-- Main Content -->

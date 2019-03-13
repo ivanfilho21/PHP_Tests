@@ -1,6 +1,7 @@
 <!-- Must declare this for files that are not in root folder -->
 <?php $relPath = "../"; ?>
 <?php $pageTitle = "Login"; ?>
+<?php $pageDescription = ""; ?>
 <?php require "../template/page-top.php"; ?>
 <?php require "authentication.php"; ?>
 

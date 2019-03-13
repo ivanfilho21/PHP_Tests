@@ -7,7 +7,7 @@
 <html>
 <head>
     <title>Blog CMS - <?php echo $pageTitle; ?></title>
-    <meta name="description" content="Blog CMS allows users to easily create and manage their own blog;">
+    <meta name="description" content="<?php echo $pageDescription; ?>">
     <?php require ROOT_PATH . "/template/parts/head-content.php"; ?>
 </head>
 <body>

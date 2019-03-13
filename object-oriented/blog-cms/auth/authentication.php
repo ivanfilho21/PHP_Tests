@@ -1,6 +1,6 @@
 <?php
 
-require "../class/auth/Authentication.php";
+require ROOT_PATH . "/class/auth/Authentication.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	# Authentication object

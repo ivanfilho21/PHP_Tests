@@ -1,10 +1,5 @@
 <?php
-
-#require dirname(__FILE__) . "/../../class/Column.php";
-require dirname(__FILE__) . "/../../../class/Column.php";
-
-#list($scriptPath) = get_included_files();
-#echo 'The script being executed is ' . $scriptPath;
+require ROOT_PATH . "/class/Column.php";
 
 abstract class DAO
 {

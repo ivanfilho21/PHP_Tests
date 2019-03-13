@@ -1,6 +1,5 @@
 <?php
-
-require dirname(__FILE__) . "/../../../class/User.php";
+require ROOT_PATH . "/class/User.php";
 
 class UserDAO extends DAO
 {

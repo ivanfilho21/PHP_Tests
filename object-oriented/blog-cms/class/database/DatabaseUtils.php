@@ -1,5 +1,4 @@
 <?php
-
 # SQL Types
 define("INT", "INT");
 define("VARCHAR", "VARCHAR");

@@ -1,7 +1,5 @@
 <?php
-
-#require "../class/database/dao/PostDAO.php";
-require dirname(__FILE__) . "/dao/PostDAO.php";
+require ROOT_PATH . "/class/database/dao/PostDAO.php";
 
 class DatabaseBlog
 {

@@ -1,8 +1,6 @@
 <?php
-#require "../class/database/dao/UserDAO.php";
-#require "../class/database/dao/PageDAO.php";
-require dirname(__FILE__) . "/dao/UserDAO.php";
-require dirname(__FILE__) . "/dao/PageDAO.php";
+require ROOT_PATH . "/class/database/dao/UserDAO.php";
+require ROOT_PATH . "/class/database/dao/PageDAO.php";
 
 class DatabaseAdmin
 {
