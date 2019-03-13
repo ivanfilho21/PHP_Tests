@@ -8,21 +8,24 @@
 <?php require "authentication.php"; ?>
 
 <!-- Main Content -->
-<section class="login-holder">
-    <h1>Login</h1>
+<main class="main-content">
+    <section class="login-holder">
+        <h1>Login</h1>
 
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-        <input type="text" name="username" placeholder="Nome de Usuário">
-        <input type="password" name="password" placeholder="Senha">
-        <input type="submit" name="login" value="Entrar">
-    </form>
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+            <input type="text" name="username" placeholder="Nome de Usuário">
+            <input type="password" name="password" placeholder="Senha">
+            <input type="submit" name="login" value="Entrar">
+        </form>
 
-    <div class="options-link">
-        <a id="link-A" href="#">Criar Conta</a>
-        <a id="link-B" href="#">Esqueci a Senha</a>
-        <div class="clear-fix"></div>
-    </div>
-</section>
+        <div class="options-link">
+            <a id="link-A" href="#">Criar Conta</a>
+            <a id="link-B" href="#">Esqueci a Senha</a>
+            <div class="clear-fix"></div>
+        </div>
+        
+    </section>
+</main>
 
 <!-- End of Main -->
 

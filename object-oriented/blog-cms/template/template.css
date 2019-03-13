@@ -113,6 +113,8 @@ h5 {
     padding-top: 1em;
 }
 
+.clear-fix { clear: both; }
+
 @media (min-width: 320px) {
     /* Header */
     .top-navigation li {
@@ -124,6 +126,10 @@ h5 {
 
 @media (min-width: 560px) {
     /* Header */
+    .header-container {
+        max-width: 90%;
+        margin: auto;
+    }
     .logo {
         float: left;
         margin: 0 0.75em;
@@ -135,5 +141,4 @@ h5 {
     .top-navigation li {
         margin-top: 0.5em;
     }
-    .clear-fix { clear: both; }
 }

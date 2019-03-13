@@ -1,6 +1,7 @@
 .login-holder {
 	padding: 0.5em;
 	text-align: center;
+	background: lavender;
 }
 
 h1 {
@@ -13,6 +14,8 @@ input {
 	width: 100%;
 	font-size: 0.75em;
 	padding: 0.5em;
+	transition: 200ms ease-out;
+	/*background: none;*/
 }
 
 input[type=text],[type=password] {
@@ -41,16 +44,26 @@ input[type=submit] {
 input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
 	color: dodgerblue;
 	opacity: 1; /* Firefox */
-	font-weight: 700;
+	/*font-weight: 700;*/
 }
 input:-ms-input-placeholder { /* Internet Explorer 10-11 */
 	color: dodgerblue;
-	font-weight: 700;
+	/*font-weight: 700;*/
 }
 
 input::-ms-input-placeholder { /* Microsoft Edge */
   	color: dodgerblue;
-  	font-weight: 700;
+  	/*font-weight: 700;*/
+}
+
+input[type=text]:focus,
+input[type=text]:hover,
+input[type=password]:focus,
+input[type=password]:hover {
+	box-shadow: 0 0 6px rgba(35, 173, 278, 1);
+}
+input[type=submit]:hover {
+	box-shadow: 0 0 12px dodgerblue;
 }
 
 .options-link {
@@ -85,7 +98,8 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 
 	.options-link {
 		max-width: 80%;
-		margin: 1em auto;
+		margin: 0 auto;
+		padding: 1em 0;
 	}
 
 	#link-A, #link-B {
@@ -99,5 +113,41 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 
 	#link-B {
 		float: right;
+	}
+}
+
+@media (min-width: 560px) {
+	.main-content {
+		background: gray;
+		/*background: linear-gradient(to bottom right, #5f2c82, #0ABFBC);*/
+		background: linear-gradient(to bottom right, #283048, #0ABFBC);
+		padding-top: 3em; 
+		padding-bottom: 3em;
+	}
+	.login-holder {
+		max-width: 80%;
+		margin: auto;
+		/*background: rgba(255,255,255, 0.55);*/
+		box-shadow: 0.15rem 0.35rem 10px #333;
+	}
+}
+
+@media (min-width: 700px) {
+	.main-content {
+		padding-top: 4em; 
+		padding-bottom: 4em;
+	}
+	.login-holder {
+		max-width: 65%;
+	}
+}
+
+@media (min-width: 920px) {
+	.main-content {
+		padding-top: 5em; 
+		padding-bottom: 5em;
+	}
+	.login-holder {
+		max-width: 40%;
 	}
 }
