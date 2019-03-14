@@ -2,7 +2,7 @@
 
 class Util
 {
-    private static $errorMsgs = array();
+    public static $errorMsgs = array();
 
     public static function formatHTMLInput($data)
     {

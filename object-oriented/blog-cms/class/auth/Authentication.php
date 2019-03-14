@@ -2,57 +2,58 @@
 
 class Authentication
 {
-	private $dbAdmin;
+    private $dbAdmin;
 
-	public function __construct($dbAdmin)
-	{
-		$this->dbAdmin = $dbAdmin;
-	}
+    public function __construct($dbAdmin)
+    {
+        $this->dbAdmin = $dbAdmin;
+    }
 
-	public function login($username, $password, bool $keepLogged)
-	{
-		if ($this->checkLogin(new User(0, $username, $password))) {
-			session_start();
+    # Static method
+    public function getLoggedUser()
+    {
+        session_start();
+        
+        if (isset($_SESSION["user-session"])) {
+            $name = $_SESSION["user-session"]["username"];
+            $pass = $_SESSION["user-session"]["password"];
+            $user = new User(0, $name, $pass);
 
-			$_SESSION["user-session"]["username"] = $username;
-			$_SESSION["user-session"]["password"] = $password;
+            return $user;
+        }
+        return null;
+    }
+    
 
-			return true;
+    public function login($username, $password, bool $keepLogged)
+    {
+        if ($this->checkLoginInDatabase(new User(0, $username, $password))) {
+            session_start();
 
-			# Do login
-			# echo "<br>User Logged.";
-		} else {
-			# echo "<br>Wrong username or password.";
-			return false;
-		}
-	}
+            $_SESSION["user-session"]["username"] = $username;
+            $_SESSION["user-session"]["password"] = $password;
 
-	public function getLoggedUser()
-	{
-		if (isset($_SESSION["user-session"])) {
-			$name = $_SESSION["user-session"]["username"];
-			$pass = $_SESSION["user-session"]["password"];
-			$user = new User(0, $name, $pass);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-			return $user;
-		}
-		return null;
-	}
+    # Returns true if the user exists in the database, false otherwise.
+    
+    private function checkLoginInDatabase($user)
+    {
+        $tableName = $this->dbAdmin->getUserDAO()->getTableName();
+        $sql = "SELECT * FROM " . $tableName . " WHERE " . QT_A . "username" . QT_A . " = " . QT . $user->getUsername() . QT . " AND " . QT_A . "password" . QT_A . " = " . MD5 . "(" . QT . $user->getPassword() . QT . ")";
 
-	# Returns true if the user exists in the database, false otherwise.
-	private function checkLogin($user)
-	{
-		$tableName = $this->dbAdmin->getUserDAO()->getTableName();
-		$sql = "SELECT * FROM " . $tableName . " WHERE " . QT_A . "username" . QT_A . " = " . QT . $user->getUsername() . QT . " AND " . QT_A . "password" . QT_A . " = " . MD5 . "(" . QT . $user->getPassword() . QT . ")";
+        # echo $sql;
 
-		# echo $sql;
-
-		$res = $this->dbAdmin->getUserDAO()->query($sql);
-		# echo "<br>rows " . $res->rowCount();
-		
-		if ($res->rowCount() == 1) {
-			return true;
-		}
-		return false;
-	}
+        $res = $this->dbAdmin->getUserDAO()->query($sql);
+        # echo "<br>rows " . $res->rowCount();
+        
+        if ($res->rowCount() == 1) {
+            return true;
+        }
+        return false;
+    }
 }
