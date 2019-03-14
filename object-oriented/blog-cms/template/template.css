@@ -21,7 +21,8 @@ a {
     color: dodgerblue;
 }
 a:hover {
-    color: lightseagreen;
+    text-decoration: underline;
+    /*color: lightseagreen;*/
 }
 
 h1 {

@@ -14,46 +14,36 @@ input {
 	width: 100%;
 	font-size: 0.75em;
 	padding: 0.5em;
-	transition: 200ms ease-out;
-	/*background: none;*/
+	
+	/* box-shadow transition */
+	-webkit-transition: box-shadow 300ms ease-in-out;
+	   -moz-transition: box-shadow 300ms ease-in-out;
+	    -ms-transition: box-shadow 300ms ease-in-out;
+	     -o-transition: box-shadow 300ms ease-in-out;
+	        transition: box-shadow 300ms ease-in-out;
 }
 
 input[type=text],[type=password] {
-	outline: none;
-	border: none;
-	border-bottom: 1px solid dodgerblue;
-	margin-top: 1em;
-	color: dodgerblue;
 	max-width: 90%;
+	margin-bottom: 1em;
 	margin-left: auto;
 	margin-right: auto;
+	outline: none;
+	border: none;
+	border-bottom: 1px solid lightgray;
 }
 
 input[type=submit] {
-	margin-top: 2em;
+	margin-top: 1em;
 	margin-left: auto;
 	margin-right: auto;
 	width: 80%;
 	border: none;
 	border-radius: 0.25em;
+	border-bottom: 1px solid lightgray;
 	background: dodgerblue;
 	color: white;
 	cursor: pointer;
-}
-
-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-	color: dodgerblue;
-	opacity: 1; /* Firefox */
-	/*font-weight: 700;*/
-}
-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
-	color: dodgerblue;
-	/*font-weight: 700;*/
-}
-
-input::-ms-input-placeholder { /* Microsoft Edge */
-  	color: dodgerblue;
-  	/*font-weight: 700;*/
 }
 
 input[type=text]:focus,
@@ -75,6 +65,10 @@ input[type=submit]:hover {
 	display: block;
 	font-size: 0.85em;
 	padding-top: 0.5em;
+}
+
+.error-msg {
+	color: indianred;
 }
 
 /*.clear-fix { clear: both; }*/
