@@ -23,7 +23,6 @@ class Authentication
         }
         return null;
     }
-    
 
     public function login($username, $password, bool $keepLogged)
     {
@@ -37,6 +36,12 @@ class Authentication
         } else {
             return false;
         }
+    }
+
+    public function logout()
+    {
+        session_start();
+        $_SESSION["user-session"]["username"] = null;
     }
 
     # Returns true if the user exists in the database, false otherwise.

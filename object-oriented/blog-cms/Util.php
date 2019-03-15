@@ -24,4 +24,10 @@ class Util
         global $errorMsgs;
         echo (isset($errorMsgs[$index])) ? $errorMsgs[$index] : "";
     }
+
+    public static function checkUserSession()
+    {
+        return Authentication::getLoggedUser() != null;
+    }
+
 }

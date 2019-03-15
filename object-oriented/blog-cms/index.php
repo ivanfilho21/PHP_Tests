@@ -1,8 +1,9 @@
 <?php $pageTitle = "Home Page"; ?>
 <?php $pageDescription = "Blog CMS allows users to easily create and manage their own blog."; ?>
 <?php $additionalStyles = array(); ?>
+<?php $relPath = ""; ?>
 <?php require "template/page-top.php"; ?>
-<?php require "class/auth/Authentication.php"; ?>
+<?php #require "class/auth/Authentication.php"; ?>
 
 <!-- Main Content -->
 

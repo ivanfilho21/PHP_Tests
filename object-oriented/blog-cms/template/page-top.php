@@ -14,4 +14,5 @@
     <?php endforeach; ?>
 </head>
 <body>
-<?php include ROOT_PATH . "/template/parts/header.php"; ?>
+	<?php include ROOT_PATH . "/auth/logout.php"; ?>
+	<?php include ROOT_PATH . "/template/parts/header.php"; ?>
