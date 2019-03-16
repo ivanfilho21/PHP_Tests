@@ -9,8 +9,6 @@
 <p>
 	<?php echo ($user != null) ? "Welcome, " . $user->getUsername() . "." : ""; ?>
 </p>
-
-<a href="auth/login.php">Login Here</a>
 <!-- End of Main -->
 
 <?php require "template/page-bottom.php"; ?>

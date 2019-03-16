@@ -12,7 +12,7 @@
                 <?php if ($user != null) : ?>
                     <li><a href="?logout">Sign Out</a></li>
                 <?php else : ?>
-                    <li><a href="<?php echo $relPath; ?>auth/login.php">Login</a></li>
+                    <li><a href="<?php echo $relPath; ?>auth/authentication.php">Login</a></li>
                 <?php endif; ?>
             </ul>
         </nav>
