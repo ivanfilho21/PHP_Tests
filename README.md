@@ -7,6 +7,7 @@ PHP scripts with HTML5 and CSS3.
 ## What I learned:
 * PHP basic commands and concepts.
 * Object-Oriented Programming in PHP.
+* Basics of Responsive Layout.
 * Good practices on Web Development.
 
 ## Live Projects
