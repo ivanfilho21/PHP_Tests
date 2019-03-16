@@ -29,9 +29,7 @@ input {
 
 input[type=text],[type=password] {
 	/*max-width: 90%;*/
-	margin-bottom: 1em;
-	margin-left: auto;
-	margin-right: auto;
+	margin: 0.5em auto;
 	outline: none;
 	border: none;
 	border-bottom: 1px solid lightgray;
@@ -40,11 +38,11 @@ input[type=text],[type=password] {
 input[type=checkbox] {
 	display: inline-block;
 	width: auto;
-	margin: 0 0.5em 0 0;
+	margin: 0 0.5em 1em 0;
 }
 
 input[type=submit] {
-	margin-top: 1em;
+	margin-top: 1.5em;
 	margin-left: auto;
 	margin-right: auto;
 	width: 80%;
@@ -79,10 +77,16 @@ input[type=submit]:hover {
 }
 
 .error-msg {
+	/*display: inline-block;
+	width: 100%;
+	margin: 1em 0;
+	text-align: center;*/
 	color: indianred;
 }
 
-/*.clear-fix { clear: both; }*/
+#error-auth {
+	text-align: center;
+}
 
 /* Breakpoints */
 

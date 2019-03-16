@@ -23,58 +23,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             die();
         } else {
             $util->setErrorMessage("login", "Nome ou Senha incorretos.");
-            # test
-            # echo "<br>Error: " . Util::showError("login");
-            # die();
         }
     }
 
     # Register
     if (isset($_POST["register"])) {
-
-        # Validation of all fields
+        $username = $util->formatHTMLInput($_POST["username"]);
+        $password = $util->formatHTMLInput($_POST["password"]);
+        $passRetype = $util->formatHTMLInput($_POST["password-retype"]);
 
         if (validateFields()) {
-            # todo
+            if ($auth->register($username, $password)) {
+                header("Location: login.php");
+                die();
+            }
+            else {
+                $util->setErrorMessage("register-username", "Este nome de usuário já existe.");
+                $res = false;
+            }
         }
-        else {
-            #$referer = $_SERVER['HTTP_REFERER'];
-            #header("Location: " . $referer);
-            #die();
-        }
-
-        #header('location: ' . $_SERVER['PHP_SELF'], true, 307);
-        #exit();
     }
 }
 
 function validateFields()
 {
-    global $util;
+    global $util, $username, $password, $passRetype;
 
     $res = true;
-    $username = $util->formatHTMLInput($_POST["username"]);
-    $password = $util->formatHTMLInput($_POST["password"]);
-    $passRetype = $util->formatHTMLInput($_POST["password-retype"]);
 
     /*if (empty($username)) {
         $util->setErrorMessage("register", "Preencha o nome de usuário.");
         $res = false;
     } else {
-        
     }*/
     if (strlen($username) > 30) {
-        $util->setErrorMessage("register", "(" . strlen($username) . ") " . "Nome de usuário deve conter no máximo 30 caracteres.");
+        $util->setErrorMessage("register-username", "(" . strlen($username) . ") " . "Nome de usuário deve conter no máximo 30 caracteres.");
         $res = false;
     }
 
     if (strlen($password) < 8) {
-        $util->setErrorMessage("register", "A senha deve conter no mínimo 8 caracteres.");
+        $util->setErrorMessage("register-pass1", "A senha deve conter no mínimo 8 caracteres.");
         $res = false;
     }
     else if (strlen($password) > 32) {
-        $util->setErrorMessage("register", "A senha deve conter no máximo 32 caracteres.");
+        $util->setErrorMessage("register-pass1", "A senha deve conter no máximo 32 caracteres.");
         $res = false;
+    }
+    else {
+        if ($password === $passRetype) {
+            #
+        }
+        else {
+            $util->setErrorMessage("register-pass2", "As senhas digitadas não são iguais.");
+            $res = false;
+        }
     }
 
     return $res;

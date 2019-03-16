@@ -9,6 +9,17 @@ class Authentication
         $this->dbAdmin = $dbAdmin;
     }
 
+    public function register($username, $password) {
+        # Check if user is already registered
+        if ($this->checkUsernameInDatabase($username) == false) {
+            $this->dbAdmin->getUserDAO()->createUser($username, $password);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     public function login($username, $password, bool $keepLogged)
     {
         if ($this->checkLoginInDatabase(new User(0, $username, $password))) {
@@ -49,6 +60,22 @@ class Authentication
     }
 
     # Private Methods
+
+    private function checkUsernameInDatabase($username)
+    {
+        $tableName = $this->dbAdmin->getUserDAO()->getTableName();
+        $sql = "SELECT * FROM " . $tableName . " WHERE " . QT_A . "username" . QT_A . " = " . QT . $username . QT;
+
+        # echo $sql;
+
+        $res = $this->dbAdmin->getUserDAO()->query($sql);
+        # echo "<br>rows " . $res->rowCount();
+        
+        if ($res->rowCount() == 1) {
+            return true;
+        }
+        return false;
+    }
 
     # Returns true if the user exists in the database, false otherwise.
     private function checkLoginInDatabase($user)

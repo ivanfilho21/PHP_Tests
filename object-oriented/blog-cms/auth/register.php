@@ -14,10 +14,18 @@
 
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <input type="text" required name="username" placeholder="Nome do Usuário" value="<?php echo (isset($_POST['username'])) ? $_POST['username'] : ''; ?>">
+
+            <span class="error-msg"><?php Util::showError("register-username"); ?></span>
+
             <input type="password" name="password" placeholder="Senha">
+
+            <span class="error-msg"><?php Util::showError("register-pass1"); ?></span>
+
             <input type="password" name="password-retype" placeholder="Repita a Senha">
 
-            <span class="error-msg"><?php Util::showError("register"); ?></span>
+            <div class="error-msg" id="error-auth">
+                <p><?php Util::showError("register-pass2"); ?></p>
+            </div>
 
             <input type="submit" name="register" value="Criar Conta">
         </form>

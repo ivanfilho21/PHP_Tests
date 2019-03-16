@@ -14,13 +14,17 @@
 
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <input type="text" name="username" placeholder="Nome do Usuário" value="<?php echo (isset($_POST['username'])) ? $_POST['username'] : ''; ?>">
+            
             <input type="password" name="password" placeholder="Senha">
 
             <label>
                 <input type="checkbox" name="keep-logged">Manter-me Conectado<br>
             </label>
 
-            <span class="error-msg"><?php Util::showError("login"); ?></span>
+            <div class="error-msg" id="error-auth">
+                <p><?php Util::showError("login"); ?></p>
+            </div>
+            
             <input type="submit" name="login" value="Entrar">
         </form>
 
