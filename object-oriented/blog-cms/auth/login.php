@@ -5,7 +5,7 @@
 <?php $additionalStyles = array(); ?>
 <?php $additionalStyles[] = "auth"; ?>
 <?php require "../template/page-top.php"; ?>
-<?php require "authentication.php"; ?>
+<?php require "scripts/authentication.php"; ?>
 
 <!-- Main Content -->
 <main class="main-content">
@@ -28,7 +28,6 @@
         
     </section>
 </main>
-
 <!-- End of Main -->
 
 <?php require "../template/page-bottom.php"; ?>

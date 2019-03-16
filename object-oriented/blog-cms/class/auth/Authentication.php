@@ -9,25 +9,10 @@ class Authentication
         $this->dbAdmin = $dbAdmin;
     }
 
-    # Static method
-    public function getLoggedUser()
-    {
-        session_start();
-        
-        if (isset($_SESSION["user-session"])) {
-            $name = $_SESSION["user-session"]["username"];
-            $pass = $_SESSION["user-session"]["password"];
-            $user = new User(0, $name, $pass);
-
-            return $user;
-        }
-        return null;
-    }
-
     public function login($username, $password, bool $keepLogged)
     {
         if ($this->checkLoginInDatabase(new User(0, $username, $password))) {
-            session_start();
+            $this->sessionStart();
 
             $_SESSION["user-session"]["username"] = $username;
             $_SESSION["user-session"]["password"] = $password;
@@ -44,8 +29,28 @@ class Authentication
         $_SESSION["user-session"]["username"] = null;
     }
 
+    public function checkUserSession()
+    {
+        return $this->getLoggedUser() != null;
+    }
+
+    public function getLoggedUser()
+    {
+        $this->sessionStart();
+        
+        if (isset($_SESSION["user-session"])) {
+            $name = $_SESSION["user-session"]["username"];
+            $pass = $_SESSION["user-session"]["password"];
+            $user = new User(0, $name, $pass);
+
+            return $user;
+        }
+        return null;
+    }
+
+    # Private Methods
+
     # Returns true if the user exists in the database, false otherwise.
-    
     private function checkLoginInDatabase($user)
     {
         $tableName = $this->dbAdmin->getUserDAO()->getTableName();
@@ -57,6 +62,15 @@ class Authentication
         # echo "<br>rows " . $res->rowCount();
         
         if ($res->rowCount() == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    private function sessionStart()
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
             return true;
         }
         return false;

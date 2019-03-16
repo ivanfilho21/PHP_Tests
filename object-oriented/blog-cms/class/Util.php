@@ -2,9 +2,14 @@
 
 class Util
 {
-    public static $errorMsgs = array();
+    public $errorMsgs = array();
 
-    public static function formatHTMLInput($data)
+    public function __construct()
+    {
+        #
+    }
+
+    public function formatHTMLInput($data)
     {
         $data = trim($data);
         $data = stripslashes($data);
@@ -13,21 +18,16 @@ class Util
         return $data;
     }
 
-    public static function setErrorMessage(string $index, string $msg)
+    public function setErrorMessage(string $index, string $msg)
     {
         global $errorMsgs;
         $errorMsgs[$index] = $msg;
     }
 
-    public static function showError(string $index)
+    public function showError(string $index)
     {
         global $errorMsgs;
         echo (isset($errorMsgs[$index])) ? $errorMsgs[$index] : "";
-    }
-
-    public static function checkUserSession()
-    {
-        return Authentication::getLoggedUser() != null;
     }
 
 }

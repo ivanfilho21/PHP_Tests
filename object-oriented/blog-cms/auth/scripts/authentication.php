@@ -1,17 +1,13 @@
 <?php
-require ROOT_PATH . "/class/auth/Authentication.php";
-require ROOT_PATH . "/Util.php";
 
 # Check if user is already logged.
-if (Util::checkUserSession()) {
+if ($user != null) {
     header("Location: " . $relPath . "index.php");
     exit();
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    # Authentication object
-    $auth = new Authentication($dbAdmin);
-
+    
     # Login
     if (isset($_POST["login"])) {
         $username = Util::formatHTMLInput($_POST["username"]);

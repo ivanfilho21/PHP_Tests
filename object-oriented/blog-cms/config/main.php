@@ -1,5 +1,5 @@
 <?php
-require ROOT_PATH . "/config/config.php";
+# require ROOT_PATH . "/config/config.php";
 require ROOT_PATH . "/class/database/dao/DAO.php";
 require ROOT_PATH . "/class/database/DatabaseAdmin.php";
 require ROOT_PATH . "/class/database/DatabaseBlog.php";

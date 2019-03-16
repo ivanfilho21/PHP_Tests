@@ -1,3 +1,4 @@
+<?php $relPath = ""; ?>
 <?php $pageTitle = "Dashboard"; ?>
 <?php $pageDescription = ""; ?>
 <?php require "template/page-top.php"; ?>

@@ -1,6 +1,3 @@
-<?php require ROOT_PATH . "/class/auth/Authentication.php"; ?>
-<?php require ROOT_PATH . "/Util.php"; ?>
-
 <header class="header">
     <div class="header-container">
         <!-- Logo -->
@@ -12,8 +9,10 @@
                 <li><a href="#">Link 1</a></li>
                 <li><a href="#">Link 2</a></li>
                 <li><a href="#">Link 3</a></li>
-                <?php if (Util::checkUserSession()) : ?>
+                <?php if ($user != null) : ?>
                     <li><a href="?logout">Sign Out</a></li>
+                <?php else : ?>
+                    <li><a href="<?php echo $relPath; ?>auth/login.php">Login</a></li>
                 <?php endif; ?>
             </ul>
         </nav>
