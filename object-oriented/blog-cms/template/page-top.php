@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Blog CMS - <?php echo $pageTitle; ?></title>
+    <title><?php echo $pageTitle; ?> - Blog CMS</title>
     <meta name="description" content="<?php echo $pageDescription; ?>">
     <?php require ROOT_PATH . "/template/parts/head-content.php"; ?>
     <?php if (isset($additionalStyles)) : ?>

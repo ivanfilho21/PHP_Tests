@@ -1,14 +1,18 @@
 .login-holder {
 	padding: 0.5em;
-	text-align: center;
 	background: lavender;
 }
 
 h1 {
 	color: dodgerblue;
+	text-align: center;
 }
 
 /* Form */
+label {
+	font-size: 0.75em;
+}
+
 input {
 	display: block;
 	width: 100%;
@@ -24,13 +28,19 @@ input {
 }
 
 input[type=text],[type=password] {
-	max-width: 90%;
+	/*max-width: 90%;*/
 	margin-bottom: 1em;
 	margin-left: auto;
 	margin-right: auto;
 	outline: none;
 	border: none;
 	border-bottom: 1px solid lightgray;
+}
+
+input[type=checkbox] {
+	display: inline-block;
+	width: auto;
+	margin: 0 0.5em 0 0;
 }
 
 input[type=submit] {
@@ -59,6 +69,7 @@ input[type=submit]:hover {
 .options-link {
 	margin-top: 1em;
 	margin-bottom: 1em;
+	text-align: center;
 }
 
 #link-A, #link-B {
@@ -77,11 +88,14 @@ input[type=submit]:hover {
 
 @media (min-width: 320px) {
 	.login-holder {
-		text-align: center;
-		padding: 0 1em;
+		padding: 0 2em;
 	}
 
 	/* Form */
+	label {
+		font-size: 1em;
+	}
+
 	input {
 		font-size: 1em;
 	}

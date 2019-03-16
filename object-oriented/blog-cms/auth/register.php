@@ -1,6 +1,6 @@
 <!-- Must declare this for files that are not in root folder -->
 <?php $relPath = "../"; ?>
-<?php $pageTitle = "Login"; ?>
+<?php $pageTitle = "Registre-se"; ?>
 <?php $pageDescription = ""; ?>
 <?php $additionalStyles = array(); ?>
 <?php $additionalStyles[] = "auth"; ?>
@@ -10,18 +10,20 @@
 <!-- Main Content -->
 <main class="main-content">
     <section class="login-holder">
-        <h1>Login</h1>
+        <h1>Registre-se</h1>
 
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-            <input type="text" name="username" placeholder="Nome de Usuário" value="<?php echo (isset($_POST['username'])) ? $_POST['username'] : ''; ?>">
+            <input type="text" required name="username" placeholder="Nome do Usuário" value="<?php echo (isset($_POST['username'])) ? $_POST['username'] : ''; ?>">
             <input type="password" name="password" placeholder="Senha">
+            <input type="password" name="password-retype" placeholder="Repita a Senha">
 
-            <span class="error-msg"><?php Util::showError("login"); ?></span>
-            <input type="submit" name="login" value="Entrar">
+            <span class="error-msg"><?php Util::showError("register"); ?></span>
+
+            <input type="submit" name="register" value="Criar Conta">
         </form>
 
         <div class="options-link">
-            <a id="link-A" href="#">Criar Conta</a>
+            <a id="link-A" href="#">Login</a>
             <a id="link-B" href="#">Esqueci a Senha</a>
             <div class="clear-fix"></div>
         </div>

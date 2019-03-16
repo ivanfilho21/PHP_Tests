@@ -1,17 +1,9 @@
 <?php
-$registerMode = false;
 
 # Check if user is already logged.
 if ($user != null) {
     header("Location: " . $relPath . "index.php");
     exit();
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    if (isset($_GET["register"])) {
-        $registerMode = true;
-        $path;
-    }
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -46,10 +38,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             # todo
         }
         else {
-            $referer = $_SERVER['HTTP_REFERER'];
-            header("Location: $referer");
-            die();
+            #$referer = $_SERVER['HTTP_REFERER'];
+            #header("Location: " . $referer);
+            #die();
         }
+
+        #header('location: ' . $_SERVER['PHP_SELF'], true, 307);
+        #exit();
     }
 }
 
@@ -60,16 +55,26 @@ function validateFields()
     $res = true;
     $username = $util->formatHTMLInput($_POST["username"]);
     $password = $util->formatHTMLInput($_POST["password"]);
-    $passRetype = $util->formatHTMLInput($_POST["retype-password"]);
+    $passRetype = $util->formatHTMLInput($_POST["password-retype"]);
 
-    if (empty($username)) {
+    /*if (empty($username)) {
         $util->setErrorMessage("register", "Preencha o nome de usuário.");
         $res = false;
     } else {
-        if (strlen($username) > 30) {
-            $util->setErrorMessage("register", "(" . strlen($username) . ") " . "Nome de usuário deve conter no máximo 30 caracteres.");
-            $res = false;
-        }
+        
+    }*/
+    if (strlen($username) > 30) {
+        $util->setErrorMessage("register", "(" . strlen($username) . ") " . "Nome de usuário deve conter no máximo 30 caracteres.");
+        $res = false;
+    }
+
+    if (strlen($password) < 8) {
+        $util->setErrorMessage("register", "A senha deve conter no mínimo 8 caracteres.");
+        $res = false;
+    }
+    else if (strlen($password) > 32) {
+        $util->setErrorMessage("register", "A senha deve conter no máximo 32 caracteres.");
+        $res = false;
     }
 
     return $res;
