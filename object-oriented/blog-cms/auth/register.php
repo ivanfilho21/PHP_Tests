@@ -10,9 +10,15 @@
 <!-- Main Content -->
 <main class="main-content">
     <section class="login-holder">
-        <h1>Registre-se</h1>
+        <h1>
+            <?php echo ($registerFinished) ? "Usuário criado" : "Registre-se"; ?>
+        </h1>
 
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+        <span>
+            <?php echo ($registerFinished) ? "Você será redirecionado em breve..." : ""; ?>
+        </span>
+
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" <?php echo ($registerFinished) ? "style='display: none;'" : ""; ?>>
             <input type="text" required name="username" placeholder="Nome do Usuário" value="<?php echo (isset($_POST['username'])) ? $_POST['username'] : ''; ?>">
 
             <span class="error-msg"><?php Util::showError("register-username"); ?></span>

@@ -1,4 +1,5 @@
 <?php
+$registerFinished = false;
 
 # Check if user is already logged.
 if ($user != null) {
@@ -35,8 +36,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (validateFields()) {
             if ($auth->register($username, $password)) {
-                header("Location: login.php");
-                die();
+                $registerFinished = true;
+                header("refresh: 5; url=login.php");
+
+                #header("Location: login.php");
+                #die();
             }
             else {
                 $util->setErrorMessage("register-username", "Este nome de usuário já existe.");
