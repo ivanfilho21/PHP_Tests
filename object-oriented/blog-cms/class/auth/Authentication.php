@@ -34,11 +34,11 @@ class Authentication
 
             if ($keepLogged) {
                 # TODO: encrypt userInfo to put in a cookie
-                $userInfo = "{$email};{$password}";
-
-                #setrawcookie("user-session", "{'" . $email . "':'" . $password . "'}", time() + (86400 * 30), "/");
                 
-                setrawcookie("user-session", $email . ":" . $password . "", time() + (86400 * 30), "/");
+                $email = $this->encode($email);
+                $password = $this->encode($password);
+
+                setrawcookie("user-session", $email . md5(":") . $password . "", time() + (86400 * 30), "/");
             }
 
             return true;
@@ -69,18 +69,18 @@ class Authentication
         }
         else if (isset($_COOKIE["user-session"])) {
             $cookie = $_COOKIE["user-session"];
-            #echo $cookie;
+            #echo $cookie; die();
 
-            $userInfo = explode(":", $cookie);
+            $userInfo = explode(md5(":"), $cookie);
 
-            #$email = substr($userInfo[0], 2, -1);
-            #$pass = substr($userInfo[1], 1, -2);
+            $email = $this->decode($userInfo[0]);
+            $pass = $this->decode($userInfo[1]);
 
-            $email = $userInfo[0];
-            $pass = $userInfo[1];
-
-            #echo "<br>User: " . $name;
-            #echo "<br>Pass: " . $pass;
+            /*echo "<br>";
+            var_dump($email);
+            echo "<br>";
+            var_dump($pass);
+            die();*/
         }
         else {
             # No user is logged
@@ -137,5 +137,15 @@ class Authentication
 
     private function deleteUserCookie() {
         setcookie("user-session", "", time()-3600, "/");
+    }
+
+    private function encode($str)
+    {
+        return urlencode(base64_encode($str));
+    }
+
+    private function decode($str)
+    {
+        return base64_decode(urldecode($str));
     }
 }
