@@ -12,13 +12,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["login"])) {
         $username = $util->formatHTMLInput($_POST["username"]);
         $password = $util->formatHTMLInput($_POST["password"]);
+        $keepUserLogged = (isset($_POST["keep-logged"])) ? true : false;
 
         if (empty($username) || empty($password)) {
             $util->setErrorMessage("login", "Nome ou Senha incorretos.");
             return;
         }
 
-        if ($auth->login($username, $password, false)) {
+        if ($auth->login($username, $password, $keepUserLogged)) {
             header("Location: " . $relPath . "index.php");
             die();
         } else {

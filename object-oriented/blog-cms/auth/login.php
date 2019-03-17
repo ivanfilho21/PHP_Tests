@@ -18,7 +18,7 @@
             <input type="password" name="password" placeholder="Senha">
 
             <label>
-                <input type="checkbox" name="keep-logged">Manter-me Conectado<br>
+                <input type="checkbox" name="keep-logged" <?php echo (isset($_POST["keep-logged"])) ? "checked" : ""; ?>>Manter-me Conectado<br>
             </label>
 
             <div class="error-msg" id="error-auth">

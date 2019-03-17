@@ -28,6 +28,13 @@ class Authentication
             $_SESSION["user-session"]["username"] = $username;
             $_SESSION["user-session"]["password"] = $password;
 
+            # TODO: encrypt userInfo to put in a cookie
+            $userInfo = "{$username};{$password}";
+
+            if ($keepLogged) {
+                setrawcookie("user-session", "{'" . $username . "':'" . $password . "'}", time() + (86400 * 30), "/");
+            }
+
             return true;
         } else {
             return false;
@@ -36,8 +43,9 @@ class Authentication
 
     public function logout()
     {
-        session_start();
-        $_SESSION["user-session"]["username"] = null;
+        $this->sessionStart();
+        $this->deleteUserSession();
+        $this->deleteUserCookie();
     }
 
     public function checkUserSession()
@@ -52,10 +60,33 @@ class Authentication
         if (isset($_SESSION["user-session"])) {
             $name = $_SESSION["user-session"]["username"];
             $pass = $_SESSION["user-session"]["password"];
-            $user = new User(0, $name, $pass);
+        }
+        else if (isset($_COOKIE["user-session"])) {
+            $cookie = $_COOKIE["user-session"];
+            #echo $cookie;
 
+            $userInfo = explode(":", $cookie);
+
+            $name = substr($userInfo[0], 2, -1);
+            $pass = substr($userInfo[1], 1, -2);
+            #echo "<br>User: " . $name;
+            #echo "<br>Pass: " . $pass;
+        }
+        else {
+            return null;
+        }
+
+        $user = new User(0, $name, $pass);
+
+        # Double check in database
+        if ($this->checkLoginInDatabase($user)) {
             return $user;
         }
+        else {
+            $this->deleteUserSession();
+            $this->deleteUserCookie();
+        } 
+
         return null;
     }
 
@@ -101,5 +132,13 @@ class Authentication
             return true;
         }
         return false;
+    }
+
+    private function deleteUserSession() {
+        $_SESSION["user-session"] = null;
+    }
+
+    private function deleteUserCookie() {
+        setcookie("user-session", "", time()-3600, "/");
     }
 }
