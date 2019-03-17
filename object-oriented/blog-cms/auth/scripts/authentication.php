@@ -11,16 +11,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     # Login
     if (isset($_POST["login"])) {
-        $username = $util->formatHTMLInput($_POST["username"]);
+        $email = $util->formatHTMLInput($_POST["email"]);
         $password = $util->formatHTMLInput($_POST["password"]);
         $keepUserLogged = (isset($_POST["keep-logged"])) ? true : false;
 
-        if (empty($username) || empty($password)) {
+        /*if (empty($email) || empty($password)) {
             $util->setErrorMessage("login", "Nome ou Senha incorretos.");
             return;
-        }
+        }*/
 
-        if ($auth->login($username, $password, $keepUserLogged)) {
+        if ($auth->login($email, $password, $keepUserLogged)) {
             header("Location: " . $relPath . "index.php");
             die();
         } else {
@@ -30,12 +30,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     # Register
     if (isset($_POST["register"])) {
+        $email = $util->formatHTMLInput($_POST["email"]);
         $username = $util->formatHTMLInput($_POST["username"]);
         $password = $util->formatHTMLInput($_POST["password"]);
         $passRetype = $util->formatHTMLInput($_POST["password-retype"]);
 
         if (validateFields()) {
-            if ($auth->register($username, $password)) {
+            $user = new User(0, $email, $username, $password);
+
+            if ($auth->register($user)) {
+                # TODO: send email with credentials
+                # TODO: do not redirect.
+
                 $registerFinished = true;
                 header("refresh: 5; url=login.php");
 
@@ -43,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 #die();
             }
             else {
-                $util->setErrorMessage("register-username", "Este nome de usuário já existe.");
+                $util->setErrorMessage("register-email", "Este e-mail já está cadastrado.");
                 $res = false;
             }
         }
@@ -52,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 function validateFields()
 {
-    global $util, $username, $password, $passRetype;
+    global $util, $email, $username, $password, $passRetype;
 
     $res = true;
 

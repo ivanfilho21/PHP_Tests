@@ -19,7 +19,12 @@
         </span>
 
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" <?php echo ($registerFinished) ? "style='display: none;'" : ""; ?>>
-            <input type="text" required name="username" placeholder="Nome do Usuário" value="<?php echo (isset($_POST['username'])) ? $_POST['username'] : ''; ?>">
+
+            <input type="email" required name="email" placeholder="E-mail" value="<?php echo (isset($_POST['email'])) ? $_POST['email'] : ''; ?>">
+
+            <span class="error-msg"><?php Util::showError("register-email"); ?></span>
+
+            <input type="text" required name="username" placeholder="Seu nome" value="<?php echo (isset($_POST['username'])) ? $_POST['username'] : ''; ?>">
 
             <span class="error-msg"><?php Util::showError("register-username"); ?></span>
 
@@ -27,7 +32,7 @@
 
             <span class="error-msg"><?php Util::showError("register-pass1"); ?></span>
 
-            <input type="password" name="password-retype" placeholder="Repita a Senha">
+            <input type="password" name="password-retype" placeholder="Repita a senha">
 
             <div class="error-msg" id="error-auth">
                 <p><?php Util::showError("register-pass2"); ?></p>

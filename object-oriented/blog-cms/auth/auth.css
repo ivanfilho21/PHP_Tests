@@ -27,7 +27,7 @@ input {
 	        transition: box-shadow 300ms ease-in-out;
 }
 
-input[type=text],[type=password] {
+input[type=text],[type=email],[type=password] {
 	/*max-width: 90%;*/
 	margin: 0.5em auto;
 	outline: none;
@@ -56,6 +56,8 @@ input[type=submit] {
 
 input[type=text]:focus,
 input[type=text]:hover,
+input[type=email]:focus,
+input[type=email]:hover,
 input[type=password]:focus,
 input[type=password]:hover {
 	box-shadow: 0 0 6px rgba(35, 173, 278, 1);

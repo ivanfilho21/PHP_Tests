@@ -9,10 +9,10 @@ class Authentication
         $this->dbAdmin = $dbAdmin;
     }
 
-    public function register($username, $password) {
-        # Check if user is already registered
-        if ($this->checkUsernameInDatabase($username) == false) {
-            $this->dbAdmin->getUserDAO()->createUser($username, $password);
+    public function register($user) {
+        # Check if email is already registered
+        if ($this->checkEmailInDatabase($user->getEmail()) == false) {
+            $this->dbAdmin->getUserDAO()->createUser($user);
             return true;
         }
         else {
@@ -20,25 +20,31 @@ class Authentication
         }
     }
 
-    public function login($username, $password, bool $keepLogged)
+    # Checks email and password in database.
+    # When user exists, create a user session and returns true.
+    public function login($email, $password, bool $keepLogged)
     {
-        if ($this->checkLoginInDatabase(new User(0, $username, $password))) {
+        $loggedUser = $this->checkLoginInDatabase($email, $password);
+        
+        if ($loggedUser != null) {
             $this->sessionStart();
 
-            $_SESSION["user-session"]["username"] = $username;
+            $_SESSION["user-session"]["email"] = $email;
             $_SESSION["user-session"]["password"] = $password;
 
-            # TODO: encrypt userInfo to put in a cookie
-            $userInfo = "{$username};{$password}";
-
             if ($keepLogged) {
-                setrawcookie("user-session", "{'" . $username . "':'" . $password . "'}", time() + (86400 * 30), "/");
+                # TODO: encrypt userInfo to put in a cookie
+                $userInfo = "{$email};{$password}";
+
+                #setrawcookie("user-session", "{'" . $email . "':'" . $password . "'}", time() + (86400 * 30), "/");
+                
+                setrawcookie("user-session", $email . ":" . $password . "", time() + (86400 * 30), "/");
             }
 
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function logout()
@@ -58,7 +64,7 @@ class Authentication
         $this->sessionStart();
         
         if (isset($_SESSION["user-session"])) {
-            $name = $_SESSION["user-session"]["username"];
+            $email = $_SESSION["user-session"]["email"];
             $pass = $_SESSION["user-session"]["password"];
         }
         else if (isset($_COOKIE["user-session"])) {
@@ -67,62 +73,53 @@ class Authentication
 
             $userInfo = explode(":", $cookie);
 
-            $name = substr($userInfo[0], 2, -1);
-            $pass = substr($userInfo[1], 1, -2);
+            #$email = substr($userInfo[0], 2, -1);
+            #$pass = substr($userInfo[1], 1, -2);
+
+            $email = $userInfo[0];
+            $pass = $userInfo[1];
+
             #echo "<br>User: " . $name;
             #echo "<br>Pass: " . $pass;
         }
         else {
+            # No user is logged
             return null;
         }
 
-        $user = new User(0, $name, $pass);
+        # Now, user might not exist anymore in database.
+
+        $user = null;
 
         # Double check in database
-        if ($this->checkLoginInDatabase($user)) {
-            return $user;
-        }
-        else {
+        $user = $this->checkLoginInDatabase($email, $pass);
+
+        if ($user == null) {
             $this->deleteUserSession();
             $this->deleteUserCookie();
         } 
 
-        return null;
+        return $user;
     }
 
     # Private Methods
 
-    private function checkUsernameInDatabase($username)
+    private function checkEmailInDatabase($email)
     {
-        $tableName = $this->dbAdmin->getUserDAO()->getTableName();
-        $sql = "SELECT * FROM " . $tableName . " WHERE " . QT_A . "username" . QT_A . " = " . QT . $username . QT;
-
-        # echo $sql;
-
-        $res = $this->dbAdmin->getUserDAO()->query($sql);
-        # echo "<br>rows " . $res->rowCount();
+        $res = $this->dbAdmin->getUserDAO()->select("*", array("email"), array("{$email}"));
         
-        if ($res->rowCount() == 1) {
+        if ($res == null) {
+            return false;
+        }
+        else {
             return true;
         }
-        return false;
     }
 
     # Returns true if the user exists in the database, false otherwise.
-    private function checkLoginInDatabase($user)
+    private function checkLoginInDatabase($email, $password)
     {
-        $tableName = $this->dbAdmin->getUserDAO()->getTableName();
-        $sql = "SELECT * FROM " . $tableName . " WHERE " . QT_A . "username" . QT_A . " = " . QT . $user->getUsername() . QT . " AND " . QT_A . "password" . QT_A . " = " . MD5 . "(" . QT . $user->getPassword() . QT . ")";
-
-        # echo $sql;
-
-        $res = $this->dbAdmin->getUserDAO()->query($sql);
-        # echo "<br>rows " . $res->rowCount();
-        
-        if ($res->rowCount() == 1) {
-            return true;
-        }
-        return false;
+        return $this->dbAdmin->getUserDAO()->select("*", array("email", "password"), array("{$email}", "MD5(" . QT . $password . QT . ")"));
     }
 
     private function sessionStart()
