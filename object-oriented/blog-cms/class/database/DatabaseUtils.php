@@ -9,6 +9,19 @@ define("COMMA", ", ");
 define("QT_A", "`");
 define("QT", "'");
 
+/**
+* Class: UserDAO
+* 
+* Common operations in databases.
+*
+* @package      blog-cms
+* @subpackage   class/database/dao
+* @author       Ivan Filho <ivanfilho21@gmail.com>
+*
+* Created: Mar 11, 2019.
+* Last Modified: Mar 18, 2019.
+*/
+
 class DatabaseUtils
 {
     # Connects to database and returns the connection
@@ -25,11 +38,18 @@ class DatabaseUtils
         return $pdo;
     }
 
-    # Returns a string containing all column names
-    # from a given array of class/Columns.php got from
-    # a given DAO table.
-    # The primary key column name is ignored when false
-    # Expects array of objects of class class/Column.php
+    /**
+    * Method: getTableFields
+    *
+    * Returns name of columns from a given table.
+    *
+    * @param DAO $table: entity object that extends from DAO class.
+    * @param bool $includePK: when true, the primary key will be included in fields string.
+    * @param array  $whereValues: value of columns used as conditions in WHERE clause.
+    * @return string.
+    *
+    * Last Modified: Mar 18, 2019.
+    */
     public static function getTableFields(DAO $table, bool $includePK)
     {
         $columnArray = $table->getColumns();

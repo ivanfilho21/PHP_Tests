@@ -44,8 +44,6 @@ class Authentication
         }
     }
 
-    # Checks email and password in database.
-    # When user exists, create a user session and returns true.
     /**
     * Method: register
     *
@@ -98,6 +96,17 @@ class Authentication
         return $this->getLoggedUser() != null;
     }
 
+    /**
+    * Method: getLoggedUser
+    *
+    * Checks if there is user authentication data in session or cookie.
+    * If there is, checks in database if the user exists.
+    * Returns the selected user, null otherwise.
+    *
+    * @return User.
+    *
+    * Last Modified: Mar 17, 2019.
+    */
     public function getLoggedUser()
     {
         $this->sessionStart();
@@ -153,7 +162,6 @@ class Authentication
         }
     }
 
-    #used in recovery.php
     public function getUserById($id)
     {
         return $this->dbAdmin->getUserDAO()->select("*", array("id"), array("{$id}"));

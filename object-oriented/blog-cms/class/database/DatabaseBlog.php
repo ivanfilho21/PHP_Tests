@@ -1,6 +1,19 @@
 <?php
 require ROOT_PATH . "/class/database/dao/PostDAO.php";
 
+/**
+* Class: UserDAO
+* 
+* Manages all entities in database_blog.
+*
+* @package      blog-cms
+* @subpackage   class/database/dao
+* @author       Ivan Filho <ivanfilho21@gmail.com>
+*
+* Created: Mar 11, 2019.
+* Last Modified: Mar 18, 2019.
+*/
+
 class DatabaseBlog
 {
     private $postDAO;

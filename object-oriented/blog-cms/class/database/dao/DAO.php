@@ -1,6 +1,19 @@
 <?php
 require ROOT_PATH . "/class/Column.php";
 
+/**
+* Class: DAO
+* 
+* Database operations related to database entities.
+*
+* @package      blog-cms
+* @subpackage   class/database/dao
+* @author       Ivan Filho <ivanfilho21@gmail.com>
+*
+* Created: Mar 11, 2019.
+* Last Modified: Mar 18, 2019.
+*/
+
 abstract class DAO
 {
     protected $tableName = "";

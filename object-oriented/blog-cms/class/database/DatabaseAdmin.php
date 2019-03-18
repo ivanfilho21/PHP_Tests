@@ -2,6 +2,19 @@
 require ROOT_PATH . "/class/database/dao/UserDAO.php";
 require ROOT_PATH . "/class/database/dao/PageDAO.php";
 
+/**
+* Class: UserDAO
+* 
+* Manages all entities in database_admin.
+*
+* @package      blog-cms
+* @subpackage   class/database/dao
+* @author       Ivan Filho <ivanfilho21@gmail.com>
+*
+* Created: Mar 11, 2019.
+* Last Modified: Mar 18, 2019.
+*/
+
 class DatabaseAdmin
 {
     private $userDAO;

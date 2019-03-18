@@ -4,7 +4,7 @@ require ROOT_PATH . "/class/User.php";
 /**
 * Class: UserDAO
 * 
-* Ddatabase operations related to the User entity.
+* Database operations related to the User entity.
 *
 * @package      blog-cms
 * @subpackage   class/database/dao
@@ -61,7 +61,7 @@ class UserDAO extends DAO
     * @param string $columns: name of columns to be selected.
     * @param array  $whereColumns: name of columns used as conditions in WHERE clause.
     * @param array  $whereValues: value of columns used as conditions in WHERE clause.
-    * @return User $user.
+    * @return User.
     *
     * Last Modified: Mar 18, 2019.
     */

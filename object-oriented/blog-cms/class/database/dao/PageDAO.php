@@ -1,5 +1,18 @@
 <?php
 
+/**
+* Class: PageDAO
+* 
+* Database operations related to the Page entity.
+*
+* @package      blog-cms
+* @subpackage   class/database/dao
+* @author       Ivan Filho <ivanfilho21@gmail.com>
+*
+* Created: Mar 11, 2019.
+* Last Modified: Mar 18, 2019.
+*/
+
 class PageDAO extends DAO
 {
     public function __construct($db)
