@@ -103,9 +103,7 @@ class Authentication
         return $user;
     }
 
-    # Private Methods
-
-    private function checkEmailInDatabase($email)
+    public function checkEmailInDatabase($email)
     {
         $res = $this->dbAdmin->getUserDAO()->select("*", array("email"), array("{$email}"));
         
@@ -116,6 +114,8 @@ class Authentication
             return true;
         }
     }
+
+    # Private Methods
 
     # Returns true if the user exists in the database, false otherwise.
     private function checkLoginInDatabase($email, $password)

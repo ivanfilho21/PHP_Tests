@@ -43,7 +43,7 @@
 
         <div class="options-link">
             <a id="link-A" href="login.php">Login</a>
-            <a id="link-B" href="#">Esqueci a Senha</a>
+            <a id="link-B" href="password-recovery.php">Esqueci a Senha</a>
             <div class="clear-fix"></div>
         </div>
         

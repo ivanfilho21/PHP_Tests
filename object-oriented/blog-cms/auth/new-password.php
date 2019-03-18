@@ -1,13 +1,12 @@
-<!-- Must declare this for files that are not in root folder -->
 <?php $relPath = "../"; ?>
-<?php $pageTitle = "Login"; ?>
+<?php $pageTitle = "Registre-se"; ?>
 <?php $pageDescription = ""; ?>
 <?php $additionalStyles = array(); ?>
 <?php $additionalStyles[] = "auth"; ?>
 <?php require "../template/page-top.php"; ?>
 <?php require "scripts/authentication.php"; ?>
+<?php require "scripts/recovery.php"; ?>
 
-<!-- Main Content -->
 <main class="main-content">
     <section class="login-holder">
         <h1>Login</h1>
@@ -36,6 +35,5 @@
         
     </section>
 </main>
-<!-- End of Main -->
 
 <?php require "../template/page-bottom.php"; ?>
