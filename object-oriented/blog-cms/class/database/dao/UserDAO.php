@@ -1,6 +1,19 @@
 <?php
 require ROOT_PATH . "/class/User.php";
 
+/**
+* Class: UserDAO
+* 
+* Ddatabase operations related to the User entity.
+*
+* @package      blog-cms
+* @subpackage   class/database/dao
+* @author       Ivan Filho <ivanfilho21@gmail.com>
+*
+* Created: Mar 11, 2019.
+* Last Modified: Mar 18, 2019.
+*/
+
 class UserDAO extends DAO
 {
     public function __construct($db)
@@ -40,10 +53,18 @@ class UserDAO extends DAO
         parent::insert($values);
     }
 
-    # How to use:
-    # $columns = name of columns to be returned. type string
-    # $whereColumns = name of columns in where statement. type array
-    # $whereValues = value of columns in where statement. type array
+    /**
+    * Method: select
+    *
+    * Selects data from the database.
+    *
+    * @param string $columns: name of columns to be selected.
+    * @param array  $whereColumns: name of columns used as conditions in WHERE clause.
+    * @param array  $whereValues: value of columns used as conditions in WHERE clause.
+    * @return User $user.
+    *
+    * Last Modified: Mar 18, 2019.
+    */
     public function select($columns = "*", $whereColumns = "", $whereValues = "")
     {
         $whereClause = "";

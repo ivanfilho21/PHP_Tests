@@ -1,14 +1,37 @@
 <?php
 
+/**
+* Class: Authentication
+* 
+* Operations related to user authentication, such as Login, Logout, Registration. User session etc.
+*
+* @package      blog-cms
+* @subpackage   class/auth
+* @author       Ivan Filho <ivanfilho21@gmail.com>
+*
+* Created: Mar 12, 2019.
+* Last Modified: Mar 18, 2019.
+*/
+
 class Authentication
 {
     private $dbAdmin;
 
-    public function __construct($dbAdmin)
+    public function __construct(DatabaseAdmin $dbAdmin)
     {
         $this->dbAdmin = $dbAdmin;
     }
 
+    /**
+    * Method: register
+    *
+    * Creates a new user in the database, returning true if the user doesn't exist, false otherwise.
+    *
+    * @param User $user.
+    * @return bool.
+    *
+    * Last Modified: Mar 18, 2019.
+    */
     public function register($user) {
         # Check if email is already registered
         if ($this->checkEmailInDatabase($user->getEmail()) == false) {
@@ -23,6 +46,21 @@ class Authentication
 
     # Checks email and password in database.
     # When user exists, create a user session and returns true.
+    /**
+    * Method: register
+    *
+    * Checks email and password in database.
+    * If there is an user associated, creates user session.
+    * If $keepLogged is true, a cookie is created to store
+    * current user authentication data.
+    *
+    * @param string $email.
+    * @param string $password.
+    * @param bool $keepLogged.
+    * @return bool.
+    *
+    * Last Modified: Mar 17, 2019.
+    */
     public function login($email, $password, bool $keepLogged)
     {
         $loggedUser = $this->checkLoginInDatabase($email, $password);
