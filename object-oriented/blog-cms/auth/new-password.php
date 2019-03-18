@@ -9,28 +9,28 @@
 
 <main class="main-content">
     <section class="login-holder">
-        <h1>Login</h1>
+        <h1>Nova Senha</h1>
 
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-            <input type="email" name="email" placeholder="E-mail" value="<?php echo (isset($_POST['email'])) ? $_POST['email'] : ''; ?>">
-            
-            <input type="password" name="password" placeholder="Senha">
+        	<input type="hidden" name="user-id" value="<?php echo ($user != null) ? $user->getId() : '0'; ?>">
 
-            <label>
-                <input type="checkbox" name="keep-logged" <?php echo (isset($_POST["keep-logged"])) ? "checked" : ""; ?>>Manter-me Conectado<br>
-            </label>
+        	<label><?php echo ($user != null) ? $user->getUsername() : ''; ?>, digite sua nova senha:</label>
+
+            <input type="password" name="password" placeholder="Senha">
+            <span class="error-msg"><?php Util::showError("register-pass1"); ?></span>
+
+            <input type="password" name="password-retype" placeholder="Repita a Senha">
+            <span class="error-msg"><?php Util::showError("register-pass2"); ?></span>
 
             <div class="error-msg" id="error-auth">
-                <p><?php Util::showError("login"); ?></p>
+                <p><?php Util::showError("recovery-password"); ?></p>
             </div>
             
-            <input type="submit" name="login" value="Entrar">
+            <input type="submit" name="new-password" value="Criar Senha">
         </form>
 
         <div class="options-link">
-            <a id="link-A" href="register.php">Criar Conta</a>
-            <a id="link-B" href="password-recovery.php">Esqueci a Senha</a>
-            <div class="clear-fix"></div>
+            <a href=""></a>
         </div>
         
     </section>

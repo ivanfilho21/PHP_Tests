@@ -115,6 +115,12 @@ class Authentication
         }
     }
 
+    #used in recovery.php
+    public function getUserById($id)
+    {
+        return $this->dbAdmin->getUserDAO()->select("*", array("id"), array("{$id}"));
+    }
+
     # Private Methods
 
     # Returns true if the user exists in the database, false otherwise.

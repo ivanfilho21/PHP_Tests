@@ -71,6 +71,7 @@ class UserDAO extends DAO
             $user = new User(0, "", "", "");
 
             foreach ($res->fetchAll() as $userDB) {
+                $user->setId($userDB["id"]);
                 $user->setEmail($userDB["email"]);
                 $user->setUsername($userDB["username"]);
                 $user->setPassword($userDB["password"]);

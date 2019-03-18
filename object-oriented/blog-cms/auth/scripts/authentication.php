@@ -85,6 +85,15 @@ function validateFields()
         $res = false;
     }
 
+    $res = validatePasswords($res, $password, $passRetype);
+
+    return $res;
+}
+
+function validatePasswords($res, $password, $passRetype)
+{
+    global $util;
+    
     if (strlen($password) < 8) {
         $util->setErrorMessage("register-pass1", "A senha deve conter no mínimo 8 caracteres.");
         $res = false;
@@ -95,7 +104,7 @@ function validateFields()
     }
     else {
         if ($password === $passRetype) {
-            #
+            # nothing
         }
         else {
             $util->setErrorMessage("register-pass2", "As senhas digitadas não são iguais.");
