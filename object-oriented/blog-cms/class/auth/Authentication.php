@@ -13,6 +13,7 @@ class Authentication
         # Check if email is already registered
         if ($this->checkEmailInDatabase($user->getEmail()) == false) {
             $this->dbAdmin->getUserDAO()->createUser($user);
+            $this->sendMail($user->getEmail(), $user->getUsername(), $user->getPassword());
             return true;
         }
         else {
@@ -147,5 +148,20 @@ class Authentication
     private function decode($str)
     {
         return base64_decode(urldecode($str));
+    }
+
+    private function sendMail($email, $username, $password)
+    {
+        #$address = addslashes($email, $username, $password);
+
+        $sendto = $email;
+        $subj = "Seus dados de acesso no Blog CMS";
+        $body = "Olá " . $username . ". Seja bem-vindo ao Blog CMS. Abaixo estão seus dados de acesso.<br><br>E-mail: " . $email . "<br>Senha: " . $password;
+        
+        $header = "From: cubit.open.src@gmail.com" . "\r\n" .
+                    "Reply-To: " . $email . "\r\n" .
+                    "X-Mailer: PHP/" . phpversion();
+
+        mail($sendto, $subj, $body, $header);
     }
 }

@@ -11,11 +11,11 @@
 <main class="main-content">
     <section class="login-holder">
         <h1>
-            <?php echo ($registerFinished) ? "Usuário criado" : "Registre-se"; ?>
+            <?php echo ($registerFinished) ? "Conta criada com sucesso" : "Registre-se"; ?>
         </h1>
 
         <span>
-            <?php echo ($registerFinished) ? "Você será redirecionado em breve..." : ""; ?>
+            <?php echo ($registerFinished) ? "Em breve um e-mail será enviado com seus dados de acesso." : ""; ?>
         </span>
 
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" <?php echo ($registerFinished) ? "style='display: none;'" : ""; ?>>
@@ -42,7 +42,7 @@
         </form>
 
         <div class="options-link">
-            <a id="link-A" href="#">Login</a>
+            <a id="link-A" href="login.php">Login</a>
             <a id="link-B" href="#">Esqueci a Senha</a>
             <div class="clear-fix"></div>
         </div>

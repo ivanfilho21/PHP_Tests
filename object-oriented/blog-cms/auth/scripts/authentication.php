@@ -43,10 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 # TODO: do not redirect.
 
                 $registerFinished = true;
-                header("refresh: 5; url=login.php");
-
-                #header("Location: login.php");
-                #die();
+                #header("refresh: 5; url=login.php");
             }
             else {
                 $util->setErrorMessage("register-email", "Este e-mail já está cadastrado.");
