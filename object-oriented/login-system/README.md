@@ -2,6 +2,9 @@
 
 Login and Registration system in PHP.
 
+### Language
+* Português - Brasil
+
 ### Features
 * Register.
 * Login.
