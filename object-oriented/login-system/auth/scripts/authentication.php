@@ -53,21 +53,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     }
-
-    # Recovery First Time
-    if (isset($_POST["recovery"])) {
-        $email = $util->formatHTMLInput($_POST["email"]);
-        # check if email exists
-        if ($auth->checkEmailInDatabase($email)) {
-            # TODO: send link of recovery to email
-
-            $recoverySent = true;
-        }
-        else {
-            $util->setErrorMessage("recovery-email", "Não há uma conta associada a este e-mail.");
-            $res = false;
-        }
-    }
 }
 
 function validateFields()

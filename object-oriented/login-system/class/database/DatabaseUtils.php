@@ -3,6 +3,8 @@
 # SQL Types
 define("INT", "INT");
 define("VARCHAR", "VARCHAR");
+define("TEXT", "TEXT");
+define("LONGTEXT", "LONGTEXT");
 define("MD5", "MD5");
 
 # Useful characters
@@ -70,6 +72,8 @@ class DatabaseUtils
 	        $fields .= $column->getColumnInformation() . COMMA;
 	    }
 	    $fields = substr($fields, 0, strlen($fields) - strlen(COMMA));
+
+	    #echo $fields; die();
 
 	    return $fields;
 	}

@@ -38,7 +38,7 @@ abstract class DAO
 
     # Generic Table methods
 
-    protected function createTableInDatabase()
+    protected function create()
     {
         $fields = DatabaseUtils::getColumnsInformationInline($this->columns);
 
@@ -48,7 +48,7 @@ abstract class DAO
         $this->db->query($sql);
     }
 
-    protected function dropTableInDatabase()
+    protected function drop()
     {
         $sql = "DROP TABLE IF EXISTS `" . $this->tableName . "`";
         # echo $sql; die();

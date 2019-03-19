@@ -1,5 +1,6 @@
 <?php
 require ROOT_PATH . "/class/database/dao/UserDAO.php";
+require ROOT_PATH . "/class/database/dao/PasswordResetDAO.php";
 
 /**
 * Class: Database
@@ -17,15 +18,18 @@ require ROOT_PATH . "/class/database/dao/UserDAO.php";
 class Database
 {
     private $userDAO;
+    private $passRstDAO;
 
     public function __construct()
     {
         $db = $this->connectToDatabase();
 
         $this->userDAO = new UserDAO($db);
+        $this->passRstDAO = new PasswordResetDAO($db);
 
         # Create tables
         $this->userDAO->createTable();
+        $this->passRstDAO->createTable();
 
         # Test inserting new user to db
         # $this->userDAO->createUser($this->mysqli, "admin", "admin");

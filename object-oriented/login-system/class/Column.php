@@ -4,9 +4,9 @@ class Column
 {
     private $name = "";
     private $value = "";
-    private $dataType = "";
+    private $dataType = ""; # Name of the type. Ex: INT
     private $length = 0;
-    private $columnType = "";
+    private $columnType = ""; # Name of the type plus the length. Ex: VARCHAR(200)
     private $nullable = true;
     private $extra = "";
     private $key = "";
@@ -25,7 +25,16 @@ class Column
     public function getColumnInformation()
     {
         $info = "";
-        $info .= $this->getName() . " " . $this->getColumnType() . " " . $this->getNullable() . " " . $this->getExtra() . " " . $this->getKey();
+        $info .= $this->getName() . " " . $this->getColumnType();
+
+        if (! empty($this->getNullable()))
+            $info .= " " . $this->getNullable();
+
+        if (! empty($this->getExtra()))
+            $info .= " " . $this->getExtra();
+
+        if (! empty($this->getKey()))
+            $info .= " " . $this->getKey();
 
         return $info;
     }
@@ -34,10 +43,11 @@ class Column
 
     private function createColumnType()
     {
-        if (! empty($this->getDataType()) && ! empty($this->getLength())) {
-            $colType = $this->getDataType() . "(" . $this->getLength() . ")";
-            $this->setColumnType($colType);
-        }
+        $colType = $this->getDataType();
+        if ($this->getLength() > 0)
+            $colType .= "(" . $this->getLength() . ")";
+
+        $this->setColumnType($colType);
     }
 
     # Getters and Setters

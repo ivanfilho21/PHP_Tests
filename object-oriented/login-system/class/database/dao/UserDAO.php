@@ -4,14 +4,14 @@ require ROOT_PATH . "/class/User.php";
 /**
 * Class: UserDAO
 * 
-* Database operations related to the User entity.
+* Database operations related to the User table.
 *
 * @package      login-system
 * @subpackage   class/database/dao
 * @author       Ivan Filho <ivanfilho21@gmail.com>
 *
 * Created: Mar 11, 2019.
-* Last Modified: Mar 18, 2019.
+* Last Modified: Mar 19, 2019.
 */
 
 class UserDAO extends DAO
@@ -21,9 +21,9 @@ class UserDAO extends DAO
         parent::__construct($db);
 
         $this->tableName = "users";
-        $this->columns[] = new Column("id", "", INT, 11, false, "AUTO_INCREMENT", "PRIMARY KEY");
-        $this->columns[] = new Column("email", "", VARCHAR, 255, false, "", "");
-        $this->columns[] = new Column("username", "", VARCHAR, 255, false, "", "");
+        $this->columns[] = new Column("id", "", INT, false, "AUTO_INCREMENT", "PRIMARY KEY");
+        $this->columns[] = new Column("email", "", TEXT, false, "", "");
+        $this->columns[] = new Column("username", "", TEXT, false, "", "");
         $this->columns[] = new Column("password", "", VARCHAR, 32, false, "", "");
     }
 
@@ -42,13 +42,13 @@ class UserDAO extends DAO
     # Override
     public function createTable()
     {
-        parent::createTableInDatabase();
+        parent::create();
     }
 
     # Override
     public function dropTable()
     {
-        parent::dropTableInDatabase();
+        parent::drop();
     }
 
     # CRUD
