@@ -56,7 +56,7 @@ class UserDAO extends DAO
     /**
     * Method: select
     *
-    * Selects data from the database.
+    * Selects user data from the database.
     *
     * @param string $columns: name of columns to be selected.
     * @param array  $whereColumns: name of columns used as conditions in WHERE clause.
@@ -102,6 +102,17 @@ class UserDAO extends DAO
         return $user;
     }
 
+    /**
+    * Method: update
+    *
+    * Updates user data in the database.
+    *
+    * @param array of Column $columns: name and values of columns to be updated.
+    * @param array of Column $where: name and values of columns used as conditions in WHERE clause.
+    * @return false.
+    *
+    * Last Modified: Mar 18, 2019.
+    */
     public function update($columns, $where)
     {
         $cols = "";

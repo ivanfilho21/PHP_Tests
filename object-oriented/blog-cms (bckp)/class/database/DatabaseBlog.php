@@ -29,7 +29,7 @@ class DatabaseBlog
     {
         # Configuring database with PDO
 
-        $dsn = DB_TYPE . ":dbname=" . DB_ADMIN_NAME . ";host=" . DB_HOST;
+        $dsn = DB_TYPE . ":dbname=" . DB_BLOG_NAME . ";host=" . DB_HOST;
         $dbuser = DB_USER;
         $dbpass = DB_PASS;
         # echo "<br>".$dsn."<br>".$dbuser."<br>".$dbpass;

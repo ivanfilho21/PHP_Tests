@@ -1,0 +1,145 @@
+/* Reset */
+html, body, div, header, main, section, footer,
+form, label, input,
+ul, li, p, a, h1, h2, h3, h4, h5 {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 17px;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: dodgerblue;
+}
+a:hover {
+    text-decoration: underline;
+    /*color: lightseagreen;*/
+}
+
+h1 {
+    padding-top: 1em;
+    padding-bottom: 0.75em;
+}
+
+h2 {
+    padding-top: 0.75em;
+    padding-bottom: 0.5em;
+}
+
+h3 {
+    padding-top: 0.5em;
+    padding-bottom: 0.35em;
+}
+
+h4 {
+    padding-top: 0.35em;
+    padding-bottom: 0.15em;
+}
+
+h5 {
+    padding-top: 0.15em;
+    padding-bottom: 0.05em;
+}
+/* End of Reset */
+
+/* Header */
+.header {
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    background: slategray;
+    color: lavender;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.1em;
+    color: lightcyan;
+}
+
+.logo:hover {
+    color: white;
+}
+
+.top-navigation {
+    margin-top: 1em;
+}
+
+.top-navigation li {
+    /*display: inline-block;*/
+    margin-top: 0.75em;
+}
+.top-navigation li a {
+    color: lavender;
+    font-weight: 700;
+}
+.top-navigation li a:hover {
+    color: white;
+}
+
+/* Footer */
+.footer {
+    background: slategray;
+    color: lavender;
+    padding: 0.5em;
+    text-align: center;
+    font-size: 0.75em;
+    height: 100px;
+}
+.links {
+    margin-top: 1em;
+}
+.fa-github {
+    text-align: center;
+    /*margin-top: 1em;*/
+    font-size: 2em;
+    color: lavender;
+}
+.fa-github:hover {
+    color: white;
+}
+
+#copyright {
+    padding-top: 1em;
+}
+
+.clear-fix { clear: both; }
+
+@media (min-width: 320px) {
+    /* Header */
+    .top-navigation li {
+        display: inline-block;
+        margin-left: 0.75em;
+        margin-right: 0.75em;
+    }
+}
+
+@media (min-width: 560px) {
+    /* Header */
+    .header-container {
+        max-width: 90%;
+        margin: auto;
+    }
+    .logo {
+        float: left;
+        margin: 0 0.75em;
+    }
+    .top-navigation {
+        float: right;
+        margin: 0 0.5em;
+    }
+    .top-navigation li {
+        margin-top: 0.5em;
+    }
+}

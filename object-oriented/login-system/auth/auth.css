@@ -1,0 +1,167 @@
+.login-holder {
+	padding: 0.5em;
+	background: lavender;
+}
+
+h1 {
+	color: dodgerblue;
+	text-align: center;
+}
+
+/* Form */
+label {
+	font-size: 0.75em;
+}
+
+input {
+	display: block;
+	width: 100%;
+	font-size: 0.75em;
+	padding: 0.5em;
+	
+	/* box-shadow transition */
+	-webkit-transition: box-shadow 300ms ease-in-out;
+	   -moz-transition: box-shadow 300ms ease-in-out;
+	    -ms-transition: box-shadow 300ms ease-in-out;
+	     -o-transition: box-shadow 300ms ease-in-out;
+	        transition: box-shadow 300ms ease-in-out;
+}
+
+input[type=text],[type=email],[type=password] {
+	/*max-width: 90%;*/
+	margin: 0.5em auto;
+	outline: none;
+	border: none;
+	border-bottom: 1px solid lightgray;
+}
+
+input[type=checkbox] {
+	display: inline-block;
+	width: auto;
+	margin: 0 0.5em 1em 0;
+}
+
+input[type=submit] {
+	margin-top: 1.5em;
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+	border: none;
+	border-radius: 0.25em;
+	border-bottom: 1px solid lightgray;
+	background: dodgerblue;
+	color: white;
+	cursor: pointer;
+}
+
+input[type=text]:focus,
+input[type=text]:hover,
+input[type=email]:focus,
+input[type=email]:hover,
+input[type=password]:focus,
+input[type=password]:hover {
+	box-shadow: 0 0 6px rgba(35, 173, 278, 1);
+}
+input[type=submit]:hover {
+	box-shadow: 0 0 12px dodgerblue;
+}
+
+.options-link {
+	margin-top: 1em;
+	margin-bottom: 1em;
+	text-align: center;
+}
+
+#link-A, #link-B {
+	display: block;
+	font-size: 0.85em;
+	padding-top: 0.5em;
+}
+
+.error-msg {
+	/*display: inline-block;
+	width: 100%;
+	margin: 1em 0;
+	text-align: center;*/
+	color: indianred;
+}
+
+#error-auth {
+	text-align: center;
+}
+
+/* Breakpoints */
+
+@media (min-width: 320px) {
+	.login-holder {
+		padding: 0 2em;
+	}
+
+	/* Form */
+	label {
+		font-size: 1em;
+	}
+
+	input {
+		font-size: 1em;
+	}
+
+	input[type=submit] {
+		
+	}
+
+	.options-link {
+		max-width: 80%;
+		margin: 0 auto;
+		padding: 1em 0;
+	}
+
+	#link-A, #link-B {
+		display: inline-block;
+		font-size: 0.85em;
+	}
+
+	#link-A {
+		float: left;
+	}
+
+	#link-B {
+		float: right;
+	}
+}
+
+@media (min-width: 560px) {
+	.main-content {
+		background: gray;
+		/*background: linear-gradient(to bottom right, #5f2c82, #0ABFBC);*/
+		background: linear-gradient(to bottom right, #283048, #0ABFBC);
+		padding-top: 3em; 
+		padding-bottom: 3em;
+	}
+	.login-holder {
+		max-width: 80%;
+		margin: auto;
+		/*background: rgba(255,255,255, 0.55);*/
+		box-shadow: 0.15rem 0.35rem 10px #333;
+	}
+}
+
+@media (min-width: 700px) {
+	.main-content {
+		padding-top: 4em; 
+		padding-bottom: 4em;
+	}
+	.login-holder {
+		max-width: 65%;
+	}
+}
+
+@media (min-width: 920px) {
+	.main-content {
+		padding-top: 5em; 
+		padding-bottom: 5em;
+	}
+	.login-holder {
+		max-width: 40%;
+	}
+}

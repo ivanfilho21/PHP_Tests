@@ -26,8 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $passwordChanged = true;
         }
         else {
-            #header("refresh: 5; url=?{$userid}={$_POST["user-id"]}");
-            #header("Location: ?{$userid}={$_POST["user-id"]}");
+            # header("refresh: 5; url=?{$userid}={$_POST["user-id"]}");
+            # header("Location: ?{$userid}={$_POST["user-id"]}");
         }
     }
 }
