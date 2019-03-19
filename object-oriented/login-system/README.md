@@ -8,7 +8,7 @@ Login and Registration system in PHP.
 * Change password.
 
 ### Screenshot
-![Login Screen](screenshots/login-screen.png)
+![Login Screen](screenshots/sc-login-screen.png)
 
 ### Author
 Ivan Filho
