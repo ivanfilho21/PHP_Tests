@@ -1,7 +1,7 @@
 <header class="header">
     <div class="header-container">
         <!-- Logo -->
-        <a class="logo"href="<?php echo $relPath; ?>index.php";">Blog CMS</a>
+        <a class="logo"href="<?php echo $relPath; ?>index.php";">Login System</a>
 
         <!-- navigation bar -->
         <nav class="top-navigation">
