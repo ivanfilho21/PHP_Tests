@@ -3,6 +3,7 @@
 class Column
 {
     private $name = "";
+    private $value = "";
     private $dataType = "";
     private $length = 0;
     private $columnType = "";
@@ -10,9 +11,10 @@ class Column
     private $extra = "";
     private $key = "";
 
-    public function __construct($name, $dataType, $length, $nullable, $extra, $key)
+    public function __construct($name, $value, $dataType="", $length="", $nullable="", $extra="", $key="")
     {
         $this->setName($name);
+        $this->setValue($value);
         $this->setDataType($dataType);
         $this->setLength($length);
         $this->setNullable($nullable);
@@ -43,6 +45,11 @@ class Column
     public function getName()
     {
         return $this->name;
+    }
+
+    public function getValue()
+    {
+        return $this->value;
     }
 
     public function getDataType()
@@ -78,6 +85,11 @@ class Column
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    public function setValue($value)
+    {
+        $this->value = $value;
     }
 
     public function setDataType($dataType)

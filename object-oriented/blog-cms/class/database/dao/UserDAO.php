@@ -102,8 +102,31 @@ class UserDAO extends DAO
         return $user;
     }
 
+    public function update($columns, $where)
+    {
+        $cols = "";
+        foreach ($columns as $c) {
+            $cols .= QT_A . $c->getName() . QT_A . " = " . QT . $c->getValue() . QT . COMMA;
+        }
+        $cols = substr($cols, 0, - strlen(COMMA));
+        #echo $cols; die();
+
+        $condition = "";
+        foreach ($where as $c) {
+            $condition .= QT_A . $c->getName() . QT_A . " = " . QT . $c->getValue() . QT . COMMA;
+        }
+        $condition = substr($condition, 0, - strlen(COMMA));
+        #echo $condition; die();
+
+        $sql = "UPDATE " . QT_A . $this->tableName . QT_A . " SET {$cols} WHERE {$condition}";
+        #echo $sql; die();
+
+        $res = $this->query($sql);
+    }
+
     public function query($sql)
     {
         return parent::executeQuery($sql);
     }
+
 }

@@ -18,28 +18,30 @@
             <?php echo ($registerFinished) ? "Em breve um e-mail será enviado com seus dados de acesso." : ""; ?>
         </span>
 
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" <?php echo ($registerFinished) ? "style='display: none;'" : ""; ?>>
+        <?php if (! $registerFinished) : ?>
+            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
-            <input type="email" required name="email" placeholder="E-mail" value="<?php echo (isset($_POST['email'])) ? $_POST['email'] : ''; ?>">
+                <input type="email" required name="email" placeholder="E-mail" value="<?php echo (isset($_POST['email'])) ? $_POST['email'] : ''; ?>">
 
-            <span class="error-msg"><?php Util::showError("register-email"); ?></span>
+                <span class="error-msg"><?php Util::showError("register-email"); ?></span>
 
-            <input type="text" required name="username" placeholder="Seu nome" value="<?php echo (isset($_POST['username'])) ? $_POST['username'] : ''; ?>">
+                <input type="text" required name="username" placeholder="Seu nome" value="<?php echo (isset($_POST['username'])) ? $_POST['username'] : ''; ?>">
 
-            <span class="error-msg"><?php Util::showError("register-username"); ?></span>
+                <span class="error-msg"><?php Util::showError("register-username"); ?></span>
 
-            <input type="password" name="password" placeholder="Senha">
+                <input type="password" name="password" placeholder="Senha">
 
-            <span class="error-msg"><?php Util::showError("register-pass1"); ?></span>
+                <span class="error-msg"><?php Util::showError("register-pass1"); ?></span>
 
-            <input type="password" name="password-retype" placeholder="Repita a senha">
+                <input type="password" name="password-retype" placeholder="Repita a senha">
 
-            <div class="error-msg" id="error-auth">
-                <p><?php Util::showError("register-pass2"); ?></p>
-            </div>
+                <div class="error-msg" id="error-auth">
+                    <p><?php Util::showError("register-pass2"); ?></p>
+                </div>
 
-            <input type="submit" name="register" value="Criar Conta">
-        </form>
+                <input type="submit" name="register" value="Criar Conta">
+            </form>
+        <?php endif; ?>
 
         <div class="options-link">
             <a id="link-A" href="login.php">Login</a>

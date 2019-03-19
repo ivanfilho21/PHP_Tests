@@ -216,4 +216,12 @@ class Authentication
 
         mail($sendto, $subj, $body, $header);
     }
+
+    public function changePassword($userId, $newPassword)
+    {
+        $id = new Column("id", $userId);
+        $pass = new Column("password", md5($newPassword));
+
+        $this->dbAdmin->getUserDAO()->update(array($pass), array($id));
+    }
 }
