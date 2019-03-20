@@ -12,7 +12,7 @@ require ROOT_PATH . "/class/database/dao/PasswordResetDAO.php";
 * @author       Ivan Filho <ivanfilho21@gmail.com>
 *
 * Created: Mar 11, 2019.
-* Last Modified: Mar 19, 2019.
+* Last Modified: Mar 20, 2019.
 */
 
 class Database
@@ -58,6 +58,11 @@ class Database
     public function getUserDAO()
     {
         return $this->userDAO;
+    }
+
+    public function getPasswordResetDAO()
+    {
+        return $this->passRstDAO;
     }
 
 }

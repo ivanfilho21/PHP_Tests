@@ -11,7 +11,7 @@ class Column
     private $extra = "";
     private $key = "";
 
-    public function __construct($name, $value, $dataType="", $length="", $nullable="", $extra="", $key="")
+    public function __construct($name, $value, $dataType="", $length=0, $nullable="", $extra="", $key="")
     {
         $this->setName($name);
         $this->setValue($value);
@@ -110,6 +110,12 @@ class Column
 
     public function setLength($length)
     {
+        if ($length == 0) {
+            $length = DatabaseUtils::getDefaultLength($this->getDataType());
+        }
+        elseif ($length == -1) {
+            # Let SQL decide the default length for this datatype; 
+        }
         $this->length = $length;
         $this->createColumnType();
     }

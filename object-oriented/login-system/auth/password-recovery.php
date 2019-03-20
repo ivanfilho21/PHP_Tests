@@ -5,7 +5,7 @@
 <?php $additionalStyles = array(); ?>
 <?php $additionalStyles[] = "auth"; ?>
 <?php require "../template/page-top.php"; ?>
-<?php require "scripts/authentication.php"; ?>
+<?php require "scripts/recovery.php"; ?>
 
 <main class="main-content">
     <section class="login-holder">
@@ -13,6 +13,15 @@
 
         <?php if ($recoverySent) : ?>
         	<p>Um link para alterar sua senha será enviada em breve para seu e-mail.</p>
+
+            <div class="TEST_DIV_REMOVE_ME_AFTER_LOCAL_TEST">
+                <h2>It's a Secret to Everybody</h2>
+                <p>
+                    Link:<br>
+                    <a href="<?php echo $url; ?>"><?php echo $url; ?></a>
+                </p>
+            </div>
+            
         <?php endif; ?>
 
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" <?php echo ($recoverySent) ? "style='display: none;'" : ""; ?>>

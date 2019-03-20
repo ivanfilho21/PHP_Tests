@@ -50,11 +50,15 @@ class DatabaseUtils
 	public static function getColumnNamesInline(array $columnArray, bool $includePK)
 	{
 	    $fields = "";
+	    #echo ($includePK) ? "true" : "false"; die();
 
 	    foreach ($columnArray as $column) {
 	    #for ($i = $start; $i < count($columnArray); $i++) {
-	        if ($column->getKey() == "PRIMARY KEY") continue;
-
+	        if ($column->getKey() == "PRIMARY KEY") {
+	        	if (! $includePK) {
+	        		continue;
+	        	}
+	        }
 	        $fields .= QT_A . $column->getName() . QT_A . COMMA;
 	    }
 	    $fields = substr($fields, 0, strlen($fields) - strlen(COMMA));
@@ -76,5 +80,23 @@ class DatabaseUtils
 	    #echo $fields; die();
 
 	    return $fields;
+	}
+
+	public static function getDefaultLength($dataType)
+	{
+		switch ($dataType) {
+		    case INT:
+		        return 11;
+		    case VARCHAR:
+		        return 128;
+		    case TEXT:
+		        return 255;
+		    case MD5:
+		        return 32;
+		    case LONGTEXT:
+		        return 255;
+		    default:
+		        return 1;
+		}
 	}
 }

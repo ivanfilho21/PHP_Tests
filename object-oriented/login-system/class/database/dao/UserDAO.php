@@ -11,7 +11,7 @@ require ROOT_PATH . "/class/User.php";
 * @author       Ivan Filho <ivanfilho21@gmail.com>
 *
 * Created: Mar 11, 2019.
-* Last Modified: Mar 19, 2019.
+* Last Modified: Mar 20, 2019.
 */
 
 class UserDAO extends DAO
@@ -21,22 +21,15 @@ class UserDAO extends DAO
         parent::__construct($db);
 
         $this->tableName = "users";
-        $this->columns[] = new Column("id", "", INT, false, "AUTO_INCREMENT", "PRIMARY KEY");
-        $this->columns[] = new Column("email", "", TEXT, false, "", "");
-        $this->columns[] = new Column("username", "", TEXT, false, "", "");
+        $this->columns[] = new Column("id", "", INT, 0, false, "AUTO_INCREMENT", "PRIMARY KEY");
+        $this->columns[] = new Column("email", "", TEXT, 0, false, "", "");
+        $this->columns[] = new Column("username", "", TEXT, 0, false, "", "");
         $this->columns[] = new Column("password", "", VARCHAR, 32, false, "", "");
     }
 
-    public function getColumnByName($columnName)
+    public function getColumnByName($colName)
     {
-        $column = null;
-        foreach ($this->columns as $c) {
-            if ($c->getName() === $columnName) {
-                $column = $c;
-                break;
-            }
-        }
-        return $column;
+        return $this->findColumn($colName);
     }
 
     # Override

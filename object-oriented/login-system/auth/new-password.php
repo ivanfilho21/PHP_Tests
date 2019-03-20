@@ -5,7 +5,7 @@
 <?php $additionalStyles[] = "auth"; ?>
 <?php require "../template/page-top.php"; ?>
 <?php require "scripts/authentication.php"; ?>
-<?php require "scripts/recovery.php"; ?>
+<?php require "scripts/password-reset.php"; ?>
 
 <main class="main-content">
     <section class="login-holder">
@@ -15,9 +15,10 @@
 
         <?php if (! $passwordChanged) : ?>
 	        <form method="post" action="<?php #echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-	        	<input type="hidden" name="user-id" value="<?php echo ($user != null) ? $user->getId() : '0'; ?>">
+	        	<input type="hidden" name="selector" value="<?php echo $selector; ?>">
+	        	<input type="hidden" name="validator" value="<?php echo $validator; ?>">
 
-	        	<label><?php echo ($user != null) ? $user->getUsername() : ''; ?>, digite sua nova senha:</label>
+	        	<label>Digite uma nova senha:</label>
 
 	            <input type="password" name="password" placeholder="Senha">
 	            <span class="error-msg"><?php Util::showError("register-pass1"); ?></span>

@@ -1,6 +1,5 @@
 <?php
 $registerFinished = false;
-$recoverySent = false;
 $restrictedPage = "dashboard.php";
 
 # Check if user is already logged.

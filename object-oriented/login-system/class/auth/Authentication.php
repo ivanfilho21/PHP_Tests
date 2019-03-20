@@ -35,7 +35,7 @@ class Authentication
     * @param User $user.
     * @return bool.
     *
-    * Last Modified: Mar 18, 2019.
+    * Last Modified: Mar 20, 2019.
     */
     public function register($user) {
         # Check if email is already registered
@@ -172,6 +172,47 @@ class Authentication
         return $this->db->getUserDAO()->select("*", array("id"), array("{$id}"));
     }
 
+    public function createPasswordResetRequest($resetEmail, $selector, $token, $expireDate, $url)
+    {
+        $this->db->getPasswordResetDAO()->createPasswordRecoveryRequest($resetEmail, $selector, $token, $expireDate);
+
+        # Send email
+        $to = $resetEmail;
+        $subject = "Alteração de Senha - Login System";
+        $msg = "<p>Abaixo encontra-se o link para alterar sua senha. O link expirará em uma hora.</p>";
+        $msg .= "<p>Link para alterar sua senha: <br>";
+        $msg .= "<a href='{$url}'>{$url}</a></p>";
+
+        $header = "From: Cubit Software <cubit.open.src@gmail.com>\r\n";
+        $header .= "Reply-To: " .$resetEmail. "\r\n";
+        $header .= "Content-type: text/html\r\n";
+
+        mail($to, $subject, $msg, $header);
+    }
+
+    public function getPasswordResetRequest($selector)
+    {
+        $colSelector = $this->db->getPasswordResetDAO()->getColumnByName("selector");
+        $colSelector->setValue($selector);
+
+        $where = array($colSelector);
+
+        return $this->db->getPasswordResetDAO()->select($where);
+    }
+
+    public function deletePasswordResetRequest($resetEmail)
+    {
+        $this->db->getPasswordResetDAO()->deletePasswordRecoveryRequest($resetEmail);
+    }
+
+    public function changePassword($userId, $newPassword)
+    {
+        $id = new Column("id", $userId);
+        $pass = new Column("password", md5($newPassword));
+
+        $this->db->getUserDAO()->update(array($pass), array($id));
+    }
+
     # Private Methods
 
     # Returns true if the user exists in the database, false otherwise.
@@ -220,13 +261,5 @@ class Authentication
                     "X-Mailer: PHP/" . phpversion();
 
         mail($sendto, $subj, $body, $header);
-    }
-
-    public function changePassword($userId, $newPassword)
-    {
-        $id = new Column("id", $userId);
-        $pass = new Column("password", md5($newPassword));
-
-        $this->db->getUserDAO()->update(array($pass), array($id));
     }
 }
