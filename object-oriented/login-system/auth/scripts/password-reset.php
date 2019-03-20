@@ -46,6 +46,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (validatePasswords(true, $password, $passRetype)) {
                 $auth->changePassword($userEmail, $password);
                 $passwordChanged = true;
+                $auth->deletePasswordResetRequest($userEmail);
             }
         }
     }

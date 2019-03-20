@@ -7,8 +7,8 @@
 <?php require "../template/page-top.php"; ?>
 <?php require "scripts/authentication.php"; ?>
 
-<!-- Main Content -->
-<main class="main-content">
+<!-- Main -->
+<main class="main">
     <section class="login-holder">
         <h1>
             <?php echo ($registerFinished) ? "Conta criada com sucesso" : "Registre-se"; ?>

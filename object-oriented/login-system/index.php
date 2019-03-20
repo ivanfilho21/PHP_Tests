@@ -4,7 +4,9 @@
 <?php require "template/page-top.php"; ?>
 
 <!-- Main Content -->
-<h1>Login System - Home</h1>
+<section class="main">
+	<h1>Login System - Home</h1>
+</section>
 <!-- End of Main -->
 
 <?php require "template/page-bottom.php"; ?>

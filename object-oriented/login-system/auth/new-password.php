@@ -7,7 +7,7 @@
 <?php require "scripts/authentication.php"; ?>
 <?php require "scripts/password-reset.php"; ?>
 
-<main class="main-content">
+<main class="main">
     <section class="login-holder">
     	<?php if (! $requestExpired) : ?>
 	        <h1>

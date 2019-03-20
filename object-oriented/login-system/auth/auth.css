@@ -131,7 +131,7 @@ input[type=submit]:hover {
 }
 
 @media (min-width: 560px) {
-	.main-content {
+	.main {
 		background: gray;
 		/*background: linear-gradient(to bottom right, #5f2c82, #0ABFBC);*/
 		background: linear-gradient(to bottom right, #283048, #0ABFBC);
@@ -147,7 +147,7 @@ input[type=submit]:hover {
 }
 
 @media (min-width: 700px) {
-	.main-content {
+	.main {
 		padding-top: 4em; 
 		padding-bottom: 4em;
 	}
@@ -157,7 +157,7 @@ input[type=submit]:hover {
 }
 
 @media (min-width: 920px) {
-	.main-content {
+	.main {
 		padding-top: 5em; 
 		padding-bottom: 5em;
 	}

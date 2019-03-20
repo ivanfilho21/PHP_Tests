@@ -8,7 +8,7 @@
 <?php require "scripts/authentication.php"; ?>
 <?php require "scripts/recovery.php"; ?>
 
-<main class="main-content">
+<main class="main">
     <section class="login-holder">
         <h1>Recuperar Senha</h1>
 

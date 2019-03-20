@@ -157,14 +157,7 @@ class Authentication
 
     public function getUserByEmail($email)
     {
-        $res = $this->db->getUserDAO()->select("*", array("email"), array("{$email}"));
-        
-        /*if ($res == null) {
-            return false;
-        }
-        else {
-            return true;
-        }*/
+        return $this->db->getUserDAO()->select("*", array("email"), array("{$email}"));
     }
 
     public function createPasswordResetRequest($resetEmail, $selector, $token, $expireDate, $url)
@@ -189,6 +182,9 @@ class Authentication
     public function checkValidPasswordResetRequest($selector)
     {
         $passReq = $this->getPasswordResetRequest($selector);
+        if ($passReq == null) {
+            return false;
+        }
         $expires = $passReq->getExpireDate();
 
         $now = date("U");

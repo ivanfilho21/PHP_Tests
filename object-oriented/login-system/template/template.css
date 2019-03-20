@@ -89,6 +89,10 @@ h5 {
 }
 
 /* Main */
+.main {
+    padding: 0 0.5em;
+    text-align: center;
+}
 .main-content {
     width: 90%;
     margin: 1em auto;
