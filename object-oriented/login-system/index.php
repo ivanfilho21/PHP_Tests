@@ -5,10 +5,6 @@
 
 <!-- Main Content -->
 <h1>Login System - Home</h1>
-
-<p>
-	<?php echo ($user != null) ? "Welcome, " . $user->getUsername() . "." : ""; ?>
-</p>
 <!-- End of Main -->
 
 <?php require "template/page-bottom.php"; ?>

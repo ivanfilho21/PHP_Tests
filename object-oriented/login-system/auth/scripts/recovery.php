@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $token = random_bytes(32);
 
             # Website URL
-            $url = "localhost/dev/php-tests/login-system/auth/new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
+            $url = "new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
             $expires = date("U") + 1800;
 

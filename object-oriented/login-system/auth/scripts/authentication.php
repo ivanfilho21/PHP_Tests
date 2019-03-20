@@ -4,8 +4,7 @@ $restrictedPage = "dashboard.php";
 
 # Check if user is already logged.
 if ($user != null) {
-    header("Location: " . $relPath . $restrictedPage);
-    exit();
+    $util->redirectToDashboard($relPath);
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -16,14 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = $util->formatHTMLInput($_POST["password"]);
         $keepUserLogged = (isset($_POST["keep-logged"])) ? true : false;
 
-        /*if (empty($email) || empty($password)) {
-            $util->setErrorMessage("login", "Nome ou Senha incorretos.");
-            return;
-        }*/
-
         if ($auth->login($email, $password, $keepUserLogged)) {
-            header("Location: " . $relPath . "index.php");
-            die();
+            $util->redirectToDashboard($relPath);
         } else {
             $util->setErrorMessage("login", "Nome ou Senha incorretos.");
         }
@@ -40,11 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $user = new User(0, $email, $username, $password);
 
             if ($auth->register($user)) {
-                # TODO: send email with credentials
-                # TODO: do not redirect.
-
                 $registerFinished = true;
-                #header("refresh: 5; url=login.php");
             }
             else {
                 $util->setErrorMessage("register-email", "Este e-mail já está cadastrado.");
@@ -61,11 +50,6 @@ function validateFields()
 
     $res = true;
 
-    /*if (empty($username)) {
-        $util->setErrorMessage("register", "Preencha o nome de usuário.");
-        $res = false;
-    } else {
-    }*/
     if (strlen($username) > $maxUsername) {
         $util->setErrorMessage("register-username", "Nome de usuário deve conter no máximo {$maxUsername} caracteres.");
         $res = false;

@@ -5,6 +5,7 @@
 <?php $additionalStyles = array(); ?>
 <?php $additionalStyles[] = "auth"; ?>
 <?php require "../template/page-top.php"; ?>
+<?php require "scripts/authentication.php"; ?>
 <?php require "scripts/recovery.php"; ?>
 
 <main class="main-content">

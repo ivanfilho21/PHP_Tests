@@ -30,4 +30,10 @@ class Util
         echo (isset($errorMsgs[$index])) ? $errorMsgs[$index] : "";
     }
 
+    public function redirectToDashboard($relPath)
+    {
+        header("Location: " . $relPath . "dashboard.php");
+        exit();
+    }
+
 }
