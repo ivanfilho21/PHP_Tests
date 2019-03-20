@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $util->formatHTMLInput($_POST["email"]);
         
         # check if email exists in database
-        if ($auth->checkEmailInDatabase($email)) {
+        if ($auth->getUserByEmail($email) != null) {
             #
             $selector = bin2hex(random_bytes(8));
             $token = random_bytes(32);

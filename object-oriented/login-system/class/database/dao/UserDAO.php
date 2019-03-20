@@ -135,7 +135,7 @@ class UserDAO extends DAO
         #echo $condition; die();
 
         $sql = "UPDATE " . QT_A . $this->tableName . QT_A . " SET {$cols} WHERE {$condition}";
-        #echo $sql; die();
+        # echo $sql; die();
 
         $res = $this->query($sql);
     }

@@ -39,7 +39,7 @@ class Authentication
     */
     public function register($user) {
         # Check if email is already registered
-        if ($this->checkEmailInDatabase($user->getEmail()) == false) {
+        if ($this->getUserByEmail($user->getEmail()) == null) {
             $this->db->getUserDAO()->createUser($user);
             $this->sendMail($user->getEmail(), $user->getUsername(), $user->getPassword());
             return true;
@@ -155,26 +155,22 @@ class Authentication
         return $user;
     }
 
-    public function checkEmailInDatabase($email)
+    public function getUserByEmail($email)
     {
         $res = $this->db->getUserDAO()->select("*", array("email"), array("{$email}"));
         
-        if ($res == null) {
+        /*if ($res == null) {
             return false;
         }
         else {
             return true;
-        }
-    }
-
-    public function getUserById($id)
-    {
-        return $this->db->getUserDAO()->select("*", array("id"), array("{$id}"));
+        }*/
     }
 
     public function createPasswordResetRequest($resetEmail, $selector, $token, $expireDate, $url)
     {
-        $this->db->getPasswordResetDAO()->createPasswordRecoveryRequest($resetEmail, $selector, $token, $expireDate);
+        $passwordReset = new PasswordReset(0, $resetEmail, $selector, $token, $expireDate);
+        $this->db->getPasswordResetDAO()->createPasswordRecoveryRequest($passwordReset);
 
         # Send email
         $to = $resetEmail;
@@ -190,12 +186,29 @@ class Authentication
         mail($to, $subject, $msg, $header);
     }
 
+    public function checkValidPasswordResetRequest($selector)
+    {
+        $passReq = $this->getPasswordResetRequest($selector);
+        $expires = $passReq->getExpireDate();
+
+        $now = date("U");
+
+        if ($expires <= $now) {
+            $email = $passReq->getEmail();
+            $this->deletePasswordResetRequest($email);
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
     public function getPasswordResetRequest($selector)
     {
-        $colSelector = $this->db->getPasswordResetDAO()->getColumnByName("selector");
-        $colSelector->setValue($selector);
+        $c = $this->db->getPasswordResetDAO()->getColumnByName("selector");
+        $c->setValue($selector);
 
-        $where = array($colSelector);
+        $where = array($c);
 
         return $this->db->getPasswordResetDAO()->select($where);
     }
@@ -205,12 +218,12 @@ class Authentication
         $this->db->getPasswordResetDAO()->deletePasswordRecoveryRequest($resetEmail);
     }
 
-    public function changePassword($userId, $newPassword)
+    public function changePassword($email, $newPassword)
     {
-        $id = new Column("id", $userId);
+        $email = new Column("email", $email);
         $pass = new Column("password", md5($newPassword));
 
-        $this->db->getUserDAO()->update(array($pass), array($id));
+        $this->db->getUserDAO()->update(array($pass), array($email));
     }
 
     # Private Methods

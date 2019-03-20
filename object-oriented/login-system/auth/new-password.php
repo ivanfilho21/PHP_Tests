@@ -1,5 +1,5 @@
 <?php $relPath = "../"; ?>
-<?php $pageTitle = "Registre-se"; ?>
+<?php $pageTitle = "Alterar Senha"; ?>
 <?php $pageDescription = ""; ?>
 <?php $additionalStyles = array(); ?>
 <?php $additionalStyles[] = "auth"; ?>
@@ -9,11 +9,12 @@
 
 <main class="main-content">
     <section class="login-holder">
-        <h1>
-        	<?php echo ($passwordChanged) ? "Senha Criada" : "Nova Senha"; ?>
-        </h1>
-
-        <?php if (! $passwordChanged) : ?>
+    	<?php if (! $requestExpired) : ?>
+	        <h1>
+	        	<?php echo ($passwordChanged) ? "Senha Criada" : "Nova Senha"; ?>
+	        </h1>
+	        
+	        <?php if (! $passwordChanged) : ?>
 	        <form method="post" action="<?php #echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 	        	<input type="hidden" name="selector" value="<?php echo $selector; ?>">
 	        	<input type="hidden" name="validator" value="<?php echo $validator; ?>">
@@ -41,7 +42,13 @@
 	    <div class="options-link">
 	        <a href=""></a>
 	    </div>
-        
+	    <?php else : ?>
+	    	<h1>Requisição Expirada</h1>
+
+	    	<div class="options-link">
+	    	    <a href="login.php">Retornar à tela de Login</a>
+	    	</div>
+	    <?php endif; ?>        
     </section>
 </main>
 

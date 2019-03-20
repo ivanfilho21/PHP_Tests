@@ -1,6 +1,7 @@
 <?php
 #TODO
 $passwordChanged = false;
+$requestExpired = false;
 
 $index1 = "selector";
 $index2 = "validator";
@@ -16,42 +17,36 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $selector = $_GET[$index1];
         $validator = $_GET[$index2];
 
+        # Checks if selector and token are valid hexadecimals
         if (ctype_xdigit($selector) === false && ctype_xdigit($validator) === false) {
             redirect();
         }
 
-        # Check if it is a valid token for the user
-        if ($auth->getPasswordResetRequest($selector) != null) {
-            # TODO
-        }
-
-
-
-        /*# echo $id; die();
-        $user = $auth->getUserById($id);
-        if ($user != null) {
-            $username = $user->getUsername();
-            $user->setUsername(substr($username, 0, strpos($username, " ")));
-        }*/
+        # Checks if it is a valid token for the user and if it's not expired yet
+        $requestExpired = ! $auth->checkValidPasswordResetRequest($selector);
     }
     else {
         redirect();
     }
 }
-# POST (submit onclick)
 else if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["new-password"])) {
-        $userId = $util->formatHTMLInput($_POST["user-id"]);
-        $password = $util->formatHTMLInput($_POST["password"]);
-        $passRetype = $util->formatHTMLInput($_POST["password-retype"]);
+        $selector = $util->formatHTMLInput($_POST["selector"]);
+        $request = $auth->getPasswordResetRequest($selector);
 
-        if (validatePasswords(true, $password, $passRetype)) {
-            $auth->changePassword($userId, $password);
-            $passwordChanged = true;
+        if ($request == null) {
+            echo "<b>Requisição expirada</b>.<br>Você será redirecionado para a página de login...";
+            header("refresh: 5; url=login.php");
         }
         else {
-            # header("refresh: 5; url=?{$userid}={$_POST["user-id"]}");
-            # header("Location: ?{$userid}={$_POST["user-id"]}");
+            $userEmail = $request->getEmail();
+            $password = $util->formatHTMLInput($_POST["password"]);
+            $passRetype = $util->formatHTMLInput($_POST["password-retype"]);
+
+            if (validatePasswords(true, $password, $passRetype)) {
+                $auth->changePassword($userEmail, $password);
+                $passwordChanged = true;
+            }
         }
     }
     else {

@@ -9,6 +9,7 @@ define("MD5", "MD5");
 
 # Useful characters
 define("COMMA", ", ");
+define("AND_A", " AND ");
 define("QT_A", "`");
 define("QT", "'");
 
@@ -22,7 +23,7 @@ define("QT", "'");
 * @author       Ivan Filho <ivanfilho21@gmail.com>
 *
 * Created: Mar 11, 2019.
-* Last Modified: Mar 19, 2019.
+* Last Modified: Mar 20, 2019.
 */
 
 class DatabaseUtils

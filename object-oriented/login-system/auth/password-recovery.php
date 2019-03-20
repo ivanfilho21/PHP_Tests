@@ -1,6 +1,6 @@
 <!-- Must declare this for files that are not in root folder -->
 <?php $relPath = "../"; ?>
-<?php $pageTitle = "Registre-se"; ?>
+<?php $pageTitle = "Alterar Senha"; ?>
 <?php $pageDescription = ""; ?>
 <?php $additionalStyles = array(); ?>
 <?php $additionalStyles[] = "auth"; ?>

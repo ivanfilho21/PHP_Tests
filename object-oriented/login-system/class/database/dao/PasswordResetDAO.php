@@ -1,4 +1,5 @@
 <?php
+require ROOT_PATH . "/class/PasswordReset.php";
 
 /**
 * Class: PasswordResetDAO
@@ -45,11 +46,31 @@ class PasswordResetDAO extends DAO
 
 	public function select($where = "")
 	{
-		return parent::select($where);
+		$pass = null;
+		$res = parent::select($where);
+
+        if ($res->rowCount() > 0) {
+            $pass = new PasswordReset(0, "", "", "", "");
+
+            foreach ($res->fetchAll() as $obj) {
+                $pass->setId($obj["id"]);
+                $pass->setEmail($obj["reset_email"]);
+                $pass->setSelector($obj["selector"]);
+                $pass->setToken($obj["token"]);
+                $pass->setExpireDate($obj["expire_date"]);
+            }
+        }
+
+        return $pass;
 	}
 
-	public function createPasswordRecoveryRequest($email, $selector, $token, $expireDate)
+	public function createPasswordRecoveryRequest($passwordReset)
 	{
+		$email = $passwordReset->getEmail();
+		$selector = $passwordReset->getSelector();
+		$token = $passwordReset->getToken();
+		$expireDate = $passwordReset->getExpireDate();
+
 		$values = "";
 		$values .= QT .$email. QT .COMMA. QT .$selector. QT .COMMA. QT .$token. QT .COMMA. QT .$expireDate. QT;
 

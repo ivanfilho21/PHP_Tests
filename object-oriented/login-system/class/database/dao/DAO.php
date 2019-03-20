@@ -101,22 +101,47 @@ abstract class DAO
         $sql = "DELETE FROM " . QT_A .$this->tableName. QT_A . " WHERE " .$condition;
 
         # echo $sql; die();
-        $this->db->query($sql);
+
+        $this->executeQuery($sql);
     }
 
     protected function select($whereColumnArray = "")
     {
-        # WORKING IN
-        # http://localhost/dev/php-tests/object-oriented/login-system/auth/new-password.php?selector=91d6eccb330ebaf3&validator=79f4dca21d18736782ad949685a61740b0d00b892027bea4160e6d71a2c26364
-
+        $table = QT_A .$this->tableName. QT_A;
         $select = "*";
+        $where = $this->formatWhereClause($whereColumnArray);
         
-        $sql = "SELECT " .$select. " FROM ";
-        echo $sql; die();
+        $sql = "SELECT " .$select. " FROM " .$table. $where;
+        # echo $sql; die();
+
+        return $this->executeQuery($sql);
     }
 
-    # Abstract Methods
+    # Abstract methods
 
     public abstract function createTable();
     public abstract function dropTable();
+
+    # Private methods
+    private function formatWhereClause($whereColumns)
+    {
+        $whereClause = "";
+
+        if (! empty($whereColumns)) {
+            $whereClause .= " WHERE ";
+
+            foreach ($whereColumns as $column) {
+                $whereClause .= QT_A .$column->getName(). QT_A ." = ". QT .$column->getValue(). QT . AND_A;
+
+                /*if (strpos($column->getValue(), "MD5") !== false)
+                    $whereClause .= $whereValues[$k] . " AND ";
+                else
+                    $whereClause .= QT . $whereValues[$k] . QT . " AND ";*/
+            }
+            $whereClause = substr($whereClause, 0, - strlen(AND_A));
+        }
+        # echo $whereClause; die();
+
+        return $whereClause;
+    }
 }
