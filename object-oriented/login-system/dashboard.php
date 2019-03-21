@@ -1,6 +1,8 @@
 <?php $relPath = ""; ?>
 <?php $pageTitle = "Dashboard"; ?>
-<?php $pageDescription = ""; ?>
+<?php $pageDescription = "Restricted area accessible only by logged in users."; ?>
+<?php $additionalStyles = array(); ?>
+<?php $additionalStyles[] = "dashboard"; ?>
 <?php require "template/page-top.php"; ?>
 
 <!-- Main Content -->

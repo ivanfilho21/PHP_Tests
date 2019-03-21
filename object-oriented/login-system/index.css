@@ -1,0 +1,100 @@
+/* Sub-Header */
+
+.sub-header {
+    text-align: center;
+    padding: 1em 1.5em 2em 1.5em;
+    font-size: 1.35em;
+    background: slategray;
+    color: lavender;
+}
+
+.sub-header a {
+    font-style: italic;
+    font-weight: bold;
+    color: lavender;
+}
+.sub-header a:hover {
+    text-decoration: underline;
+}
+
+/* Main */
+
+.title {
+    text-align: center;
+}
+
+.card-holder {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-top: 1em;
+    padding: 0.5em;
+}
+
+@media (min-width: 320px) {
+	/* Main */
+
+	.card-holder {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+    }
+
+    .card-sublime {
+        grid-column: 1/-1;
+    }
+}
+
+@media (min-width: 560px) {
+	/* Sub-Header */
+
+    .sub-header {
+        padding-left: 5em;
+        padding-right: 5em;
+        font-size: 1.5em;
+    }
+
+    /* Main */
+
+    .main {
+    	width: 95%;
+    	margin: auto; 
+    }
+
+    .card-holder {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .card-sublime {
+        grid-column: auto;
+    }
+}
+
+@media (min-width: 960px) {
+    /* Header */
+
+    .sub-header {
+        padding-left: 6.5em;
+        padding-right: 6.5em;
+        font-size: 1.6em;
+    }
+    
+    /* Main */
+
+	.main {
+    	width: 90%;
+    	margin: auto;
+    	margin-top: 3em; 
+    	margin-bottom: 7em; 
+    }
+}
