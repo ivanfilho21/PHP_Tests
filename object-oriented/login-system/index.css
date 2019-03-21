@@ -68,7 +68,9 @@
 
     .main {
     	width: 95%;
-    	margin: auto; 
+    	margin: auto;
+    	margin-top: 2em;
+    	margin-bottom: 4em;
     }
 
     .card-holder {

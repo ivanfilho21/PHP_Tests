@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($auth->login($email, $password, $keepUserLogged)) {
             $util->redirectToDashboard($relPath);
         } else {
-            $util->setErrorMessage("login", "Nome ou Senha incorretos.");
+            $util->setErrorMessage("login", "E-mail ou Senha incorretos.");
         }
     }
 

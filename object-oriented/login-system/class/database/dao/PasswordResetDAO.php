@@ -11,7 +11,7 @@ require ROOT_PATH . "/class/PasswordReset.php";
 * @author       Ivan Filho <ivanfilho21@gmail.com>
 *
 * Created: Mar 19, 2019.
-* Last Modified: Mar 20, 2019.
+* Last Modified: Mar 21, 2019.
 */
 
 class PasswordResetDAO extends DAO

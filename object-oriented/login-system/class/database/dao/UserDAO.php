@@ -11,7 +11,7 @@ require ROOT_PATH . "/class/User.php";
 * @author       Ivan Filho <ivanfilho21@gmail.com>
 *
 * Created: Mar 11, 2019.
-* Last Modified: Mar 20, 2019.
+* Last Modified: Mar 21, 2019.
 */
 
 class UserDAO extends DAO
@@ -70,28 +70,10 @@ class UserDAO extends DAO
     *
     * Last Modified: Mar 18, 2019.
     */
-    public function select($columns = "*", $whereColumns = "", $whereValues = "")
+    public function select($where = "")
     {
-        $whereClause = "";
-        if (! empty($whereColumns)) {
-            $whereClause .= " WHERE ";
-
-            foreach ($whereColumns as $k => $v) {
-                $whereClause .= QT_A . $v . QT_A . " = ";
-
-                if (strpos($whereValues[$k], "MD5") !== false)
-                    $whereClause .= $whereValues[$k] . " AND ";
-                else
-                    $whereClause .= QT . $whereValues[$k] . QT . " AND ";
-            }
-            $whereClause = substr($whereClause, 0, - strlen(" AND "));
-        }
-
-        $sql = "SELECT " . $columns . " FROM " . QT_A . $this->tableName . QT_A . $whereClause;
-        # echo $sql . "<br>"; die();
-
-        $res = $this->query($sql);
         $user = null;
+        $res = parent::select($where);
 
         if ($res->rowCount() > 0) {
             $user = new User(0, "", "", "");

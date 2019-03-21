@@ -10,7 +10,7 @@
 * @author       Ivan Filho <ivanfilho21@gmail.com>
 *
 * Created: Mar 12, 2019.
-* Last Modified: Mar 19, 2019.
+* Last Modified: Mar 21, 2019.
 */
 
 class Authentication
@@ -157,7 +157,11 @@ class Authentication
 
     public function getUserByEmail($email)
     {
-        return $this->db->getUserDAO()->select("*", array("email"), array("{$email}"));
+        $c = $this->db->getUserDAO()->getColumnByName("email");
+        $c->setValue($email);
+        $where = array($c);
+
+        return $this->db->getUserDAO()->select($where);
     }
 
     public function createPasswordResetRequest($resetEmail, $selector, $token, $expireDate, $url)
@@ -203,7 +207,6 @@ class Authentication
     {
         $c = $this->db->getPasswordResetDAO()->getColumnByName("selector");
         $c->setValue($selector);
-
         $where = array($c);
 
         return $this->db->getPasswordResetDAO()->select($where);
@@ -227,7 +230,15 @@ class Authentication
     # Returns true if the user exists in the database, false otherwise.
     private function checkLoginInDatabase($email, $password)
     {
-        return $this->db->getUserDAO()->select("*", array("email", "password"), array("{$email}", "MD5(" . QT . $password . QT . ")"));
+        $c1 = $this->db->getUserDAO()->getColumnByName("email");
+        $c2 = $this->db->getUserDAO()->getColumnByName("password");
+        $c1->setValue($email);
+        $c2->setValue(md5($password));
+        $where = array($c1, $c2);
+
+        return $this->db->getUserDAO()->select($where);
+
+        #return $this->db->getUserDAO()->select("*", array("email", "password"), array("{$email}", "MD5(" . QT . $password . QT . ")"));
     }
 
     private function sessionStart()
