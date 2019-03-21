@@ -53,12 +53,12 @@ h5 {
 /* End of Reset */
 
 /* Header */
+.header-bg { background: #2a5d84; }
 
 .header {
     text-align: center;
     padding-top: 1em;
     padding-bottom: 1em;
-    background: slategray;
     color: lavender;
 }
 
@@ -93,7 +93,7 @@ h5 {
 /* Footer */
 
 .footer {
-    background: slategray;
+    background: #555555;
     color: lavender;
     padding: 0.5em;
     text-align: center;

@@ -2,14 +2,14 @@
 <?php $pageTitle = "Home Page"; ?>
 <?php $additionalStyles = array(); ?>
 <?php $additionalStyles[] = "index"; ?>
-<?php $pageDescription = "Login System is a simple Web Application to register and login users."; ?>
+<?php $pageDescription = "Login System é uma aplicação Web que gerencia login de usuários."; ?>
 <?php require "template/page-top.php"; ?>
 
 <!-- Main Content -->
-<section class="sub-header">
-	Login System is a PHP Web Application that allows you to <a href="auth/register.php">create an account</a> and <a href="auth/login.php">Login</a>.
+<section class="sub-header header-bg">
+	Login System é uma Aplicação Web feita em PHP que permite <a href="auth/register.php">criar uma conta</a> e fazer <a href="auth/login.php">Login</a>.
 
-	If you forgot your password, you can easily <a href="auth/password-recovery.php">reset it</a>.
+	Caso você esqueça sua senha, você pode <a href="auth/password-recovery.php">recuperá-la</a> facilmente.
 </section>
 
 <section class="main">
@@ -18,17 +18,17 @@
 	<div class="card-holder">
 		<div class="card">
 			<h3>PHP 7</h3>
-			<p>PHP is a popular general-purpose scripting language that is especially suited to web development.</p>
+			<p>PHP é uma popular linguagem de scripting de propósito geral que é especialmente adequada para o desenvolvimento web.</p>
 		</div>
 
 		<div class="card">
 			<h3>MySQL</h3>
-			<p>MySQL is an open-source relational database management system.</p>
+			<p>MySQL é um sistema de gerenciamento de banco de dados relacional open-source.</p>
 		</div>
 
 		<div class="card card-sublime">
 			<h3>Sublime Text</h3>
-			<p>Sublime Text is a proprietary cross-platform source code editor with a Python application programming interface.</p>
+			<p>Sublime Text é um editor de código fonte proprietário e multi-plataforma com uma interface feita em Python.</p>
 		</div>
 	</div>
 </section>

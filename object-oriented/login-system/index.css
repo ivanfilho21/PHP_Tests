@@ -4,7 +4,6 @@
     text-align: center;
     padding: 1em 1.5em 2em 1.5em;
     font-size: 1.35em;
-    background: slategray;
     color: lavender;
 }
 
@@ -96,7 +95,7 @@
 	.main {
     	width: 90%;
     	margin: auto;
-    	margin-top: 3em; 
-    	margin-bottom: 7em; 
+    	margin-top: 2.7em; 
+    	margin-bottom: 4em; 
     }
 }

@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header header-bg">
     <div class="header-container">
         <!-- Logo -->
         <a class="logo"href="<?php echo $relPath; echo ($user != null) ? 'dashboard.php' : 'index.php'?>">Login System</a>
