@@ -14,7 +14,7 @@ Login and Registration system in PHP.
 [https://ivanfilho21.000webhostapp.com/auth/index.php](https://ivanfilho21.000webhostapp.com/auth/index.php)
 
 ### Screenshot
-![Login Screen](screenshots/index-page.png)
+![Login Screen](screenshots/home-page.png)
 
 ### Author
 Ivan Filho
