@@ -66,8 +66,8 @@ class Contact
     {
         if ($this->emailExists($email)) {
             $sql = "UPDATE contacts SET name = :name WHERE email = :email";
-            $sql = $this->db->dd->prepare($sql);
-            $sql->bindValue(":name", $name);
+            $sql = $this->db->prepare($sql);
+            $sql->bindValue(":name", $newName);
             $sql->bindValue(":email", $email);
             $sql->execute();
 

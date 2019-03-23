@@ -6,12 +6,18 @@
 </head>
 <body>
 	<h1>My Agenda - Contacts</h1>
+
+	<?php #print_r($contacts->getAll()); ?>
+
+	<a href="create.php">[ CREATE ]</a>
+	<br><br>
+
 	<?php if (count($contacts->getAll()) > 0) : ?>
     	<table border="1">
     		<tr>
     			<th>ID</th>
-    			<th>E-mail</th>
     			<th>Name</th>
+    			<th>E-mail</th>
     			<th>Action</th>
     		</tr>
 
@@ -21,15 +27,15 @@
     					<?php echo $contact["id"]; ?>
     				</td>
     				<td>
-    					<?php echo $contact["email"]; ?>
+    					<?php echo $contact["name"]; ?>
     				</td>
     				<td>
-    					<?php echo $contact["name"]; ?>
+    					<?php echo $contact["email"]; ?>
     				</td>
 
     				<td>
-    					<a href="update.php?email=<?php echo $contact["email"]; ?>">Edit</a>
-    					<a href="delete.php?email=<?php echo $contact["email"]; ?>">Delete</a>
+    					<a href="update.php?email=<?php echo $contact["email"]; ?>">[ EDIT ]</a>
+    					<a href="delete.php?email=<?php echo $contact["email"]; ?>">[ DELETE ]</a>
     				</td>    			
     			</tr>
     		<?php endforeach; ?>
