@@ -1,5 +1,7 @@
 <?php
 require "Contact.php";
+require "util.php";
+
 $contacts = new Contact();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -11,23 +13,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 	else {
 		$contacts->add($email, $name);
-
-		header("Location: index.php");
-		exit();
 	}		
 	
 	
 }
-
-function formatInput($data)
-{
-	if (isset($data)) {
-		$data = trim($data);
-		$data = stripslashes($data);
-		$data = htmlspecialchars($data);
-
-		return $data;
-	}
-
-	return "";
-}
+header("Location: index.php");
+exit();
