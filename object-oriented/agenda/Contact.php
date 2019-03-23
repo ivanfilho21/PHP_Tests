@@ -36,19 +36,17 @@ class Contact
         return false;
     }
 
-    public function getName($email)
+    public function getInfo($id)
     {
-        $sql = "SELECT name FROM contacts WHERE email = :email";
+        $sql = "SELECT * FROM contacts WHERE id = :id";
         $sql = $this->db->prepare($sql);
-        $sql->bindValue(":email", $email);
+        $sql->bindValue(":id", $id);
         $sql->execute();
 
         if ($sql->rowCount() > 0) {
-            $info = $sql->fetch();
-
-            return $info["name"];
+            return $info = $sql->fetch();
         }
-        return "";
+        return array();
     }
 
     public function getAll()
@@ -62,31 +60,26 @@ class Contact
         return array();
     }
 
-    public function update($newName,$email)
+    public function update($contact, $id)
     {
-        if ($this->emailExists($email)) {
-            $sql = "UPDATE contacts SET name = :name WHERE email = :email";
-            $sql = $this->db->prepare($sql);
-            $sql->bindValue(":name", $newName);
-            $sql->bindValue(":email", $email);
-            $sql->execute();
+        $sql = "UPDATE contacts SET name = :name, email = :email WHERE id = :id";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":name", $contact["name"]);
+        $sql->bindValue(":email", $contact["email"]);
+        $sql->bindValue(":id", $id);
+        $sql->execute();
 
-            return true;
-        }
-        return false;
+        return true;
     }
 
-    public function delete($email)
+    public function delete($id)
     {
-        if ($this->emailExists($email)) {
-            $sql = "DELETE FROM contacts WHERE email = :email";
-            $sql = $this->db->prepare($sql);
-            $sql->bindValue(":email", $email);
-            $sql->execute();
+        $sql = "DELETE FROM contacts WHERE id = :id";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id", $id);
+        $sql->execute();
 
-            return true;
-        }
-        return false;
+        return true;
     }
 
     private function emailExists($email)
