@@ -1,0 +1,84 @@
+/* General */
+
+.form-wrapper {
+	margin-top: 3em;
+	text-align: center;
+}
+
+.title {
+	margin: 1em 0;
+}
+
+input {
+	font-size: 1em;
+	display: block;
+	margin: 0.75em auto;
+	border: 1px solid lightgray;
+	border-radius: 0.25em;
+}
+
+input[type=text],[type=email] {
+	min-width: 80%;
+	padding: 0.5em;
+}
+
+input[type=submit] {
+	margin-top: 1.5em;
+	padding: 0.5em 1.25em;
+}
+
+.save-btn {
+	background: linear-gradient(mediumseagreen, #2c8654);
+	color: white;
+	border: 1px solid seagreen;
+}
+.save-btn:hover {
+	background: #2c8654;
+	box-shadow: 0 0 6px mediumseagreen;
+}
+
+/* Mobile */
+@media (max-device-width: 1024px) {
+	.form-wrapper {
+		min-width: 60%;
+		max-width: 80%;
+		margin: auto;
+	}
+}
+
+/* Desktop */
+@media (min-device-width: 1224px) {
+	.form-wrapper {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	input {
+		margin: 1em auto;
+		/* box-shadow transition */
+		-webkit-transition: box-shadow 200ms ease-in-out;
+		   -moz-transition: box-shadow 200ms ease-in-out;
+		    -ms-transition: box-shadow 200ms ease-in-out;
+		     -o-transition: box-shadow 200ms ease-in-out;
+		        transition: box-shadow 200ms ease-in-out;
+	}
+
+	input[type=text]:focus,
+	input[type=text]:hover,
+	input[type=email]:focus,
+	input[type=email]:hover {
+		box-shadow: 0 0 6px rgba(35, 173, 278, 1);
+	}
+
+	input[type=text],[type=email] {
+		min-width: 60%;
+		max-width: 70%;
+		outline: none;
+	}
+
+	input[type=submit] {
+		cursor: pointer;
+	}
+}
+/* End of Desktop Breakpoint */
+
