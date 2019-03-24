@@ -11,8 +11,9 @@ PHP scripts with HTML5 and CSS3.
 * Good practices on Web Development.
 
 ## Live Projects
-* ### [Task Manager](https://ivanfilho21.000webhostapp.com)
-* ### [Login System](https://ivanfilho21.000webhostapp.com/auth/index.php) (Having some troubles)
+* ### [Agenda](http://ivanfilho21.000webhostapp.com/agenda/index.php)
+* ### [Task Manager](https://ivanfilho21.000webhostapp.com/index.php)
+* ### [Login System](https://ivanfilho21.000webhostapp.com/auth/index.php) (Contains some issues)
 
 ## Status:
 * You never stop learning something new :)
