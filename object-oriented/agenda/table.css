@@ -30,6 +30,10 @@ td {
 	text-align: center;
 }
 
+.td-action {
+	text-align: center;
+}
+
 .option {
 	margin: 1em 0;
 }
@@ -44,10 +48,6 @@ td {
 	table {
 		width: 100%;
 		font-size: 1em;
-	}
-
-	.td-action {
-		text-align: center;
 	}
 
 	.option {
