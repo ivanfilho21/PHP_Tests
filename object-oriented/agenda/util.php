@@ -1,5 +1,11 @@
 <?php
 
+function autoLoad() {
+	spl_autoload_register(function($class) {
+	    require "assets/classes/" .$class. ".php";
+	});
+}
+
 function formatInput($data)
 {
     if (isset($data)) {

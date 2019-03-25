@@ -1,4 +1,10 @@
-<?php require "Contact.php"; $contacts = new Contact(); ?>
+<?php
+require "util.php";
+
+autoLoad();
+$contacts = new Contact();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
