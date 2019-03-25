@@ -1,15 +1,37 @@
 <?php
+define("DB_TYPE", "mysql");
+define("DB_NAME", "blog_admin_db");
+define("DB_HOST", "127.0.0.1");
+define("DB_USER", "root");
+define("DB_PASS", "");
 
-define("BQ", "`");
+define("BQ", "`"); #Backquote
 
 class Database
 {
 	public function __construct()
 	{
 		#...
-		$db = null;
+		$pdo = $this->getDatabaseConnection();
 
 		$this->createTables();
+	}
+
+	private function getDatabaseConnection() {
+		$pdo = null;
+
+		try {
+			$dsn = DB_TYPE . ":dbname=" . DB_NAME . ";host=" . DB_HOST;
+			$dbUser = DB_USER;
+			$dbPass = DB_PASS;
+
+			$this->pdo = new PDO($dsn, $dbUser, $dbPass);
+			# echo "Connected to Database."; die();
+		} catch(PDOException $e) {
+			# echo "<br>Connection failed:<br>" .$e->getMessage(); die();
+		}
+
+		return $pdo;
 	}
 
 	private function createTables()
@@ -36,6 +58,6 @@ class Database
 					BQ."price".BQ. " FLOAT,".
 					BQ."condition".BQ. " INT
 				)";
-		echo $sql; die();
+		#echo $sql; die();
 	}
 }

@@ -1,13 +1,16 @@
-<?php require "assets/autoload.php"; new Database(); ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>My Catalog</title>
-	<link rel="stylesheet" href="assets/css/reset.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-	<h1>Hello World</h1>
-</body>
-</html>
+<?php require "pages/header.php"; ?>
+
+	<div class="card">
+		<h1>We now have 999 advertisements</h1>
+		<h3>Over 999 registered users</h3>
+	</div>
+
+	<div class="card">
+		<h3>Advanced Search</h3>
+	</div>
+
+	<div class="card">
+		<h3>Newest Announcements</h3>
+	</div>
+
+<?php require "pages/footer.php"; ?>

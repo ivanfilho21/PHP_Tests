@@ -1,0 +1,73 @@
+.light {
+	background: ghostwhite;
+	color: darkslategray;
+}
+.light a { color: darkslategray; }
+.light a:hover { color: black; }
+
+.dark {
+	background: darkslategray;
+	color: ghostwhite;
+}
+.dark a { color: ghostwhite; }
+.dark a:hover { color: white; }
+
+.card {
+	margin: 1em;
+	padding: 2em 3em;
+	background: white;
+	color: darkslategray;
+	border-radius: 0.25em;
+	box-shadow: 0 3px 7px rgba(0,0,0,0.19), 0 2px 2px rgba(0,0,0,0.23);
+}
+
+.btn {
+	border: 1px solid lightgray;
+}
+
+.btn-default {
+	background: whitesmoke;
+}
+.btn-default:hover {
+	background: silver;
+} 
+
+.container {
+	width: 95%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+input {
+	font-size: 1em;
+	margin: 0.5em 0;
+	padding: 0.5em 1em;
+
+	/* box-shadow transition */
+	-webkit-transition: box-shadow 200ms ease-in-out;
+	   -moz-transition: box-shadow 200ms ease-in-out;
+	    -ms-transition: box-shadow 200ms ease-in-out;
+	     -o-transition: box-shadow 200ms ease-in-out;
+	        transition: box-shadow 200ms ease-in-out;
+}
+
+input[type=text],[type=email],[type=password] {
+	width: 100%;
+	border: 1px solid lightgray;
+	border-radius: 0.25em;
+	outline: none;
+}
+
+input[type=text]:focus,
+input[type=text]:hover,
+input[type=email]:focus,
+input[type=email]:hover,
+input[type=password]:focus,
+input[type=password]:hover
+{
+	box-shadow: 0 0 6px rgba(35, 173, 278, 1);
+}
+
+input[type=submit] {
+	cursor: pointer;
+}
