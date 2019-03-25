@@ -1,3 +1,4 @@
+<?php require "assets/autoload.php"; new Database(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
