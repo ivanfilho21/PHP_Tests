@@ -23,6 +23,7 @@
 
 .btn {
 	border: 1px solid lightgray;
+	border-radius: 0.25em;
 }
 
 .btn-default {
