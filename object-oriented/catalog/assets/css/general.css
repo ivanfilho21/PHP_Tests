@@ -31,7 +31,22 @@
 }
 .btn-default:hover {
 	background: silver;
-} 
+}
+
+.alert {
+	margin: 0.5em 0 1em 0;
+	padding: 1em;
+	border-radius: 0.25em;
+}
+
+.alert-warning {
+	border: 1px solid moccasin;
+	background: lightyellow;
+}
+
+.error {
+	color: tomato;
+}
 
 .container {
 	width: 95%;
@@ -40,6 +55,7 @@
 }
 
 input {
+	display: block;
 	font-size: 1em;
 	margin: 0.5em 0;
 	padding: 0.5em 1em;
@@ -64,7 +80,8 @@ input[type=text]:hover,
 input[type=email]:focus,
 input[type=email]:hover,
 input[type=password]:focus,
-input[type=password]:hover
+input[type=password]:hover,
+input[type=submit]:focus
 {
 	box-shadow: 0 0 6px rgba(35, 173, 278, 1);
 }
