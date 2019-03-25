@@ -40,9 +40,13 @@ input[type=submit] {
 /* Mobile */
 @media (max-device-width: 1024px) {
 	.form-wrapper {
-		min-width: 60%;
-		max-width: 80%;
+		width: 100%;
 		margin: auto;
+	}
+
+	input[type=text],[type=email] {
+		width: 90%;
+		outline: none;
 	}
 }
 
@@ -71,8 +75,8 @@ input[type=submit] {
 	}
 
 	input[type=text],[type=email] {
-		min-width: 60%;
-		max-width: 70%;
+		min-width: 75%;
+		max-width: 90%;
 		outline: none;
 	}
 

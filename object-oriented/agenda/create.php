@@ -3,8 +3,8 @@
 <head>
     <title>Agenda - Create Contact</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/form.css">
 </head>
 <body>
     <section class="main-wrapper">
@@ -20,8 +20,8 @@
             </form>
         </div>
         
-        <br><br>
-        <a href="index.php">[ GO BACK ]</a>
+        <!-- <br><br>
+        <a href="index.php">[ GO BACK ]</a> -->
     </section>
 </body>
 </html>
