@@ -1,6 +1,6 @@
 <?php
-require "Contact.php";
 require "util.php";
+autoLoad();
 
 $contacts = new Contact();
 
