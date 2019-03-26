@@ -24,6 +24,7 @@
 .btn {
 	border: 1px solid lightgray;
 	border-radius: 0.25em;
+	margin-top: 1em;
 }
 
 .btn-default {
@@ -42,6 +43,13 @@
 .alert-warning {
 	border: 1px solid moccasin;
 	background: lightyellow;
+}
+.alert-title {
+	margin: 0.25em 0;
+}
+.alert-warning ul {
+	list-style: inherit;
+	padding: 0.5em 2em;
 }
 
 .error {

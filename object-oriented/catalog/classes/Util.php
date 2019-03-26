@@ -4,7 +4,7 @@ class Util
 {
 	public function __construct()
 	{
-		$errorMsg = array();
+		$this->errorMsg = array();
 	}
 
 	public function checkMethod($method)
@@ -22,6 +22,11 @@ class Util
 			return $data;
 		}
 		return "";
+	}
+
+	public function getErrorMessageArray()
+	{
+		return $this->errorMsg;
 	}
 
 	public function getErrorMessage($index)

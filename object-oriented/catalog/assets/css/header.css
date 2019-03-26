@@ -6,6 +6,11 @@
 
 .nav-bar-header {
 	font-size: 2em;
+	font-weight: 700;
+
+}
+.nav-bar a {
+	text-decoration: none;
 }
 
 .nav-bar-menu-list {
@@ -17,4 +22,8 @@
 	margin-top: 0.75em;
 	margin-bottom: 0.75em;
 	font-weight: 700;
+}
+
+.nav-bar-menu-list a {
+	font-size: 1.3em;
 }

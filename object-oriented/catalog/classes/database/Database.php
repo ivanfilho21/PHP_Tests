@@ -1,6 +1,6 @@
 <?php
 define("DB_TYPE", "mysql");
-define("DB_NAME", "blog_admin_db");
+define("DB_NAME", "catalog_db");
 define("DB_HOST", "127.0.0.1");
 define("DB_USER", "root");
 define("DB_PASS", "");
@@ -11,7 +11,6 @@ define("FLOAT", "FLOAT");
 define("VARCHAR", "VARCHAR");
 define("TEXT", "TEXT");
 define("LONGTEXT", "LONGTEXT");
-define("MD5", "MD5");
 
 # Useful characters
 define("COMMA", ", ");
@@ -23,12 +22,10 @@ define("BQ", "`"); #Backquote
 
 class Database
 {
-	private $pdo;
 	public function __construct()
 	{
-		#...
 		$this->pdo = $this->getDatabaseConnection();
-		$this->users = new User($this->pdo);
+		$this->users = new Users($this->pdo);
 
 		$this->users->createTable();
 	}
@@ -39,20 +36,19 @@ class Database
 	}
 
 	private function getDatabaseConnection() {
-		$pdo = null;
-
 		try {
 			$dsn = DB_TYPE . ":dbname=" . DB_NAME . ";host=" . DB_HOST;
 			$dbUser = DB_USER;
 			$dbPass = DB_PASS;
 
-			$this->pdo = new PDO($dsn, $dbUser, $dbPass);
+			$pdo = new PDO($dsn, $dbUser, $dbPass);
 			# echo "Connected to Database."; die();
+			return $pdo;
 		} catch(PDOException $e) {
 			# echo "<br>Connection failed:<br>" .$e->getMessage(); die();
 		}
 
-		return $pdo;
+		return null;
 	}
 
 	private function createTables()

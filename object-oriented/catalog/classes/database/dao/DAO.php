@@ -10,7 +10,7 @@
 * @author       Ivan Filho <ivanfilho21@gmail.com>
 *
 * Created: Mar 11, 2019.
-* Last Modified: Mar 20, 2019.
+* Last Modified: Mar 26, 2019.
 */
 
 abstract class DAO
@@ -51,9 +51,9 @@ abstract class DAO
 
     protected function create()
     {
-        $fields = DatabaseUtils::getColumnsInformationInline($this->columns);
+        $fields = DatabaseUtils::getFieldsFromColumnArray($this->columns);
 
-        $sql = "CREATE TABLE IF NOT EXISTS `" . $this->tableName . "` (" . $fields . ")";
+        $sql = "CREATE TABLE IF NOT EXISTS " .BQ .$this->tableName .BQ ." (" .$fields .")";
         # echo $sql; die();
 
         $this->db->query($sql);
@@ -75,10 +75,11 @@ abstract class DAO
 
     # Todo Methods: update and delete
 
-    # expects string as values
-    protected function insert($values)
+    # expects array with data to insert
+    protected function insert($array)
     {
-        $fields = DatabaseUtils::getColumnNamesInline($this->columns, false);
+        $fields = DatabaseUtils::getFieldsFromColumnArray($this->columns, false, false);
+        $values = DatabaseUtils::getValuesFromArray($array);
         
         $sql = "INSERT INTO " . QT_A . $this->tableName . QT_A . " (" . $fields . ") VALUES (" . $values . ")";
         # echo $sql; die();
@@ -104,13 +105,13 @@ abstract class DAO
         $this->executeQuery($sql);
     }
 
-    protected function select($whereColumnArray = "")
+    protected function select($selectColumnArray, $whereColumnArray = "")
     {
-        $table = QT_A .$this->tableName. QT_A;
-        $select = "*";
+        $table = QT_A .$this->tableName .QT_A;
+        $select = $this->formatSelectClause($selectColumnArray);
         $where = $this->formatWhereClause($whereColumnArray);
         
-        $sql = "SELECT " .$select. " FROM " .$table. $where;
+        $sql = "SELECT " .$select ." FROM " .$table .$where;
         # echo $sql; die();
 
         return $this->executeQuery($sql);
@@ -121,26 +122,29 @@ abstract class DAO
     public abstract function createTable();
     public abstract function dropTable();
 
-    # Private methods
-    private function formatWhereClause($whereColumns)
+    # Private Methods
+
+    private function formatSelectClause($columnArray)
     {
-        $whereClause = "";
+        $clause = "";
 
-        if (! empty($whereColumns)) {
-            $whereClause .= " WHERE ";
-
-            foreach ($whereColumns as $column) {
-                $whereClause .= QT_A .$column->getName(). QT_A ." = ". QT .$column->getValue(). QT . AND_A;
-
-                /*if (strpos($column->getValue(), "MD5") !== false)
-                    $whereClause .= $whereValues[$k] . " AND ";
-                else
-                    $whereClause .= QT . $whereValues[$k] . QT . " AND ";*/
-            }
-            $whereClause = substr($whereClause, 0, - strlen(AND_A));
+        foreach ($columnArray as $column) {
+            $clause .= BQ .$column->getName() .BQ .COMMA;
         }
-        # echo $whereClause; die();
+        return DatabaseUtils::removeLastString($clause, COMMA);
 
-        return $whereClause;
+    }
+
+    private function formatWhereClause($columnArray = "")
+    {
+        $clause = "";
+
+        if (! empty($columnArray)) {
+            $clause .= " WHERE ";
+            foreach ($columnArray as $column) {
+                $clause .= BQ .$column->getName() .BQ ." = " .QT .$column->getValue() .QT .AND_A;
+            }
+        }
+        return DatabaseUtils::removeLastString($clause, AND_A);
     }
 }

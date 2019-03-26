@@ -5,9 +5,15 @@
 	<h1>Register</h1>
 
 	<form method="post">
-		<?php if ($showWarning) : ?>
+		<?php if (count($util->getErrorMessageArray()) > 0) : ?>
 			<div class="alert alert-warning">
-				<?php $util->getErrorMessage("warning"); ?>
+				<h3 class="alert-title">Errors</h3>
+				<ul>
+					<?php foreach($util->getErrorMessageArray() as $error) : ?>
+						<li><?php echo $error; ?></li>
+					<?php endforeach; ?>
+				</ul>
+				
 			</div>
 		<?php endif; ?>
 
@@ -16,10 +22,10 @@
 		<input type="text" name="phone" placeholder="Phone number" value="<?php echo (isset($phone)) ? $phone : ''; ?>">
 
 		<input type="password" required name="password" placeholder="Password">
-		<span class="error"><?php echo $util->getErrorMessage("password1"); ?></span>
+		<span class="error"><?php #echo $util->getErrorMessage("password1"); ?></span>
 
 		<input type="password" required name="password-repeat" placeholder="Repeat the password">
-		<span class="error"><?php echo $util->getErrorMessage("password2"); ?></span>
+		<span class="error"><?php #echo $util->getErrorMessage("password2"); ?></span>
 
 		<input type="submit" name="register" value="Register" class="btn btn-default">
 	</form>

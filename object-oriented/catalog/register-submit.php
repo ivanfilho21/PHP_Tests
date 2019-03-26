@@ -1,19 +1,22 @@
 <?php
 $util = new Util();
-$users = $database->getUsersTable();
-$showWarning = false;
+$usersTable = $database->getUsersTable();
 
 if ($util->checkMethod("POST")) {
 	$name = $util->formatHTMLInput($_POST["name"]);
 	$email = $util->formatHTMLInput($_POST["email"]);
 	$password = $util->formatHTMLInput($_POST["password"]);
 	$passRepeat = $util->formatHTMLInput($_POST["password-repeat"]);
+	$phone = $util->formatHTMLInput($_POST["phone"]);
 
 	if (passwordValidation($password, $passRepeat)) {
-		$user->register($name, $email, $password, $phone);
-	}
-	else {
-		$showWarning = true;
+		$userArray = array("name" => $name, "email" => $email, "password" => md5($password), "phone" => $phone);
+		if ($usersTable->register($userArray)) {
+
+		}
+		else {
+			$util->setErrorMessage("warning", "E-mail \"" .$email ."\" has already been registered.");
+		}
 	}
 }
 
@@ -22,19 +25,13 @@ function passwordValidation($pass1, $pass2)
 	global $util;
 	$res = true;
 
-	if (strlen($pass1) < 6) {
-		$util->setErrorMessage("password1", "This password is too short.");
+	if (strlen($pass1) < 6 || strlen($pass2) < 6) {
+		$util->setErrorMessage("password", "Your password is too short. The minimum length is 6.");
 		$res = false;
 	}
-	if (strlen($pass2) < 6) {
-		$util->setErrorMessage("password2", "This password is too short.");
+	elseif ($pass1 !== $pass2) {
+		$util->setErrorMessage("password", "Passwords don't match.");
 		$res = false;
-	}
-	if ($res) {
-		if ($pass1 !== $pass2) {
-			$util->setErrorMessage("password2", "Passwords don't match.");
-			$res = false;
-		}
 	}
 
 	return $res;

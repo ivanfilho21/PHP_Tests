@@ -11,7 +11,7 @@ class Column
     private $extra = "";
     private $key = "";
 
-    public function __construct($name, $value, $dataType="", $length=0, $nullable="", $extra="", $key="")
+    public function __construct($name, $value, $dataType="", $length=0, $nullable=true, $extra="", $key="")
     {
         $this->setName($name);
         $this->setValue($value);
@@ -25,16 +25,16 @@ class Column
     public function getColumnInformation()
     {
         $info = "";
-        $info .= $this->getName() . " " . $this->getColumnType();
+        $info .= $this->getName() ." " .$this->getColumnType();
 
         if (! empty($this->getNullable()))
-            $info .= " " . $this->getNullable();
+            $info .= " " .$this->getNullable();
 
         if (! empty($this->getExtra()))
-            $info .= " " . $this->getExtra();
+            $info .= " " .$this->getExtra();
 
         if (! empty($this->getKey()))
-            $info .= " " . $this->getKey();
+            $info .= " " .$this->getKey();
 
         return $info;
     }
@@ -127,7 +127,7 @@ class Column
 
     public function setNullable($nullable)
     {
-        $this->nullable = $nullable;
+        $this->nullable = ($nullable) ? "" : "NOT NULL";
     }
 
     public function setKey($key)
