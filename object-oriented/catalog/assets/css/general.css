@@ -9,7 +9,7 @@
 	background: darkslategray;
 	color: ghostwhite;
 }
-.dark a { color: ghostwhite; }
+.dark a { color: lightgray; }
 .dark a:hover { color: white; }
 
 .card {
