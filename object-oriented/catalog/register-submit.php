@@ -1,6 +1,7 @@
 <?php
 $util = new Util();
-$user = new User();
+$users = $database->getUsersTable();
+$showWarning = false;
 
 if ($util->checkMethod("POST")) {
 	$name = $util->formatHTMLInput($_POST["name"]);
@@ -12,11 +13,7 @@ if ($util->checkMethod("POST")) {
 		$user->register($name, $email, $password, $phone);
 	}
 	else {
-		?>
-		<div class="alert alert-warning">
-			Check the passwords.
-		</div>
-		<?php
+		$showWarning = true;
 	}
 }
 

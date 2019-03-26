@@ -5,16 +5,37 @@ define("DB_HOST", "127.0.0.1");
 define("DB_USER", "root");
 define("DB_PASS", "");
 
+# SQL Types
+define("INT", "INT");
+define("FLOAT", "FLOAT");
+define("VARCHAR", "VARCHAR");
+define("TEXT", "TEXT");
+define("LONGTEXT", "LONGTEXT");
+define("MD5", "MD5");
+
+# Useful characters
+define("COMMA", ", ");
+define("AND_A", " AND ");
+define("QT_A", "`");
+define("QT", "'");
+
 define("BQ", "`"); #Backquote
 
 class Database
 {
+	private $pdo;
 	public function __construct()
 	{
 		#...
-		$pdo = $this->getDatabaseConnection();
+		$this->pdo = $this->getDatabaseConnection();
+		$this->users = new User($this->pdo);
 
-		$this->createTables();
+		$this->users->createTable();
+	}
+
+	public function getUsersTable()
+	{
+		return $this->users;
 	}
 
 	private function getDatabaseConnection() {

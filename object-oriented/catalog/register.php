@@ -1,12 +1,15 @@
 <?php require "pages/header.php"; ?>
-<?php #require "register-submit.php"; ?>
+<?php require "register-submit.php"; ?>
 
 <div class="card">
 	<h1>Register</h1>
 
 	<form method="post">
-
-		<?php require "register-submit.php"; ?>
+		<?php if ($showWarning) : ?>
+			<div class="alert alert-warning">
+				<?php $util->getErrorMessage("warning"); ?>
+			</div>
+		<?php endif; ?>
 
 		<input type="text" required name="name" placeholder="Name" value="<?php echo (isset($name)) ? $name : ''; ?>">
 		<input type="email" name="email" placeholder="E-mail" value="<?php echo (isset($email)) ? $email : ''; ?>">
