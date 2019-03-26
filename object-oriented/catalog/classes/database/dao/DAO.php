@@ -118,8 +118,21 @@ abstract class DAO
         
         $sql = "SELECT " .$select ." FROM " .$table .$where;
         # echo $sql; die();
+        $sql = $this->db->prepare($sql);
 
-        return $this->executeQuery($sql);
+        foreach ($whereColumnArray as $column) {
+            $sql->bindValue(CL .$column->getName(), $column->getValue());
+            # echo CL .$column->getName() . " = " . $column->getValue() . "<br>"  ;
+        }
+
+        $sql->execute();
+
+        if ($sql->rowCount() > 0) {
+            foreach ($sql->fetchAll() as $obj) {
+                return $obj;
+            }
+        }
+        return false;
     }
 
     # Abstract methods
@@ -131,6 +144,7 @@ abstract class DAO
 
     private function formatSelectClause($columnArray)
     {
+        if ($columnArray === "*") return $columnArray;
         $clause = "";
 
         foreach ($columnArray as $column) {
@@ -147,7 +161,7 @@ abstract class DAO
         if (! empty($columnArray)) {
             $clause .= " WHERE ";
             foreach ($columnArray as $column) {
-                $clause .= BQ .$column->getName() .BQ ." = " .QT .$column->getValue() .QT .AND_A;
+                $clause .= BQ .$column->getName() .BQ ." = " .CL .$column->getName() .AND_A;
             }
         }
         return DatabaseUtils::removeLastString($clause, AND_A);

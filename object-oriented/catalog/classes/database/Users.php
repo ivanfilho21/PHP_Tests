@@ -27,6 +27,11 @@ class Users extends DAO
 		return false;
 	}
 
+	public function login($userArray)
+	{
+		return $this->getIdByEmail($userArray["email"]);
+	}
+
 	private function getIdByEmail($email)
 	{
 		$s = parent::findColumn("id");
@@ -37,12 +42,10 @@ class Users extends DAO
 		$select = array($s);
 		$where = array($c);
 
-		$pdoStatement = parent::select($select, $where);
+		$id = parent::select($select, $where);
 
-		if ($pdoStatement->rowCount() > 0) {
-            foreach ($pdoStatement->fetchAll() as $info) {
-            	return $info["id"];
-            }
+		if ($id != false) {
+            return $id["id"];
 		}
 		return false;
 	}

@@ -1,5 +1,5 @@
 <?php require "pages/header.php"; ?>
-<?php require "register-submit.php"; ?>
+<?php require "login-script.php"; ?>
 
 <div class="card">
 	<h1>Register</h1>
@@ -21,7 +21,7 @@
 			<?php endif; ?>
 
 			<input type="text" required name="name" placeholder="Name" value="<?php echo (isset($name)) ? $name : ''; ?>">
-			<input type="email" name="email" placeholder="E-mail" value="<?php echo (isset($email)) ? $email : ''; ?>">
+			<input type="email" required name="email" placeholder="E-mail" value="<?php echo (isset($email)) ? $email : ''; ?>">
 			<input type="text" name="phone" placeholder="Phone number" value="<?php echo (isset($phone)) ? $phone : ''; ?>">
 			<input type="password" required name="password" placeholder="Password">
 			<input type="password" required name="password-repeat" placeholder="Repeat the password">
