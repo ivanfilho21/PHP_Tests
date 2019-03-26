@@ -34,23 +34,13 @@
 	background: silver;
 }
 
-.alert {
-	margin: 0.5em 0 1em 0;
-	padding: 1em;
-	border-radius: 0.25em;
-}
-
-.alert-warning {
-	border: 1px solid moccasin;
-	background: lightyellow;
-}
-.alert-title {
-	margin: 0.25em 0;
-}
-.alert-warning ul {
-	list-style: inherit;
-	padding: 0.5em 2em;
-}
+.alert { margin: 0.5em 0 1em 0; padding: 1em; border-radius: 0.25em; }
+.alert ul { list-style: inherit; padding: 0.5em 2em; }
+.alert a { font-weight: 700; }
+.alert-title { margin: 0.25em 0; }
+.alert-warning { border: 1px solid #FFE082; background: #FFF8E1; }
+.alert-success { border: 1px solid #C8E6C9; background: #E8F5E9; color: #1B5E20; }
+.alert-danger { border: 1px solid #EF9A9A; background: #FFEBEE; color: #B71C1C; }
 
 .error {
 	color: tomato;

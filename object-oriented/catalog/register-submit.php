@@ -1,6 +1,7 @@
 <?php
 $util = new Util();
 $usersTable = $database->getUsersTable();
+$finished = false;
 
 if ($util->checkMethod("POST")) {
 	$name = $util->formatHTMLInput($_POST["name"]);
@@ -12,10 +13,10 @@ if ($util->checkMethod("POST")) {
 	if (passwordValidation($password, $passRepeat)) {
 		$userArray = array("name" => $name, "email" => $email, "password" => md5($password), "phone" => $phone);
 		if ($usersTable->register($userArray)) {
-
+			$finished = true;
 		}
 		else {
-			$util->setErrorMessage("warning", "E-mail \"" .$email ."\" has already been registered.");
+			$util->setErrorMessage("email", "This e-mail has already been registered. <a href='login.php'>Login here</a>.");
 		}
 	}
 }
