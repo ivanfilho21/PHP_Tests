@@ -19,6 +19,7 @@ define("QT_A", "`");
 define("QT", "'");
 
 define("BQ", "`"); #Backquote
+define("CL", ":"); #Colon
 
 class Database
 {

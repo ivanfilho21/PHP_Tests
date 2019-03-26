@@ -79,12 +79,17 @@ abstract class DAO
     protected function insert($array)
     {
         $fields = DatabaseUtils::getFieldsFromColumnArray($this->columns, false, false);
-        $values = DatabaseUtils::getValuesFromArray($array);
-        
-        $sql = "INSERT INTO " . QT_A . $this->tableName . QT_A . " (" . $fields . ") VALUES (" . $values . ")";
-        # echo $sql; die();
+        $pseudoValues = DatabaseUtils::getPseudoValuesFromColumnArray($this->columns, false);
 
-        $this->db->query($sql);
+        $sql = "INSERT INTO " .QT_A .$this->tableName .QT_A ." SET " .$pseudoValues;
+        # echo $sql; die();
+        $sql = $this->db->prepare($sql);
+
+        foreach ($array as $key => $value) {
+            $sql->bindValue(CL .$this->findColumn($key)->getName(), $value);   
+        }
+
+        $sql->execute();
     }
 
     # expects array of Column as where condition

@@ -30,6 +30,20 @@ class DatabaseUtils
 		}
 	}
 
+	public function getPseudoValuesFromColumnArray($columnArray, $includePK=true)
+	{
+		$fields = "";
+		foreach ($columnArray as $column) {
+			if (! $includePK && $column->getKey() == "PRIMARY KEY") {
+	        	continue;
+	        }
+	        $fields .= $column->getName() ." = " .CL .$column->getName() .COMMA;
+		}
+		$fields = DatabaseUtils::removeLastString($fields, COMMA);
+		# echo $fields; die();
+		return $fields;
+	}
+
 	public function getValuesFromArray($array)
 	{
 		$values = "";
