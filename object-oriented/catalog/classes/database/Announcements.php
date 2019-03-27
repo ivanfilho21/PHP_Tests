@@ -9,6 +9,7 @@ class Announcements extends DAO
 		$this->tableName = "announcements";
         $this->columns[] = new Column("id", INT, 0, false, "AUTO_INCREMENT", "PRIMARY KEY");
         $this->columns[] = new Column("userId", INT, 0, false);
+        $this->columns[] = new Column("categoryId", INT, 0, false);
         $this->columns[] = new Column("title", VARCHAR, 100);
         $this->columns[] = new Column("description", VARCHAR, 100);
         $this->columns[] = new Column("price", FLOAT, -1);
@@ -36,6 +37,11 @@ class Announcements extends DAO
 			return $res;
 		}
 		return array();
+	}
+
+	public function addAnnouncement($announcementArray)
+	{
+		parent::insert($announcementArray);
 	}
 
 	# Override

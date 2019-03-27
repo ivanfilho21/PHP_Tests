@@ -1,11 +1,11 @@
-<?php require "pages/header.php" ?>
-<?php $categories = $database->getCategoriesTable(); ?>
+<?php require "pages/header.php"; ?>
+<?php require "create-announcement-submit.php"; ?>
 
 <section class="card">
 	<h1 class="form-title">New Announcement</h1>
 	<form method="POST" enctype="multipart/form-data">
 		<label>Category</label>
-		<select name="categories">
+		<select name="category">
 			<?php foreach ($categories->getAll() as $category) : ?>
 				<option><?php echo $category["name"]; ?></option>
 			<?php endforeach; ?>
@@ -30,4 +30,4 @@
 	</form>
 </section>
 
-<?php require "pages/footer.php" ?>
+<?php require "pages/footer.php"; ?>

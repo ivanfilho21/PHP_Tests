@@ -86,7 +86,8 @@ abstract class DAO
         $sql = $this->db->prepare($sql);
 
         foreach ($array as $key => $value) {
-            $sql->bindValue(CL .$this->findColumn($key)->getName(), $value);   
+            $sql->bindValue(CL .$this->findColumn($key)->getName(), $value);
+            # echo CL .$this->findColumn($key)->getName() . " = " . $value . "<br>"  ;   
         }
 
         $sql->execute();
