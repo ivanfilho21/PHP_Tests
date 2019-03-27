@@ -29,22 +29,38 @@ class Users extends DAO
 
 	public function login($userArray)
 	{
-		return $this->getIdByEmail($userArray["email"]);
+		#return $this->getIdByEmail($userArray["email"]);
+
+		$s = parent::findColumn("id");
+
+		$c1 = parent::findColumn("email");
+		$c1->setValue($userArray["email"]);
+
+		$c2 = parent::findColumn("password");
+		$c2->setValue($userArray["password"]);
+
+		$select = array($s);
+		$where = array($c1, $c2);
+
+		$res = parent::select($select, $where);
+		echo $res;
 	}
 
 	private function getIdByEmail($email)
 	{
 		$s = parent::findColumn("id");
-		$c = parent::findColumn("email");
 
+		$c = parent::findColumn("email");
 		$c->setValue($email);
 
 		$select = array($s);
 		$where = array($c);
 
 		$id = parent::select($select, $where);
+		echo "ID: " .$id["id"];
 
 		if ($id != false) {
+			echo "id " .$id;
             return $id["id"];
 		}
 		return false;

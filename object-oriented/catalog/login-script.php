@@ -28,13 +28,14 @@ if ($util->checkMethod("POST")) {
 
 		$userArray = array("email" => $email, "password" => md5($password));
 		$id = $usersTable->login($userArray);
+		
 		if ($id !== false) {
 			setUserSession($id);
 
 			# Redirect to index page
 			?>
 			<script>
-				window.location.href = "./";
+				// window.location.href = "./";
 			</script>
 			<?php
 		}

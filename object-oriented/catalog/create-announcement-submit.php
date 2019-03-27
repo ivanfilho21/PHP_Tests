@@ -21,8 +21,22 @@ if ($util->checkMethod("POST")) {
 		$description = $util->formatHTMLInput($_POST["description"]);
 
 		# validation
-		$announcementArray = array("userId" => $userId, "categoryId" => $categoryId, "title" => $title, "condition" => $condition, "price" => $price, "description" => $description);
+		if (validation($price)) {
+			$announcementArray = array("userId" => $userId, "categoryId" => $categoryId, "title" => $title, "condition" => $condition, "price" => $price, "description" => $description);
 
-		$announcements->addAnnouncement($announcementArray);
+			$announcements->addAnnouncement($announcementArray);
+		}
 	}
+}
+
+function validation($price)
+{
+	$res = true;
+
+	if (number_format($price) <= 1) {
+		$res = false;
+		$util->setErrorMessage("price", "The price must be greater than $ 1.00");
+	}
+
+	return $res;
 }

@@ -4,6 +4,15 @@
 <section class="card">
 	<h1 class="form-title">New Announcement</h1>
 	<form method="POST" enctype="multipart/form-data">
+
+		<?php if (count($util->getErrorMessageArray()) > 0) : ?>
+			<div class="alert alert-warning">
+				<?php foreach ($util->getErrorMessageArray() as $error) : ?>
+					<?php echo $error; ?>
+				<?php endforeach; ?>
+			</div>
+		<?php endif; ?>
+		
 		<label>Category</label>
 		<select name="category">
 			<?php foreach ($categories->getAll() as $category) : ?>

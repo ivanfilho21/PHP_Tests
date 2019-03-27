@@ -118,14 +118,15 @@ abstract class DAO
         $where = $this->formatWhereClause($whereColumnArray);
         
         $sql = "SELECT " .$select ." FROM " .$table .$where;
-        #echo $sql; die();
+        echo $sql;
+        # die();
         
         if (! empty($where)) {
             $sql = $this->db->prepare($sql);
 
             foreach ($whereColumnArray as $column) {
                 $sql->bindValue(CL .$column->getName(), $column->getValue());
-                # echo CL .$column->getName() . " = " . $column->getValue() . "<br>"  ;
+                echo CL .$column->getName() . " = " . $column->getValue() . "<br>"  ;
             }
 
             $sql->execute();
@@ -133,6 +134,8 @@ abstract class DAO
         else {
             $sql = $this->db->query($sql);
         }
+
+        echo "Rows: " .$sql->rowCount();
 
         if ($sql->rowCount() > 0) {
             return $sql->fetchAll();
