@@ -1,7 +1,7 @@
 <?php require "pages/header.php"; ?>
 <?php require "login-script.php"; ?>
 
-<div class="card">
+<section class="card">
 	<h1>Login</h1>
 
 	<form method="post">
@@ -19,6 +19,6 @@
 
 		<input type="submit" name="login" value="Login" class="btn btn-default">
 	</form>
-</div>
+</section>
 
 <?php require "pages/footer.php"; ?>

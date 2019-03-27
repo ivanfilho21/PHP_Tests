@@ -27,13 +27,32 @@ class Database
 	{
 		$this->pdo = $this->getDatabaseConnection();
 		$this->users = new Users($this->pdo);
+		$this->categories = new Categories($this->pdo);
+		$this->announcements = new Announcements($this->pdo);
 
 		$this->users->createTable();
+		$this->categories->createTable();
+		$this->announcements->createTable();
+
+		#$this->categories->addCategory(array("name" => "Eletronics"));
+		#$this->categories->addCategory(array("name" => "Home"));
+		#$this->categories->addCategory(array("name" => "Health"));
+		#$this->categories->addCategory(array("name" => "Furnitures"));
 	}
 
 	public function getUsersTable()
 	{
 		return $this->users;
+	}
+
+	public function getCategoriesTable()
+	{
+		return $this->categories;
+	}
+
+	public function getAnnouncementsTable()
+	{
+		return $this->announcements;
 	}
 
 	private function getDatabaseConnection() {
@@ -75,6 +94,12 @@ class Database
 					BQ."description".BQ. " VARCHAR(100),".
 					BQ."price".BQ. " FLOAT,".
 					BQ."condition".BQ. " INT
+				)";
+
+		$sql = "CREATE TABLE IF NOT EXISTS announcement_images (".
+					BQ."id".BQ. " INT NOT NULL AUTO_INCREMENT PRIMARY KEY,".
+					BQ."announcementId".BQ. " INT NOT NULL,".
+					BQ."url".BQ. " VARCHAR(200) NOT NULL
 				)";
 		#echo $sql; die();
 	}

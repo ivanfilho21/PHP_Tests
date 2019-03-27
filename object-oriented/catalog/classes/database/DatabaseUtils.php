@@ -9,7 +9,7 @@
 * @author       Ivan Filho <ivanfilho21@gmail.com>
 *
 * Created: Mar 11, 2019.
-* Last Modified: Mar 26, 2019.
+* Last Modified: Mar 27, 2019.
 */
 
 class DatabaseUtils
@@ -62,10 +62,12 @@ class DatabaseUtils
 			if (! $includePK && $column->getKey() == "PRIMARY KEY") {
 	        	continue;
 	        }
-	        if ($fullInformation)
+	        if ($fullInformation) {
 		    	$fields .= $column->getColumnInformation();
-		    else
+	        }
+		    else {
 		    	$fields .= $column->getName();
+		    }
 
 		    $fields .= COMMA;
 		}

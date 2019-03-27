@@ -1,7 +1,7 @@
 <?php require "pages/header.php"; ?>
 <?php require "login-script.php"; ?>
 
-<div class="card">
+<section class="card">
 	<h1>Register</h1>
 
 	<?php #$finished = true; ?>
@@ -29,6 +29,6 @@
 			<input type="submit" name="register" value="Register" class="btn btn-default">
 		</form>
 	<?php endif; ?>
-</div>
+</section>
 
 <?php require "pages/footer.php"; ?>

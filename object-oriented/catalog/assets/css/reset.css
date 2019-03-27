@@ -1,6 +1,6 @@
 html, body, main, section, aside, span, div,
 ul, li,
-form, fieldset, legend, input,
+form, fieldset, legend, input, select, textarea,
 h1, h2, h3, h4, h5, p, a
 {
 	margin: 0;

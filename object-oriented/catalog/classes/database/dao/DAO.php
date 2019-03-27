@@ -10,7 +10,7 @@
 * @author       Ivan Filho <ivanfilho21@gmail.com>
 *
 * Created: Mar 11, 2019.
-* Last Modified: Mar 26, 2019.
+* Last Modified: Mar 27, 2019.
 */
 
 abstract class DAO
@@ -110,27 +110,36 @@ abstract class DAO
         $this->executeQuery($sql);
     }
 
-    protected function select($selectColumnArray, $whereColumnArray = "")
+    protected function select($selectColumnArray=array(), $whereColumnArray=array(), $additionalColumnArray=array(), $additionalTable="", $additionalWhere=array(), $limit="")
     {
         $table = QT_A .$this->tableName .QT_A;
-        $select = $this->formatSelectClause($selectColumnArray);
+        $select = $this->formatSelectClause($selectColumnArray, $additionalColumnArray, $additionalTable, $additionalWhere, $limit);
         $where = $this->formatWhereClause($whereColumnArray);
         
         $sql = "SELECT " .$select ." FROM " .$table .$where;
-        # echo $sql; die();
-        $sql = $this->db->prepare($sql);
+        #echo $sql; die();
+        
+        if (! empty($where)) {
+            $sql = $this->db->prepare($sql);
 
-        foreach ($whereColumnArray as $column) {
-            $sql->bindValue(CL .$column->getName(), $column->getValue());
-            # echo CL .$column->getName() . " = " . $column->getValue() . "<br>"  ;
+            foreach ($whereColumnArray as $column) {
+                $sql->bindValue(CL .$column->getName(), $column->getValue());
+                # echo CL .$column->getName() . " = " . $column->getValue() . "<br>"  ;
+            }
+
+            $sql->execute();
+        }
+        else {
+            $sql = $this->db->query($sql);
         }
 
-        $sql->execute();
-
         if ($sql->rowCount() > 0) {
-            foreach ($sql->fetchAll() as $obj) {
-                return $obj;
+            return $sql->fetchAll();
+            /*foreach ($sql->fetchAll() as $obj) {
+                #return $obj;
+                $list[] = $obj;
             }
+            return $list;*/
         }
         return false;
     }
@@ -142,16 +151,47 @@ abstract class DAO
 
     # Private Methods
 
-    private function formatSelectClause($columnArray)
+    private function formatSelectClause($columnArray=array(), $additionalColumnArray=array(), $additionalTable="", $additionalWhere=array(), $limit="")
     {
-        if ($columnArray === "*") return $columnArray;
+        #if ($columnArray === "*" && count($additionalColumnArray) == 0) return $columnArray;
         $clause = "";
 
-        foreach ($columnArray as $column) {
-            $clause .= BQ .$column->getName() .BQ .COMMA;
+        if (count($columnArray) > 0) {
+            /*if ($columnArray !== "*") {
+                
+            }
+            else {
+                $clause = $columnArray .COMMA;
+            }*/
+            foreach ($columnArray as $column) {
+                $clause .= BQ .$column->getName() .BQ .COMMA;
+            }
         }
-        return DatabaseUtils::removeLastString($clause, COMMA);
+        if (count($additionalColumnArray) > 0) {
+            foreach ($additionalColumnArray as $column) {
+                $clause .= "(";
+                $clause .= "SELECT " .BQ .$additionalTable .BQ ."." .BQ .$column->getName() .BQ ." FROM " .BQ .$additionalTable .BQ ." WHERE ";
 
+                if (count($additionalWhere) > 0) {
+                    foreach ($additionalWhere as $whereColumn) {
+                        $clause .= BQ .$additionalTable .BQ ."." .BQ .$whereColumn->getName() .BQ ." = " .BQ .$this->tableName .BQ ."." .BQ .$this->findColumn($whereColumn->getName())->getName() .BQ .AND_A;
+                    }
+                    $clause = DatabaseUtils::removeLastString($clause, AND_A);
+
+                    if (! empty($limit)) {
+                        $clause .= " LIMIT " .$limit;
+                    }
+                }
+
+                $clause .= ")";
+            }
+            # echo $clause; die();
+        }
+        else {
+            #$clause = DatabaseUtils::removeLastString($clause, COMMA);
+        }
+
+        return (empty($clause)) ? "*" : $clause;
     }
 
     private function formatWhereClause($columnArray = "")

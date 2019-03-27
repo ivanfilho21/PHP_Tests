@@ -3,29 +3,29 @@
 class Column
 {
     private $name = "";
-    private $value = "";
     private $dataType = ""; # Name of the type. Ex: INT
     private $length = 0;
     private $columnType = ""; # Name of the type plus the length. Ex: VARCHAR(200)
     private $nullable = true;
     private $extra = "";
     private $key = "";
+    private $value = "";
 
-    public function __construct($name, $value, $dataType="", $length=0, $nullable=true, $extra="", $key="")
+    public function __construct($name, $dataType, $length=0, $nullable=true, $extra="", $key="", $value="")
     {
         $this->setName($name);
-        $this->setValue($value);
         $this->setDataType($dataType);
         $this->setLength($length);
         $this->setNullable($nullable);
         $this->setExtra($extra);
         $this->setKey($key);
+        $this->setValue($value);
     }
 
     public function getColumnInformation()
     {
         $info = "";
-        $info .= $this->getName() ." " .$this->getColumnType();
+        $info .= BQ .$this->getName() .BQ ." " .$this->getColumnType();
 
         if (! empty($this->getNullable()))
             $info .= " " .$this->getNullable();

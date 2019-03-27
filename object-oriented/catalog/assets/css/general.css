@@ -14,7 +14,8 @@
 
 .card {
 	margin: 1em;
-	padding: 2em 3em;
+	padding: 1.5em 2em;
+	/*padding: 2em 3em;*/
 	background: white;
 	color: darkslategray;
 	border-radius: 0.25em;
@@ -22,16 +23,25 @@
 }
 
 .btn {
+	display: block;
+	width: max-content;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	padding: 0.5em 1em;
 	border: 1px solid lightgray;
 	border-radius: 0.25em;
-	margin-top: 1em;
+	cursor: pointer;
+	text-decoration: none;
+}
+.btn:hover {
+	text-decoration: none;	
 }
 
 .btn-default {
 	background: whitesmoke;
 }
 .btn-default:hover {
-	background: silver;
+	background: gainsboro;
 }
 
 .alert { margin: 0.5em 0 1em 0; padding: 1em; border-radius: 0.25em; }
@@ -46,17 +56,49 @@
 	color: tomato;
 }
 
-.container {
-	width: 95%;
-	margin-left: auto;
-	margin-right: auto;
+/* TABLES */
+
+.table {
+	border-collapse: collapse;
+	width: 100%;
 }
 
-input {
+.table th {
+	padding: 0.5em 0.15em;
+}
+
+.table-stripped tr:first-child td {
+	border-top: 2px solid #ddd;
+}
+
+.table-stripped td {
+	border-top: 1px solid #ccc;
+	padding: 0.25em 0.15em;
+}
+
+.table-stripped tbody tr:nth-child(odd) {
+	background: whitesmoke;
+}
+
+
+.form-title {
+	font-size: 2em;
+}
+
+label {
+	font-weight: 700;
+}
+
+input, textarea, select {
 	display: block;
-	font-size: 1em;
 	margin: 0.5em 0;
 	padding: 0.5em 1em;
+	width: 100%;
+	background: white;
+	border: 1px solid lightgray;
+	border-radius: 0.25em;
+	outline: none;
+	font-size: 1em;
 
 	/* box-shadow transition */
 	-webkit-transition: box-shadow 200ms ease-in-out;
@@ -66,24 +108,13 @@ input {
 	        transition: box-shadow 200ms ease-in-out;
 }
 
-input[type=text],[type=email],[type=password] {
-	width: 100%;
-	border: 1px solid lightgray;
-	border-radius: 0.25em;
-	outline: none;
+textarea {
+	resize: none;
 }
 
-input[type=text]:focus,
-input[type=text]:hover,
-input[type=email]:focus,
-input[type=email]:hover,
-input[type=password]:focus,
-input[type=password]:hover,
-input[type=submit]:focus
+input:focus,
+textarea:focus,
+select:focus
 {
 	box-shadow: 0 0 6px rgba(35, 173, 278, 1);
-}
-
-input[type=submit] {
-	cursor: pointer;
 }
