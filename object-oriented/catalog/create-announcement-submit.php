@@ -14,12 +14,13 @@ if ($util->checkMethod("POST")) {
 		$condition = $util->formatHTMLInput($_POST["condition"]);
 		$price = $util->formatHTMLInput($_POST["price"]);
 		$description = $util->formatHTMLInput($_POST["description"]);
+		$pictures = (isset($_FILES["pictures"])) ? $_FILES["pictures"] : array();
 
 		# validation
 		if (validation($price)) {
 			$announcementArray = array("userId" => $userId, "categoryId" => $categoryId, "title" => $title, "condition" => $condition, "price" => $price, "description" => $description);
 
-			$announcements->addAnnouncement($announcementArray);
+			$announcements->addAnnouncement($database, $announcementArray, $pictures);
 			$created = true;
 		}
 	}

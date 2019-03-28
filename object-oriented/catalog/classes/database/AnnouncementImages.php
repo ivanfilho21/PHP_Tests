@@ -7,7 +7,7 @@ class AnnouncementImages extends DAO
 		parent::__construct($pdo);
 
 		$this->tableName = "announcement_images";
-        $this->columns[] = new Column("id", INT, false, "AUTO_INCREMENT", "PRIMARY KEY");
+        $this->columns[] = new Column("id", INT, 0, false, "AUTO_INCREMENT", "PRIMARY KEY");
         $this->columns[] = new Column("announcementId", INT, false);
         $this->columns[] = new Column("url", VARCHAR, 200);
     }
@@ -15,6 +15,11 @@ class AnnouncementImages extends DAO
     public function findColumn($name)
     {
     	return parent::findColumn($name);
+    }
+
+    public function insert($array)
+    {
+        parent::insert($array);
     }
 
 	# Override

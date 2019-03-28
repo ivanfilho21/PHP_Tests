@@ -23,7 +23,7 @@
 				<?php foreach ($list as $announcement) : ?>
 					<tr>
 						<td>
-							<img class="thumb" src="assets/images/announcements/<?php echo (isset($announcement['url'])) ? $announcement['url'] : 'default.svg'; ?>">
+							<img class="thumb" src="<?php echo ANNOUNCEMENT_PICTURES_DIR ."/"; echo (isset($announcement['url'])) ? $announcement['url'] : 'default.svg'; ?>">
 						</td>
 						<td><?php echo $announcement["title"]; ?></td>
 						<td><?php echo number_format($announcement["price"]); ?></td>

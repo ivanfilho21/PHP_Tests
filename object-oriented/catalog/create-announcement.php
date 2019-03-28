@@ -7,7 +7,7 @@
 	<?php if ($created) : ?>
 		<div class="alert alert-success">
 			Your announcement was created successfully.<br><br>
-			<a href="./">Back to Dashboard</a>
+			<a href="./my-announcements.php">Back to your announcements</a>
 		</div>
 	<?php else : ?>
 		<form method="POST" enctype="multipart/form-data">
@@ -33,14 +33,23 @@
 			<label>Price</label>
 			<input type="text" name="price" placeholder="1.00" value="<?php echo (isset($price)) ? $price : ''; ?>">
 
-			<label>Product Condition</label>
-			<select name="condition">
-				<option value="0" <?php echo (isset($condition) && $condition == 0) ? "selected" : ""; ?>>New</option>
-				<option value="1" <?php echo (isset($condition) && $condition == 1) ? "selected" : ""; ?>>Used</option>
-			</select>
-			
-			<label>Description</label>
-			<textarea name="description" placeholder="Describe your product" rows="6"><?php echo (isset($description)) ? $description : ""; ?></textarea>
+			<fieldset>
+				<legend>Product Information</legend>
+
+				<div class="alert alert-default">
+					<h4>Pictures</h4>
+					<input type="file" name="pictures[]" multiple>
+				</div>
+				
+				<label>Product Condition</label>
+				<select name="condition">
+					<option value="0" <?php echo (isset($condition) && $condition == 0) ? "selected" : ""; ?>>New</option>
+					<option value="1" <?php echo (isset($condition) && $condition == 1) ? "selected" : ""; ?>>Used</option>
+				</select>
+				
+				<label>Description</label>
+				<textarea name="description" placeholder="Describe your product" rows="6"><?php echo (isset($description)) ? $description : ""; ?></textarea>
+			</fieldset>
 
 			<input type="submit" name="create" value="Create Announcement" class="btn btn-default">
 		</form>

@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+define("ANNOUNCEMENT_PICTURES_DIR", "assets/images/announcements");
+
 require "autoload.php";
 
 #globaL $database;

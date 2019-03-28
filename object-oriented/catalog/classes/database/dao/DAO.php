@@ -82,7 +82,7 @@ abstract class DAO
         $pseudoValues = DatabaseUtils::getPseudoValuesFromColumnArray($this->columns, false);
 
         $sql = "INSERT INTO " .BQ .$this->tableName .BQ ." SET " .$pseudoValues;
-        # echo $sql ."<br>"; die();
+        # echo $sql ."<br>"; #die();
         $sql = $this->db->prepare($sql);
 
         foreach ($array as $key => $value) {

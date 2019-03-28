@@ -60,13 +60,64 @@ class Announcements extends DAO
 		$additionalWhere = array($ac);
 		$limit = 1;
 
-		$res = parent::select($select, $where, $additionalColumns, $additionalTable, $additionalWhere, $limit, false);
+		$res = parent::select($select, $where, $additionalColumns, $additionalTable, $additionalWhere, $limit);
 		return ($res) ? $res : array();
 	}
 
-	public function addAnnouncement($announcementArray)
+	public function addAnnouncement($database, $announcementArray, $pictures=array())
 	{
 		parent::insert($announcementArray);
+
+		$supportedTypes = array("image/jpeg", "image/png");
+
+		for ($i = 0; $i < count($pictures["tmp_name"]); $i++) {
+			$type = $pictures["type"][$i];
+
+			if (in_array($type, $supportedTypes)) {
+				$tmpName = md5(time() .rand(0, 9999)) .".jpg";
+				$imagePath = ANNOUNCEMENT_PICTURES_DIR ."/" .$tmpName;
+				move_uploaded_file($pictures["tmp_name"][$i], $imagePath);
+
+				# resize and save image
+				$this->saveResizedImage($type, $imagePath);
+
+				$pictureArray = array("announcementId" => $this->db->lastInsertId(), "url" => $tmpName);
+				$database->getAnnouncementImagesTable()->insert($pictureArray);
+			}
+		}
+	}
+
+	private function saveResizedImage($type, $imagePath)
+	{
+		list($srcWidth, $srcHeight) = getimagesize($imagePath);
+		$ratio = $srcWidth / $srcHeight;
+		$width = 500;
+		$height = 500;
+
+		if ($width/$height > $ratio) {
+			$width = $height * $ratio;
+		}
+		else {
+			$height = $width * $ratio;
+		}
+
+		$img = imagecreatetruecolor($width, $height);
+		
+		
+		switch ($type) {
+			case "image/jpeg":
+				$src = imagecreatefromjpeg($imagePath);
+				break;
+			case "image/png":
+				$src = imagecreatefrompng($imagePath);
+				break;
+			default:
+				$src = "";
+				break;
+		}
+
+		imagecopyresampled($img, $src, 0, 0, 0, 0, $width, $height, $srcWidth, $srcHeight);
+		imagejpeg($img, $imagePath, 80);
 	}
 
 	public function editAnnouncement($announcementArray)
