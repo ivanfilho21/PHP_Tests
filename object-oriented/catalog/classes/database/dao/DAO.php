@@ -131,14 +131,14 @@ abstract class DAO
         $sql->execute();
     }
 
-    protected function select($selectColumnArray=array(), $whereColumnArray=array(), $additionalColumnArray=array(), $additionalTable="", $additionalWhere=array(), $limit="", $getAll=true)
+    protected function select($selectColumnArray=array(), $whereColumnArray=array(), $additionalColumnArray=array(), $additionalTable="", $additionalWhere=array(), $limit="", $additionalSelectColumn="")
     {
         $table = BQ .$this->tableName .BQ;
-        $select = $this->formatSelectClause($selectColumnArray, $additionalColumnArray, $additionalTable, $additionalWhere, $limit);
+        $select = $this->formatSelectClause($selectColumnArray, $additionalColumnArray, $additionalTable, $additionalWhere, $limit, $additionalSelectColumn);
         $where = $this->formatWhereClause($whereColumnArray);
         
         $sql = "SELECT " .$select ." FROM " .$table .$where;
-        #echo $sql ."<br>";
+        # echo $sql ."<br>";
         # die();
         
         if (! empty($where)) {
@@ -187,7 +187,7 @@ abstract class DAO
 
     # Private Methods
 
-    private function formatSelectClause($columnArray=array(), $additionalColumnArray=array(), $additionalTable="", $additionalWhere=array(), $limit="")
+    private function formatSelectClause($columnArray=array(), $additionalColumnArray=array(), $additionalTable="", $additionalWhere=array(), $limit="", $as="")
     {
         #if ($columnArray === "*" && count($additionalColumnArray) == 0) return $columnArray;
         $clause = "";
@@ -228,6 +228,9 @@ abstract class DAO
                 }
 
                 $clause .= ")";
+
+                if ($as !== "")
+                    $clause .= " AS " .BQ .$as .BQ;
             }
             # echo $clause; die();
         }

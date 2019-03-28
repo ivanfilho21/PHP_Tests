@@ -34,8 +34,9 @@ class Announcements extends DAO
 		$additionalTable = $database->getAnnouncementImagesTable()->getTableName();#"announcement_images"; #todo
 		$additionalWhere = array($ac);
 		$limit = 1;
+		$additionalSelectColumn = "url";
 
-		$res = parent::select($select, $where, $additionalColumns, $additionalTable, $additionalWhere, $limit);
+		$res = parent::select($select, $where, $additionalColumns, $additionalTable, $additionalWhere, $limit, $additionalSelectColumn);
 		return ($res) ? $res : array();
 	}
 
@@ -56,11 +57,13 @@ class Announcements extends DAO
 		$select = array();
 		$where = array($c1, $c2);
 		$additionalColumns = array($as);
-		$additionalTable = $database->getAnnouncementImagesTable()->getTableName();#"announcement_images"; #todo
+		$additionalTable = $database->getAnnouncementImagesTable()->getTableName();
 		$additionalWhere = array($ac);
 		$limit = 1;
+		$additionalSelectColumn = "url";
 
-		$res = parent::select($select, $where, $additionalColumns, $additionalTable, $additionalWhere, $limit);
+		$res = parent::select($select, $where, $additionalColumns, $additionalTable, $additionalWhere, $limit, $additionalSelectColumn);
+
 		return ($res) ? $res : array();
 	}
 
