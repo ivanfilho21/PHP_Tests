@@ -22,13 +22,15 @@
 				<?php #var_dump($list); ?>
 				<?php foreach ($list as $announcement) : ?>
 					<tr>
-						<td><img src="assets/images/announcements/<?php echo $announcement['url']; ?>"></td>
+						<td>
+							<img class="thumb" src="assets/images/announcements/<?php echo (isset($announcement['url'])) ? $announcement['url'] : 'default.svg'; ?>">
+						</td>
 						<td><?php echo $announcement["title"]; ?></td>
 						<td><?php echo number_format($announcement["price"]); ?></td>
 						<td>
-							<a href="#">Edit</a>
-							<a href="#">Delete</a>
-							<a href="#">Copy</a>
+							<a href="edit-announcement.php?id=<?php echo $announcement['id']; ?>" class="btn btn-default">Edit</a>
+							<a href="#" class="btn btn-default">Copy</a>
+							<a href="delete-announcement.php?id=<?php echo $announcement['id']; ?>" class="btn btn-danger">Delete</a>
 						</td>
 					</tr>
 				<?php endforeach; ?>

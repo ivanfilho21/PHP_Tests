@@ -15,10 +15,8 @@ define("LONGTEXT", "LONGTEXT");
 # Useful characters
 define("COMMA", ", ");
 define("AND_A", " AND ");
-define("QT_A", "`");
-define("QT", "'");
-
 define("BQ", "`"); #Backquote
+define("QT", "'"); #Single Quote
 define("CL", ":"); #Colon
 
 class Database

@@ -23,13 +23,9 @@ class Announcements extends DAO
 		$c->setValue($userId);
 
 		# additional selection
-		$as = $database->getAnnouncementImagesTable()->findColumn("url"); #new Column("url", VARCHAR, 200); #todo Database->get...
+		$as = $database->getAnnouncementImagesTable()->findColumn("url");
 		# additional condition
-		$ac = $database->getAnnouncementImagesTable()->findColumn("announcementId");#new Column("id", INT); # get from table instead
-
-		#echo $as->getName(); die();
-		#echo $ac->getName(); die();
-
+		$ac = $database->getAnnouncementImagesTable()->findColumn("announcementId");
 		$ac->setValue("id");
 
 		$select = array();
@@ -39,16 +35,52 @@ class Announcements extends DAO
 		$additionalWhere = array($ac);
 		$limit = 1;
 
-		$res = parent::select($select, $where, $additionalColumns, $additionalTable, $additionalWhere, $limit, true);
-		if ($res) {
-			return $res;
-		}
-		return array();
+		$res = parent::select($select, $where, $additionalColumns, $additionalTable, $additionalWhere, $limit);
+		return ($res) ? $res : array();
+	}
+
+	public function getUserAnnouncement($database, $id, $userId)
+	{
+		# condition
+		$c1 = parent::findColumn("id");
+		$c2 = parent::findColumn("userId");
+		$c1->setValue($id);
+		$c2->setValue($userId);
+
+		# additional selection
+		$as = $database->getAnnouncementImagesTable()->findColumn("url");
+		# additional condition
+		$ac = $database->getAnnouncementImagesTable()->findColumn("announcementId");
+		$ac->setValue("id");
+
+		$select = array();
+		$where = array($c1, $c2);
+		$additionalColumns = array($as);
+		$additionalTable = $database->getAnnouncementImagesTable()->getTableName();#"announcement_images"; #todo
+		$additionalWhere = array($ac);
+		$limit = 1;
+
+		$res = parent::select($select, $where, $additionalColumns, $additionalTable, $additionalWhere, $limit, false);
+		return ($res) ? $res : array();
 	}
 
 	public function addAnnouncement($announcementArray)
 	{
 		parent::insert($announcementArray);
+	}
+
+	public function editAnnouncement($announcementArray)
+	{
+		parent::update($announcementArray);
+	}
+
+	public function deleteAnnouncement($id)
+	{
+		$c = parent::findColumn("id");
+		$c->setValue($id);
+
+		$where = array($c);
+		parent::delete($where);
 	}
 
 	# Override

@@ -81,7 +81,7 @@ abstract class DAO
         $fields = DatabaseUtils::getFieldsFromColumnArray($this->columns, false, false);
         $pseudoValues = DatabaseUtils::getPseudoValuesFromColumnArray($this->columns, false);
 
-        $sql = "INSERT INTO " .QT_A .$this->tableName .QT_A ." SET " .$pseudoValues;
+        $sql = "INSERT INTO " .BQ .$this->tableName .BQ ." SET " .$pseudoValues;
         # echo $sql ."<br>"; die();
         $sql = $this->db->prepare($sql);
 
@@ -94,27 +94,31 @@ abstract class DAO
         $sql->execute();
     }
 
-    # expects array of Column as where condition
-    protected function delete($where)
+    protected function update($array)
     {
-        $condition = "";
 
-        foreach ($where as $column) {
-            $condition .= QT_A .$column->getName(). QT_A . " = " . QT .$column->getValue(). QT . " AND ";
-        }
-        $condition = substr($condition, 0, - strlen(" AND "));
-        # echo $condition; die();
-
-        $sql = "DELETE FROM " . QT_A .$this->tableName. QT_A . " WHERE " .$condition;
-
-        # echo $sql; die();
-
-        $this->executeQuery($sql);
     }
 
-    protected function select($selectColumnArray=array(), $whereColumnArray=array(), $additionalColumnArray=array(), $additionalTable="", $additionalWhere=array(), $limit="", $getAll=false)
+    # expects array of Column as where condition
+    protected function delete($whereColumnArray)
     {
-        $table = QT_A .$this->tableName .QT_A;
+        $where = $this->formatWhereClause($whereColumnArray);
+
+        $sql = "DELETE FROM " .BQ .$this->tableName .BQ .$where;
+        # echo $sql ."<br>"; die();
+        $sql = $this->db->prepare($sql);
+
+        foreach ($whereColumnArray as $column) {
+            $sql->bindValue(CL .$column->getName(), $column->getValue());
+            #  echo CL .$column->getName() . " = " . $column->getValue() . "<br>"  ;
+        }
+
+        $sql->execute();
+    }
+
+    protected function select($selectColumnArray=array(), $whereColumnArray=array(), $additionalColumnArray=array(), $additionalTable="", $additionalWhere=array(), $limit="", $getAll=true)
+    {
+        $table = BQ .$this->tableName .BQ;
         $select = $this->formatSelectClause($selectColumnArray, $additionalColumnArray, $additionalTable, $additionalWhere, $limit);
         $where = $this->formatWhereClause($whereColumnArray);
         

@@ -6,6 +6,18 @@ require "autoload.php";
 #globaL $database;
 $database = new Database();
 
+function checkUserPermissionToPage()
+{
+	if (empty (getUserSession())) {
+		?>
+		<script>
+			window.location.href = "./";
+		</script>
+		<?php
+		exit();
+	}
+}
+
 function getUserSession()
 {
 	if (isset($_SESSION["user-session-id"])) {

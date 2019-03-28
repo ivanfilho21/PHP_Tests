@@ -10,7 +10,11 @@
 
 }
 .nav-bar a {
+	color: lightgray;
 	text-decoration: none;
+}
+.nav-bar a:hover {
+	color: white;
 }
 
 .nav-bar-menu-list {

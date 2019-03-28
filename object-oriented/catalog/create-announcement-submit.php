@@ -1,16 +1,10 @@
 <?php
+checkUserPermissionToPage();
+
 $util = new Util();
 $categories = $database->getCategoriesTable();
 $announcements = $database->getAnnouncementsTable();
 $created = false;
-
-# User not logged
-if (empty(getUserSession())) {
-	?>
-	<script>window.location.href = "./"</script>
-	<?php
-	exit();
-}
 
 if ($util->checkMethod("POST")) {
 	if (isset($_POST["create"])) {

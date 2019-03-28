@@ -2,15 +2,16 @@
 	background: ghostwhite;
 	color: darkslategray;
 }
-.light a { color: darkslategray; }
-.light a:hover { color: black; }
+/*.light a { color: darkslategray; }
+.light a:hover { color: black; }*/
 
 .dark {
 	background: darkslategray;
 	color: ghostwhite;
 }
+/*
 .dark a { color: lightgray; }
-.dark a:hover { color: white; }
+.dark a:hover { color: white; }*/
 
 .card {
 	margin: 1em;
@@ -23,7 +24,7 @@
 }
 
 .btn {
-	display: block;
+	display: inline-block;
 	width: max-content;
 	margin-top: 1em;
 	margin-bottom: 1em;
@@ -33,16 +34,13 @@
 	cursor: pointer;
 	text-decoration: none;
 }
-.btn:hover {
-	text-decoration: none;	
-}
+.btn:hover { text-decoration: none;	}
 
-.btn-default {
-	background: whitesmoke;
-}
-.btn-default:hover {
-	background: gainsboro;
-}
+.btn-default { background: white; color: darkslategray; }
+.btn-default:hover { background: gainsboro; color: darkslategray; }
+
+.btn-danger { background: orangered; color: white; }
+.btn-danger:hover { background: firebrick; color: white; }
 
 .alert { margin: 0.5em 0 1em 0; padding: 1em; border-radius: 0.25em; }
 .alert ul { list-style: inherit; padding: 0.5em 2em; }
@@ -77,13 +75,21 @@
 }
 
 .table-stripped tbody tr:nth-child(odd) {
-	background: whitesmoke;
+	background: #FAFAFA;
+	/*background: whitesmoke;*/
 }
 
 .table-center {
 	text-align: center;
 }
 
+/* IMAGES */
+.thumb {
+	max-width: 60px;
+}
+
+
+/* FORMS */
 
 .form-title {
 	font-size: 2em;
