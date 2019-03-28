@@ -45,6 +45,15 @@
 .btn-danger { background: orangered; color: white; }
 .btn-danger:hover { background: firebrick; color: white; }
 
+.upload-btn-wrapper { position: relative; overflow: hidden; display: inline-block; }
+.upload-btn-wrapper input[type=file] {
+	font-size: 100px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0;
+}
+
 .alert { margin: 0.5em 0 1em 0; padding: 1em; border-radius: 0.25em; }
 .alert ul { list-style: inherit; padding: 0.5em 2em; }
 .alert a { font-weight: 700; }

@@ -38,7 +38,12 @@
 
 				<div class="alert alert-default">
 					<h4>Pictures</h4>
-					<input type="file" name="pictures[]" multiple>
+					<p>
+						Choose up to three pictures of your product.
+					</p>
+					<input type="file" name="pictures[]">
+					<input type="file" name="pictures[]">
+					<input type="file" name="pictures[]">
 				</div>
 				
 				<label>Product Condition</label>
