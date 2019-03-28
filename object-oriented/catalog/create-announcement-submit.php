@@ -2,6 +2,7 @@
 $util = new Util();
 $categories = $database->getCategoriesTable();
 $announcements = $database->getAnnouncementsTable();
+$created = false;
 
 # User not logged
 if (empty(getUserSession())) {
@@ -25,12 +26,14 @@ if ($util->checkMethod("POST")) {
 			$announcementArray = array("userId" => $userId, "categoryId" => $categoryId, "title" => $title, "condition" => $condition, "price" => $price, "description" => $description);
 
 			$announcements->addAnnouncement($announcementArray);
+			$created = true;
 		}
 	}
 }
 
 function validation($price)
 {
+	global $util;
 	$res = true;
 
 	if (number_format($price) <= 1) {

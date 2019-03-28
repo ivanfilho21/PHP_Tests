@@ -37,7 +37,7 @@ class DatabaseUtils
 			if (! $includePK && $column->getKey() == "PRIMARY KEY") {
 	        	continue;
 	        }
-	        $fields .= $column->getName() ." = " .CL .$column->getName() .COMMA;
+	        $fields .= BQ .$column->getName() .BQ ." = " .CL .$column->getName() .COMMA;
 		}
 		$fields = DatabaseUtils::removeLastString($fields, COMMA);
 		# echo $fields; die();
@@ -66,7 +66,7 @@ class DatabaseUtils
 		    	$fields .= $column->getColumnInformation();
 	        }
 		    else {
-		    	$fields .= $column->getName();
+		    	$fields .= BQ .$column->getName() .BQ;
 		    }
 
 		    $fields .= COMMA;

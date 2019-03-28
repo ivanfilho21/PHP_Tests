@@ -35,7 +35,7 @@ if ($util->checkMethod("POST")) {
 			# Redirect to index page
 			?>
 			<script>
-				// window.location.href = "./";
+				window.location.href = "./";
 			</script>
 			<?php
 		}

@@ -21,7 +21,7 @@
 		</div>
 		<ul class="nav-bar-menu-list">
 			<?php if (! empty(getUserSession())) : ?>
-				<li><a href="#">My Announcements</a></li>
+				<li><a href="my-announcements.php">My Announcements</a></li>
 				<li><a href="logout.php">Logout</a></li>
 			<?php else : ?>
 				<li><a href="register.php">Register</a></li>

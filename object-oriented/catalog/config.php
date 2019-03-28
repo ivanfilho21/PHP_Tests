@@ -3,7 +3,7 @@ session_start();
 
 require "autoload.php";
 
-globaL $database;
+#globaL $database;
 $database = new Database();
 
 function getUserSession()

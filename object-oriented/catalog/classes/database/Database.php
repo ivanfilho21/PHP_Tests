@@ -29,10 +29,12 @@ class Database
 		$this->users = new Users($this->pdo);
 		$this->categories = new Categories($this->pdo);
 		$this->announcements = new Announcements($this->pdo);
+		$this->announcementImg = new AnnouncementImages($this->pdo);
 
 		$this->users->createTable();
 		$this->categories->createTable();
 		$this->announcements->createTable();
+		$this->announcementImg->createTable();
 
 		#$this->categories->addCategory(array("name" => "Eletronics"));
 		#$this->categories->addCategory(array("name" => "Home"));
@@ -53,6 +55,11 @@ class Database
 	public function getAnnouncementsTable()
 	{
 		return $this->announcements;
+	}
+
+	public function getAnnouncementImagesTable()
+	{
+		return $this->announcementImg;
 	}
 
 	private function getDatabaseConnection() {

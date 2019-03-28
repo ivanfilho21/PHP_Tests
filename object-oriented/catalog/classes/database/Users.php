@@ -42,8 +42,11 @@ class Users extends DAO
 		$select = array($s);
 		$where = array($c1, $c2);
 
-		$res = parent::select($select, $where);
-		echo $res;
+		$user = parent::select(array(), $where);
+
+		#var_dump($user);
+		#echo "<br>ID: " .$user["id"];
+		return $user["id"];
 	}
 
 	private function getIdByEmail($email)

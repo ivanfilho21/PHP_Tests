@@ -10,7 +10,7 @@
 * @author       Ivan Filho <ivanfilho21@gmail.com>
 *
 * Created: Mar 11, 2019.
-* Last Modified: Mar 27, 2019.
+* Last Modified: Mar 28, 2019.
 */
 
 abstract class DAO
@@ -82,12 +82,13 @@ abstract class DAO
         $pseudoValues = DatabaseUtils::getPseudoValuesFromColumnArray($this->columns, false);
 
         $sql = "INSERT INTO " .QT_A .$this->tableName .QT_A ." SET " .$pseudoValues;
-        # echo $sql; die();
+        # echo $sql ."<br>"; die();
         $sql = $this->db->prepare($sql);
 
         foreach ($array as $key => $value) {
-            $sql->bindValue(CL .$this->findColumn($key)->getName(), $value);
-            # echo CL .$this->findColumn($key)->getName() . " = " . $value . "<br>"  ;   
+            $columnName = $this->findColumn($key)->getName();
+            $sql->bindValue(CL .$columnName, $value);
+            # echo CL .$columnName . " = " . $value . "<br>";
         }
 
         $sql->execute();
@@ -111,14 +112,14 @@ abstract class DAO
         $this->executeQuery($sql);
     }
 
-    protected function select($selectColumnArray=array(), $whereColumnArray=array(), $additionalColumnArray=array(), $additionalTable="", $additionalWhere=array(), $limit="")
+    protected function select($selectColumnArray=array(), $whereColumnArray=array(), $additionalColumnArray=array(), $additionalTable="", $additionalWhere=array(), $limit="", $getAll=false)
     {
         $table = QT_A .$this->tableName .QT_A;
         $select = $this->formatSelectClause($selectColumnArray, $additionalColumnArray, $additionalTable, $additionalWhere, $limit);
         $where = $this->formatWhereClause($whereColumnArray);
         
         $sql = "SELECT " .$select ." FROM " .$table .$where;
-        echo $sql;
+        #echo $sql ."<br>";
         # die();
         
         if (! empty($where)) {
@@ -126,7 +127,7 @@ abstract class DAO
 
             foreach ($whereColumnArray as $column) {
                 $sql->bindValue(CL .$column->getName(), $column->getValue());
-                echo CL .$column->getName() . " = " . $column->getValue() . "<br>"  ;
+                #echo CL .$column->getName() . " = " . $column->getValue() . "<br>"  ;
             }
 
             $sql->execute();
@@ -135,15 +136,17 @@ abstract class DAO
             $sql = $this->db->query($sql);
         }
 
-        echo "Rows: " .$sql->rowCount();
+        # echo "Rows: " .$sql->rowCount();
 
         if ($sql->rowCount() > 0) {
-            return $sql->fetchAll();
-            /*foreach ($sql->fetchAll() as $obj) {
-                #return $obj;
-                $list[] = $obj;
+            if ($getAll) {
+                return $sql->fetchAll();
             }
-            return $list;*/
+            else {
+                $all = $sql->fetchAll();
+                $k = key($all);
+                return $all[$k];
+            }
         }
         return false;
     }
@@ -171,14 +174,22 @@ abstract class DAO
                 $clause .= BQ .$column->getName() .BQ .COMMA;
             }
         }
+        else {
+            $clause = "*" .COMMA;
+        }
+        
         if (count($additionalColumnArray) > 0) {
+
             foreach ($additionalColumnArray as $column) {
                 $clause .= "(";
                 $clause .= "SELECT " .BQ .$additionalTable .BQ ."." .BQ .$column->getName() .BQ ." FROM " .BQ .$additionalTable .BQ ." WHERE ";
+                
+                #echo $clause ."<br>";
 
                 if (count($additionalWhere) > 0) {
                     foreach ($additionalWhere as $whereColumn) {
-                        $clause .= BQ .$additionalTable .BQ ."." .BQ .$whereColumn->getName() .BQ ." = " .BQ .$this->tableName .BQ ."." .BQ .$this->findColumn($whereColumn->getName())->getName() .BQ .AND_A;
+                        $clause .= BQ .$additionalTable .BQ ."." .BQ .$whereColumn->getName() .BQ ." = " .BQ .$this->tableName .BQ ."." .BQ .$this->findColumn($whereColumn->getValue())->getName() .BQ .AND_A;
+                        #$clause .= BQ .$additionalTable .BQ ."." .BQ .$whereColumn->getName() .BQ ." = " .BQ .$this->tableName .BQ ."." .BQ .$this->findColumn($whereColumn->getName())->getName() .BQ .AND_A;
                     }
                     $clause = DatabaseUtils::removeLastString($clause, AND_A);
 
@@ -192,7 +203,7 @@ abstract class DAO
             # echo $clause; die();
         }
         else {
-            #$clause = DatabaseUtils::removeLastString($clause, COMMA);
+            $clause = DatabaseUtils::removeLastString($clause, COMMA);
         }
 
         return (empty($clause)) ? "*" : $clause;
