@@ -94,9 +94,24 @@ abstract class DAO
         $sql->execute();
     }
 
-    protected function update($array)
+    protected function update($array, $whereColumnArray)
     {
+        $fields = DatabaseUtils::getFieldsFromColumnArray($this->columns, false, false);
+        $pseudoValues = DatabaseUtils::getPseudoValuesFromColumnArray($this->columns, false);
+        $where = $this->formatWhereClause($whereColumnArray);
 
+        $sql = "UPDATE " .BQ .$this->tableName .BQ ." SET " .$pseudoValues . $where;
+
+        # echo $sql ."<br>"; die();
+        $sql = $this->db->prepare($sql);
+
+        foreach ($array as $key => $value) {
+            $columnName = $this->findColumn($key)->getName();
+            $sql->bindValue(CL .$columnName, $value);
+            # echo CL .$columnName . " = " . $value . "<br>";
+        }
+
+        $sql->execute();
     }
 
     # expects array of Column as where condition
@@ -142,7 +157,17 @@ abstract class DAO
 
         # echo "Rows: " .$sql->rowCount();
 
-        if ($sql->rowCount() > 0) {
+        if ($sql->rowCount() == 1) {
+            $all = $sql->fetchAll();
+            $k = key($all);
+            return $all[$k];
+        }
+        elseif ($sql->rowCount() > 1) {
+            return $sql->fetchAll();
+        }
+        return false;
+
+        /*if ($sql->rowCount() > 0) {
             if ($getAll) {
                 return $sql->fetchAll();
             }
@@ -152,7 +177,7 @@ abstract class DAO
                 return $all[$k];
             }
         }
-        return false;
+        return false;*/
     }
 
     # Abstract methods

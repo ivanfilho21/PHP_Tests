@@ -71,7 +71,10 @@ class Announcements extends DAO
 
 	public function editAnnouncement($announcementArray)
 	{
-		parent::update($announcementArray);
+		$c = $this->findColumn("id");
+		$c->setValue($announcementArray["id"]);
+		$where = array($c);
+		parent::update($announcementArray, $where);
 	}
 
 	public function deleteAnnouncement($id)

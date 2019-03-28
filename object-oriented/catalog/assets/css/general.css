@@ -39,6 +39,9 @@
 .btn-default { background: white; color: darkslategray; }
 .btn-default:hover { background: gainsboro; color: darkslategray; }
 
+.btn-success { background: #47a245; color: white; }
+.btn-success:hover { background: #1e601e; color: white; }
+
 .btn-danger { background: orangered; color: white; }
 .btn-danger:hover { background: firebrick; color: white; }
 

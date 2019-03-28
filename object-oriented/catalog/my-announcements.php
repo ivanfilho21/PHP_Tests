@@ -6,7 +6,7 @@
 	$announcements = $database->getAnnouncementsTable();
 	$list = $announcements->getUserAnnouncements($database, getUserSession())
 	?>
-	<a href="create-announcement.php" class="btn btn-default">Create Announcement</a>
+	<a href="create-announcement.php" class="btn btn-success">Create Announcement</a>
 
 	<?php if (count($list) > 0) : ?>
 		<table class="table table-stripped table-center">

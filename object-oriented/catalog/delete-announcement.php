@@ -12,4 +12,9 @@ if ($util->checkMethod("GET")) {
 	$announcements->deleteAnnouncement($id);
 }
 header("Location: my-announcements.php");
+?>
+<script>
+	// window.location.href = "my-announcements.php";
+</script>
+<?php
 exit();

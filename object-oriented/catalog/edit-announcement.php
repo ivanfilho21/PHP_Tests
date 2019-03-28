@@ -12,9 +12,11 @@
 				<?php endforeach; ?>
 			</div>
 		<?php endif; ?>
+
+		<input type="hidden" name="id" value="<?php echo $id; ?>">
 		
 		<label>Category</label>
-		<select name="category">
+		<select name="categoryId">
 			<?php foreach ($categories->getAll() as $category) : ?>
 				<option value="<?php echo $category['id']; ?>" <?php echo (isset($categoryId) && $categoryId == $category["id"]) ? "selected" : ""; ?>><?php echo $category["name"]; ?></option>
 			<?php endforeach; ?>
@@ -35,7 +37,7 @@
 		<label>Description</label>
 		<textarea name="description" placeholder="Describe your product" rows="6"><?php echo (isset($description)) ? $description : ""; ?></textarea>
 
-		<input type="submit" name="create" value="Save" class="btn btn-default">
+		<input type="submit" name="edit" value="Save" class="btn btn-success">
 	</form>
 </section>
 

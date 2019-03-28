@@ -29,7 +29,10 @@ if ($util->checkMethod("POST")) {
 		$userArray = array("email" => $email, "password" => md5($password));
 		$id = $usersTable->login($userArray);
 		
-		if ($id !== false) {
+		if ($id == false) {
+			$util->setErrorMessage("login", "Failed to login. Check your e-mail and password and try again.");
+		}
+		else {
 			setUserSession($id);
 
 			# Redirect to index page
@@ -38,9 +41,6 @@ if ($util->checkMethod("POST")) {
 				window.location.href = "./";
 			</script>
 			<?php
-		}
-		else {
-			$util->setErrorMessage("login", "Failed to login. Check your e-mail and password and try again.");
 		}
 	}
 }
