@@ -28,6 +28,18 @@
 		<label>Price</label>
 		<input type="text" name="price" placeholder="1.00" value="<?php echo (isset($price)) ? $price : ''; ?>">
 
+		<div class="alert alert-default">
+			<h4>Pictures</h4>
+			<p>
+				Choose up to three pictures of your product.
+			</p>
+			<?php foreach ($announcement["pictures"] as $picture) : ?>
+				<div class="picture-item">
+					<img class="thumb" src="<?php echo ANNOUNCEMENT_PICTURES_DIR .'/' .$picture['url']; ?>" alt="Announcement Picture" border="0">
+				</div>
+			<?php endforeach; ?>
+		</div>
+
 		<label>Product Condition</label>
 		<select name="condition">
 			<option value="0" <?php echo (isset($condition) && $condition == 0) ? "selected" : ""; ?>>New</option>

@@ -17,6 +17,17 @@ class AnnouncementImages extends DAO
     	return parent::findColumn($name);
     }
 
+    public function getAll($announcementId)
+    {
+        # select
+        $select = array();
+
+        # condition
+        $where[] = DatabaseUtils::createCondition($this, "announcementId", $announcementId);
+
+        return parent::select($select, $where, array(), "", array(), "", true);
+    }
+
     public function insert($array)
     {
         parent::insert($array);

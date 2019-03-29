@@ -4,7 +4,7 @@
 	<h1>My Announcements</h1>
 	<?php
 	$announcements = $database->getAnnouncementsTable();
-	$list = $announcements->getUserAnnouncements($database, getUserSession())
+	$list = $announcements->getUserAnnouncements($database, getUserSession());
 	?>
 	<a href="create-announcement.php" class="btn btn-success">Create Announcement</a>
 

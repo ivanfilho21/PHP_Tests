@@ -80,4 +80,11 @@ class DatabaseUtils
 	{
 		return substr($sourceStr, 0, strlen($sourceStr) - strlen($str));
 	}
+
+	public function createCondition($dao, $columnName, $value)
+	{
+		$condition = $dao->findColumn($columnName);
+		$condition->setValue($value);
+		return $condition;
+	}
 }

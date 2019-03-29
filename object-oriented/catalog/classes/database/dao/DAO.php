@@ -10,7 +10,7 @@
 * @author       Ivan Filho <ivanfilho21@gmail.com>
 *
 * Created: Mar 11, 2019.
-* Last Modified: Mar 28, 2019.
+* Last Modified: Mar 29, 2019.
 */
 
 abstract class DAO
@@ -131,7 +131,7 @@ abstract class DAO
         $sql->execute();
     }
 
-    protected function select($selectColumnArray=array(), $whereColumnArray=array(), $additionalColumnArray=array(), $additionalTable="", $additionalWhere=array(), $limit="")
+    protected function select($selectColumnArray=array(), $whereColumnArray=array(), $additionalColumnArray=array(), $additionalTable="", $additionalWhere=array(), $limit="", $returnAsList=false)
     {
         $table = BQ .$this->tableName .BQ;
         $select = $this->formatSelectClause($selectColumnArray);
@@ -159,6 +159,12 @@ abstract class DAO
         # echo "Rows: " .$sql->rowCount();
 
         if ($sql->rowCount() == 1) {
+            if ($returnAsList) {
+                $list = array();
+                $list[] = $sql->fetch();
+                
+                return $list;
+            }
             return $sql->fetch();
         }
         elseif ($sql->rowCount() > 1) {
@@ -171,6 +177,7 @@ abstract class DAO
 
     public abstract function createTable();
     public abstract function dropTable();
+    #public abstract function findColumn();
 
     # Private Methods
 

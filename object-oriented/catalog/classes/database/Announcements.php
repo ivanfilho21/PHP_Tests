@@ -36,7 +36,10 @@ class Announcements extends DAO
 		$limit = 1;
 		$additionalSelectColumn = "url";
 
-		$res = parent::select($select, $where, $additionalColumns, $additionalTable, $additionalWhere, $limit, $additionalSelectColumn);
+		$returnAsList = true;
+
+		$res = parent::select($select, $where, $additionalColumns, $additionalTable, $additionalWhere, $limit, $additionalSelectColumn, $returnAsList);
+
 		return ($res) ? $res : array();
 	}
 
@@ -51,14 +54,20 @@ class Announcements extends DAO
 		$select = array();
 		$where = array($c1, $c2);
 
-		$res = parent::select($select, $where);
+		$announcement = parent::select($select, $where);
 
-		return ($res) ? $res : array();
+		# get pictures
+		$pictures = $database->getAnnouncementImagesTable()->getAll($announcement["id"]);
+
+		$announcement["pictures"] = $pictures;
+
+		return ($announcement) ? $announcement : array();
 	}
 
 	public function addAnnouncement($database, $announcementArray, $pictures=array())
 	{
 		parent::insert($announcementArray);
+		$announcementId = $this->db->lastInsertId();
 
 		$supportedTypes = array("image/jpeg", "image/png");
 
@@ -73,7 +82,7 @@ class Announcements extends DAO
 				# resize and save image
 				$this->saveResizedImage($type, $imagePath);
 
-				$pictureArray = array("announcementId" => $this->db->lastInsertId(), "url" => $tmpName);
+				$pictureArray = array("announcementId" => $announcementId, "url" => $tmpName);
 				$database->getAnnouncementImagesTable()->insert($pictureArray);
 			}
 		}
