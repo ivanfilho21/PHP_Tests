@@ -29,10 +29,10 @@ class Database
 		$this->announcements = new Announcements($this->pdo);
 		$this->announcementImg = new AnnouncementImages($this->pdo);
 
-		$this->users->createTable();
-		$this->categories->createTable();
-		$this->announcements->createTable();
-		$this->announcementImg->createTable();
+		#$this->users->create();
+		#$this->categories->create();
+		#$this->announcements->create();
+		#$this->announcementImg->create();
 
 		#$this->categories->addCategory(array("name" => "Eletronics"));
 		#$this->categories->addCategory(array("name" => "Home"));

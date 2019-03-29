@@ -12,7 +12,7 @@ if ($util->checkMethod("GET")) {
 
 	$pictures->delete($id);
 
-	header("Location: edit-announcement.php?id=" .$announcementId);
+	header("Location: announcement.php?id=" .$announcementId);
 	exit();
 }
 header("Location: ./");

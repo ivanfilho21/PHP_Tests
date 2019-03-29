@@ -24,7 +24,7 @@ abstract class DAO
         $this->db = $db;
     }
 
-    # Getters and Setters
+    # Getters
     public function getTableName()
     {
         return $this->tableName;
@@ -131,18 +131,29 @@ abstract class DAO
         $sql->execute();
     }
 
-    protected function select($selectColumnArray=array(), $whereColumnArray=array(), $additionalColumnArray=array(), $additionalTable="", $additionalWhere=array(), $limit="", $returnAsList=false)
+    protected function selectOne($select=array(), $where=array(), $asList=false)
     {
-        $table = BQ .$this->tableName .BQ;
-        $select = $this->formatSelectClause($selectColumnArray);
-        $select = $this->formatAdditionalSelectClause($select, $additionalColumnArray, $additionalTable, $additionalWhere, $limit);
-        $where = $this->formatWhereClause($whereColumnArray);
-        
-        $sql = "SELECT " .$select ." FROM " .$table .$where;
-        # echo $sql ."<br>";
-        # die();
-        
-        if (! empty($where)) {
+        $sql = $this->createSelectSQL($select, $where, 1);
+        return $this->select($sql, $where, $asList);
+    }
+
+    protected function selectAll($select=array(), $where=array(), $asList=false)
+    {
+        $sql = $this->createSelectSQL($select, $where);
+        return $this->select($sql, $where, $asList);
+    }
+
+    protected function selectWithAdditionalColumn($select=array(), $where=array(), $limit="", $additionalSelect=array(), $additionalWhere=array(), $additionalTable="", $additionalLimit="", $asList=false)
+    {
+        $sql = $this->createSelectSQL($select, $where, $limit, $additionalSelect, $additionalWhere, $additionalTable, $additionalLimit);
+        return $this->select($sql, $where, $asList);
+    }
+
+    private function select($sql, $whereColumnArray=array(), $asList=false)
+    {
+        #echo $sql ."<br>"; # die();
+
+        if (count($whereColumnArray) > 0) {
             $sql = $this->db->prepare($sql);
 
             foreach ($whereColumnArray as $column) {
@@ -156,30 +167,36 @@ abstract class DAO
             $sql = $this->db->query($sql);
         }
 
-        # echo "Rows: " .$sql->rowCount();
-
         if ($sql->rowCount() == 1) {
-            if ($returnAsList) {
-                $list = array();
+            #echo "Found 1";
+            if ($asList) {
+                #echo " as List.";
                 $list[] = $sql->fetch();
-                
                 return $list;
             }
             return $sql->fetch();
         }
         elseif ($sql->rowCount() > 1) {
+            #echo "Found " .$sql->rowCount();
             return $sql->fetchAll();
         }
         return false;
     }
 
-    # Abstract methods
-
-    public abstract function createTable();
-    public abstract function dropTable();
-    #public abstract function findColumn();
-
     # Private Methods
+
+    private function createSelectSQL($selectColumnArray=array(), $whereColumnArray=array(), $limit="", $additionalColumnArray=array(), $additionalWhere=array(), $additionalTable="", $additionalLimit="")
+    {
+        $table = BQ .$this->tableName .BQ;
+        $select = $this->formatSelectClause($selectColumnArray);
+        $select = $this->formatAdditionalSelectClause($select, $additionalColumnArray, $additionalWhere, $additionalTable, $additionalLimit);
+        $where = $this->formatWhereClause($whereColumnArray);
+
+        $sql = "SELECT " .$select ." FROM " .$table .$where;
+        $sql .= ($limit > 0) ? " LIMIT " .$limit : "";
+
+        return $sql;
+    }
 
     private function formatSelectClause($columnArray=array())
     {
@@ -194,7 +211,7 @@ abstract class DAO
         return (empty($clause)) ? "*" : $clause;
     }
 
-    private function formatAdditionalSelectClause($selectClause, $additionalColumnArray=array(), $additionalTable="", $additionalWhere=array(), $limit="")
+    private function formatAdditionalSelectClause($selectClause, $additionalColumnArray=array(), $additionalWhere=array(), $additionalTable="", $limit="")
     {
         $clause = $selectClause;
 

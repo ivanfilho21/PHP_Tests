@@ -16,45 +16,53 @@ class Announcements extends DAO
         $this->columns[] = new Column("description", VARCHAR, 100);
 	}
 
-	public function getUserAnnouncements($database, $userId)
+	public function insert($announcementArray, $pictureArray=array(), $database="")
+	{
+		parent::insert($announcementArray);
+		$announcementId = $this->db->lastInsertId();
+
+		$this->savePictures($database, $announcementId, $pictureArray);
+	}
+
+	public function update($announcementArray, $pictureArray=array(), $database="")
 	{
 		# condition
-		$c = parent::findColumn("userId");
-		$c->setValue($userId);
+		$where[] = DatabaseUtils::createCondition($this, "id", $announcementArray["id"]);
+		parent::update($announcementArray, $where);
 
-		# additional selection
-		$as = $database->getAnnouncementImagesTable()->findColumn("url");
-		# additional condition
-		$ac = $database->getAnnouncementImagesTable()->findColumn("announcementId");
-		$ac->setValue("id");
+		$this->savePictures($database, $announcementArray["id"], $pictureArray);
+	}
 
+	public function getAll($userId, $database="")
+	{
+		# select
 		$select = array();
-		$where = array($c);
-		$additionalColumns = array($as);
-		$additionalTable = $database->getAnnouncementImagesTable()->getTableName();#"announcement_images"; #todo
-		$additionalWhere = array($ac);
-		$limit = 1;
-		$additionalSelectColumn = "url";
+		# condition
+		$where[] = DatabaseUtils::createCondition($this, "userId", $userId);
 
-		$returnAsList = true;
+		$announcementImagesTable = $database->getAnnouncementImagesTable();
+		$additionalTable = $announcementImagesTable->getTableName();
+		$additionalSelect[] = DatabaseUtils::createSelection($announcementImagesTable, "url");
+		$additionalWhere[] = DatabaseUtils::createCondition($announcementImagesTable, "announcementId", "id");
+		$limit = "";
+		$additionalLimit = 1;
+		$asList = true;
 
-		$res = parent::select($select, $where, $additionalColumns, $additionalTable, $additionalWhere, $limit, $additionalSelectColumn, $returnAsList);
+		$res = parent::selectWithAdditionalColumn($select, $where, $limit, $additionalSelect, $additionalWhere, $additionalTable, $additionalLimit, $asList);
 
 		return ($res) ? $res : array();
 	}
 
-	public function getUserAnnouncement($database, $id, $userId)
+	public function get($id, $userId, $database)
 	{
-		# condition
-		$c1 = parent::findColumn("id");
-		$c2 = parent::findColumn("userId");
-		$c1->setValue($id);
-		$c2->setValue($userId);
-
+		# select
 		$select = array();
-		$where = array($c1, $c2);
 
-		$announcement = parent::select($select, $where);
+		# condition
+		$where[] = DatabaseUtils::createCondition($this, "id", $id);
+		$where[] = DatabaseUtils::createCondition($this, "userId", $userId);
+
+		$announcement = parent::selectOne($select, $where);
 
 		# get pictures
 		$pictures = $database->getAnnouncementImagesTable()->getAll($announcement["id"]);
@@ -66,11 +74,16 @@ class Announcements extends DAO
 		return array();
 	}
 
-	public function addAnnouncement($database, $announcementArray, $pictures=array())
+	public function delete($id)
 	{
-		parent::insert($announcementArray);
-		$announcementId = $this->db->lastInsertId();
+		$where[] = DatabaseUtils::createCondition($this, "id", $id);
+		parent::delete($where);
+	}
 
+	# Private methods
+
+	private function savePictures($database, $announcementId, $pictures)
+	{
 		$supportedTypes = array("image/jpeg", "image/png");
 
 		for ($i = 0; $i < count($pictures["tmp_name"]); $i++) {
@@ -122,33 +135,4 @@ class Announcements extends DAO
 		imagecopyresampled($img, $src, 0, 0, 0, 0, $width, $height, $srcWidth, $srcHeight);
 		imagejpeg($img, $imagePath, 80);
 	}
-
-	public function editAnnouncement($announcementArray)
-	{
-		$c = $this->findColumn("id");
-		$c->setValue($announcementArray["id"]);
-		$where = array($c);
-		parent::update($announcementArray, $where);
-	}
-
-	public function deleteAnnouncement($id)
-	{
-		$c = parent::findColumn("id");
-		$c->setValue($id);
-
-		$where = array($c);
-		parent::delete($where);
-	}
-
-	# Override
-	public function createTable()
-	{
-		parent::create();
-	}
-
-	# Override
-    public function dropTable()
-    {
-    	parent::drop();
-    }
 }

@@ -1,12 +1,13 @@
 <?php require "pages/header.php"; ?>
+<?php checkUserPermissionToPage(); ?>
 
 <section class="card">
 	<h1>My Announcements</h1>
 	<?php
 	$announcements = $database->getAnnouncementsTable();
-	$list = $announcements->getUserAnnouncements($database, getUserSession());
+	$list = $announcements->getAll(getUserSession(), $database);
 	?>
-	<a href="create-announcement.php" class="btn btn-success">Create Announcement</a>
+	<a href="announcement.php" class="btn btn-success">Create Announcement</a>
 
 	<?php if (count($list) > 0) : ?>
 		<table class="table table-stripped table-center">
@@ -28,7 +29,7 @@
 						<td><?php echo $announcement["title"]; ?></td>
 						<td><?php echo number_format($announcement["price"]); ?></td>
 						<td>
-							<a href="edit-announcement.php?id=<?php echo $announcement['id']; ?>" class="btn btn-default">Edit</a>
+							<a href="announcement.php?id=<?php echo $announcement['id']; ?>" class="btn btn-default">Edit</a>
 							<a href="#" class="btn btn-default">Copy</a>
 							<a href="delete-announcement.php?id=<?php echo $announcement['id']; ?>" class="btn btn-danger">Delete</a>
 						</td>
@@ -38,7 +39,7 @@
 		</table>
 	<?php else: ?>
 		<div class="alert alert-warning">
-			You don't have any announcements yet. <a href="create-announcement.php">Create your first</a>.
+			You don't have any announcements yet. <a href="announcement.php">Create your first</a>.
 		</div>
 	<?php endif; ?>
 </section>

@@ -1,8 +1,10 @@
 <?php require "pages/header.php"; ?>
-<?php require "create-announcement-submit.php"; ?>
+<?php require "announcement-submit.php"; ?>
 
 <section class="card">
-	<h1 class="form-title">New Announcement</h1>
+	<h1 class="form-title">
+		<?php echo ($createMode) ? 'New Announcement' : 'Edit Announcement'; ?>
+	</h1>
 
 	<?php if ($created) : ?>
 		<div class="alert alert-success">
@@ -19,9 +21,11 @@
 					<?php endforeach; ?>
 				</div>
 			<?php endif; ?>
+
+			<input type="hidden" name="id" value="<?php echo $id; ?>">
 			
 			<label>Category</label>
-			<select name="category">
+			<select name="categoryId">
 				<?php foreach ($categories->getAll() as $category) : ?>
 					<option value="<?php echo $category['id']; ?>" <?php echo (isset($categoryId) && $categoryId == $category["id"]) ? "selected" : ""; ?>><?php echo $category["name"]; ?></option>
 				<?php endforeach; ?>
@@ -36,24 +40,19 @@
 			<fieldset>
 				<legend>Product Information</legend>
 
-				<div class="alert alert-default">
+				<div class="panel">
 					<h4>Pictures</h4>
-					<p>
-						Choose up to three pictures of your product.
-					</p>
+
+					<input type="file" name="pictures[]" multiple>
 
 					<?php if (isset($announcement["pictures"]) && count($announcement["pictures"]) > 0) : ?>
-						<?php foreach ($announcement["pictures"] as $picture) : ?>
+						<?php foreach ($pictures as $picture) : ?>
 							<div class="picture-item">
 								<img class="thumb" src="<?php echo ANNOUNCEMENT_PICTURES_DIR .'/' .$picture['url']; ?>" alt="Announcement Picture" border="0">
 
 								<a href="delete-announcement-image.php?id=<?php echo $picture['id']; ?>" class="btn btn-danger">Delete</a>
 							</div>
 						<?php endforeach; ?>
-					<?php else : ?>
-						<input type="file" name="pictures[]">
-						<input type="file" name="pictures[]">
-						<input type="file" name="pictures[]">
 					<?php endif; ?>
 				</div>
 				
@@ -67,7 +66,7 @@
 				<textarea name="description" placeholder="Describe your product" rows="6"><?php echo (isset($description)) ? $description : ""; ?></textarea>
 			</fieldset>
 
-			<input type="submit" name="create" value="Create Announcement" class="btn btn-default">
+			<input type="submit" name="<?php echo ($createMode) ? 'create' : 'edit'; ?>" value="<?php echo ($createMode) ? 'Create Announcement' : 'Edit Announcement'; ?>" class="btn btn-success">
 		</form>
 	<?php endif; ?>
 

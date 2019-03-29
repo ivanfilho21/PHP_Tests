@@ -45,15 +45,6 @@
 .btn-danger { background: orangered; color: white; }
 .btn-danger:hover { background: firebrick; color: white; }
 
-.upload-btn-wrapper { position: relative; overflow: hidden; display: inline-block; }
-.upload-btn-wrapper input[type=file] {
-	font-size: 100px;
-	position: absolute;
-	left: 0;
-	top: 0;
-	opacity: 0;
-}
-
 .alert { margin: 0.5em 0 1em 0; padding: 1em; border-radius: 0.25em; }
 .alert ul { list-style: inherit; padding: 0.5em 2em; }
 .alert a { font-weight: 700; }
@@ -97,10 +88,24 @@
 }
 
 /* IMAGES */
+.picture-panel {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    text-align: center;
+}
 .picture-item {
 	display: inline-block;
+	margin: 0.5em;
+	padding: 0.5em;
+	background: white;
 }
 .picture-item a { display: block; margin: auto; }
+
+.border {
+	border: 1px solid #aaa;
+	border-radius: 0.25em;
+}
 
 .thumb {
 	width: 80px;
@@ -109,7 +114,6 @@
 	border-radius: 0.25em;
 	padding: 0.25em;
 }
-
 
 /* FORMS */
 
@@ -123,9 +127,10 @@ label {
 
 input, textarea, select {
 	display: block;
+	width: 100%;
 	margin: 0.5em 0;
 	padding: 0.5em 1em;
-	width: 100%;
+	max-width: 100%;
 	background: white;
 	border: 1px solid lightgray;
 	border-radius: 0.25em;
@@ -138,6 +143,11 @@ input, textarea, select {
 	    -ms-transition: box-shadow 200ms ease-in-out;
 	     -o-transition: box-shadow 200ms ease-in-out;
 	        transition: box-shadow 200ms ease-in-out;
+}
+
+input[type=file] {
+	background: none;
+	border: none;
 }
 
 textarea {

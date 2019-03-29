@@ -9,7 +9,7 @@ $announcements = $database->getAnnouncementsTable();
 if ($util->checkMethod("GET")) {
 	$id = $util->formatHTMLInput($_GET["id"]);
 
-	$announcements->deleteAnnouncement($id);
+	$announcements->delete($id);
 }
 header("Location: my-announcements.php");
 ?>
