@@ -131,10 +131,11 @@ abstract class DAO
         $sql->execute();
     }
 
-    protected function select($selectColumnArray=array(), $whereColumnArray=array(), $additionalColumnArray=array(), $additionalTable="", $additionalWhere=array(), $limit="", $additionalSelectColumn="")
+    protected function select($selectColumnArray=array(), $whereColumnArray=array(), $additionalColumnArray=array(), $additionalTable="", $additionalWhere=array(), $limit="")
     {
         $table = BQ .$this->tableName .BQ;
-        $select = $this->formatSelectClause($selectColumnArray, $additionalColumnArray, $additionalTable, $additionalWhere, $limit, $additionalSelectColumn);
+        $select = $this->formatSelectClause($selectColumnArray);
+        $select = $this->formatAdditionalSelectClause($select, $additionalColumnArray, $additionalTable, $additionalWhere, $limit);
         $where = $this->formatWhereClause($whereColumnArray);
         
         $sql = "SELECT " .$select ." FROM " .$table .$where;
@@ -158,26 +159,12 @@ abstract class DAO
         # echo "Rows: " .$sql->rowCount();
 
         if ($sql->rowCount() == 1) {
-            $all = $sql->fetchAll();
-            $k = key($all);
-            return $all[$k];
+            return $sql->fetch();
         }
         elseif ($sql->rowCount() > 1) {
             return $sql->fetchAll();
         }
         return false;
-
-        /*if ($sql->rowCount() > 0) {
-            if ($getAll) {
-                return $sql->fetchAll();
-            }
-            else {
-                $all = $sql->fetchAll();
-                $k = key($all);
-                return $all[$k];
-            }
-        }
-        return false;*/
     }
 
     # Abstract methods
@@ -187,28 +174,25 @@ abstract class DAO
 
     # Private Methods
 
-    private function formatSelectClause($columnArray=array(), $additionalColumnArray=array(), $additionalTable="", $additionalWhere=array(), $limit="", $as="")
+    private function formatSelectClause($columnArray=array())
     {
-        #if ($columnArray === "*" && count($additionalColumnArray) == 0) return $columnArray;
         $clause = "";
 
         if (count($columnArray) > 0) {
-            /*if ($columnArray !== "*") {
-                
-            }
-            else {
-                $clause = $columnArray .COMMA;
-            }*/
             foreach ($columnArray as $column) {
                 $clause .= BQ .$column->getName() .BQ .COMMA;
             }
         }
-        else {
-            $clause = "*" .COMMA;
-        }
-        
-        if (count($additionalColumnArray) > 0) {
 
+        return (empty($clause)) ? "*" : $clause;
+    }
+
+    private function formatAdditionalSelectClause($selectClause, $additionalColumnArray=array(), $additionalTable="", $additionalWhere=array(), $limit="")
+    {
+        $clause = $selectClause;
+
+        if (count($additionalColumnArray) > 0) {
+            $clause .= COMMA;
             foreach ($additionalColumnArray as $column) {
                 $clause .= "(";
                 $clause .= "SELECT " .BQ .$additionalTable .BQ ."." .BQ .$column->getName() .BQ ." FROM " .BQ .$additionalTable .BQ ." WHERE ";
@@ -226,19 +210,13 @@ abstract class DAO
                         $clause .= " LIMIT " .$limit;
                     }
                 }
-
                 $clause .= ")";
-
-                if ($as !== "")
-                    $clause .= " AS " .BQ .$as .BQ;
+                $clause .= " AS " .BQ .$column->getName() .BQ .COMMA;
             }
+            $clause = DatabaseUtils::removeLastString($clause, COMMA);
             # echo $clause; die();
         }
-        else {
-            $clause = DatabaseUtils::removeLastString($clause, COMMA);
-        }
-
-        return (empty($clause)) ? "*" : $clause;
+        return $clause;
     }
 
     private function formatWhereClause($columnArray = "")

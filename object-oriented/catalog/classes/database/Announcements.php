@@ -48,21 +48,10 @@ class Announcements extends DAO
 		$c1->setValue($id);
 		$c2->setValue($userId);
 
-		# additional selection
-		$as = $database->getAnnouncementImagesTable()->findColumn("url");
-		# additional condition
-		$ac = $database->getAnnouncementImagesTable()->findColumn("announcementId");
-		$ac->setValue("id");
-
 		$select = array();
 		$where = array($c1, $c2);
-		$additionalColumns = array($as);
-		$additionalTable = $database->getAnnouncementImagesTable()->getTableName();
-		$additionalWhere = array($ac);
-		$limit = 1;
-		$additionalSelectColumn = "url";
 
-		$res = parent::select($select, $where, $additionalColumns, $additionalTable, $additionalWhere, $limit, $additionalSelectColumn);
+		$res = parent::select($select, $where);
 
 		return ($res) ? $res : array();
 	}

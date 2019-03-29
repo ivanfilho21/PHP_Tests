@@ -57,7 +57,7 @@
 .alert { margin: 0.5em 0 1em 0; padding: 1em; border-radius: 0.25em; }
 .alert ul { list-style: inherit; padding: 0.5em 2em; }
 .alert a { font-weight: 700; }
-.alert h1, h2, h3, h4, h5 { margin: 0; }
+.alert h1, h2, h3, h4, h5 { margin: 0.5em 0; }
 .alert-default { border: 1px solid #aaa; background: whitesmoke; }
 .alert-warning { border: 1px solid #FFE082; background: #FFF8E1; }
 .alert-success { border: 1px solid #C8E6C9; background: #E8F5E9; color: #1B5E20; }
