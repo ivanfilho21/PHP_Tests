@@ -12,9 +12,12 @@ class AnnouncementImages extends DAO
         $this->columns[] = new Column("url", VARCHAR, 200);
     }
 
-    public function findColumn($name)
+    public function get($id)
     {
-    	return parent::findColumn($name);
+        $select = array();
+        $where[] = DatabaseUtils::createCondition($this, "id", $id);
+
+        return parent::select($select, $where);
     }
 
     public function getAll($announcementId)
@@ -28,9 +31,10 @@ class AnnouncementImages extends DAO
         return parent::select($select, $where, array(), "", array(), "", true);
     }
 
-    public function insert($array)
+    # Override
+    public function findColumn($name)
     {
-        parent::insert($array);
+        return parent::findColumn($name);
     }
 
 	# Override
@@ -43,5 +47,18 @@ class AnnouncementImages extends DAO
     public function dropTable()
     {
     	parent::drop();
+    }
+
+    # Override
+    public function insert($array)
+    {
+        parent::insert($array);
+    }
+    
+    # Override
+    public function delete($id)
+    {
+        $where[] = DatabaseUtils::createCondition($this, "id", $id);
+        parent::delete($where);
     }
 }

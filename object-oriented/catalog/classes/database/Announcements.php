@@ -59,9 +59,11 @@ class Announcements extends DAO
 		# get pictures
 		$pictures = $database->getAnnouncementImagesTable()->getAll($announcement["id"]);
 
-		$announcement["pictures"] = $pictures;
-
-		return ($announcement) ? $announcement : array();
+		if ($announcement !== false) {
+			$announcement["pictures"] = ($pictures !== false) ? $pictures : array();
+			return $announcement;
+		}
+		return array();
 	}
 
 	public function addAnnouncement($database, $announcementArray, $pictures=array())

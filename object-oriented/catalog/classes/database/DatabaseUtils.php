@@ -81,10 +81,20 @@ class DatabaseUtils
 		return substr($sourceStr, 0, strlen($sourceStr) - strlen($str));
 	}
 
-	public function createCondition($dao, $columnName, $value)
+	public function createSelection($dao, $columnName)
 	{
-		$condition = $dao->findColumn($columnName);
+		return DatabaseUtils::getColumnByName($dao, $columnName);
+	}
+
+	public function createCondition($dao, $columnName, $value)
+	{		
+		$condition = DatabaseUtils::getColumnByName($dao, $columnName);
 		$condition->setValue($value);
 		return $condition;
+	}
+
+	private function getColumnByName($dao, $columnName)
+	{
+		return $dao->findColumn($columnName);
 	}
 }

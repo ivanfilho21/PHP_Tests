@@ -30,16 +30,25 @@
 
 		<div class="alert alert-default">
 			<h4>Pictures</h4>
-			<p>
-				Choose up to three pictures of your product.
-			</p>
-			<?php foreach ($announcement["pictures"] as $picture) : ?>
-				<div class="picture-item">
-					<img class="thumb" src="<?php echo ANNOUNCEMENT_PICTURES_DIR .'/' .$picture['url']; ?>" alt="Announcement Picture" border="0">
+			
+			<?php if (count($announcement["pictures"]) > 0) : ?>
+				<?php foreach ($announcement["pictures"] as $picture) : ?>
+					<div class="picture-item">
+						<img class="thumb" src="<?php echo ANNOUNCEMENT_PICTURES_DIR .'/' .$picture['url']; ?>" alt="Announcement Picture" border="0">
 
-					<a href="delete-picture.php?id=<?php echo $picture['id']; ?>" class="btn btn-danger">Delete</a>
-				</div>
-			<?php endforeach; ?>
+						<a href="delete-announcement-image.php?id=<?php echo $picture['id']; ?>" class="btn btn-danger">Delete</a>
+					</div>
+				<?php endforeach; ?>
+			<?php else : ?>
+				<p>
+					Choose up to three pictures of your product.
+				</p>
+
+				<?php $size = (isset($_FILES["pictures"])) ? count($_FILES["pictures"]) : 0; ?>
+				<?php for ($i = $size; $i < 3; $i++) : ?>
+					<input type="file" name="pictures[]">
+				<?php endfor; ?>
+			<?php endif; ?>
 		</div>
 
 		<label>Product Condition</label>
