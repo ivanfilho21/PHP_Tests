@@ -97,8 +97,17 @@
 }
 
 /* IMAGES */
+.picture-item {
+	display: inline-block;
+}
+.picture-item a { display: block; margin: auto; }
+
 .thumb {
-	max-width: 60px;
+	width: 80px;
+	background: white; 
+	border: 1px solid #fff;
+	border-radius: 0.25em;
+	padding: 0.25em;
 }
 
 

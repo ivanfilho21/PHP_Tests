@@ -36,6 +36,8 @@
 			<?php foreach ($announcement["pictures"] as $picture) : ?>
 				<div class="picture-item">
 					<img class="thumb" src="<?php echo ANNOUNCEMENT_PICTURES_DIR .'/' .$picture['url']; ?>" alt="Announcement Picture" border="0">
+
+					<a href="delete-picture.php?id=<?php echo $picture['id']; ?>" class="btn btn-danger">Delete</a>
 				</div>
 			<?php endforeach; ?>
 		</div>
