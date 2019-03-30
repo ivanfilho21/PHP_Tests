@@ -9,8 +9,13 @@
 * @subpackage   class/database/dao
 * @author       Ivan Filho <ivanfilho21@gmail.com>
 *
+* Dependencies:
+* class Column.
+* class DatabaseUtils.
+* database-related constants.
+*
 * Created: Mar 11, 2019.
-* Last Modified: Mar 29, 2019.
+* Last Modified: Mar 30, 2019.
 */
 
 abstract class DAO
@@ -143,15 +148,16 @@ abstract class DAO
         return $this->select($sql, $where, $asList);
     }
 
-    protected function selectWithAdditionalColumn($select=array(), $where=array(), $limit="", $additionalSelect=array(), $additionalWhere=array(), $additionalTable="", $additionalLimit="", $asList=false)
+    #protected function selectWithAdditionalColumn($select=array(), $where=array(), $limit="", $additionalSelect=array(), $additionalWhere=array(), $additionalTable="", $additionalLimit="", $asList=false)
+    protected function selectWithAdditionalColumn($select=array(), $where=array(), $limit="", $additionalSelect=array(), $order=array(), $asList=false)
     {
-        $sql = $this->createSelectSQL($select, $where, $limit, $additionalSelect, $additionalWhere, $additionalTable, $additionalLimit);
+        $sql = $this->createSelectSQL($select, $where, $limit, $additionalSelect, $order);
         return $this->select($sql, $where, $asList);
     }
 
     private function select($sql, $whereColumnArray=array(), $asList=false)
     {
-        #echo $sql ."<br>"; # die();
+        # echo $sql ."<br>"; # die();
 
         if (count($whereColumnArray) > 0) {
             $sql = $this->db->prepare($sql);
@@ -185,14 +191,15 @@ abstract class DAO
 
     # Private Methods
 
-    private function createSelectSQL($selectColumnArray=array(), $whereColumnArray=array(), $limit="", $additionalColumnArray=array(), $additionalWhere=array(), $additionalTable="", $additionalLimit="")
+    private function createSelectSQL($selectColumnArray=array(), $whereColumnArray=array(), $limit="", $additionalColumnArray=array(), $order=array())
     {
         $table = BQ .$this->tableName .BQ;
         $select = $this->formatSelectClause($selectColumnArray);
-        $select = $this->formatAdditionalSelectClause($select, $additionalColumnArray, $additionalWhere, $additionalTable, $additionalLimit);
+        $select = $this->formatAdditionalSelectClause($select, $additionalColumnArray);
         $where = $this->formatWhereClause($whereColumnArray);
 
         $sql = "SELECT " .$select ." FROM " .$table .$where;
+        $sql .= (count($order) > 0) ? " ORDER BY " .BQ .$order["column"]->getName() .BQ ." " .$order["criteria"] : "";
         $sql .= ($limit > 0) ? " LIMIT " .$limit : "";
 
         return $sql;
@@ -211,31 +218,38 @@ abstract class DAO
         return (empty($clause)) ? "*" : $clause;
     }
 
-    private function formatAdditionalSelectClause($selectClause, $additionalColumnArray=array(), $additionalWhere=array(), $additionalTable="", $limit="")
+    private function formatAdditionalSelectClause($selectClause, $additionalColumnArray=array())
     {
         $clause = $selectClause;
 
         if (count($additionalColumnArray) > 0) {
             $clause .= COMMA;
-            foreach ($additionalColumnArray as $column) {
-                $clause .= "(";
-                $clause .= "SELECT " .BQ .$additionalTable .BQ ."." .BQ .$column->getName() .BQ ." FROM " .BQ .$additionalTable .BQ ." WHERE ";
-                
-                #echo $clause ."<br>";
+            foreach ($additionalColumnArray as $additional) {
+                $table = $additional["name"];
+                $select = $additional["select"];
+                $where = $additional["where"];
+                $as = $additional["as"];
+                $limit = $additional["limit"];
 
-                if (count($additionalWhere) > 0) {
-                    foreach ($additionalWhere as $whereColumn) {
-                        $clause .= BQ .$additionalTable .BQ ."." .BQ .$whereColumn->getName() .BQ ." = " .BQ .$this->tableName .BQ ."." .BQ .$this->findColumn($whereColumn->getValue())->getName() .BQ .AND_A;
-                        #$clause .= BQ .$additionalTable .BQ ."." .BQ .$whereColumn->getName() .BQ ." = " .BQ .$this->tableName .BQ ."." .BQ .$this->findColumn($whereColumn->getName())->getName() .BQ .AND_A;
+                $clause .= "(";
+                foreach ($select as $column) {
+                    $clause .= "SELECT " .BQ .$table .BQ ."." .BQ .$column->getName() .BQ ." FROM " .BQ .$table .BQ ." WHERE ";
+
+                    #echo $clause ."<br>";
+                    if (count($where) > 0) {
+                        foreach ($where as $whereColumn) {
+                            $clause .= BQ .$table .BQ ."." .BQ .$whereColumn->getName() .BQ ." = " .BQ .$this->tableName .BQ ."." .BQ .$this->findColumn($whereColumn->getValue())->getName() .BQ .AND_A;
+                        }
+                        $clause = DatabaseUtils::removeLastString($clause, AND_A);
                     }
-                    $clause = DatabaseUtils::removeLastString($clause, AND_A);
 
                     if (! empty($limit)) {
                         $clause .= " LIMIT " .$limit;
                     }
+
+                    $clause .= ")";
+                    $clause .= " AS " .BQ .$as .BQ .COMMA;
                 }
-                $clause .= ")";
-                $clause .= " AS " .BQ .$column->getName() .BQ .COMMA;
             }
             $clause = DatabaseUtils::removeLastString($clause, COMMA);
             # echo $clause; die();

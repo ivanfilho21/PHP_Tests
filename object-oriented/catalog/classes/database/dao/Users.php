@@ -40,6 +40,11 @@ class Users extends DAO
 		return ($user !== false) ? $user["id"] : false;
 	}
 
+	public function getAll()
+	{
+		return parent::selectAll(array(), array(), true);
+	}
+
 	private function getIdByEmail($email)
 	{
 		# select

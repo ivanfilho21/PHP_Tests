@@ -33,23 +33,85 @@ class Announcements extends DAO
 		$this->savePictures($database, $announcementArray["id"], $pictureArray);
 	}
 
-	public function getAll($userId, $database="")
+	public function getLatest($database, $limit="")
 	{
 		# select
 		$select = array();
-		# condition
-		$where[] = DatabaseUtils::createCondition($this, "userId", $userId);
 
+		# condition
+		$where = array();
+
+		# additionalSelections
+		$additional = array();
+
+		$table1 = array("name" => "", "select" => array(), "where"  => array(), "as" => "", "limit" => "");
 		$announcementImagesTable = $database->getAnnouncementImagesTable();
-		$additionalTable = $announcementImagesTable->getTableName();
-		$additionalSelect[] = DatabaseUtils::createSelection($announcementImagesTable, "url");
-		$additionalWhere[] = DatabaseUtils::createCondition($announcementImagesTable, "announcementId", "id");
-		$limit = "";
-		$additionalLimit = 1;
+
+		$table1["name"] = $announcementImagesTable->getTableName();
+		$table1["select"][] = DatabaseUtils::createSelection($announcementImagesTable, "url");
+		$table1["where"][] = DatabaseUtils::createCondition($announcementImagesTable, "announcementId", "id");
+		$table1["as"] = "url";
+		$table1["limit"] = 1;
+
+		$table2 = array("name" => "", "select" => array(), "where"  => array(), "limit" => "");
+		$categoriesTable = $database->getCategoriesTable();
+
+		$table2["name"] = $categoriesTable->getTableName();
+		$table2["select"][] = DatabaseUtils::createSelection($categoriesTable, "name");
+		$table2["where"][] = DatabaseUtils::createCondition($categoriesTable, "id", "categoryId");
+		$table2["as"] = "categoryName";
+		$table2["limit"] = 1;
+
+		$additional[] = $table1;
+		$additional[] = $table2;
+
+		# order
+		$order = array("column" => parent::findColumn("id"), "criteria" => "DESC");
+
+		# result as list, even if only one is queried
 		$asList = true;
 
-		$res = parent::selectWithAdditionalColumn($select, $where, $limit, $additionalSelect, $additionalWhere, $additionalTable, $additionalLimit, $asList);
+		$res = parent::selectWithAdditionalColumn($select, $where, $limit, $additional, $order, $asList);
+		return ($res) ? $res : array();
+	}
 
+	public function getAll($userId="", $database="")
+	{
+		# select
+		$select = array();
+
+		# condition
+		$where = array();
+		if (! empty($userId))
+			$where[] = DatabaseUtils::createCondition($this, "userId", $userId);
+
+		# additionalSelections
+		$additional = array();
+
+		if (! empty($database)) {
+			$table1 = array("name" => "", "select" => array(), "where"  => array(), "as" => "", "limit" => "");
+			$announcementImagesTable = $database->getAnnouncementImagesTable();
+
+			$table1["name"] = $announcementImagesTable->getTableName();
+			$table1["select"][] = DatabaseUtils::createSelection($announcementImagesTable, "url");
+			$table1["where"][] = DatabaseUtils::createCondition($announcementImagesTable, "announcementId", "id");
+			$table1["as"] = "url";
+			$table1["limit"] = 1;
+
+			$additional[] = $table1;
+		}
+
+		# query limit
+		$limit = "";
+
+		# order
+		#$order = array();
+		$order = array("column" => parent::findColumn("id"), "criteria" => "DESC");
+
+		# result as list
+		$asList = true;
+
+		$res = parent::selectWithAdditionalColumn($select, $where, $limit, $additional, $order, $asList);
 		return ($res) ? $res : array();
 	}
 
