@@ -12,6 +12,7 @@ PHP scripts with HTML5 and CSS3.
 
 ## Live Projects
 * ### [Agenda](http://ivanfilho21.000webhostapp.com/agenda/index.php)
+* ### [Catalog](https://ivanfilho21.000webhostapp.com/catalog/index.php)
 * ### [Task Manager](https://ivanfilho21.000webhostapp.com/index.php)
 * ### [Login System](https://ivanfilho21.000webhostapp.com/auth/index.php) (Contains some issues)
 
