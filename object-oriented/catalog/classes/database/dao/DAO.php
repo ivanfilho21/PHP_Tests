@@ -49,7 +49,7 @@ abstract class DAO
 
     # Generic Table methods
 
-    protected function create()
+    public function create()
     {
         $fields = DatabaseUtils::getFieldsFromColumnArray($this->columns);
 
@@ -59,7 +59,7 @@ abstract class DAO
         $this->db->query($sql);
     }
 
-    protected function drop()
+    public function drop()
     {
         $sql = "DROP TABLE IF EXISTS `" . $this->tableName . "`";
         # echo $sql; die();
@@ -76,7 +76,7 @@ abstract class DAO
     # Todo Methods: update and delete
 
     # expects array with data to insert
-    protected function insert($array)
+    public function insert($array)
     {
         $fields = DatabaseUtils::getFieldsFromColumnArray($this->columns, false, false);
         $pseudoValues = DatabaseUtils::getPseudoValuesFromColumnArray($this->columns, false);

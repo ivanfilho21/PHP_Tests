@@ -3,7 +3,7 @@
 			© 2019 - <a href="https://github.com/ivanfilho21">Ivan Filho</a>
 		</p>
 		<p class="license">
-			Licensed under MIT License.
+			Licensed under the MIT License.
 		</p>
 	</footer>
 </body>

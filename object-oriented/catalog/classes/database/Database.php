@@ -34,10 +34,10 @@ class Database
 		#$this->announcements->create();
 		#$this->announcementImg->create();
 
-		#$this->categories->addCategory(array("name" => "Eletronics"));
-		#$this->categories->addCategory(array("name" => "Home"));
-		#$this->categories->addCategory(array("name" => "Health"));
-		#$this->categories->addCategory(array("name" => "Furnitures"));
+		#$this->categories->insert(array("name" => "Eletronics"));
+		#$this->categories->insert(array("name" => "Home"));
+		#$this->categories->insert(array("name" => "Health"));
+		#$this->categories->insert(array("name" => "Furnitures"));
 	}
 
 	public function getUsersTable()

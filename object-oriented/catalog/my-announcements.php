@@ -30,7 +30,6 @@
 						<td><?php echo number_format($announcement["price"]); ?></td>
 						<td>
 							<a href="announcement.php?id=<?php echo $announcement['id']; ?>" class="btn btn-default">Edit</a>
-							<a href="#" class="btn btn-default">Copy</a>
 							<a href="delete-announcement.php?id=<?php echo $announcement['id']; ?>" class="btn btn-danger">Delete</a>
 						</td>
 					</tr>
