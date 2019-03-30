@@ -1,9 +1,5 @@
 <?php require "pages/header.php"; ?>
-<?php $announcements = $database->getAnnouncementsTable(); ?>
-<?php $users = $database->getUsersTable(); ?>
-<?php $totalAnnouncements = count($announcements->getAll()); ?>
-<?php $totalUsers = count($users->getAll()); ?>
-
+<?php require "index-script.php"; ?>
 	<section class="card">
 		<h1>We now have <?php echo $totalAnnouncements; ?>  advertisement<?php echo ($totalAnnouncements > 1) ? "s" : ""; ?></h1>
 		<h3>And <?php echo $totalUsers; ?> registered user<?php echo ($totalUsers > 1) ? "s" : ""; ?></h3>
@@ -11,30 +7,50 @@
 
 	<section class="card">
 		<h3>Advanced Search</h3>
+
+		<form method="GET">
+			<label>By Category</label>
+			<?php foreach ($categories->getAll() as $category) : ?>
+			<input type="checkbox" name="filter[category][]"><label for="filter[category][]"><?php echo $category['name']; ?></label>
+			<?php endforeach; ?>
+
+			<select name="filter[category]">
+			<?php foreach ($categories->getAll() as $category) : ?>
+				<option value="<?php echo $category['id']; ?>" <?php echo (isset($categoryId) && $categoryId == $category["id"]) ? "selected" : ""; ?>><?php echo $category["name"]; ?></option>
+			<?php endforeach; ?>
+			</select>
+			<input type="submit" name="search" value="Search" class="btn btn-default">
+		</form>
 	</section>
 
 	<section class="card">
 		<h3>Newest Announcements</h3>
-		<?php foreach ($announcements->getLatest($database, 5) as $a) : ?>
-			<table>
-				<tbody>
-					<tr>
-						<td>
-							<?php echo $a["categoryName"]; ?>
-						</td>
-						<td>
-							<img class="thumb" src="<?php echo ANNOUNCEMENT_PICTURES_DIR ."/"; echo (isset($a['url'])) ? $a['url'] : 'default.svg'; ?>">
-						</td>
-						<td>
-							<?php echo $a["title"]; ?>
-						</td>
-						<td>
-							<?php echo $a["price"]; ?>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		<?php endforeach; ?>
+		<table class="table table-stripped">
+			<tbody>
+				<?php foreach ($announcements->getLatest($database, $currentPage, $maxPerPage) as $a) : ?>
+				<tr>
+					<td>
+						<img class="thumb" src="<?php echo ANNOUNCEMENT_PICTURES_DIR ."/"; echo (isset($a['url'])) ? $a['url'] : 'default.svg'; ?>" alt="Announcement Picture" border="0">
+					</td>
+
+					<td>
+						<p><a href="announcement-view.php?id=<?php echo $a['id']; ?>"><?php echo $a["title"]; ?></a></p>
+						<p><?php echo $a["categoryName"]; ?></p>
+					</td>
+
+					<td>
+						<p>US$ <?php echo $a["price"]; ?></p>
+					</td>
+				</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+		<div class="pagination">
+			<?php for ($i = 1; $i <= $maxPages; $i++) : ?>
+			<a <?php echo ($i == $currentPage) ? 'class="active"' : ''; ?> href="index.php?p=<?php echo ($i); ?>"><?php echo ($i); ?></a>
+			<?php endfor; ?>
+		</div>
+		
 	</section>
 
 <?php require "pages/footer.php"; ?>

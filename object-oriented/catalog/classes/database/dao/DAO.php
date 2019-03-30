@@ -200,7 +200,8 @@ abstract class DAO
 
         $sql = "SELECT " .$select ." FROM " .$table .$where;
         $sql .= (count($order) > 0) ? " ORDER BY " .BQ .$order["column"]->getName() .BQ ." " .$order["criteria"] : "";
-        $sql .= ($limit > 0) ? " LIMIT " .$limit : "";
+        $sql .= (! empty($limit)) ? " LIMIT " .$limit : "";
+        #$sql .= ($limit > 0) ? " LIMIT " .$limit : "";
 
         return $sql;
     }

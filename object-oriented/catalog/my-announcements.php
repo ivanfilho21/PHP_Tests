@@ -26,7 +26,9 @@
 						<td>
 							<img class="thumb" src="<?php echo ANNOUNCEMENT_PICTURES_DIR ."/"; echo (isset($announcement['url'])) ? $announcement['url'] : 'default.svg'; ?>">
 						</td>
-						<td><?php echo $announcement["title"]; ?></td>
+						<td>
+							<a href="announcement-view.php?id=<?php echo $announcement['id']; ?>"><?php echo $announcement["title"]; ?></a>
+						</td>
 						<td><?php echo number_format($announcement["price"]); ?></td>
 						<td>
 							<a href="announcement.php?id=<?php echo $announcement['id']; ?>" class="btn btn-default">Edit</a>

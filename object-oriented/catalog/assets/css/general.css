@@ -1,3 +1,6 @@
+/* MAIN PARAMETERS */
+.center { text-align: center; }
+
 .light {
 	background: ghostwhite;
 	color: darkslategray;
@@ -58,6 +61,20 @@
 	color: tomato;
 }
 
+.pagination { margin-bottom: 2em; }
+.pagination a {
+	float: left;
+	margin: 0;
+	padding: 0.5em 1em;
+	border: 1px solid #ddd;
+	border-right: none;
+	transition: background-color 200ms;
+}
+.pagination a:first-child { border-top-left-radius: 0.25em; border-bottom-left-radius: 0.25em; }
+.pagination a:last-child { border-top-right-radius: 0.25em; border-bottom-right-radius: 0.25em; border-right: 1px solid #ddd; }
+.pagination .active { background: dodgerblue; color: white; }
+.pagination a:hover:not(.active) {background-color: whitesmoke;}
+
 /* TABLES */
 
 .table {
@@ -115,6 +132,7 @@
 	padding: 0.25em;
 }
 
+.img { max-height: 250px; }
 /* FORMS */
 
 .form-title {
@@ -132,7 +150,7 @@ input, textarea, select {
 	padding: 0.5em 1em;
 	max-width: 100%;
 	background: white;
-	border: 1px solid lightgray;
+	border: 2px solid whitesmoke;
 	border-radius: 0.25em;
 	outline: none;
 	font-size: 1em;
@@ -149,6 +167,8 @@ input[type=file] {
 	background: none;
 	border: none;
 }
+
+input[type=checkbox] { display: inline-block; width: unset; }
 
 textarea {
 	resize: none;
