@@ -143,6 +143,8 @@ label {
 	font-weight: 700;
 }
 
+.checkbox-label { font-weight: 300; }
+
 input, textarea, select {
 	display: block;
 	width: 100%;
@@ -168,7 +170,7 @@ input[type=file] {
 	border: none;
 }
 
-input[type=checkbox] { display: inline-block; width: unset; }
+input[type=checkbox] { display: inline-block; width: inherit; }
 
 textarea {
 	resize: none;
@@ -179,4 +181,9 @@ textarea:focus,
 select:focus
 {
 	box-shadow: 0 0 6px rgba(35, 173, 278, 1);
+}
+
+/* LISTS */
+.ul {
+	margin: 0.25em 1em;
 }

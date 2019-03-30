@@ -10,15 +10,14 @@
 
 		<form method="GET">
 			<label>By Category</label>
-			<?php foreach ($categories->getAll() as $category) : ?>
-			<input type="checkbox" name="filter[category][]"><label for="filter[category][]"><?php echo $category['name']; ?></label>
-			<?php endforeach; ?>
-
-			<select name="filter[category]">
-			<?php foreach ($categories->getAll() as $category) : ?>
-				<option value="<?php echo $category['id']; ?>" <?php echo (isset($categoryId) && $categoryId == $category["id"]) ? "selected" : ""; ?>><?php echo $category["name"]; ?></option>
-			<?php endforeach; ?>
-			</select>
+			<ul class="ul">
+				<?php foreach ($categories->getAll() as $category) : ?>
+				<li>
+					<input type="checkbox" name="filter[category][]" id="category<?php echo $category['id']; ?>"> <label class="checkbox-label" for="category<?php echo $category['id']; ?>"><?php echo $category['name']; ?></label>
+				</li>
+				<?php endforeach; ?>
+			</ul>
+			
 			<input type="submit" name="search" value="Search" class="btn btn-default">
 		</form>
 	</section>
