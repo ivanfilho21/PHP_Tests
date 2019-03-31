@@ -94,7 +94,7 @@ class Announcements extends DAO
 
 		# Id starts from
 		$startPoint = ($page - 1) * $limit;
-		$limitTxt = $startPoint .", " .$limit;
+		$limitTxt = ($startPoint > 0) ? $startPoint .", " .$limit : "";
 
 		$res = parent::selectWithAdditionalColumn($select, $where, $limitTxt, $additional, $order, $asList);
 		return ($res) ? $res : array();

@@ -157,7 +157,7 @@ abstract class DAO
 
     private function select($sql, $whereColumnArray=array(), $asList=false)
     {
-        echo $sql ."<br>"; # die();
+        # echo $sql ."<br>"; # die();
 
         if (count($whereColumnArray) > 0) {
             $sql = $this->db->prepare($sql);

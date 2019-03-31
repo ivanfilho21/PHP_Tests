@@ -25,13 +25,13 @@
 
 				<label>By Price</label>
 
-				<select name="filter[price-range]">
+				<!-- <select name="filter[price-range]">
 					<option value="0">Any</option>
 					<option value="1" <?php echo (isset($filter["price-range"]) && $filter["price-range"] == 1) ? "selected" : ""; ?>>Minimum</option>
 					<option value="2" <?php echo (isset($filter["price-range"]) && $filter["price-range"] == 2) ? "selected" : ""; ?>>Maximum</option>
 				</select>
 
-				<input type="text" name="filter[price]" placeholder="Price" value="<?php echo (isset($filter["price"])) ? $filter["price"] : ""; ?>">
+				<input type="text" name="filter[price]" placeholder="Price" value="<?php echo (isset($filter["price"])) ? $filter["price"] : ""; ?>"> -->
 
 				<label>By Condition</label>
 				<select name="filter[condition]">
