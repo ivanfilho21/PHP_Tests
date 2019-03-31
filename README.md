@@ -11,10 +11,26 @@ PHP scripts with HTML5 and CSS3.
 * Good practices on Web Development.
 
 ## Live Projects
-* ### [Agenda](http://ivanfilho21.000webhostapp.com/agenda/index.php)
-* ### [Catalog](https://ivanfilho21.000webhostapp.com/catalog/index.php)
-* ### [Task Manager](https://ivanfilho21.000webhostapp.com/index.php)
-* ### [Login System](https://ivanfilho21.000webhostapp.com/auth/index.php) (Contains some issues)
+
+### [Agenda](http://ivanfilho21.000webhostapp.com/agenda/index.php)
+#### Description:
+* CRUD of contacts.
+* [Project page](https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/agenda).
+
+### [Catalog](https://ivanfilho21.000webhostapp.com/catalog/index.php)
+#### Description:
+* A system to create and view announcements.
+* [Project page](https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/catalog).
+
+### [Task Manager](https://ivanfilho21.000webhostapp.com/index.php)
+#### Description:
+* CRUD of tasks.
+* [Project page](https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/tasks_oo).
+
+### [Login System](https://ivanfilho21.000webhostapp.com/auth/index.php) (Contains some issues)
+#### Description:
+* A system to register and login users.
+* [Project page](https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/login-system).
 
 ## Status:
 * You never stop learning something new :)
