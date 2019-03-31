@@ -33,10 +33,20 @@ class Announcements extends DAO
 		$this->savePictures($database, $announcementArray["id"], $pictureArray);
 	}
 
-	public function getLatest($database, $page=1, $limit=5)
+	public function getLatest($database, $page=1, $limit=5, $filter=array())
 	{
 		# select
 		$select = array();
+		if (count($filter) > 0) {
+			if (! empty($filter["category"])) {
+				$select[] = DatabaseUtils::createSelection($database->getCategoriesTable(), "id");
+				$where[] = DatabaseUtils::createCondition($database->getCategoriesTable(), "id", $filter["category"]);
+			}
+			if (! empty($filter["price"])) {		
+				$select[] = DatabaseUtils::createSelection($this, "price");
+				$where[] = DatabaseUtils::createCondition($this, "price", $filter["price"]);
+			}
+		}
 
 		# condition
 		$where = array();
