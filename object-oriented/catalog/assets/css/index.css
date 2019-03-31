@@ -1,0 +1,29 @@
+.advanced-search { display: none; padding: 1em; }
+.advanced-search h3 { text-align: center; }
+.newest-announcements { padding: 1em; background: white; }
+
+@media (min-width: 540px) {
+	.index-wrapper {
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+	    grid-template-rows: auto;
+	}
+	.advanced-search {
+		display: block;
+		margin: 1em;
+		margin-right: 0;
+	}
+	.newest-announcements {
+		margin: 1em;
+		margin-right: 0;
+		padding: 1em;
+	}
+}
+
+@media (min-width: 720px) {
+	.index-wrapper {
+		display: grid;
+		grid-template-columns: 1fr 3fr;
+	    grid-template-rows: auto;
+	}
+}

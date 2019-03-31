@@ -17,7 +17,7 @@
 .dark a:hover { color: white; }*/
 
 .card {
-	margin: 1em;
+	margin: 0.5em;
 	padding: 1.5em 2em;
 	/*padding: 2em 3em;*/
 	background: white;
@@ -143,7 +143,7 @@ label {
 	font-weight: 700;
 }
 
-.checkbox-label { font-weight: 300; }
+.label-option { font-weight: 300; }
 
 input, textarea, select {
 	display: block;
@@ -170,13 +170,13 @@ input[type=file] {
 	border: none;
 }
 
-input[type=checkbox] { display: inline-block; width: inherit; }
+input[type=checkbox], [type=radio] { display: inline-block; width: inherit; }
 
 textarea {
 	resize: none;
 }
 
-input:focus,
+input:focus:not([type=radio], [type=checkbox]),
 textarea:focus,
 select:focus
 {
