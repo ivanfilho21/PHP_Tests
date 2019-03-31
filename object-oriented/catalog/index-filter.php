@@ -4,12 +4,11 @@ $util = new Util();
 $filter = getEmptyFilterArray();
 
 if ($util->checkMethod("GET")) {
-	if (isset($_GET["advanced-search"])) {
+	if (isset($_GET["filter-submit"])) {
 		$filter = (isset($_GET["filter"])) ? $_GET["filter"] : getEmptyFilterArray();
-		#$filter = $_GET["filter"];
 
-		if (count($filter) > 0) {
-			#var_dump($filter["category"]);
+		if (! is_array($filter)) {
+			$filter = getEmptyFilterArray();
 		}
 	}
 }

@@ -93,6 +93,12 @@ class DatabaseUtils
 		return $condition;
 	}
 
+	public function createOrder($dao, $columnName, $criteria)
+	{
+		$order = array("column" => $dao->findColumn($columnName), "criteria" => $criteria);
+		return $order;
+	}
+
 	private function getColumnByName($dao, $columnName)
 	{
 		return $dao->findColumn($columnName);

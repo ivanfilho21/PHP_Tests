@@ -15,7 +15,7 @@
 * database-related constants.
 *
 * Created: Mar 11, 2019.
-* Last Modified: Mar 30, 2019.
+* Last Modified: Mar 31, 2019.
 */
 
 abstract class DAO
@@ -157,7 +157,7 @@ abstract class DAO
 
     private function select($sql, $whereColumnArray=array(), $asList=false)
     {
-        # echo $sql ."<br>"; # die();
+        echo $sql ."<br>"; # die();
 
         if (count($whereColumnArray) > 0) {
             $sql = $this->db->prepare($sql);
@@ -199,7 +199,17 @@ abstract class DAO
         $where = $this->formatWhereClause($whereColumnArray);
 
         $sql = "SELECT " .$select ." FROM " .$table .$where;
-        $sql .= (count($order) > 0) ? " ORDER BY " .BQ .$order["column"]->getName() .BQ ." " .$order["criteria"] : "";
+
+        #var_dump($order); die();
+
+        if (count($order) > 0) {
+            $sql .= " ORDER BY ";
+            foreach ($order as $o) {
+                $sql .= BQ .$o["column"]->getName() .BQ ." " .$o["criteria"] .COMMA;
+            }
+            $sql = DatabaseUtils::removeLastString($sql, COMMA);
+        }
+        #$sql .= (count($order) > 0) ? " ORDER BY " .BQ .$order["column"]->getName() .BQ ." " .$order["criteria"] : "";
         $sql .= (! empty($limit)) ? " LIMIT " .$limit : "";
         #$sql .= ($limit > 0) ? " LIMIT " .$limit : "";
 

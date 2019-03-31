@@ -5,7 +5,7 @@ $totalAnnouncements = count($announcements->getAll());
 $totalUsers = count($users->getAll());
 
 $currentPage = 1;
-$maxPerPage = 2;
+$maxPerPage = 5;
 $maxPages = ceil($totalAnnouncements / $maxPerPage);
 
 $categories = $database->getCategoriesTable();

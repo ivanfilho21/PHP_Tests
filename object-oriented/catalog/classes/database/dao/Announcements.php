@@ -37,19 +37,23 @@ class Announcements extends DAO
 	{
 		# select
 		$select = array();
-		if (count($filter) > 0) {
-			if (! empty($filter["category"])) {
-				$select[] = DatabaseUtils::createSelection($database->getCategoriesTable(), "id");
-				$where[] = DatabaseUtils::createCondition($database->getCategoriesTable(), "id", $filter["category"]);
-			}
-			if (! empty($filter["price"])) {		
-				$select[] = DatabaseUtils::createSelection($this, "price");
-				$where[] = DatabaseUtils::createCondition($this, "price", $filter["price"]);
-			}
-		}
 
 		# condition
 		$where = array();
+
+		if (count($filter) > 0) {
+			if (! empty($filter["category"])) {
+				#$select[] = DatabaseUtils::createSelection($database->getCategoriesTable(), "id");
+				$where[] = DatabaseUtils::createCondition($this, "categoryId", $filter["category"]);
+			}
+			if (! empty($filter["price-range"])) {
+				$priceRange = $filter["price-range"];
+			}
+			if (! empty($filter["condition"])) {
+				#$select[] = DatabaseUtils::createSelection($this, "condition");
+				$where[] = DatabaseUtils::createCondition($this, "condition", $filter["condition"] -1);
+			}
+		}
 
 		# additionalSelections
 		$additional = array();
@@ -76,7 +80,14 @@ class Announcements extends DAO
 		$additional[] = $table2;
 
 		# order
-		$order = array("column" => parent::findColumn("id"), "criteria" => "DESC");
+		$order = array();
+		$order[] = DatabaseUtils::createOrder($this, "id", "DESC");
+
+		if (isset($priceRange)) {
+		$criteria = ($priceRange == 1) ? "ASC" : "DESC";
+			if (! empty($criteria))
+				$order[] = DatabaseUtils::createOrder($this, "price", $criteria);
+		}
 
 		# result as list, even if only one is queried
 		$asList = true;
@@ -119,8 +130,8 @@ class Announcements extends DAO
 		$limit = "";
 
 		# order
-		#$order = array();
-		$order = array("column" => parent::findColumn("id"), "criteria" => "DESC");
+		$order = array();
+		$order[] = DatabaseUtils::createOrder($this, "id", "DESC");
 
 		# result as list
 		$asList = true;
