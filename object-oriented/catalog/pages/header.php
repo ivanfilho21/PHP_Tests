@@ -25,6 +25,7 @@
 			<input type="submit" name="search" value="?" class="btn btn-search">
 			<a href="#" class="btn-advanced-search btn btn-default">#</a>
 		</form>
+		<div></div>
 		<ul class="nav-bar-menu-list">
 			<?php if (! empty(getUserSession())) : ?>
 				<li><a href="my-announcements.php">My Announcements</a></li>

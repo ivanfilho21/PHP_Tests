@@ -28,7 +28,7 @@
 }
 
 .nav-bar-menu-list a {
-	font-size: 1.3em;
+	font-size: 1.2em;
 }
 
 /* SEARCH BAR */
@@ -66,11 +66,11 @@
 @media (min-width: 540px) {
 	.nav-bar-header { margin-left: 1em; margin-right: 1em; }
 
-	.nav-bar-menu-list { margin: 1em; }
+	.nav-bar-menu-list { grid-column: 1/-1; margin-top: 0; margin-bottom: 0; }
 
 	.search-bar {
 		grid-template-columns: 6fr 1fr;
-		margin: 1em;
+		/*margin: 1em;*/
 	}
 
 	.btn-advanced-search {
@@ -82,7 +82,7 @@
 	.clear-fix { clear: both; }
 	.nav-bar {
 		display: grid;
-		grid-template-columns: 0.5fr 2fr 0.75fr;
+		grid-template-columns: 1fr 2fr 0.5fr;
 	    grid-template-rows: auto;		
 	}
 	.nav-bar-header { float: left; margin: 1em; }
