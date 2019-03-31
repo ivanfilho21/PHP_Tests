@@ -33,7 +33,7 @@ class Announcements extends DAO
 		$this->savePictures($database, $announcementArray["id"], $pictureArray);
 	}
 
-	public function getLatest($database, $page=1, $limit=5, $filter=array())
+	public function getLatest($database, $page=1, $filter=array())
 	{
 		# select
 		$select = array();
@@ -92,9 +92,13 @@ class Announcements extends DAO
 		# result as list, even if only one is queried
 		$asList = true;
 
-		# Id starts from
-		$startPoint = ($page - 1) * $limit;
-		$limitTxt = ($startPoint > 0) ? $startPoint .", " .$limit : "";
+		if (! empty($limit)) {
+			# Id starts from
+			$startPoint = ($page - 1) * $limit;
+			$limitTxt = ($startPoint >= 0) ? $startPoint .", " .$limit : "";
+		}
+		else
+			$limitTxt = "";
 
 		$res = parent::selectWithAdditionalColumn($select, $where, $limitTxt, $additional, $order, $asList);
 		return ($res) ? $res : array();
