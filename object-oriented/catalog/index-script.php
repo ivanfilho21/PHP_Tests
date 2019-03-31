@@ -18,5 +18,5 @@ if ($util->checkMethod("GET")) {
 	$currentPage = $p;	
 }
 
-echo "Total of announcements: " .$totalAnnouncements;
+#echo "Total of announcements: " .$totalAnnouncements;
 $totalUsers = count($users->getAll());

@@ -25,9 +25,9 @@
 				<?php endforeach; ?>
 				</select>
 
-				<label>By Price</label>
+				<!-- <label>By Price</label>
 
-				<!-- <select name="filter[price-range]">
+				<select name="filter[price-range]">
 					<option value="0">Any</option>
 					<option value="1" <?php echo (isset($filter["price-range"]) && $filter["price-range"] == 1) ? "selected" : ""; ?>>Minimum</option>
 					<option value="2" <?php echo (isset($filter["price-range"]) && $filter["price-range"] == 2) ? "selected" : ""; ?>>Maximum</option>
@@ -56,16 +56,16 @@
 					<?php $a = $latestAnnouncements[$i]; ?>
 					<tr>
 						<td>
-							<img class="thumb" src="<?php echo ANNOUNCEMENT_PICTURES_DIR ."/"; echo (isset($a['url'])) ? $a['url'] : 'default.svg'; ?>" alt="Announcement Picture" border="0">
+							<img class="announcement-thumb" src="<?php echo ANNOUNCEMENT_PICTURES_DIR ."/"; echo (isset($a['url'])) ? $a['url'] : 'default.svg'; ?>" alt="Announcement Picture" border="0">
 						</td>
 
 						<td>
-							<p><a href="announcement-view.php?id=<?php echo $a['id']; ?>"><?php echo $a["title"]; ?></a></p>
-							<p><?php echo $a["categoryName"]; ?></p>
+							<p><a href="announcement-view.php?id=<?php echo $a['id']; ?>" class="announcement-title"><?php echo $a["title"]; ?></a></p>
+							<p class="announcement-category"><?php echo $a["categoryName"]; ?></p>
 						</td>
 
 						<td>
-							<p>US$ <?php echo $a["price"]; ?></p>
+							<p class="announcement-price">US$ <?php echo $a["price"]; ?></p>
 						</td>
 					</tr>
 					<?php endfor; ?>

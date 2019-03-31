@@ -2,6 +2,10 @@
 .advanced-search h3 { text-align: center; }
 .newest-announcements { padding: 1em; background: white; }
 
+.announcement-thumb { max-width: 80px; }
+.announcement-title { font-size: 1.2em; font-weight: 700; margin: 1em 0.5em;}
+.announcement-category { margin: 0.5em 0.5em;}
+
 @media (min-width: 540px) {
 	.index-wrapper {
 		display: grid;

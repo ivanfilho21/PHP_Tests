@@ -5,8 +5,8 @@
 	background: ghostwhite;
 	color: darkslategray;
 }
-/*.light a { color: darkslategray; }
-.light a:hover { color: black; }*/
+/*.light a { color: darkslategray; }*/
+/*.light a:hover { color: black; }*/
 
 .dark {
 	background: darkslategray;
@@ -125,7 +125,7 @@
 }
 
 .thumb {
-	width: 80px;
+	width: 70px;
 	background: white; 
 	border: 1px solid #fff;
 	border-radius: 0.25em;
@@ -176,7 +176,7 @@ textarea {
 	resize: none;
 }
 
-input:focus:not([type=radio], [type=checkbox]),
+input:focus,
 textarea:focus,
 select:focus
 {
