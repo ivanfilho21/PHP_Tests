@@ -62,10 +62,10 @@ elseif ($util->checkMethod("POST")) {
 		$announcementArray = array("id" => $id, "userId" => $userId, "categoryId" => $categoryId, "title" => $title, "condition" => $condition, "price" => $price, "description" => $description);
 
 		$announcements->update($announcementArray, $pictures, $database);
-		header("Location: my-announcements.php");
+		#header("Location: my-announcements.php");
 		?>
 		<script>
-			// window.location.href = "my-announcements.php";
+			window.location.href = "my-announcements.php";
 		</script>
 		<?php
 		exit();
