@@ -21,7 +21,7 @@
         <?php if (! $registerFinished) : ?>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
-                <input type="email" required name="email" placeholder="E-mail" value="<?php echo (isset($_POST['email'])) ? $_POST['email'] : ''; ?>">
+                <input type="email" required name="email" placeholder="E-mail" value="<?php echo (isset($_POST['email'])) ? $_POST['email'] : ''; ?>" autofocus>
 
                 <span class="error-msg"><?php Util::showError("register-email"); ?></span>
 

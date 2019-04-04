@@ -1,5 +1,4 @@
 <?php
-#TODO
 $passwordChanged = false;
 $requestExpired = false;
 
@@ -8,8 +7,7 @@ $index2 = "validator";
 
 function redirect()
 {
-    header("Location: " . $relPath . "index.php");
-    die();
+    $util->redirectTo($relPath, "./");
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {

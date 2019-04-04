@@ -21,7 +21,7 @@
 
 	        	<label>Digite uma nova senha:</label>
 
-	            <input type="password" name="password" placeholder="Senha">
+	            <input type="password" name="password" placeholder="Senha" autofocus>
 	            <span class="error-msg"><?php Util::showError("register-pass1"); ?></span>
 
 	            <input type="password" name="password-retype" placeholder="Repita a Senha">

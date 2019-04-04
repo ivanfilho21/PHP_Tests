@@ -29,7 +29,7 @@
 
         	<label>Por favor, digite o e-mail usado para criar sua conta.</label>
 
-            <input type="email" required name="email" placeholder="E-mail" value="<?php echo (isset($_POST['email'])) ? $_POST['email'] : ''; ?>">
+            <input type="email" required name="email" placeholder="E-mail" value="<?php echo (isset($_POST['email'])) ? $_POST['email'] : ''; ?>" autofocus>
 
             <div class="error-msg" id="error-auth">
                 <p><?php Util::showError("recovery-email"); ?></p>

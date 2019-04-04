@@ -1,4 +1,5 @@
 <?php
+	session_start();
     # Root Path Constant
     define("ROOT_PATH", $_SERVER["DOCUMENT_ROOT"] . "/dev/php-tests/object-oriented/login-system");
 ?>

@@ -30,10 +30,23 @@ class Util
         echo (isset($errorMsgs[$index])) ? $errorMsgs[$index] : "";
     }
 
+    public function redirectTo($relPath, $page)
+    {
+        ?>
+        <span id="redirectTo" data-relpath="<?php echo $relPath; ?>" data-page="<?php echo $page; ?>"></span>
+        <script>
+            var relPath = document.getElementById("redirectTo").getAttribute("data-relpath");
+            var page = document.getElementById("redirectTo").getAttribute("data-page");
+
+            window.location.href = relPath + page;
+        </script>
+        <?php
+        exit();
+    }
+
     public function redirectToDashboard($relPath)
     {
-        header("Location: " . $relPath . "dashboard.php");
-        exit();
+        $this->redirectTo($relPath, "dashboard.php");
     }
 
 }
