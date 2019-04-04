@@ -12,25 +12,35 @@ PHP scripts with HTML5 and CSS3.
 
 ## Live Projects
 
-### [Agenda](http://ivanfilho21.000webhostapp.com/agenda/index.php)
-#### Description:
-* CRUD of contacts.
-* [Project page](https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/agenda).
-
-### [Catalog](https://ivanfilho21.000webhostapp.com/catalog/index.php)
-#### Description:
-* A system to create and view announcements.
-* [Project page](https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/catalog).
-
-### [Task Manager](https://ivanfilho21.000webhostapp.com/index.php)
-#### Description:
-* CRUD of tasks.
-* [Project page](https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/tasks_oo).
-
-### [Login System](https://ivanfilho21.000webhostapp.com/auth/index.php) (Contains some issues)
-#### Description:
-* A system to register and login users.
-* [Project page](https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/login-system).
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Project Page</th>
+  </tr>
+  <tbody>
+    <tr>
+      <td><a href="http://ivanfilho21.000webhostapp.com/agenda/index.php">Agenda</a></td>
+      <td>CRUD of contacts.</td>
+      <td><a href="https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/agenda">link</a></td>
+    </tr>
+    <tr>
+      <td><a href="http://ivanfilho21.000webhostapp.com/catalog/index.php">Catalog</a></td>
+      <td>A system to create and view announcements.</td>
+      <td><a href="https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/catalog">link</a></td>
+    </tr>
+    <tr>
+      <td><a href="https://ivanfilho21.000webhostapp.com/index.php">Task Manager</a></td>
+      <td>CRUD of tasks.</td>
+      <td><a href="https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/agenda">link</a></td>
+    </tr>
+    <tr>
+      <td><a href="https://ivanfilho21.000webhostapp.com/auth/index.php">Login System</a></td>
+      <td>A system to register and login users. <b>There are bugs.</b></td>
+      <td><a href="https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/login-system">link</a></td>
+    </tr>
+  </tbody>
+</table>
 
 ## Status:
 * You never stop learning something new :)
