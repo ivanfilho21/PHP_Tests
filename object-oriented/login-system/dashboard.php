@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php $relPath = ""; ?>
 <?php $pageTitle = "Dashboard"; ?>
 <?php $pageDescription = "Restricted area accessible only by logged in users."; ?>

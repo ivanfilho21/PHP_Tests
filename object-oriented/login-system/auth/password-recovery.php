@@ -1,4 +1,4 @@
-<!-- Must declare this for files that are not in root folder -->
+<?php session_start(); ?>
 <?php $relPath = "../"; ?>
 <?php $pageTitle = "Alterar Senha"; ?>
 <?php $pageDescription = ""; ?>

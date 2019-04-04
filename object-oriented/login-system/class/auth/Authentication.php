@@ -69,8 +69,6 @@ class Authentication
         $loggedUser = $this->checkLoginInDatabase($email, $password);
         
         if ($loggedUser != null) {
-            $this->sessionStart();
-
             $_SESSION["user-session"]["email"] = $email;
             $_SESSION["user-session"]["password"] = $password;
 
@@ -91,7 +89,6 @@ class Authentication
 
     public function logout()
     {
-        $this->sessionStart();
         $this->deleteUserSession();
         $this->deleteUserCookie();
     }
@@ -114,8 +111,6 @@ class Authentication
     */
     public function getLoggedUser()
     {
-        $this->sessionStart();
-        
         if (isset($_SESSION["user-session"])) {
             $email = $_SESSION["user-session"]["email"];
             $pass = $_SESSION["user-session"]["password"];
@@ -239,15 +234,6 @@ class Authentication
         return $this->db->getUserDAO()->select($where);
 
         #return $this->db->getUserDAO()->select("*", array("email", "password"), array("{$email}", "MD5(" . QT . $password . QT . ")"));
-    }
-
-    private function sessionStart()
-    {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-            return true;
-        }
-        return false;
     }
 
     private function deleteUserSession() {

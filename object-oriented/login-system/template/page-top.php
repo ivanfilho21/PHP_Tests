@@ -1,13 +1,12 @@
 <?php
-	session_start();
-    # Root Path Constant
-    define("ROOT_PATH", $_SERVER["DOCUMENT_ROOT"] . "/dev/php-tests/object-oriented/login-system");
+define("ROOT_PATH", $_SERVER["DOCUMENT_ROOT"] . "/dev/php-tests/object-oriented/login-system");
+require ROOT_PATH . "/dependencies.php";
 ?>
-<?php require ROOT_PATH . "/dependencies.php"; ?>
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
     <title><?php echo $pageTitle; ?></title>
+    <meta charset="utf-8">
     <meta name="description" content="<?php echo $pageDescription; ?>">
     <?php require ROOT_PATH . "/template/parts/head-content.php"; ?>
     <?php if (isset($additionalStyles)) : ?>

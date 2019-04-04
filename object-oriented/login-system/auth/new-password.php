@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php $relPath = "../"; ?>
 <?php $pageTitle = "Alterar Senha"; ?>
 <?php $pageDescription = ""; ?>
