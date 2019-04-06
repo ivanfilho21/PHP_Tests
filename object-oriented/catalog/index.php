@@ -50,10 +50,7 @@
 			<h3>Newest Announcements</h3>
 			<table class="table table-stripped">
 				<tbody>
-					<?php #foreach ($latestAnnouncements as $a) : ?>
-					<?php for ($i = ($currentPage - 1) * (($maxPerPage < $totalAnnouncements) ? $maxPerPage : 1), $j = 0; $i < $totalAnnouncements; $i++, $j++) : ?>
-					<?php if ($j >= $maxPerPage) { break; } ?>
-					<?php $a = $latestAnnouncements[$i]; ?>
+					<?php foreach ($latestAnnouncements as $a) : ?>
 					<tr>
 						<td>
 							<img class="announcement-thumb" src="<?php echo ANNOUNCEMENT_PICTURES_DIR ."/"; echo (isset($a['url'])) ? $a['url'] : 'default.svg'; ?>" alt="Announcement Picture" border="0">
@@ -68,10 +65,10 @@
 							<p class="announcement-price">US$ <?php echo $a["price"]; ?></p>
 						</td>
 					</tr>
-					<?php endfor; ?>
-					<?php #endforeach; ?>
+					<?php endforeach; ?>
 				</tbody>
 			</table>
+
 			<div class="pagination">
 				<?php for ($i = 1; $i <= $maxPages; $i++) : ?>
 				<a <?php echo ($i == $currentPage) ? 'class="active"' : ''; ?> href="index.php?<?php

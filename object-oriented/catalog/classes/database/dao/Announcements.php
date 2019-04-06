@@ -33,7 +33,7 @@ class Announcements extends DAO
 		$this->savePictures($database, $announcementArray["id"], $pictureArray);
 	}
 
-	public function getLatest($database, $page=1, $filter=array())
+	public function getLatest($database, $page=1, $filter=array(), $maxPerPage=0)
 	{
 		# select
 		$select = array();
@@ -91,6 +91,8 @@ class Announcements extends DAO
 
 		# result as list, even if only one is queried
 		$asList = true;
+
+		$limit = $maxPerPage;
 
 		if (! empty($limit)) {
 			# Id starts from
