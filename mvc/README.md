@@ -4,7 +4,7 @@ MVC is a popular Design Pattern that separates the project into three main parts
 <br>
 This folder contains PHP projects using the MVC architecture.
 
-## How it works?
+## How does it work?
 
 A PHP project with the MVC architecture usually follows this structure:
 1. Use mod_rewrite to convert the website URL into a PHP variable.
