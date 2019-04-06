@@ -12,5 +12,9 @@ A PHP project with the MVC architecture usually follows this structure:
 1. The controller will manage everything that is necessary for that page to load correctly and then load the correct view.
 1. The view will display the correct content for that page.
 
+## Example
+
+#### [Hello World](https://github.com/ivanfilho21/PHP_Tests/edit/master/mvc/hello-world)
+
 ### Author:
 > Ivan Filho
