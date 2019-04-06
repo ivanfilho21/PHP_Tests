@@ -9,7 +9,7 @@ class Core
 		$url = "/";
 		$url .= (! empty($_GET["url"])) ? $_GET["url"] : "";
 
-		echo "URL: " .$url ."<br><hr>";
+		#echo "URL: " .$url ."<br><hr>";
 
 		# get controller, action, and parameters from URL
 		if (! empty($url) && $url !== "/") {
@@ -29,7 +29,7 @@ class Core
 			# Get parameters from url
 			array_shift($url);
 			#print_r($url);
-			echo "length of url: " .count($url);
+			#echo "length of url: " .count($url);
 			$currentParams = (count($url) > 0) ? $url : DEFAULT_PARAMS;
 
 		} else {

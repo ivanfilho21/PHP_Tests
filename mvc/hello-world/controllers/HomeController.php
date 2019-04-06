@@ -3,10 +3,14 @@ class HomeController extends Controller
 {
 	public function index()
 	{
-		echo "Hello World";
+		$data = array(
+			"name" => "World",
+			"var" => 21
+		);
+		$this->loadTemplate("home", $data);
 	}
 
-	public function test($params)
+	public function test($params=array(""))
 	{
 		echo "Test action.<br>";
 		if (! empty($params)) {

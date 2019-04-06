@@ -2,8 +2,8 @@
 require "environment.php";
 $config = array();
 
-if (ENVIRONMENT == "debug") {
-	define("BASE_URL", "http://localhost/dev/php-tests/mvc/");
+if (ENVIRONMENT == "development" || ENVIRONMENT == "debug") {
+	define("BASE_URL", "http://localhost/dev/php-tests/mvc/hello-world/");
 	$config["dbname"] = "mvc_db";
 	$config["host"] = "127.0.0.1";
 	$config["dbuser"] = "root";
