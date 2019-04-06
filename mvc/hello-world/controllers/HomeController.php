@@ -3,10 +3,11 @@ class HomeController extends Controller
 {
 	public function index()
 	{
-		$data = array(
-			"name" => "World",
-			"var" => 21
-		);
+		global $db;
+		$testModel = new TestModel($db);
+		
+		$data = array("name" => "World", "var" => $testModel->getValue());
+
 		$this->loadTemplate("home", $data);
 	}
 
