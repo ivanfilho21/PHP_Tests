@@ -3,6 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<title><?php echo ucfirst($viewName); ?></title>
+	<link rel="stylesheet" href="<?php echo BASE_URL ."assets/css/"; ?>style.css">
+	<link rel="stylesheet" href="<?php echo BASE_URL ."assets/css/" .$viewName; ?>.css">
 </head>
 <body>
 	<h3>Header</h3>
