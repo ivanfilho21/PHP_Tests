@@ -202,11 +202,11 @@ class Announcements extends DAO
 		$width = 500;
 		$height = 500;
 
-		if ($width/$height > $ratio) {
+		if (($width/$height) > $ratio) {
 			$width = $height * $ratio;
 		}
 		else {
-			$height = $width * $ratio;
+			$height = $width / $ratio;
 		}
 
 		$img = imagecreatetruecolor($width, $height);
