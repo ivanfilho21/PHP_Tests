@@ -1,0 +1,32 @@
+html, body, main, section, aside, span, div,
+ul, li,
+form, fieldset, legend, input, select, textarea,
+h1, h2, h3, h4, h5, p, a
+{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	box-sizing: border-box;
+	font-family: sans-serif;
+}
+
+html {
+	font-size: 16px;
+}
+
+ul {
+	list-style: none;
+}
+
+h1, h2, h3, h4, h5 {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}

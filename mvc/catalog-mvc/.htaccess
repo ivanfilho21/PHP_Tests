@@ -1,0 +1,6 @@
+RewriteEngine on
+
+# Redirect to Index with url parameter
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ /dev/php-tests/mvc/catalog-mvc/index.php?url=$1 [QSA,L]

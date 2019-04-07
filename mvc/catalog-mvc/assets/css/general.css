@@ -1,0 +1,222 @@
+html, body, main, section, aside, span, div,
+ul, li,
+form, fieldset, legend, input, select, textarea,
+h1, h2, h3, h4, h5, p, a
+{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	box-sizing: border-box;
+	font-family: sans-serif;
+}
+
+html {
+	font-size: 16px;
+}
+
+ul {
+	list-style: none;
+}
+
+h1, h2, h3, h4, h5 {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+/* MAIN PARAMETERS */
+.center { text-align: center; }
+
+.light {
+	background: ghostwhite;
+	color: darkslategray;
+}
+/*.light a { color: darkslategray; }*/
+/*.light a:hover { color: black; }*/
+
+.dark {
+	background: darkslategray;
+	color: ghostwhite;
+}
+/*
+.dark a { color: lightgray; }
+.dark a:hover { color: white; }*/
+
+.card {
+	margin: 0.5em;
+	padding: 1.5em 2em;
+	/*padding: 2em 3em;*/
+	background: white;
+	color: darkslategray;
+	border-radius: 0.25em;
+	box-shadow: 0 3px 7px rgba(0,0,0,0.19), 0 2px 2px rgba(0,0,0,0.23);
+}
+
+.btn {
+	display: inline-block;
+	width: max-content;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	padding: 0.5em 1em;
+	border: 1px solid lightgray;
+	border-radius: 0.25em;
+	cursor: pointer;
+	text-decoration: none;
+}
+.btn:hover { text-decoration: none;	}
+
+.btn-default { background: white; color: darkslategray; }
+.btn-default:hover { background: gainsboro; color: darkslategray; }
+
+.btn-success { background: #47a245; color: white; }
+.btn-success:hover { background: #1e601e; color: white; }
+
+.btn-danger { background: orangered; color: white; }
+.btn-danger:hover { background: firebrick; color: white; }
+
+.alert { margin: 0.5em 0 1em 0; padding: 1em; border-radius: 0.25em; }
+.alert ul { list-style: inherit; padding: 0.5em 2em; }
+.alert a { font-weight: 700; }
+.alert h1, h2, h3, h4, h5 { margin: 0.5em 0; }
+.alert-default { border: 1px solid #aaa; background: whitesmoke; }
+.alert-warning { border: 1px solid #FFE082; background: #FFF8E1; }
+.alert-success { border: 1px solid #C8E6C9; background: #E8F5E9; color: #1B5E20; }
+.alert-danger { border: 1px solid #EF9A9A; background: #FFEBEE; color: #B71C1C; }
+
+.error {
+	color: tomato;
+}
+
+.pagination { margin-bottom: 2em; }
+.pagination a {
+	float: left;
+	margin: 0;
+	padding: 0.5em 1em;
+	border: 1px solid #ddd;
+	border-right: none;
+	transition: background-color 200ms;
+}
+.pagination a:first-child { border-top-left-radius: 0.25em; border-bottom-left-radius: 0.25em; }
+.pagination a:last-child { border-top-right-radius: 0.25em; border-bottom-right-radius: 0.25em; border-right: 1px solid #ddd; }
+.pagination .active { background: dodgerblue; color: white; }
+.pagination a:hover:not(.active) {background-color: whitesmoke;}
+
+/* TABLES */
+
+.table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.table th {
+	padding: 0.5em 0.15em;
+}
+
+.table-stripped tr:first-child td {
+	border-top: 2px solid #ddd;
+}
+
+.table-stripped td {
+	border-top: 1px solid #ccc;
+	padding: 0.25em 0.15em;
+}
+
+.table-stripped tbody tr:nth-child(odd) {
+	background: #FAFAFA;
+	/*background: whitesmoke;*/
+}
+
+.table-center {
+	text-align: center;
+}
+
+/* IMAGES */
+.picture-panel {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    text-align: center;
+}
+.picture-item {
+	display: inline-block;
+	margin: 0.5em;
+	padding: 0.5em;
+	background: white;
+}
+.picture-item a { display: block; margin: auto; }
+
+.border {
+	border: 1px solid #aaa;
+	border-radius: 0.25em;
+}
+
+.thumb {
+	width: 70px;
+	background: white; 
+	border: 1px solid #fff;
+	border-radius: 0.25em;
+	padding: 0.25em;
+}
+
+.img { max-height: 250px; }
+/* FORMS */
+
+.form-title {
+	font-size: 2em;
+}
+
+label {
+	font-weight: 700;
+}
+
+.label-option { font-weight: 300; }
+
+input, textarea, select {
+	display: block;
+	width: 100%;
+	margin: 0.5em 0;
+	padding: 0.5em 1em;
+	max-width: 100%;
+	background: white;
+	border: 2px solid whitesmoke;
+	border-radius: 0.25em;
+	outline: none;
+	font-size: 1em;
+
+	/* box-shadow transition */
+	-webkit-transition: box-shadow 200ms ease-in-out;
+	   -moz-transition: box-shadow 200ms ease-in-out;
+	    -ms-transition: box-shadow 200ms ease-in-out;
+	     -o-transition: box-shadow 200ms ease-in-out;
+	        transition: box-shadow 200ms ease-in-out;
+}
+
+input[type=file] {
+	background: none;
+	border: none;
+}
+
+input[type=checkbox], [type=radio] { display: inline-block; width: inherit; }
+
+textarea {
+	resize: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus
+{
+	box-shadow: 0 0 6px rgba(35, 173, 278, 1);
+}
+
+/* LISTS */
+.ul {
+	margin: 0.25em 1em;
+}
