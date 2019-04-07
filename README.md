@@ -21,7 +21,7 @@ PHP scripts with HTML5 and CSS3.
   <tr>
     <th>Name</th>
     <th>Description</th>
-    <th>Project Page</th>
+    <th>GitHub Page</th>
   </tr>
   <tbody>
     <tr>
