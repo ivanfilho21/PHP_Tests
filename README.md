@@ -25,22 +25,22 @@ PHP scripts with HTML5 and CSS3.
   </tr>
   <tbody>
     <tr>
-      <td><a href="http://ivanfilho21.000webhostapp.com/agenda/index.php">Agenda</a></td>
+      <td><b><a href="http://ivanfilho21.000webhostapp.com/agenda/index.php">Agenda</a></b></td>
       <td>CRUD of contacts.</td>
       <td><a href="https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/agenda">link</a></td>
     </tr>
     <tr>
-      <td><a href="http://ivanfilho21.000webhostapp.com/catalog/index.php">Catalog</a></td>
+      <td><b><a href="http://ivanfilho21.000webhostapp.com/catalog/index.php">Catalog</a></b></td>
       <td>A system to create and view announcements.</td>
       <td><a href="https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/catalog">link</a></td>
     </tr>
     <tr>
-      <td><a href="https://ivanfilho21.000webhostapp.com/index.php">Task Manager</a></td>
+      <td><b><a href="https://ivanfilho21.000webhostapp.com/index.php">Task Manager</a></b></td>
       <td>CRUD of tasks.</td>
       <td><a href="https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/agenda">link</a></td>
     </tr>
     <tr>
-      <td><a href="https://ivanfilho21.000webhostapp.com/auth/index.php">Login System</a></td>
+      <td><b><a href="https://ivanfilho21.000webhostapp.com/auth/index.php">Login System</a></b></td>
       <td>A system to register and login users. <b>There are bugs.</b></td>
       <td><a href="https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/login-system">link</a></td>
     </tr>
