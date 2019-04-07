@@ -5,13 +5,14 @@ PHP scripts with HTML5 and CSS3.
 <!-- * One day I wake up and decided to learn PHP. I thought that by doing this I could review HTML and CSS along the way. -->
 
 ## What I learned:
-* The basics of the PHP programming language.
+* The basics of PHP.
 * Procedural and Object-Oriented programming in PHP.
-* MVC pattern.
-* Using database (MySQL) and external libraries.
-* Using and configuring Apache server.
-* Deployment of sites in a server.
-* Basics of Responsive Layout.
+* The MVC pattern.
+* Using the MySQL database.
+* Using and configuring external libraries.
+* Using and configuring the Apache server.
+* Deployment of sites in local and external server.
+* The basics of Responsive Layout.
 * Good practices on Web Development.
 
 ## Live Projects
