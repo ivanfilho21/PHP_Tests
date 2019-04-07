@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+	<title>Very Simple Calculator</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="style.css">
+	<script src="js/ajax.js">alert("start");</script>
+</head>
+<body>
+	<h1 class="container title">Simple Ajax Calculator</h1>
+
+	<form class="container" onsubmit="return false;">
+		<input type="number" name="n1" placeholder="0">
+		<input type="number" name="n2" placeholder="0">
+
+		<br><br>
+
+		<label for="operation">Operation</label>
+		<select name="op">
+			<option>Sum</option>
+			<option>Subtract</option>
+			<option>Multiply</option>
+			<option>Divide</option>
+		</select>
+
+		<br><br>
+		<input type="submit" name="calculate" value="Calculate" onclick="requestCalculation()">
+	</form>
+
+	<div class="result container">
+		<h3>Result:</h3>
+		<span id="result"></span>
+	</div>
+</body>
+</html>
