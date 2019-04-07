@@ -1,7 +1,7 @@
 <?php
 session_start();
-require "config.php";
 require "autoload.php";
+require "config.php";
 
 $core = new Core();
 $core->start();

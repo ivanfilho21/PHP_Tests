@@ -3,26 +3,27 @@
 /**
 * Class: DAO
 * 
-* Database operations related to database entities.
+* Database operations related to database tables.
 *
 * @package      login-system
 * @subpackage   class/database/dao
 * @author       Ivan Filho <ivanfilho21@gmail.com>
 *
 * Dependencies:
+* class Database.
 * class Column.
 * class DatabaseUtils.
 * database-related constants.
 *
 * Created: Mar 11, 2019.
-* Last Modified: Mar 31, 2019.
+* Last Modified: Apr 07, 2019.
 */
 
 abstract class DAO
 {
     protected $tableName = "";
     protected $columns = array();
-    protected $db;
+    #protected $db;
 
     public function __construct($db)
     {

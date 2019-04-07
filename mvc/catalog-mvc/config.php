@@ -2,32 +2,26 @@
 #define("ENVIRONMENT", "production");
 define("ENVIRONMENT", "development");
 define("DEBUG", "true");
-$config = array();
 
 if (ENVIRONMENT == "development") {
 	define("BASE_URL", "http://localhost/dev/php-tests/mvc/catalog-mvc/");
-	$config["dbname"] = "catalog_db";
-	$config["host"] = "127.0.0.1";
-	$config["dbuser"] = "root";
-	$config["dbpass"] = "";
-	$config["dbtype"] = "mysql";
+	define("DB_NAME", "catalog_db");
+	define("DB_HOST", "127.0.0.1");
+	define("DB_USER", "root");
+	define("DB_PASS", "");
+	define("DB_TYPE", "mysql");
 }
 else {
 	define("BASE_URL", "mysite here ");
-	$config["dbname"] = "id3272628_auth_db";
-	$config["host"] = "localhost";
-	$config["dbuser"] = "id3272628_auth_user";
-	$config["dbpass"] = "authdb";
-	$config["dbtype"] = "mysql";
+	define("DB_NAME", "id3272628_auth_db");
+	define("DB_HOST", "localhost");
+	define("DB_USER", "id3272628_auth_user");
+	define("DB_PASS", "authdb");
+	define("DB_TYPE", "mysql");
 }
 
-global $db;
-try {
-	$db = new PDO(
-		$config["dbtype"] .":dbname=" .$config["dbname"] .";"
-		."host=" .$config["host"],$config["dbuser"],$config["dbpass"]
-	);
-} catch(PDOException $e) {
-	echo "Failed connecting to database. Message: " .$e->getMessage();
-	exit();
-}
+define("ANNOUNCEMENT_PICTURES_DIR", BASE_URL ."assets/images/announcements");
+
+global $database;
+
+$database = new Database();

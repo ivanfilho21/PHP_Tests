@@ -7,7 +7,10 @@
 	<link rel="stylesheet" href="<?php echo BASE_URL ."assets/css/"; ?>general.css">
 	<link rel="stylesheet" href="<?php echo BASE_URL ."assets/css/"; ?>header.css">
 	<link rel="stylesheet" href="<?php echo BASE_URL ."assets/css/"; ?>footer.css">
-	<!-- <link rel="stylesheet" href="<?php #echo BASE_URL ."assets/css/" .$viewName; ?>.css"> -->
+
+	<?php if (file_exists("assets/css/" .$viewName .".css")) : ?>
+		<link rel="stylesheet" href="<?php echo BASE_URL ."assets/css/" .$viewName; ?>.css">
+	<?php endif; ?>
 
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
