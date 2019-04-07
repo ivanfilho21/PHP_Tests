@@ -4,3 +4,12 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ /dev/php-tests/mvc/catalog-mvc/index.php?url=$1 [QSA,L]
+
+
+#RewriteEngine On
+
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-l
+
+#RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]

@@ -18,6 +18,12 @@ spl_autoload_register(function($className) {
 	elseif (file_exists("models/" .$className .$extension)) {
 		require "models/" .$className .$extension;
 	}
+	elseif (file_exists("models/database/" .$className .$extension)) {
+		require "models/database/" .$className .$extension;
+	}
+	elseif (file_exists("models/database/dao/" .$className .$extension)) {
+		require "models/database/dao/" .$className .$extension;
+	}
 	elseif (file_exists("core/" .$className .$extension)) {
 		require "core/" .$className .$extension;
 	}
