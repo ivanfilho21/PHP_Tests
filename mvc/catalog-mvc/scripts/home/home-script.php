@@ -13,7 +13,7 @@ if ($util->checkMethod("GET")) {
 }
 
 $latestAnnouncements = $announcements->getLatest($database, $currentPage, $filter, $maxPerPage);
-$totalAnnouncements = count($announcements->getAll());
+$totalAnnouncements = count($announcements->getAll("", "", $filter));
 $maxPages = ($maxPerPage > 0) ? ceil($totalAnnouncements / $maxPerPage) : 1;
 
 $categories = $database->getCategoriesTable();

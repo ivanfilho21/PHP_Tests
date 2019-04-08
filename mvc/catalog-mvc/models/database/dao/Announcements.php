@@ -41,7 +41,9 @@ class Announcements extends DAO
 		# condition
 		$where = array();
 
-		if (count($filter) > 0) {
+		$where = $this->getWhereFromFilter($where, $filter);
+
+		/*if (count($filter) > 0) {
 			if (! empty($filter["category"])) {
 				#$select[] = DatabaseUtils::createSelection($database->getCategoriesTable(), "id");
 				$where[] = DatabaseUtils::createCondition($this, "categoryId", $filter["category"]);
@@ -53,7 +55,7 @@ class Announcements extends DAO
 				#$select[] = DatabaseUtils::createSelection($this, "condition");
 				$where[] = DatabaseUtils::createCondition($this, "condition", $filter["condition"] -1);
 			}
-		}
+		}*/
 
 		# additionalSelections
 		$additional = array();
@@ -106,7 +108,7 @@ class Announcements extends DAO
 		return ($res) ? $res : array();
 	}
 
-	public function getAll($userId="", $database="")
+	public function getAll($userId="", $database="", $filter=array())
 	{
 		# select
 		$select = array();
@@ -115,6 +117,8 @@ class Announcements extends DAO
 		$where = array();
 		if (! empty($userId))
 			$where[] = DatabaseUtils::createCondition($this, "userId", $userId);
+
+		$where = $this->getWhereFromFilter($where, $filter);
 
 		# additionalSelections
 		$additional = array();
@@ -175,6 +179,25 @@ class Announcements extends DAO
 	}
 
 	# Private methods
+
+	private function getWhereFromFilter($where, $filter)
+	{
+		if (count($filter) > 0) {
+			if (! empty($filter["category"])) {
+				#$select[] = DatabaseUtils::createSelection($database->getCategoriesTable(), "id");
+				$where[] = DatabaseUtils::createCondition($this, "categoryId", $filter["category"]);
+			}
+			if (! empty($filter["price-range"])) {
+				$priceRange = $filter["price-range"];
+			}
+			if (! empty($filter["condition"])) {
+				#$select[] = DatabaseUtils::createSelection($this, "condition");
+				$where[] = DatabaseUtils::createCondition($this, "condition", $filter["condition"] -1);
+			}
+		}
+
+		return $where;
+	}
 
 	private function savePictures($database, $announcementId, $pictures)
 	{
