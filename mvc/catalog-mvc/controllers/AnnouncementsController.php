@@ -1,16 +1,22 @@
 <?php
-class AnnouncementController extends Controller
+class AnnouncementsController extends Controller
 {
 	public function __construct()
 	{
 		$this->title = "";
-		$this->viewName = "announcement";
+		$this->viewName = "announcements";
 		$this->viewData = array();
 	}
 
 	public function index()
 	{
-		$this->loadView();
+		checkUserPermissionToPage();
+		global $database;
+
+		$this->title = "My Announcements";
+		$this->viewData["database"] = $database;
+
+		$this->loadView("my-announcements");
 	}
 
 	public function view($id)
@@ -25,5 +31,20 @@ class AnnouncementController extends Controller
 		$this->title = $title;
 
 		$this->loadView("announcement-view");
+	}
+
+	public function create()
+	{
+		#
+	}
+
+	public function edit()
+	{
+		#
+	}
+
+	public function delete()
+	{
+		#
 	}
 }

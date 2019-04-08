@@ -54,7 +54,7 @@
 					</td>
 
 					<td>
-						<p><a href="<?php echo BASE_URL; ?>announcement/view/<?php echo $a['id']; ?>" class="announcement-title"><?php echo $a["title"]; ?></a></p>
+						<p><a href="<?php echo BASE_URL; ?>announcements/view/<?php echo $a['id']; ?>" class="announcement-title"><?php echo $a["title"]; ?></a></p>
 						<p class="announcement-category"><?php echo $a["categoryName"]; ?></p>
 					</td>
 

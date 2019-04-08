@@ -26,6 +26,19 @@ global $database;
 
 $database = new Database();
 
+function checkUserPermissionToPage()
+{
+	if (empty (getUserSession())) {
+		?>
+		<script>
+			// window.location.href = "./";
+		</script>
+		<?php
+		header("Location: " .BASE_URL);
+		exit();
+	}
+}
+
 function getUserSession()
 {
 	if (isset($_SESSION["user-session-id"])) {

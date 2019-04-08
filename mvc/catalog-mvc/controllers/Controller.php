@@ -19,6 +19,12 @@ abstract class Controller
 		# transforms keys into variables
 		extract($this->viewData);
 
-		require "views/" .$viewName .".php";
+		if (file_exists("views/" .$viewName .".php")) {
+			require "views/" .$viewName .".php";
+		} else {
+			header("Location: " .BASE_URL ."views/404.php");
+			exit();
+		}
+		
 	}
 } 

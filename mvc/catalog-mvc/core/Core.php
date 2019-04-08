@@ -27,8 +27,12 @@ class Core
 			# Get action from url
 			array_shift($url);
 			#print_r($url);
-			$act = (strpos($url[0], ".php") !== false) ? substr($url[0], 0, - strlen(".php")) : $url[0];
-			$currentAction = (isset($act) && ! empty($act)) ? $act : DEFAULT_ACTION;
+			if (isset($url[0]) && !empty($url[0])) {
+				$act = (strpos($url[0], ".php") !== false) ? substr($url[0], 0, - strlen(".php")) : $url[0];
+				$currentAction = (isset($act) && ! empty($act)) ? $act : DEFAULT_ACTION;
+			} else {
+				$currentAction = DEFAULT_ACTION;
+			}
 
 			# Get parameters from url
 			array_shift($url);

@@ -35,7 +35,7 @@
 		<nav class="nav-bar">
 			<ul class="menu-list">
 				<?php if (! empty(getUserSession())) : ?>
-					<li><a href="<?php echo BASE_URL; ?>my-announcements">My Announcements</a></li>
+					<li><a href="<?php echo BASE_URL; ?>announcements">My Announcements</a></li>
 					<li><a href="<?php echo BASE_URL; ?>authentication/logout">Logout</a></li>
 				<?php else : ?>
 					<li><a href="<?php echo BASE_URL; ?>authentication/register">Register</a></li>
