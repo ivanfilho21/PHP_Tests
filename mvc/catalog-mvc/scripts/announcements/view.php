@@ -16,4 +16,4 @@ if (empty($info)) {
 $title = $info["title"];
 $price = $info["price"];
 $description = $info["description"];
-$firstPictureUrl = (isset($info["pictures"]) && isset($info["pictures"][0])) ? $info["pictures"][0]["url"] : null;
+$pictures = (isset($info["pictures"])) ? $info["pictures"] : array();

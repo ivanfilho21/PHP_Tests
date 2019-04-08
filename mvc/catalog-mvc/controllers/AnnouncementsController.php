@@ -29,7 +29,7 @@ class AnnouncementsController extends Controller
 
 		$this->viewData["title"] = $title;
 		$this->viewData["price"] = $price;
-		$this->viewData["firstPictureUrl"] = $firstPictureUrl;
+		$this->viewData["pictures"] = $pictures;
 		$this->viewData["description"] = $description;
 
 		$this->title = $title;
