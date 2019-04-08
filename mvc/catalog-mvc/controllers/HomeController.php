@@ -23,6 +23,6 @@ class HomeController extends Controller
 			"totalAnnouncements" => $totalAnnouncements
 		);
 
-		$this->loadView("home");
+		$this->loadView();
 	}
 }

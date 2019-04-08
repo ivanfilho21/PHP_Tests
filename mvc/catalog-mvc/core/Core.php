@@ -10,17 +10,19 @@ class Core
 		$url = "/";
 		$url .= (! empty($_GET["url"])) ? $_GET["url"] : "";
 
-		#echo "URL: " .$url ."<br><hr>";
+		echo "URL: " .$url ."<br><hr>";
 
 		# get controller, action, and parameters from URL
-		if (! empty($url) && $url !== "/") {
+		#if (! empty($url) && $url !== "/") {
+		if ($url !== "/") {
 			$url = explode("/", $url);
 			#print_r($url);
 
 			# Get controller from url
-			# removes first index from array
+			# removes first index from array, which is /
 			array_shift($url);
-			$currentController = ucfirst($url[0]) ."Controller";
+			$cont = (strpos($url[0], ".php") !== false) ? substr($url[0], 0, - strlen(".php")) : $url[0];
+			$currentController = ucfirst($cont) ."Controller";
 
 			# Get action from url
 			array_shift($url);
@@ -51,18 +53,24 @@ class Core
 
 		# Instantiate controller using the variable $currentController
 		try {
-			$c = new $currentController();
+			$c = $this->loadCurrentController($currentController);
 
 			# Call action (function) from current controller
 			# I can't do this:  $c->index(); works, but can't pass the parameters
-			call_user_func_array(array($c, $currentAction), array($currentParams));
+			#call_user_func_array(array($c, $currentAction), array($currentParams));
+			call_user_func_array(array($c, $currentAction), $currentParams);
 		} catch(\Exception $e) {
-			#echo $e->getMessage();
+			echo $e->getMessage();
 			# Redirect to 404 page
-			header("Location: ./404.php");
+			# header("Location: " .BASE_URL ."404.php");
 			exit();
 		}
 
 		
+	}
+
+	private function loadCurrentController($currentController)
+	{
+		return new $currentController();
 	}
 }

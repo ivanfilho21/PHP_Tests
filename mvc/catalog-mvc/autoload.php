@@ -28,6 +28,7 @@ spl_autoload_register(function($className) {
 		require "core/" .$className .$extension;
 	}
 	else {
-		throw new Exception("Error: class doesn't exist.", 1);
+
+		throw new \Exception("Error: class doesn't exist.", 1);
 	}
 });

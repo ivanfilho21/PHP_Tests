@@ -54,7 +54,7 @@
 					</td>
 
 					<td>
-						<p><a href="announcement-view.php?id=<?php echo $a['id']; ?>" class="announcement-title"><?php echo $a["title"]; ?></a></p>
+						<p><a href="<?php echo BASE_URL; ?>announcement/view/<?php echo $a['id']; ?>" class="announcement-title"><?php echo $a["title"]; ?></a></p>
 						<p class="announcement-category"><?php echo $a["categoryName"]; ?></p>
 					</td>
 
@@ -68,7 +68,7 @@
 
 		<div class="pagination">
 			<?php for ($i = 1; $i <= $maxPages; $i++) : ?>
-			<a <?php echo ($i == $currentPage) ? 'class="active"' : ''; ?> href="index.php?<?php
+			<a <?php echo ($i == $currentPage) ? 'class="active"' : ''; ?> href="<?php echo BASE_URL; ?>?<?php
 			$get = $_GET;
 			$get['p'] = $i;
 			echo http_build_query($get);

@@ -23,7 +23,7 @@
 	<!-- Header -->
 	<header class="header dark">
 		<div class="logo">
-			<a href="index.php">Catalog</a>
+			<a href="<?php echo BASE_URL; ?>">Catalog</a>
 		</div>
 
 		<form class="search-bar" method="GET">
@@ -35,11 +35,11 @@
 		<nav class="nav-bar">
 			<ul class="menu-list">
 				<?php #if (! empty(getUserSession())) : ?>
-					<li><a href="my-announcements.php">My Announcements</a></li>
-					<li><a href="logout.php">Logout</a></li>
+					<li><a href="<?php echo BASE_URL; ?>my-announcements.php">My Announcements</a></li>
+					<li><a href="<?php echo BASE_URL; ?>logout.php">Logout</a></li>
 				<?php #else : ?>
-					<li><a href="register.php">Register</a></li>
-					<li><a href="login.php">Login</a></li>
+					<li><a href="<?php echo BASE_URL; ?>register.php">Register</a></li>
+					<li><a href="<?php echo BASE_URL; ?>login.php">Login</a></li>
 				<?php #endif; ?>
 			</ul>
 		</nav>
@@ -49,7 +49,7 @@
 	</header>
 	
 	<!-- Main -->
-	<?php $this->loadViewInTemplate(); ?>
+	<?php $this->loadViewInTemplate($viewName); ?>
 
 	<!-- Footer -->
 	<footer class="footer light">
