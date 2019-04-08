@@ -10,7 +10,7 @@ class Core
 		$url = "/";
 		$url .= (! empty($_GET["url"])) ? $_GET["url"] : "";
 
-		echo "URL: " .$url ."<br><hr>";
+		#echo "URL: " .$url ."<br><hr>";
 
 		# get controller, action, and parameters from URL
 		#if (! empty($url) && $url !== "/") {
@@ -60,9 +60,9 @@ class Core
 			#call_user_func_array(array($c, $currentAction), array($currentParams));
 			call_user_func_array(array($c, $currentAction), $currentParams);
 		} catch(\Exception $e) {
-			echo $e->getMessage();
+			#echo $e->getMessage();
 			# Redirect to 404 page
-			# header("Location: " .BASE_URL ."404.php");
+			header("Location: " .BASE_URL ."404.php");
 			exit();
 		}
 

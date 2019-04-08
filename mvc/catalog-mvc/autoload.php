@@ -29,6 +29,6 @@ spl_autoload_register(function($className) {
 	}
 	else {
 
-		throw new \Exception("Error: class doesn't exist.", 1);
+		throw new Exception("Error: class doesn't exist.", 1);
 	}
 });

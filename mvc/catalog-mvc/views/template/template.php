@@ -34,13 +34,13 @@
 
 		<nav class="nav-bar">
 			<ul class="menu-list">
-				<?php #if (! empty(getUserSession())) : ?>
-					<li><a href="<?php echo BASE_URL; ?>my-announcements.php">My Announcements</a></li>
-					<li><a href="<?php echo BASE_URL; ?>logout.php">Logout</a></li>
-				<?php #else : ?>
-					<li><a href="<?php echo BASE_URL; ?>register.php">Register</a></li>
-					<li><a href="<?php echo BASE_URL; ?>login.php">Login</a></li>
-				<?php #endif; ?>
+				<?php if (! empty(getUserSession())) : ?>
+					<li><a href="<?php echo BASE_URL; ?>my-announcements">My Announcements</a></li>
+					<li><a href="<?php echo BASE_URL; ?>logout">Logout</a></li>
+				<?php else : ?>
+					<li><a href="<?php echo BASE_URL; ?>register">Register</a></li>
+					<li><a href="<?php echo BASE_URL; ?>login">Login</a></li>
+				<?php endif; ?>
 			</ul>
 		</nav>
 
