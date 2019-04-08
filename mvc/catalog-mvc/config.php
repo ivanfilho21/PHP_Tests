@@ -20,7 +20,7 @@ else {
 	define("DB_TYPE", "mysql");
 }
 
-define("ANNOUNCEMENT_PICTURES_DIR", BASE_URL ."assets/images/announcements");
+define("ANNOUNCEMENT_PICTURES_DIR", "assets/images/announcements");
 
 global $database;
 

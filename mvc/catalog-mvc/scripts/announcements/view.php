@@ -2,15 +2,6 @@
 # checkUserPermissionToPage();
 $util = new Util();
 
-if (empty($id)) {
-	# redirect
-	?>
-	<!-- <script>window.location.href = "./";</script> -->
-	<?php
-	header("Location: " .BASE_URL);
-	exit();
-}
-
 $info = $database->getAnnouncementsTable()->get($id, "", $database);
 
 if (empty($info)) {

@@ -50,7 +50,7 @@
 				<?php foreach ($latestAnnouncements as $a) : ?>
 				<tr>
 					<td>
-						<img class="announcement-thumb" src="<?php echo ANNOUNCEMENT_PICTURES_DIR ."/"; echo (isset($a['url'])) ? $a['url'] : 'default.svg'; ?>" alt="Announcement Picture" border="0">
+						<img class="announcement-thumb" src="<?php echo BASE_URL .ANNOUNCEMENT_PICTURES_DIR ."/"; echo (isset($a['url'])) ? $a['url'] : 'default.svg'; ?>" alt="Announcement Picture" border="0">
 					</td>
 
 					<td>
