@@ -27,7 +27,8 @@ class Core
 			# Get action from url
 			array_shift($url);
 			#print_r($url);
-			$currentAction = (isset($url[0]) && ! empty($url[0])) ? $url[0] : DEFAULT_ACTION;
+			$act = (strpos($url[0], ".php") !== false) ? substr($url[0], 0, - strlen(".php")) : $url[0];
+			$currentAction = (isset($act) && ! empty($act)) ? $act : DEFAULT_ACTION;
 
 			# Get parameters from url
 			array_shift($url);
@@ -62,7 +63,7 @@ class Core
 		} catch(\Exception $e) {
 			#echo $e->getMessage();
 			# Redirect to 404 page
-			header("Location: " .BASE_URL ."404.php");
+			header("Location: " .BASE_URL ."views/404.php");
 			exit();
 		}
 

@@ -3,6 +3,7 @@ class HomeController extends Controller
 {
 	public function __construct()
 	{
+		$this->title = "Home";
 		$this->viewName = "home";
 		$this->viewData = array(); 
 	}

@@ -2,6 +2,7 @@
 
 abstract class Controller
 {
+	protected $title = "Catalog";
 	protected $viewName = "";
 	protected $viewData = array();
 

@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title><?php echo ucfirst($viewName); ?></title>
+	<title><?php echo $this->title; ?></title>
 	<link rel="stylesheet" href="<?php echo BASE_URL ."assets/css/"; ?>normalize.css">
 	<link rel="stylesheet" href="<?php echo BASE_URL ."assets/css/"; ?>general.css">
 	<link rel="stylesheet" href="<?php echo BASE_URL ."assets/css/"; ?>header.css">
@@ -36,10 +36,10 @@
 			<ul class="menu-list">
 				<?php if (! empty(getUserSession())) : ?>
 					<li><a href="<?php echo BASE_URL; ?>my-announcements">My Announcements</a></li>
-					<li><a href="<?php echo BASE_URL; ?>logout">Logout</a></li>
+					<li><a href="<?php echo BASE_URL; ?>authentication/logout">Logout</a></li>
 				<?php else : ?>
-					<li><a href="<?php echo BASE_URL; ?>register">Register</a></li>
-					<li><a href="<?php echo BASE_URL; ?>login">Login</a></li>
+					<li><a href="<?php echo BASE_URL; ?>authentication/register">Register</a></li>
+					<li><a href="<?php echo BASE_URL; ?>authentication/login">Login</a></li>
 				<?php endif; ?>
 			</ul>
 		</nav>
