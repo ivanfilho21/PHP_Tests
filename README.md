@@ -30,9 +30,9 @@ PHP scripts with HTML5 and CSS3.
       <td><a href="https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/agenda">link</a></td>
     </tr>
     <tr>
-      <td><b><a href="http://ivanfilho21.000webhostapp.com/catalog/index.php">Catalog</a></b></td>
+      <td><b><a href="https://ivanfilho21.000webhostapp.com/mvc/catalog-mvc/">Catalog</a></b></td>
       <td>A system to create and view announcements.</td>
-      <td><a href="https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/catalog">link</a></td>
+      <td><a href="https://github.com/ivanfilho21/PHP_Tests/tree/master/mvc/catalog-mvc">link</a></td>
     </tr>
     <tr>
       <td><b><a href="https://ivanfilho21.000webhostapp.com/index.php">Task Manager</a></b></td>
