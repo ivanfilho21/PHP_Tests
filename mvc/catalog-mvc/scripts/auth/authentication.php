@@ -41,11 +41,13 @@ if ($util->checkMethod("POST")) {
 
 			# Redirect to index page
 			?>
+			<input id="data" type="hidden" data-base-url="<?php echo BASE_URL; ?>">
 			<script>
-				// window.location.href = "./";
+				var baseUrl = document.getElementById("data").getAttribute("data-base-url");
+				window.location.href = baseUrl;
 			</script>
 			<?php
-			header("Location: " .BASE_URL);
+			#header("Location: " .BASE_URL);
 			exit();
 		}
 	}

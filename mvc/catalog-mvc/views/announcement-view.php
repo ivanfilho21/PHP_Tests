@@ -10,7 +10,7 @@
 				
 				<?php foreach($pictures as $picture) : ?>
 					<div class="slide">
-						<img src="<?php echo BASE_URL .ANNOUNCEMENT_PICTURES_DIR .$picture["url"]; ?>" alt="Announcement Picture">
+						<img src="<?php echo BASE_URL .ANNOUNCEMENT_PICTURES_DIR ."/" .$picture["url"]; ?>" alt="Announcement Picture">
 					</div>
 				<?php endforeach; ?>
 				

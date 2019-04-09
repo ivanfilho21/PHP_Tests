@@ -21,7 +21,14 @@ if ($util->checkMethod("GET")) {
 		$announcement = $database->getAnnouncementsTable()->get($id, $userId, $database);
 
 		if (empty($announcement)) {
-			header("Location: " .BASE_URL ."announcements");
+			?>
+			<input id="data" type="hidden" data-base-url="<?php echo BASE_URL; ?>">
+			<script>
+				var baseUrl = document.getElementById("data").getAttribute("data-base-url");
+				window.location.href = baseUrl + "announcements";
+			</script>
+			<?php
+			#header("Location: " .BASE_URL ."announcements");
 			exit();
 		}
 
@@ -72,13 +79,14 @@ elseif ($util->checkMethod("POST")) {
 		$announcementArray = array("id" => $id, "userId" => $userId, "categoryId" => $categoryId, "title" => $title, "condition" => $condition, "price" => $price, "description" => $description);
 
 		$announcements->update($announcementArray, $pictures, $database);
-		#header("Location: my-announcements.php");
 		?>
+		<input id="base-url" type="hidden" data-base-url="<?php echo BASE_URL; ?>">
 		<script>
-			// window.location.href = "my-announcements.php";
+			var baseUrl = document.getElementById("base-url").getAttribute("data-base-url");
+			window.location.href = baseUrl + "announcements";
 		</script>
 		<?php
-		header("Location: " .BASE_URL ."announcements");
+		#header("Location: " .BASE_URL ."announcements");
 		exit();
 	}
 }

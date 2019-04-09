@@ -22,7 +22,14 @@ abstract class Controller
 		if (file_exists("views/" .$viewName .".php")) {
 			require "views/" .$viewName .".php";
 		} else {
-			header("Location: " .BASE_URL ."views/404.php");
+			?>
+			<input type="hidden" data-base-url="<?php echo BASE_URL; ?>">
+			<script>
+				var baseUrl = document.getElementById("data-base-url").value;
+				window.location.href = baseUrl + "views/404.php";
+			</script>
+			<?php
+			#header("Location: " .BASE_URL ."views/404.php");
 			exit();
 		}
 		

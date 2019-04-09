@@ -103,9 +103,6 @@ class AnnouncementsController extends Controller
 
 	public function deletePicture($imgId)
 	{
-		if (empty($id)) {
-			$this->redirectToIndex();
-		}
 		global $database;
 		$id = $imgId;
 		require "scripts/announcements/delete-picture.php";
@@ -113,7 +110,14 @@ class AnnouncementsController extends Controller
 
 	private function redirectToIndex()
 	{
-		header("Location: " .BASE_URL);
+		?>
+		<input id="data" type="hidden" data-base-url="<?php echo BASE_URL; ?>">
+		<script>
+			var baseUrl = document.getElementById("data").getAttribute("data-base-url");
+			window.location.href = baseUrl;
+		</script>
+		<?php
+		#header("Location: " .BASE_URL);
 		exit();
 	}
 }

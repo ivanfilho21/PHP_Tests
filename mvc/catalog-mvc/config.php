@@ -12,15 +12,15 @@ if (ENVIRONMENT == "development") {
 	define("DB_TYPE", "mysql");
 }
 else {
-	define("BASE_URL", "mysite here ");
-	define("DB_NAME", "id3272628_auth_db");
+	define("BASE_URL", "https://ivanfilho21.000webhostapp.com/mvc/catalog-mvc/");
+	define("DB_NAME", "id3272628_tasks");
 	define("DB_HOST", "localhost");
-	define("DB_USER", "id3272628_auth_user");
-	define("DB_PASS", "authdb");
+	define("DB_USER", "id3272628_ivanfilho21");
+	define("DB_PASS", "taskdb");
 	define("DB_TYPE", "mysql");
 }
 
-define("ANNOUNCEMENT_PICTURES_DIR", "assets/images/announcements/");
+define("ANNOUNCEMENT_PICTURES_DIR", "assets/images/announcements");
 
 global $database;
 
@@ -30,12 +30,12 @@ function checkUserPermissionToPage()
 {
 	if (empty (getUserSession())) {
 		?>
+		<input id="data" type="hidden" data-base-url="<?php echo BASE_URL; ?>">
 		<script>
-			// window.location.href = "./";
+			var baseUrl = document.getElementById("data").getAttribute("data-base-url");
+			window.location.href = baseUrl;
 		</script>
 		<?php
-		header("Location: " .BASE_URL);
-		exit();
 	}
 }
 
