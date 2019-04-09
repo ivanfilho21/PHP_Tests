@@ -2,18 +2,10 @@
 	<div class="center">
 		<h1><?php echo $title; ?></h1>
 
+		<?php if (count($pictures) > 0) : ?>
 		<p>Pictures: <?php echo count($pictures); ?></p>
 
 		<div id="slider" class="slider">
-			<!-- <div class="buttons">
-				
-			</div> -->
-			<div class="slider-btn left"></div>
-			<div class="slider-btn right"></div>
-
-			<button class="slider-btn" id="left-btn" onclick="previousSlide()"><i class="fas fa-chevron-left"></i></button>
-			<button class="slider-btn" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
-			
 			<div id="slider-frame" class="slider-frame">
 				
 				<?php foreach($pictures as $picture) : ?>
@@ -24,10 +16,11 @@
 				
 			</div>
 		</div>
-
-		<br><br>
-
-		<img class="img" src="<?php echo BASE_URL .ANNOUNCEMENT_PICTURES_DIR ."/"; echo (isset($pictures[0])) ? $pictures[0]["url"] : 'default.svg'; ?>" alt="Announcement Picture" border="0">
+		<div>
+			<button class="slider-btn" id="left-btn" onclick="previousSlide()"><i class="fas fa-chevron-left"></i></button>
+			<button class="slider-btn" id="right-btn" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
+		</div>
+		<?php endif; ?>
 
 		<h2>U$$ <?php echo $price;?></h2>
 

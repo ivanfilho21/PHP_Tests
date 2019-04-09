@@ -1,6 +1,8 @@
 currentSlide = 0;
 
-window.onload = function() {
+window.onload = resize();
+
+function resize() {
 	var slideWidth = document.getElementById("slider").offsetWidth;
 	var objects = document.getElementsByClassName("slide");
 
@@ -10,23 +12,21 @@ window.onload = function() {
 		objects[i].style.width = slideWidth + "px";
 	}
 
-	var sliderFrame = document.getElementById("slider-frame");
-	sliderFrame.style.width = slideWidth * max;
-
-	// setInterval(nextSlide, 5000);
+	document.getElementById("slider-frame").style.width = slideWidth * max + "px";
+	// setInterval(nextSlide, 2000);
 }
 
 function previousSlide() {
-	if (currentSlide <= max && currentSlide > 0)
+	if (currentSlide > 0)
 		currentSlide--;
-	else
-		currentSlide = 0;
+	else if (currentSlide == 0)
+		currentSlide = max-1;
 
 	changeSlide(currentSlide);
 }
 
 function nextSlide() {
-	if (currentSlide < max)
+	if (currentSlide < (max -1))
 		currentSlide++;
 	else
 		currentSlide = 0;
