@@ -1,4 +1,4 @@
-<ul class="menu-list">
+<ul class="menu-list  container">
 	<?php foreach($menu as $m) : ?>
 	<?php $name = $m["name"]; ?>
 	<?php $link = $m["url"]; ?>

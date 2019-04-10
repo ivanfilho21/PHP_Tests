@@ -1,0 +1,21 @@
+.page-wrapper {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-areas:
+	"header"
+	"main"
+	"footer";
+	grid-gap: 1em;
+}
+
+.header {
+	grid-area: header;
+}
+
+.main {
+	grid-area: main;
+}
+
+.footer {
+	grid-area: footer;
+}

@@ -1,0 +1,24 @@
+.main {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	grid-template-areas:
+	"content aside";
+	min-height: 320px;
+	height: 100%;
+}
+
+.content {
+	grid-area: content;
+}
+
+.sidebar {
+	grid-area: aside;
+
+	/* Just to view */
+	height: 480px;
+	background: linear-gradient(to bottom right, rgba(255, 255, 255, 0), whitesmoke);
+}
+
+@media(min-width: 480px) {
+	.main { min-height: 480px; }
+}

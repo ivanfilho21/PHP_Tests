@@ -4,10 +4,16 @@
 	<meta charset="utf-8">
 	<title><?php echo (! empty($this->title)) ? $this->title ." | " .$this->siteConfig["title"] : $this->siteConfig["title"]; ?></title>
 
-	<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/default.css">
-	<?php if (file_exists("assets/css/" .$viewName .".css")) : ?>
-		<link rel="stylesheet" href="<?php echo BASE_URL ."assets/css/" .$viewName; ?>.css">
-	<?php endif; ?>
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/normalize.css">
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/default/general.css">
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/default/page-grid.css">
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/default/header.css">
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/default/main-grid.css">
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/default/footer.css">
+
+	<!-- <?php #if (file_exists("assets/css/" .$viewName .".css")) : ?>
+	<link rel="stylesheet" href="<?php #echo BASE_URL ."assets/css/" .$viewName; ?>.css">
+	<?php #endif; ?> -->
 
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -16,39 +22,40 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="theme-color" content="darkslategray">
 </head>
-<body class="light">
-	<!-- Header -->
-	<header class="header dark">
-		<div class="logo">
-			<a href="<?php echo BASE_URL; ?>">Blog CMS</a>
-		</div>
+<body>
+	<div class="page-wrapper">
+		<!-- Header -->
+		<header class="header card-style">
+			<div class="logo-bar container">
+				<a id="logo" href="<?php echo BASE_URL; ?>"><?php echo $this->siteConfig["title"]; ?></a>
+				<button id="menu-btn" class="btn round-btn"><i class="fas fa-bars"></i></button>
+			</div>
 
-		<form class="search-bar" method="GET">
-			<input type="text" name="search-text" placeholder="Search">
-			<button type="submit" class="btn btn-search"><i class="fas fa-search"></i></button>
-			<a href="#" class="btn-advanced-search btn btn-default"><i class="fas fa-sort-amount-down"></i></a>
-		</form>
+			<nav class="nav-bar"><?php $this->loadMenu(); ?></nav>
+		</header>
+		
+		<!-- Main -->
+		<section class="main container">
+			<section class="content"><?php $this->loadViewIntoTemplate($viewName); ?></section>
+			<section class="content"><?php $this->loadViewIntoTemplate($viewName); ?></section>
 
-		<nav class="nav-bar">
-			<?php $this->loadMenu(); ?>
-		</nav>
+			<aside class="sidebar">
+				<span>Sidebar</span>
+			</aside>
+		</section>
+
+		
 		
 
-		<!-- Gap necessary in grid 720px -->
-		<div></div>
-	</header>
-	
-	<!-- Main -->
-	<?php $this->loadViewIntoTemplate($viewName); ?>
-
-	<!-- Footer -->
-	<footer class="footer light">
-		<p class="copyright">
-			© 2019 - <a href="https://github.com/ivanfilho21">Ivan Filho</a>
-		</p>
-		<p class="license">
-			Licensed under the MIT License.
-		</p>
-	</footer>
+		<!-- Footer -->
+		<footer class="footer container">
+			<p class="copyright">
+				© 2019 - <a href="https://github.com/ivanfilho21">Ivan Filho</a>
+			</p>
+			<p class="license">
+				Licensed under the MIT License.
+			</p>
+		</footer>
+	</div>
 </body>
 </html>
