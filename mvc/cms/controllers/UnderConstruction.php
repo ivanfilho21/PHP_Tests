@@ -1,10 +1,9 @@
 <?php
 class UnderConstruction extends Controller
 {
-	public function __construct()
+	public function __construct($database)
 	{
-		$this->title = "Under Construction";
-		$this->viewName = "under-construction";
+		parent::__construct($database, "Under Construction");
 	}
 
 	public function index()

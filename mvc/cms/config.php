@@ -6,7 +6,7 @@ define("ENVIRONMENT", "development");
 
 if (ENVIRONMENT == "development") {
 	define("BASE_URL", "http://localhost/dev/php-tests/mvc/cms/");
-	define("DB_NAME", "blog_db__");
+	define("DB_NAME", "blog_db");
 	define("DB_HOST", "127.0.0.1");
 	define("DB_USER", "root");
 	define("DB_PASS", "");
@@ -24,6 +24,7 @@ else {
 global $database;
 try {
 	$database = new Database();
+	define("EXCEPTION", false);
 } catch(Exception $e) {
 	define("EXCEPTION", true);
 }

@@ -14,7 +14,7 @@ class Core
 		$this->debugCore = $debugCore;
 	}
 
-	public function start()
+	public function start($database)
 	{
 		$url = "/";
 		$url .= (! empty($_GET["url"])) ? $_GET["url"] : "";
@@ -22,7 +22,7 @@ class Core
 		if ($this->debugCore) echo "URL: " .$url ."<br><hr>";
 
 		# get controller, action, and parameters from URL
-		if ($url !== "/" && (! defined("EXCEPTION") && ! EXCEPTION)) {
+		if ($url !== "/" && (! EXCEPTION)) {
 			$url = explode("/", $url);
 			if ($this->debugCore) print_r($url);
 
@@ -71,7 +71,7 @@ class Core
 
 		# Instantiate controller using the variable $currentController and calling action
 		try {
-			$c = $this->loadCurrentController($currentController);				
+			$c = $this->loadCurrentController($currentController, $database);				
 		} catch(Exception $e) {
 			if (defined("DEBUG") && DEBUG) {
 				echo "<b>Core:</b> Controller \"{$currentController}\" does not exist."; die();
@@ -79,7 +79,7 @@ class Core
 				$currentController = DEFAULT_ERROR_CONTROLLER;
 				$currentAction = DEFAULT_ACTION;
 				
-				$c = $this->loadCurrentController($currentController);
+				$c = $this->loadCurrentController($currentController, $database);
 			}
 		}
 		try {
@@ -94,10 +94,10 @@ class Core
 		}
 	}
 
-	private function loadCurrentController($currentController)
+	private function loadCurrentController($currentController, $database)
 	{
 		if (class_exists($currentController)) {
-			return new $currentController();
+			return new $currentController($database);
 		}
 		else {
 			throw new Exception("<b>Core:</b> Controller <b>\"{$currentController}\"</b> does not exist.", 1);

@@ -1,0 +1,13 @@
+<?php
+class Pages extends DAO
+{
+	public function __construct($pdo)
+	{
+		parent::__construct($pdo);
+
+		$this->tableName = "menu";
+        $this->columns[] = new Column("id", INT, 0, false, "AUTO_INCREMENT", "PRIMARY KEY");
+        $this->columns[] = new Column("title", VARCHAR, 100, false);
+        $this->columns[] = new Column("body", VARCHAR, 100, false);
+	}
+}

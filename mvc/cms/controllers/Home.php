@@ -1,10 +1,9 @@
 <?php
 class Home extends Controller
 {
-	public function __construct()
+	public function __construct($database)
 	{
-		$this->title = "Home";
-		$this->viewData = array(); 
+		parent::__construct($database, "Home");
 	}
 
 	public function index()

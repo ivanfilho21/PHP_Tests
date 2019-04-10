@@ -18,40 +18,21 @@ class Database extends Model
 	public function __construct()
 	{
 		$this->pdo = $this->getDatabaseConnection();
+		$this->siteConfig = new SiteConfiguration($this->pdo);
+		$this->menu = new Menu($this->pdo);
+		$this->pages = new Pages($this->pdo);
 		$this->users = new Users($this->pdo);
-		$this->categories = new Categories($this->pdo);
-		$this->announcements = new Announcements($this->pdo);
-		$this->announcementImg = new AnnouncementImages($this->pdo);
 
-		#$this->users->create();
-		#$this->categories->create();
-		#$this->announcements->create();
-		#$this->announcementImg->create();
+		/*
+		$this->siteConfig->create();
+		$this->menu->create();
+		$this->pages->create();
+		$this->users->create();
+		*/
 
-		#$this->categories->insert(array("name" => "Eletronics"));
-		#$this->categories->insert(array("name" => "Home"));
-		#$this->categories->insert(array("name" => "Health"));
-		#$this->categories->insert(array("name" => "Furnitures"));
-	}
-
-	public function getUsersTable()
-	{
-		return $this->users;
-	}
-
-	public function getCategoriesTable()
-	{
-		return $this->categories;
-	}
-
-	public function getAnnouncementsTable()
-	{
-		return $this->announcements;
-	}
-
-	public function getAnnouncementImagesTable()
-	{
-		return $this->announcementImg;
+		#$a = array("title" => "Blog CMS", "color" => "blue", "template" => "default");
+		#$this->siteConfig->insert($a);
+		
 	}
 
 	private function getDatabaseConnection() {

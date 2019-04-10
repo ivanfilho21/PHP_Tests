@@ -4,4 +4,4 @@ require "autoload.php";
 require "config.php";
 
 $core = new Core();
-$core->start();
+$core->start($database);

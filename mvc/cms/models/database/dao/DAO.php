@@ -72,14 +72,6 @@ abstract class DAO
 
         $this->db->query($sql);
     }
-    
-    # Executes a given query and returns the output.
-    protected function executeQuery($sql)
-    {
-        return $this->db->query($sql);
-    }
-
-    # Todo Methods: update and delete
 
     # expects array with data to insert
     public function insert($array)
@@ -225,6 +217,7 @@ abstract class DAO
             foreach ($columnArray as $column) {
                 $clause .= BQ .$column->getName() .BQ .COMMA;
             }
+            $clause = DatabaseUtils::removeLastString($clause, COMMA);
         }
 
         return (empty($clause)) ? "*" : $clause;

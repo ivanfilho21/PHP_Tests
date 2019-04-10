@@ -2,9 +2,9 @@
 
 class NotFound extends Controller
 {
-	public function __construct()
+	public function __construct($database)
 	{
-		$this->title = "Page Not Found";
+		parent::__construct($database, "Page Not Found");
 	}
 
 	public function index()
