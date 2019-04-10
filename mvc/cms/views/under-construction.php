@@ -1,1 +1,1 @@
-<img src="assets/img/under-construction.png" alt="Under Construction">
+<style>* { font-family: sans-serif; } body { text-align: center; } img { max-width: 640px; width: 100%; }</style><h1>Site under Maintenance</h1><img src="assets/img/under-construction.png" alt="Under Construction">
