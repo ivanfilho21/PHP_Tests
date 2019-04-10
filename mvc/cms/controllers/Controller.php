@@ -15,7 +15,6 @@ abstract class Controller
 		$this->siteConfig = $this->database->siteConfig->get();
 	}
 
-
 	public abstract function index();
 
 	public function loadView($viewName, $loadTemplate=true)
@@ -27,10 +26,17 @@ abstract class Controller
 		}
 	}
 
-	private function loadViewIntoTemplate($viewName)
+	private function loadViewIntoTemplate($viewName, $viewData="")
 	{
+		$viewData = (empty($viewData)) ? $this->viewData : $viewData;
 		# transforms keys into variables
-		extract($this->viewData);
+		extract($viewData);
 		require "views/" .$viewName .".php";
+	}
+
+	private function loadMenu()
+	{
+		$menu = $this->database->menu->getAll();
+		$this->loadViewIntoTemplate("menu", array("menu" => $menu));
 	}
 } 

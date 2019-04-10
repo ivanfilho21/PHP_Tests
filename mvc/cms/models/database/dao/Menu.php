@@ -10,4 +10,9 @@ class Menu extends DAO
         $this->columns[] = new Column("name", VARCHAR, 100, false);
         $this->columns[] = new Column("url", VARCHAR, 100, false);
 	}
+
+	public function getAll()
+	{
+		return parent::selectAll(array(), array(), true);
+	}
 }

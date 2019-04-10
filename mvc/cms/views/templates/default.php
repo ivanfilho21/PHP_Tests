@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<title><?php echo (! empty($this->title)) ? $this->title ." | " .$this->siteConfig["title"] : $this->siteConfig["title"]; ?></title>
 
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/default.css">
 	<?php if (file_exists("assets/css/" .$viewName .".css")) : ?>
 		<link rel="stylesheet" href="<?php echo BASE_URL ."assets/css/" .$viewName; ?>.css">
 	<?php endif; ?>
@@ -29,16 +30,9 @@
 		</form>
 
 		<nav class="nav-bar">
-			<ul class="menu-list">
-				<?php #if (! empty(getUserSession())) : ?>
-					<li><a href="<?php echo BASE_URL; ?>announcements">My Announcements</a></li>
-					<li><a href="<?php echo BASE_URL; ?>authentication/logout">Logout</a></li>
-				<?php #else : ?>
-					<li><a href="<?php echo BASE_URL; ?>authentication/register">Register</a></li>
-					<li><a href="<?php echo BASE_URL; ?>authentication/login">Login</a></li>
-				<?php #endif; ?>
-			</ul>
+			<?php $this->loadMenu(); ?>
 		</nav>
+		
 
 		<!-- Gap necessary in grid 720px -->
 		<div></div>

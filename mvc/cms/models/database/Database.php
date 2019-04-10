@@ -32,6 +32,13 @@ class Database extends Model
 
 		#$a = array("title" => "Blog CMS", "color" => "blue", "template" => "default");
 		#$this->siteConfig->insert($a);
+
+		#$a = array("name" => "Home", "url" => "home");
+		#$b = array("name" => "Services", "url" => "services");
+		#$c = array("name" => "About", "url" => "about");
+		#$this->menu->insert($a);
+		#$this->menu->insert($b);
+		#$this->menu->insert($c);
 		
 	}
 
