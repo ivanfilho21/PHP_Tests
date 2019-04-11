@@ -1,5 +1,5 @@
 <?php
-class UnderConstruction extends Controller
+class UnderConstructionController extends Controller
 {
 	public function __construct($database)
 	{

@@ -1,7 +1,7 @@
 <?php
-define("UNDER_CONSTRUCTION_CONTROLLER", "UnderConstruction");
-define("DEFAULT_ERROR_CONTROLLER", "NotFound");
-define("DEFAULT_CONTROLLER", "Home");
+define("UNDER_CONSTRUCTION_CONTROLLER", "UnderConstructionController");
+define("DEFAULT_ERROR_CONTROLLER", "NotFoundController");
+define("DEFAULT_CONTROLLER", "HomeController");
 define("DEFAULT_ACTION", "index");
 define("DEFAULT_PARAMS", array(""));
 
@@ -30,7 +30,7 @@ class Core
 			# removes first index from array, which is /
 			array_shift($url);
 			$cont = (strpos($url[0], ".php") !== false) ? substr($url[0], 0, - strlen(".php")) : $url[0];
-			$currentController = ucfirst($cont);
+			$currentController = ucfirst($cont) ."Controller";
 
 			# Get action from url
 			array_shift($url);
@@ -76,12 +76,16 @@ class Core
 			if (defined("DEBUG") && DEBUG) {
 				echo "<b>Core:</b> Controller \"{$currentController}\" does not exist."; die();
 			} else {
-				$currentController = DEFAULT_ERROR_CONTROLLER;
+				/*$currentController = DEFAULT_ERROR_CONTROLLER;
 				$currentAction = DEFAULT_ACTION;
 				
-				$c = $this->loadCurrentController($currentController, $database);
+				$c = $this->loadCurrentController($currentController, $database);*/
+
+				# Try to load CMS Pages controller
+				echo "Does not exist. Maybe a CMS Page"; die();
 			}
 		}
+
 		try {
 			$this->callFunction($c, $currentAction, $currentParams);
 		} catch(Exception $e) {
@@ -98,8 +102,7 @@ class Core
 	{
 		if (class_exists($currentController)) {
 			return new $currentController($database);
-		}
-		else {
+		} else {
 			throw new Exception("<b>Core:</b> Controller <b>\"{$currentController}\"</b> does not exist.", 1);
 		}
 	}

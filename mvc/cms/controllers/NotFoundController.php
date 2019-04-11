@@ -1,6 +1,6 @@
 <?php
 
-class NotFound extends Controller
+class NotFoundController extends Controller
 {
 	public function __construct($database)
 	{
