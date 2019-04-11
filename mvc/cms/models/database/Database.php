@@ -30,8 +30,10 @@ class Database extends Model
 		$this->users->create();
 		*/
 
-		#$a = array("title" => "Blog CMS", "color" => "blue", "template" => "default");
-		#$this->siteConfig->insert($a);
+		/*$a = array("title" => "Blog CMS", "color" => "blue", "template" => "default", "home_banner" => "banner.jpg", "home_welcome" => "Welcome to my Blog");
+		$this->siteConfig->drop();
+		$this->siteConfig->create();
+		$this->siteConfig->insert($a);*/
 
 		#$a = array("name" => "Home", "url" => "home");
 		#$b = array("name" => "Services", "url" => "services");
@@ -39,6 +41,9 @@ class Database extends Model
 		#$this->menu->insert($a);
 		#$this->menu->insert($b);
 		#$this->menu->insert($c);
+
+		#$this->pages->insert(array("url" => "services", "title" => "Posts", "body" => ""));
+		#$this->pages->insert(array("url" => "about", "title" => "About", "body" => ""));
 		
 	}
 

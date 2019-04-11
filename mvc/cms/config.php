@@ -5,7 +5,8 @@ define("ENVIRONMENT", "development");
 #define("DEBUG", false);
 
 if (ENVIRONMENT == "development") {
-	define("BASE_URL", "http://localhost/dev/php-tests/mvc/cms/");
+	#define("BASE_URL", "http://localhost/dev/php-tests/mvc/cms/");
+	define("BASE_URL", "http://dev-php.pc/mvc/cms/");
 	define("DB_NAME", "blog_db");
 	define("DB_HOST", "127.0.0.1");
 	define("DB_USER", "root");

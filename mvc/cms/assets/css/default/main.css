@@ -1,0 +1,29 @@
+.banner-img {
+	height: 300px;
+	background-size: cover;
+	background-position: center;
+}
+.home-welcome {
+	height: 300px;
+	margin-top: -300px;
+	padding-left: 2em;
+	padding-right: 2em;
+	background-color: rgba(0, 0, 0, 0.3);
+	color: white;
+	word-wrap: break-word;
+}
+.home-welcome p {
+	padding-top: 2em;	
+	font-size: 2.5em;
+	font-weight: 600;
+	text-align: center;
+	/*line-height: 300px;*/
+	/*vertical-align: middle;*/
+}
+
+
+.sidebar {
+	/* Just to view */
+	height: 480px;
+	background: linear-gradient(to bottom right, rgba(255, 255, 255, 0), whitesmoke);
+}

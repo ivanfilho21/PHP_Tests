@@ -7,6 +7,7 @@ class Pages extends DAO
 
 		$this->tableName = "menu";
         $this->columns[] = new Column("id", INT, 0, false, "AUTO_INCREMENT", "PRIMARY KEY");
+        $this->columns[] = new Column("url", VARCHAR, 50, false);
         $this->columns[] = new Column("title", VARCHAR, 100, false);
         $this->columns[] = new Column("body", VARCHAR, 100, false);
 	}

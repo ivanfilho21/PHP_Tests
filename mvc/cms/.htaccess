@@ -3,5 +3,5 @@ RewriteEngine on
 # Redirect to Index with url parameter
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
-#RewriteRule ^(.*)$ /mvc/cms/index.php?url=$1 [QSA,L]
-RewriteRule ^(.*)$ /dev/php-tests/mvc/cms/index.php?url=$1 [QSA,L]
+RewriteRule ^(.*)$ /mvc/cms/index.php?url=$1 [QSA,L]
+#RewriteRule ^(.*)$ /dev-php.pc/mvc/cms/index.php?url=$1 [QSA,L]

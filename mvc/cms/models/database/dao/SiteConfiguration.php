@@ -10,6 +10,8 @@ class SiteConfiguration extends DAO
         $this->columns[] = new Column("title", VARCHAR, 100, false);
         $this->columns[] = new Column("color", VARCHAR, 100, false);
         $this->columns[] = new Column("template", VARCHAR, 100, false);
+        $this->columns[] = new Column("home_banner", VARCHAR, 100, false);
+        $this->columns[] = new Column("home_welcome", VARCHAR, 100, false);
 	}
 
 	public function get($columnName="")

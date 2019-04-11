@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/default/page-grid.css">
 	<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/default/header.css">
 	<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/default/main-grid.css">
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/default/main.css">
 	<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/default/footer.css">
 
 	<!-- <?php #if (file_exists("assets/css/" .$viewName .".css")) : ?>
@@ -33,19 +34,26 @@
 
 			<nav class="nav-bar"><?php $this->loadMenu(); ?></nav>
 		</header>
-		
+
 		<!-- Main -->
 		<section class="main container">
-			<section class="content"><?php $this->loadViewIntoTemplate($viewName); ?></section>
-			<section class="content"><?php $this->loadViewIntoTemplate($viewName); ?></section>
+			<div class="banner">
+				<div class="banner-img" style="background-image: url('<?php echo BASE_URL ."assets/img/" .$this->siteConfig["home_banner"]; ?>')">
+				</div>
+				
+				<div class="home-welcome">
+					<p><?php echo $this->siteConfig["home_welcome"]; ?></p>
+				</div>
+			</div>			
+
+			<section class="content">
+				<?php $this->loadViewIntoTemplate($viewName); ?>
+			</section>
 
 			<aside class="sidebar">
 				<span>Sidebar</span>
 			</aside>
 		</section>
-
-		
-		
 
 		<!-- Footer -->
 		<footer class="footer container">
