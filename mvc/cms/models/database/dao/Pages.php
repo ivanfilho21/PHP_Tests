@@ -5,10 +5,18 @@ class Pages extends DAO
 	{
 		parent::__construct($pdo);
 
-		$this->tableName = "menu";
+		$this->tableName = "pages";
         $this->columns[] = new Column("id", INT, 0, false, "AUTO_INCREMENT", "PRIMARY KEY");
         $this->columns[] = new Column("url", VARCHAR, 50, false);
         $this->columns[] = new Column("title", VARCHAR, 100, false);
         $this->columns[] = new Column("body", VARCHAR, 100, false);
+	}
+
+	public function getByUrl($url)
+	{
+		$select = array();
+		$where[] = DatabaseUtils::createCondition($this, "url", $url);
+
+		return parent::selectOne($select, $where);
 	}
 }

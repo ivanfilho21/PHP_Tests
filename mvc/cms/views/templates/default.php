@@ -47,7 +47,7 @@
 			</div>			
 
 			<section class="content">
-				<?php $this->loadViewIntoTemplate($viewName); ?>
+				<?php $this->loadViewIntoTemplate($viewName, $viewData); ?>
 			</section>
 
 			<aside class="sidebar">

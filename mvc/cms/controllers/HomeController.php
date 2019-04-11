@@ -8,7 +8,6 @@ class HomeController extends Controller
 
 	public function index()
 	{
-		global $database;
 		$this->loadView("home");
 	}
 }

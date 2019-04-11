@@ -23,26 +23,30 @@ class Database extends Model
 		$this->pages = new Pages($this->pdo);
 		$this->users = new Users($this->pdo);
 
-		/*
-		$this->siteConfig->create();
-		$this->menu->create();
-		$this->pages->create();
-		$this->users->create();
-		*/
+		
+		#$this->siteConfig->create();
+		#$this->menu->create();
+		#$this->pages->create();
+		#$this->users->create();
+		
 
 		/*$a = array("title" => "Blog CMS", "color" => "blue", "template" => "default", "home_banner" => "banner.jpg", "home_welcome" => "Welcome to my Blog");
 		$this->siteConfig->drop();
 		$this->siteConfig->create();
 		$this->siteConfig->insert($a);*/
 
+		#$this->menu->drop();
+		#$this->menu->create();
 		#$a = array("name" => "Home", "url" => "home");
-		#$b = array("name" => "Services", "url" => "services");
+		#$b = array("name" => "Posts", "url" => "posts");
 		#$c = array("name" => "About", "url" => "about");
 		#$this->menu->insert($a);
 		#$this->menu->insert($b);
 		#$this->menu->insert($c);
 
-		#$this->pages->insert(array("url" => "services", "title" => "Posts", "body" => ""));
+		#$this->pages->drop();
+		#$this->pages->create();
+		#$this->pages->insert(array("url" => "posts", "title" => "Posts", "body" => ""));
 		#$this->pages->insert(array("url" => "about", "title" => "About", "body" => ""));
 		
 	}

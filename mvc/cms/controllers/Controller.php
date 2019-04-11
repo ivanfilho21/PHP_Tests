@@ -4,7 +4,7 @@ abstract class Controller
 {
 	protected $database;
 	protected $title = "Catalog";
-	protected $viewData = array();
+	// protected $viewData = array();
 	protected $siteConfig = array();
 
 	public function __construct($database, $title, $viewData=array())
@@ -17,7 +17,7 @@ abstract class Controller
 
 	public abstract function index();
 
-	public function loadView($viewName, $loadTemplate=true)
+	public function loadView($viewName, $loadTemplate=true, $viewData="")
 	{
 		if ($loadTemplate) {
 			require "views/templates/" .$this->siteConfig["template"] .".php";
@@ -28,9 +28,10 @@ abstract class Controller
 
 	private function loadViewIntoTemplate($viewName, $viewData="")
 	{
-		$viewData = (empty($viewData)) ? $this->viewData : $viewData;
+		// $viewData = (empty($viewData)) ? $this->viewData : $viewData;
 		# transforms keys into variables
-		extract($viewData);
+		if (! empty($viewData))
+			extract($viewData);
 		require "views/" .$viewName .".php";
 	}
 

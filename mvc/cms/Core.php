@@ -82,7 +82,8 @@ class Core
 				$c = $this->loadCurrentController($currentController, $database);*/
 
 				# Try to load CMS Pages controller
-				echo "Does not exist. Maybe a CMS Page"; die();
+				$currentParams = array("url" => substr($currentController, 0, -strlen("Controller")));
+				$c = $this->loadCurrentController("PagesController", $database);
 			}
 		}
 
