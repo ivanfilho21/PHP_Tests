@@ -4,25 +4,36 @@
 	<?php endforeach; ?>
 </span>
 
-<h1><?php echo ($loginMode) ? "Login" : "Register"; ?></h1>
+<div class="container">
+	<h1><?php echo ($loginMode) ? "Login" : "Register"; ?></h1>
 
-<i class="fas fa-user"></i>
+	<form method="POST">
+		<div class="input-group">
+			<i class="fas fa-user item"></i>
+			<input class="item" type="email" name="email" value="<?php echo (! empty($_POST['email'])) ? $_POST['email'] : ''; ?>" placeholder="E-mail">
+		</div>
+		<span class="error"><?php echo (! empty($error["email"])) ? $error["email"] : ""; ?></span>
+		
+		<div class="input-group">
+			<i class="fas fa-lock item"></i>
+			<input class="item" type="password" name="password" placeholder="Password">
+			<a id="menu-btn" class="item" href="#" title="Show Password"><i class="fas fa-eye"></i></a>
+		</div>
+		<span class="error"><?php echo (! empty($error["password"])) ? $error["password"] : ""; ?></span>
 
-<i class="fas fa-lock"></i>
+		<div class="error"><?php echo (! empty($error["login"])) ? $error["login"] : ""; ?></div>
 
-<form method="POST">
-	<label>E-mail:</label>
-	<input type="email" name="email" value="">
-	<span><?php echo (! empty($error["email"])) ? $error["email"] : ""; ?></span>
+		<input type="submit" name="<?php echo ($loginMode) ? 'login' : 'register'; ?>" value="<?php echo ($loginMode) ? 'Login' : 'Register'; ?>">
+	</form>
+</div>
 
-	<label>Password:</label>
-	<input type="password" name="password" value="">
-	<a id="menu-btn" href="#" title="Show Password"><i class="fas fa-eye"></i></a>
-	
-	<span><?php echo (! empty($error["password"])) ? $error["password"] : ""; ?></span>
-
-	<input type="submit" name="<?php echo ($loginMode) ? 'login' : 'register'; ?>" value="<?php echo ($loginMode) ? 'Login' : 'Register'; ?>">
-</form>
+<script>
+	var inputs = document.getElementsByTagName("input");
+	for (var i = 0; i < inputs.length; i++) {
+		inputs[i].onfocus = function() { this.parentElement.classList.add("active"); }
+		inputs[i].onblur = function() { this.parentElement.classList.remove("active"); }
+	}
+</script>
 
 <?php if ($loginMode) : ?>
 

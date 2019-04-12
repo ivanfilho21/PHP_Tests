@@ -3,6 +3,9 @@
 <head>
 	<title><?php echo $this->title; ?></title>
 
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/normalize.css">
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/panel/general.css">
+
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	
