@@ -45,7 +45,7 @@ class Users extends DAO
 		return parent::selectAll(array(), array(), true);
 	}
 
-	private function getIdByEmail($email)
+	public function getIdByEmail($email)
 	{
 		# select
 		$select[] = DatabaseUtils::createSelection($this, "id");

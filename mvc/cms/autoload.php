@@ -5,6 +5,7 @@ spl_autoload_register(function($className) {
 	$paths[] = "";
 	$paths[] = "controllers/";
 	$paths[] = "models/";
+	$paths[] = "models/authentication/";
 	$paths[] = "models/database/";
 	$paths[] = "models/database/dao/";
 	$paths[] = "core/";

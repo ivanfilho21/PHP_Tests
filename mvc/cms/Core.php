@@ -74,7 +74,7 @@ class Core
 			$c = $this->loadCurrentController($currentController, $database);				
 		} catch(Exception $e) {
 			if (defined("DEBUG") && DEBUG) {
-				echo "<b>Core:</b> Controller \"{$currentController}\" does not exist."; die();
+				echo $e->getMessage(); die();
 			} else {
 				/*$currentController = DEFAULT_ERROR_CONTROLLER;
 				$currentAction = DEFAULT_ACTION;
