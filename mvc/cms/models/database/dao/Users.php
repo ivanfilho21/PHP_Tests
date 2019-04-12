@@ -8,10 +8,8 @@ class Users extends DAO
 
 		$this->tableName = "users";
         $this->columns[] = new Column("id", INT, 0, false, "AUTO_INCREMENT", "PRIMARY KEY");
-        $this->columns[] = new Column("name", VARCHAR, 100, false);
         $this->columns[] = new Column("email", VARCHAR, 100, false);
         $this->columns[] = new Column("password", VARCHAR, 32, false);
-        $this->columns[] = new Column("phone", VARCHAR, 30);
 	}
 
 	public function register($userArray)

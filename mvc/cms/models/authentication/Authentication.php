@@ -17,10 +17,8 @@ class Authentication extends Model
 
 	public function register($userArray) {
         if ($this->validation($userArray)) {
-            #$this->db->getUserDAO()->createUser($user);
-            
+            $this->db->users->register($userArray);
             #$this->sendMail($user->getEmail(), $user->getUsername(), $user->getPassword());
-            echo "Register ok";
             return true;
         }
         else {
@@ -71,7 +69,7 @@ class Authentication extends Model
     	$regex = "/^(([^<>()\[\]\\.,;:\s@\"]+(\.[^<>()\[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/";
 
     	if (! preg_match($regex, $email)) {
-    		$this->util->setErrorMessage("email", "Enter a valid E_mail.");
+    		$this->util->setErrorMessage("email", "Enter a valid e-mail.");
     		$res = false;
     	}
 

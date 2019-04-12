@@ -1,29 +1,46 @@
-<span>
-	<?php foreach ($error as $e) : ?>
-		<?php echo $e; ?>
-	<?php endforeach; ?>
-</span>
-
-<div class="container">
+<div class="auth-wrapper">
 	<h1><?php echo ($loginMode) ? "Login" : "Register"; ?></h1>
 
 	<form method="POST">
+		<?php if (! $loginMode) : ?>
+			<div class="input-group">
+				<span><i class="fas fa-user item"></i></span>
+				<input type="text" name="name" value="<?php echo (! empty($_POST['name'])) ? $_POST['name'] : ''; ?>" placeholder="Name">
+			</div>
+		<?php endif; ?>
+
 		<div class="input-group">
-			<i class="fas fa-user item"></i>
-			<input class="item" type="email" name="email" value="<?php echo (! empty($_POST['email'])) ? $_POST['email'] : ''; ?>" placeholder="E-mail">
+			<span><i class="fas fa-envelope item"></i></span>
+			<input type="email" name="email" value="<?php echo (! empty($_POST['email'])) ? $_POST['email'] : ''; ?>" placeholder="E-mail">
 		</div>
-		<span class="error"><?php echo (! empty($error["email"])) ? $error["email"] : ""; ?></span>
+
+		<?php if (! empty($error["email"])) : ?>
+			<span class="error"><i class="fas fa-exclamation-circle"></i><?php echo $error["email"]; ?></span>
+		<?php endif; ?>
 		
 		<div class="input-group">
-			<i class="fas fa-lock item"></i>
-			<input class="item" type="password" name="password" placeholder="Password">
-			<a id="menu-btn" class="item" href="#" title="Show Password"><i class="fas fa-eye"></i></a>
+			<span><i class="fas fa-lock item"></i></span>
+			<input type="password" name="password" placeholder="Password">
+			<a id="show-pass-btn" class="item" href="javascript: void(0)" title="Show Password"><i class="fas fa-eye"></i></a>
 		</div>
-		<span class="error"><?php echo (! empty($error["password"])) ? $error["password"] : ""; ?></span>
+		<?php if (! empty($error["password"])) : ?>
+			<span class="error"><i class="fas fa-exclamation-circle"></i><?php echo $error["password"]; ?></span>
+		<?php endif; ?>
 
-		<div class="error"><?php echo (! empty($error["login"])) ? $error["login"] : ""; ?></div>
+		<?php if (! $loginMode) : ?>
+			<div class="login-options">
+				<label class="option" for="keep-session"><input type="checkbox" name="keep-session" id="keep-session"> Remember me</label>
 
-		<input type="submit" name="<?php echo ($loginMode) ? 'login' : 'register'; ?>" value="<?php echo ($loginMode) ? 'Login' : 'Register'; ?>">
+				<a href="#" class="option">Forgot your password?</a>
+			</div>
+			
+		<?php endif; ?>
+
+		<?php if (! empty($error["login"])) : ?>
+			<span class="error"><i class="fas fa-exclamation-circle"></i><?php echo $error["login"]; ?></span>
+		<?php endif; ?>
+
+		<input class="btn auth-btn" type="submit" name="<?php echo ($loginMode) ? 'login' : 'register'; ?>" value="<?php echo ($loginMode) ? 'Login' : 'Register'; ?>">
 	</form>
 </div>
 
@@ -33,8 +50,17 @@
 		inputs[i].onfocus = function() { this.parentElement.classList.add("active"); }
 		inputs[i].onblur = function() { this.parentElement.classList.remove("active"); }
 	}
+
+	document.getElementById("show-pass-btn").onclick = function() {
+		var pass = document.getElementsByTagName("input")[1];
+		if (pass.type == "password") {
+			this.innerHTML = "<i class=\"fas fa-eye-slash\"></i>";
+			this.title = "Hide Password";
+			pass.type = "text";
+		} else {
+			this.innerHTML = "<i class=\"fas fa-eye\"></i>";
+			this.title = "Show Password";
+			pass.type = "password";
+		}
+	};
 </script>
-
-<?php if ($loginMode) : ?>
-
-<?php endif; ?>
