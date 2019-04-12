@@ -12,11 +12,11 @@ class PagesController extends Controller
 		$data = $this->database->pages->getByUrl($url);
 		if ($data !== false) {
 			$this->title = $data["title"];
-			$this->loadView("page", true, $data);
+			$this->loadView("page", $data);
 		}
 		else {
 			$this->title = "Page Not Found";
-			$this->loadView("404", false);
+			$this->loadView("404", array(), "blank");
 		}
 	}
 }

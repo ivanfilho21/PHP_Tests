@@ -1,10 +1,8 @@
 <?php
-
 abstract class Controller
 {
 	protected $database;
 	protected $title = "Catalog";
-	// protected $viewData = array();
 	protected $siteConfig = array();
 
 	public function __construct($database, $title, $viewData=array())
@@ -17,19 +15,20 @@ abstract class Controller
 
 	public abstract function index();
 
-	public function loadView($viewName, $loadTemplate=true, $viewData="")
+	public function loadView(string $viewName, array $viewData=array(), string $templateName="")
 	{
-		if ($loadTemplate) {
-			require "views/templates/" .$this->siteConfig["template"] .".php";
+		if (!empty ($templateName)) {
+			if (file_exists("views/templates/" .$templateName .".php")) {
+				require "views/templates/" .$templateName .".php";
+			}
 		} else {
-			require "views/templates/blank.php";
+			require "views/templates/" .$this->siteConfig["template"] .".php";
 		}
 	}
 
 	private function loadViewIntoTemplate($viewName, $viewData="")
 	{
-		// $viewData = (empty($viewData)) ? $this->viewData : $viewData;
-		# transforms keys into variables
+		# convert array keys into variables
 		if (! empty($viewData))
 			extract($viewData);
 		require "views/" .$viewName .".php";

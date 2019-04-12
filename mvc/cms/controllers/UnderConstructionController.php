@@ -8,7 +8,7 @@ class UnderConstructionController extends Controller
 
 	public function index()
 	{
-		$this->loadView("under-construction", false);
+		$this->loadView("under-construction", array(), "blank");
 	}
 
 }
