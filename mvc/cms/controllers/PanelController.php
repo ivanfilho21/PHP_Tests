@@ -82,14 +82,20 @@ class PanelController extends Controller
 
 	public function delete($name, $id)
 	{
-		echo "delete {$name} which id is " .$id; die();
 		if ($name === "menus") {
 			$this->database->menus->delete($id);
+		} elseif($name === "pages") {
+			$this->database->pages->delete($id);
+		} else {
+			# Redirect to login
+			redirect("panel/login");
 		}
+		redirect("panel/" .$name);
 	}
 
 	private function auth()
 	{
 		# todo: unify login and register
 	}
+
 }

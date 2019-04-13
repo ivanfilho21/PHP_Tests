@@ -1,7 +1,7 @@
 <?php
 #define("ENVIRONMENT", "production");
 define("ENVIRONMENT", "development");
-define("DEBUG", true);
+#define("DEBUG", true);
 #define("DEBUG", false);
 
 if (ENVIRONMENT == "development") {
@@ -30,19 +30,19 @@ try {
 	define("EXCEPTION", true);
 }
 
-/*function checkUserPermissionToPage()
+function redirect($relPath)
 {
-	if (empty (getUserSession())) {
-		?>
-		<input id="data" type="hidden" data-base-url="<?php echo BASE_URL; ?>">
-		<script>
-			var baseUrl = document.getElementById("data").getAttribute("data-base-url");
-			window.location.href = baseUrl;
-		</script>
-		<?php
-	}
+	?>
+	<input id="data" type="hidden" data-base-url="<?php echo BASE_URL; ?>" data-relpath="<?php echo $relPath; ?>">
+	<script>
+		var baseUrl = document.getElementById("data").getAttribute("data-base-url");
+		var path = document.getElementById("data").getAttribute("data-relpath");
+		window.location.href = baseUrl + path;
+	</script>
+	<?php
+	exit();
 }
-
+/*
 function getUserSession()
 {
 	if (isset($_SESSION["user-session-id"])) {

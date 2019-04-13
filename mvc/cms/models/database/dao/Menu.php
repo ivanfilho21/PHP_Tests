@@ -15,4 +15,10 @@ class Menu extends DAO
 	{
 		return parent::selectAll(array(), array(), true);
 	}
+
+	public function delete($id)
+	{
+		$where[] = DatabaseUtils::createCondition($this, "id", $id);
+		parent::delete($where);
+	}
 }
