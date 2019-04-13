@@ -58,6 +58,22 @@
 	margin: 0 0.5em 0 0.25em;
 }
 
+.table {
+	border-collapse: collapse;
+	width: 100%;
+	border: 1px solid lightgray;
+}
+.table thead {
+	background-color: gainsboro;
+	border-bottom: 3px solid lightgray;
+}
+.table th { padding: 0.5em 0; }
+.table td { padding: 0.5em 0; text-align: center; }
+
+.stripped-table tr:nth-child(even) {
+	background-color: whitesmoke;
+}
+
 @media(min-width: 325px) {
 	.container {
 		max-width: 85%;

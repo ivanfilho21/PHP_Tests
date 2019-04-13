@@ -1,0 +1,1 @@
+<?php $this->loadCrudTable("Menus", "menus", $menus, $columns); ?>

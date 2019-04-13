@@ -19,7 +19,7 @@ class Database extends Model
 	{
 		$this->pdo = $this->getDatabaseConnection();
 		$this->siteConfig = new SiteConfiguration($this->pdo);
-		$this->menu = new Menu($this->pdo);
+		$this->menus = new Menu($this->pdo);
 		$this->pages = new Pages($this->pdo);
 		$this->users = new Users($this->pdo);
 

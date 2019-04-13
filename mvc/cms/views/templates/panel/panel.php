@@ -18,6 +18,13 @@
 	<link rel="icon" href="<?php echo BASE_URL; ?>assets/img/favicon.png">
 </head>
 <body>
+	<header>
+		<ul>
+			<li><a href="<?php BASE_URL; ?>pages">Pages</a></li>
+			<li><a href="<?php BASE_URL; ?>menus">Menus</a></li>
+		</ul>
+	</header>
+
 	<?php $this->loadViewIntoTemplate($viewName, $viewData); ?>
 </body>
 </html>

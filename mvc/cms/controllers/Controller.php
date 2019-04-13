@@ -36,7 +36,13 @@ abstract class Controller
 
 	private function loadMenu()
 	{
-		$menu = $this->database->menu->getAll();
+		$menu = $this->database->menus->getAll();
 		$this->loadViewIntoTemplate("menu", array("menu" => $menu));
+	}
+
+	private function loadCrudTable($name, $url, $list, $columns)
+	{
+		$data = array("name" => $name, "list" => $list, "columns" => $columns, "url" => $url);
+		$this->loadViewIntoTemplate("table", $data);
 	}
 } 

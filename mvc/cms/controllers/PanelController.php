@@ -3,13 +3,15 @@ class PanelController extends Controller
 {
 	private $auth;
 	private $util;
+	private $subdir = "panel/";
+	private $template = "";
 
 	public function __construct($database)
 	{
 		parent::__construct($database, "Main Panel");
 		$this->util = new Util();
 		$this->auth = new Authentication($this->database, $this->util);
-		
+		$this->template = $this->subdir ."panel";
 	}
 
 	public function index()
@@ -18,7 +20,7 @@ class PanelController extends Controller
 			header("Location: " .BASE_URL ."panel/login");
 			exit();
 		}
-		$this->loadView("panel/home", array(), "panel/panel");
+		$this->loadView($this->subdir ."home", array(), $this->template);
 	}
 
 	public function login()
@@ -62,5 +64,24 @@ class PanelController extends Controller
 
 		$data["error"] = $this->util->getErrorMessageArray();
 		$this->loadview("authentication", $data, "panel/panel");
+	}
+
+	public function pages()
+	{
+		$data["pages"] = $this->database->pages->getAll();
+		$data["columns"] = $this->database->pages->getColumns();
+		$this->loadview($this->subdir ."pages", $data, $this->template);
+	}
+
+	public function menus()
+	{
+		$data["menus"] = $this->database->menus->getAll();
+		$data["columns"] = $this->database->menus->getColumns();
+		$this->loadView($this->subdir ."menus", $data, $this->template);
+	}
+
+	private function auth()
+	{
+		# todo: unify login and register
 	}
 }

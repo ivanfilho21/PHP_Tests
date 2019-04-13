@@ -19,4 +19,9 @@ class Pages extends DAO
 
 		return parent::selectOne($select, $where);
 	}
+
+	public function getAll()
+	{
+		return parent::selectAll(array(), array(), true);
+	}
 }
