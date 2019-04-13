@@ -80,6 +80,14 @@ class PanelController extends Controller
 		$this->loadView($this->subdir ."menus", $data, $this->template);
 	}
 
+	public function delete($name, $id)
+	{
+		echo "delete {$name} which id is " .$id; die();
+		if ($name === "menus") {
+			$this->database->menus->delete($id);
+		}
+	}
+
 	private function auth()
 	{
 		# todo: unify login and register

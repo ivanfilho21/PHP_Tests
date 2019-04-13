@@ -1,7 +1,7 @@
 <?php
 #define("ENVIRONMENT", "production");
 define("ENVIRONMENT", "development");
-#define("DEBUG", true);
+define("DEBUG", true);
 #define("DEBUG", false);
 
 if (ENVIRONMENT == "development") {

@@ -20,8 +20,8 @@
 <body>
 	<header>
 		<ul>
-			<li><a href="<?php BASE_URL; ?>pages">Pages</a></li>
-			<li><a href="<?php BASE_URL; ?>menus">Menus</a></li>
+			<li><a href="<?php BASE_URL; ?>panel/pages">Pages</a></li>
+			<li><a href="<?php BASE_URL; ?>panel/menus">Menus</a></li>
 		</ul>
 	</header>
 

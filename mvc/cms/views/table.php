@@ -19,8 +19,8 @@
 				<?php endforeach; ?>
 
 				<td>
-					<a href="<?php echo BASE_URL .$url .'/'; ?>edit/<?php echo $obj['id']; ?>">Edit</a>
-					<a href="<?php echo BASE_URL .$url .'/'; ?>delete/<?php echo $obj['id']; ?>">Delete</a>
+					<a href="<?php echo BASE_URL ."panel/"; ?>edit/<?php echo $url .'/' .$obj['id']; ?>">Edit</a>
+					<a href="<?php echo BASE_URL ."panel/"; ?>delete/<?php echo $url .'/' .$obj['id']; ?>">Delete</a>
 				</td>
 			</tr>
 		<?php endforeach; ?>
