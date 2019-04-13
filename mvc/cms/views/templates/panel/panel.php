@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title><?php echo $this->title; ?></title>
+	<title><?php echo (! empty($this->title)) ? $this->title ." | " .$this->siteConfig["title"] : $this->siteConfig["title"]; ?></title>
 
 	<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/normalize.css">
 	<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/reset.css">

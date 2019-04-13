@@ -1,6 +1,14 @@
+hr { margin: 2em 1em 1em 1em; }
+
+a { color: blue; }
+a:hover { text-decoration: underline; }
+img { margin-top: 2em; max-width: 20%; }
+#show-pass-btn { color: black; }
+
 .auth-wrapper {
 	max-width: 90%;
 	margin: auto;
+	text-align: center;
 }
 
 .item {

@@ -1,47 +1,56 @@
 <div class="auth-wrapper">
+	<img src="<?php echo BASE_URL; ?>assets/img/logo.svg">
 	<h1><?php echo ($loginMode) ? "Login" : "Register"; ?></h1>
 
-	<form method="POST">
-		<?php if (! $loginMode) : ?>
+	<?php if ($registerFinished) : ?>
+		<h4>You are now registered. Login <a href="<?php echo BASE_URL; ?>panel/login">here</a>.</h4>
+	<?php else : ?>
+		<form method="POST">
+			<?php if (! $loginMode) : ?>
+				<div class="input-group">
+					<span><i class="fas fa-user item"></i></span>
+					<input type="text" name="name" value="<?php echo (! empty($_POST['name'])) ? $_POST['name'] : ''; ?>" placeholder="Name">
+				</div>
+			<?php endif; ?>
+
 			<div class="input-group">
-				<span><i class="fas fa-user item"></i></span>
-				<input type="text" name="name" value="<?php echo (! empty($_POST['name'])) ? $_POST['name'] : ''; ?>" placeholder="Name">
+				<span><i class="fas fa-envelope item"></i></span>
+				<input type="email" name="email" value="<?php echo (! empty($_POST['email'])) ? $_POST['email'] : ''; ?>" placeholder="E-mail">
 			</div>
-		<?php endif; ?>
 
-		<div class="input-group">
-			<span><i class="fas fa-envelope item"></i></span>
-			<input type="email" name="email" value="<?php echo (! empty($_POST['email'])) ? $_POST['email'] : ''; ?>" placeholder="E-mail">
-		</div>
-
-		<?php if (! empty($error["email"])) : ?>
-			<span class="error"><i class="fas fa-exclamation-circle"></i><?php echo $error["email"]; ?></span>
-		<?php endif; ?>
-		
-		<div class="input-group">
-			<span><i class="fas fa-lock item"></i></span>
-			<input type="password" name="password" placeholder="Password">
-			<a id="show-pass-btn" class="item" href="javascript: void(0)" title="Show Password"><i class="fas fa-eye"></i></a>
-		</div>
-		<?php if (! empty($error["password"])) : ?>
-			<span class="error"><i class="fas fa-exclamation-circle"></i><?php echo $error["password"]; ?></span>
-		<?php endif; ?>
-
-		<?php if (! $loginMode) : ?>
-			<div class="login-options">
-				<label class="option" for="keep-session"><input type="checkbox" name="keep-session" id="keep-session"> Remember me</label>
-
-				<a href="#" class="option">Forgot your password?</a>
-			</div>
+			<?php if (! empty($error["email"])) : ?>
+				<span class="error"><i class="fas fa-exclamation-circle"></i><?php echo $error["email"]; ?></span>
+			<?php endif; ?>
 			
-		<?php endif; ?>
+			<div class="input-group">
+				<span><i class="fas fa-lock item"></i></span>
+				<input type="password" name="password" id="pass" placeholder="Password">
+				<a id="show-pass-btn" class="item" href="javascript: void(0)" title="Show Password"><i class="fas fa-eye"></i></a>
+			</div>
+			<?php if (! empty($error["password"])) : ?>
+				<span class="error"><i class="fas fa-exclamation-circle"></i><?php echo $error["password"]; ?></span>
+			<?php endif; ?>
 
-		<?php if (! empty($error["login"])) : ?>
-			<span class="error"><i class="fas fa-exclamation-circle"></i><?php echo $error["login"]; ?></span>
-		<?php endif; ?>
+			<?php if ($loginMode) : ?>
+				<div class="login-options">
+					<label class="option" for="keep-session"><input type="checkbox" name="keep-session" id="keep-session" <?php echo (! empty($_POST["keep-session"])) ? "checked" : ""?>> Remember me</label>
 
-		<input class="btn auth-btn" type="submit" name="<?php echo ($loginMode) ? 'login' : 'register'; ?>" value="<?php echo ($loginMode) ? 'Login' : 'Register'; ?>">
-	</form>
+					<a href="#" class="option">Forgot your password?</a>
+				</div>
+				
+			<?php endif; ?>
+
+			<?php if (! empty($error["login"])) : ?>
+				<span class="error"><i class="fas fa-exclamation-circle"></i><?php echo $error["login"]; ?></span>
+			<?php endif; ?>
+
+			<input class="btn auth-btn" type="submit" name="<?php echo ($loginMode) ? 'login' : 'register'; ?>" value="<?php echo ($loginMode) ? 'Login' : 'Register'; ?>">
+		</form>
+
+		<hr>
+		<a href="<?php echo BASE_URL .'panel/'; echo (! $loginMode) ? 'login' : 'register'; ?>"><?php echo (! $loginMode) ? 'I already have an Account' : 'Create an Account'; ?></a>
+
+	<?php endif; ?>
 </div>
 
 <script>
@@ -52,7 +61,7 @@
 	}
 
 	document.getElementById("show-pass-btn").onclick = function() {
-		var pass = document.getElementsByTagName("input")[1];
+		var pass = document.getElementById("pass");
 		if (pass.type == "password") {
 			this.innerHTML = "<i class=\"fas fa-eye-slash\"></i>";
 			this.title = "Hide Password";

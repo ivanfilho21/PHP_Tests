@@ -17,6 +17,7 @@ class Authentication extends Model
 
 	public function register($userArray) {
         if ($this->validation($userArray)) {
+        	$userArray["password"] = md5($userArray["password"]);
             $this->db->users->register($userArray);
             #$this->sendMail($user->getEmail(), $user->getUsername(), $user->getPassword());
             return true;
@@ -45,6 +46,45 @@ class Authentication extends Model
             return true;
         }
         return false;
+    }
+
+    public function getLoggedUser()
+    {
+        if (isset($_SESSION["user-session"])) {
+            $email = $_SESSION["user-session"]["email"];
+            $pass = $_SESSION["user-session"]["password"];
+        }
+        else if (isset($_COOKIE["user-session"])) {
+            $cookie = $_COOKIE["user-session"];
+
+            $userInfo = explode(md5(":"), $cookie);
+
+            $email = $this->decode($userInfo[0]);
+            $pass = $this->decode($userInfo[1]);
+
+            /*echo "<br>";
+            var_dump($email);
+            echo "<br>";
+            var_dump($pass);
+            die();*/
+        }
+        else {
+            # No user is logged
+            return null;
+        }
+
+        # Now, user might not exist anymore in database.
+        $user = null;
+
+        # Double check in database
+        $user = $this->loginInDatabase($email, $pass);
+
+        if ($user == false) {
+            $this->deleteUserSession();
+            $this->deleteUserCookie();
+        } 
+
+        return $user;
     }
 
     # Private methods
@@ -85,52 +125,18 @@ class Authentication extends Model
     	return $res;
     }
 
-
-    public function getLoggedUser()
-    {
-        if (isset($_SESSION["user-session"])) {
-            $email = $_SESSION["user-session"]["email"];
-            $pass = $_SESSION["user-session"]["password"];
-        }
-        else if (isset($_COOKIE["user-session"])) {
-            $cookie = $_COOKIE["user-session"];
-            #echo $cookie; die();
-
-            $userInfo = explode(md5(":"), $cookie);
-
-            $email = $this->decode($userInfo[0]);
-            $pass = $this->decode($userInfo[1]);
-
-            /*echo "<br>";
-            var_dump($email);
-            echo "<br>";
-            var_dump($pass);
-            die();*/
-        }
-        else {
-            # No user is logged
-            return null;
-        }
-
-        # Now, user might not exist anymore in database.
-
-        $user = null;
-
-        # Double check in database
-        $user = $this->loginInDatabase($email, $pass);
-
-        if ($user !== false) {
-            $this->deleteUserSession();
-            $this->deleteUserCookie();
-        } 
-
-        return $user;
-    }
-
     private function loginInDatabase($email, $password)
     {
     	$userArray = array("email" => $email, "password" => $password);
         return $this->db->users->login($userArray);
+    }
+
+    private function deleteUserSession() {
+        unset($_SESSION["user-session"]);
+    }
+
+    private function deleteUserCookie() {
+        setcookie("user-session", "", time()-3600, "/");
     }
 
     private function encode($str)
