@@ -10,7 +10,7 @@
 	border: 1px solid lightgray;
 	background-color: white;
 	cursor: pointer;
-	transition: 0.2s;
+	transition: box-shadow 0.2s linear;
 }
 .btn:hover {
 	box-shadow: 0 0 6px rgba(35, 173, 278, 1);
@@ -28,16 +28,26 @@
 	box-shadow: 0 3px 7px rgba(0,0,0,0.19), 0 2px 2px rgba(0,0,0,0.23);
 }
 
+.form-wrapper {
+	max-width: 90%;
+	margin: auto;
+	text-align: center;
+}
+
 .input-group {
 	display: flex;
 	margin: 0.5em 0;
 	box-shadow: 0 0 1px gray;
-	transition: 0.2s;
+	transition: box-shadow 0.2s linear;
 }
 
 .input-group.active  {
 	box-shadow: 0 0 6px rgba(35, 173, 278, 1);
 }
+
+.input-group span,
+.input-group a,
+.input-group input { padding: 1em; }
 
 .input-group input {
 	width: 100%;
@@ -84,11 +94,18 @@
 	.container {
 		max-width: 80%;
 	}
+
+	.form-wrapper {
+		max-width: 75%;
+	}
 }
 
 @media(min-width: 720px) {
 	.container {
 		max-width: 75%;
+	}
+	.form-wrapper {
+		max-width: 60%;
 	}
 }
 
@@ -96,11 +113,18 @@
 	.container {
 		max-width: 75%;
 	}
+	.form-wrapper {
+		max-width: 50%;
+	}
 }
 
 @media(min-width: 1280px) {
 	.container {
 		max-width: 2000px;
 		width: 75%;
+	}
+	.form-wrapper {
+		max-width: 40%;
+		width: 1280px;
 	}
 }

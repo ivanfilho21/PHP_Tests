@@ -1,4 +1,4 @@
-<div class="auth-wrapper">
+<div class="form-wrapper">
 	<img src="<?php echo BASE_URL; ?>assets/img/logo.svg">
 	<h1><?php echo ($loginMode) ? "Login" : "Register"; ?></h1>
 
@@ -8,13 +8,13 @@
 		<form method="POST">
 			<?php if (! $loginMode) : ?>
 				<div class="input-group">
-					<span><i class="fas fa-user item"></i></span>
+					<span><i class="fas fa-user"></i></span>
 					<input type="text" name="name" value="<?php echo (! empty($_POST['name'])) ? $_POST['name'] : ''; ?>" placeholder="Name">
 				</div>
 			<?php endif; ?>
 
 			<div class="input-group">
-				<span><i class="fas fa-envelope item"></i></span>
+				<span><i class="fas fa-envelope"></i></span>
 				<input type="email" name="email" value="<?php echo (! empty($_POST['email'])) ? $_POST['email'] : ''; ?>" placeholder="E-mail">
 			</div>
 
@@ -23,9 +23,9 @@
 			<?php endif; ?>
 			
 			<div class="input-group">
-				<span><i class="fas fa-lock item"></i></span>
+				<span><i class="fas fa-lock"></i></span>
 				<input type="password" name="password" id="pass" placeholder="Password">
-				<a id="show-pass-btn" class="item" href="javascript: void(0)" title="Show Password"><i class="fas fa-eye"></i></a>
+				<a id="show-pass-btn" href="javascript: void(0)" title="Show Password"><i class="fas fa-eye"></i></a>
 			</div>
 			<?php if (! empty($error["password"])) : ?>
 				<span class="error"><i class="fas fa-exclamation-circle"></i><?php echo $error["password"]; ?></span>

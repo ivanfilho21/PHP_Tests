@@ -5,16 +5,6 @@ a:hover { text-decoration: underline; }
 img { margin-top: 2em; max-width: 20%; }
 #show-pass-btn { color: black; }
 
-.auth-wrapper {
-	max-width: 90%;
-	margin: auto;
-	text-align: center;
-}
-
-.item {
-	padding: 1em;
-}
-
 .auth-btn {
 	margin-top: 1em;
 }
@@ -24,33 +14,4 @@ img { margin-top: 2em; max-width: 20%; }
 	flex-wrap: wrap;
 	justify-content: space-between;
 	margin: 1em;
-}
-
-@media(min-width: 480px) {
-	.auth-wrapper {
-		max-width: 75%;
-		margin: auto;
-	}
-}
-
-@media(min-width: 640px) {
-	.auth-wrapper {
-		max-width: 60%;
-		margin: auto;
-	}
-}
-
-@media(min-width: 1024px) {
-	.auth-wrapper {
-		max-width: 50%;
-		margin: auto;
-	}
-}
-
-@media(min-width: 1280px) {
-	.auth-wrapper {
-		max-width: 40%;
-		width: 1280px;
-		margin: auto;
-	}
 }
