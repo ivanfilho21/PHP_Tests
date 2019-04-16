@@ -15,7 +15,7 @@
 		<?php foreach ($list as $obj) : ?>
 			<tr>
 				<?php foreach ($columns as $col) : ?>
-					<td><?php echo $obj[$col->getName()]; ?></td>
+					<td><?php echo htmlspecialchars_decode($obj[$col->getName()]); ?></td>
 				<?php endforeach; ?>
 
 				<td>

@@ -12,6 +12,15 @@ class Pages extends DAO
         $this->columns[] = new Column("body", VARCHAR, 100, false);
 	}
 
+	public function getById($id)
+	{
+		$select = array();
+		$where[] = DatabaseUtils::createCondition($this, "id", $id);
+
+		return parent::selectOne($select, $where);
+	}
+
+
 	public function getByUrl($url)
 	{
 		$select = array();
@@ -25,6 +34,12 @@ class Pages extends DAO
 		return parent::selectAll(array(), array(), true);
 	}
 
+	public function edit($array)
+	{
+		$where[] = DatabaseUtils::createCondition($this, "id", $array["id"]);
+		parent::update($array, $where);
+	}
+	
 	public function delete($id)
 	{
 		$where[] = DatabaseUtils::createCondition($this, "id", $id);

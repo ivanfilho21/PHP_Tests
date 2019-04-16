@@ -9,13 +9,13 @@
 			<?php if (! $loginMode) : ?>
 				<div class="input-group">
 					<span><i class="fas fa-user"></i></span>
-					<input type="text" name="name" value="<?php echo (! empty($_POST['name'])) ? $_POST['name'] : ''; ?>" placeholder="Name">
+					<input autofocus type="text" name="name" value="<?php echo (! empty($_POST['name'])) ? $_POST['name'] : ''; ?>" placeholder="Name">
 				</div>
 			<?php endif; ?>
 
 			<div class="input-group">
 				<span><i class="fas fa-envelope"></i></span>
-				<input type="email" name="email" value="<?php echo (! empty($_POST['email'])) ? $_POST['email'] : ''; ?>" placeholder="E-mail">
+				<input <?php echo ($loginMode) ? "autofocus" : ""; ?> type="email" name="email" value="<?php echo (! empty($_POST['email'])) ? $_POST['email'] : ''; ?>" placeholder="E-mail">
 			</div>
 
 			<?php if (! empty($error["email"])) : ?>

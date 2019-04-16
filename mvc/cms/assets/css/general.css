@@ -47,9 +47,11 @@
 
 .input-group span,
 .input-group a,
-.input-group input { padding: 1em; }
+.input-group input,
+.input-group select { padding: 1em; }
 
-.input-group input {
+.input-group input,
+.input-group select {
 	width: 100%;
 	padding-left: 0.5em;
 	padding-right: 0.5em;

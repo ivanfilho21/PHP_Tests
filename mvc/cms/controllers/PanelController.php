@@ -112,12 +112,12 @@ class PanelController extends Controller
 		if (property_exists($this->database, $name)) {
 			$view = substr($name, 0, -1);
 			$this->title .= " " .ucfirst($view);
-			$data[$view] = $this->database->menus->getById($id);
+			$data[$view] = $this->database->$name->getById($id);
 
 			if ($this->util->checkMethod("POST") && isset($_POST["edit"])) {
 				$array = $this->validate($view);
 				if ($array !== false) {
-					$this->database->menus->edit($array);
+					$this->database->$name->edit($array);
 					redirect($this->subdir .$name);
 				}
 			}
@@ -194,7 +194,7 @@ class PanelController extends Controller
 			$res = false;
 			$this->util->setErrorMessage("url", "URL can't be empty.");
 		}
-
+		
 		$array = array("url" => $url, "title" => $title, "body" => $body);
 		if (! empty($id)) $array["id"] = $id;
 
