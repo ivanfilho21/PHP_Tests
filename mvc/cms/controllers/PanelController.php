@@ -1,7 +1,7 @@
 <?php
 class PanelController extends Controller
 {
-	private $auth;
+	protected $auth;
 	private $util;
 	private $subdir = "panel/";
 	private $template = "";
@@ -17,57 +17,32 @@ class PanelController extends Controller
 	public function index()
 	{
 		if (! $this->auth->checkUserSession()) {
-			header("Location: " .BASE_URL ."panel/login");
-			exit();
+			redirect($this->subdir ."login");
 		}
 		$this->loadView($this->subdir ."home", array(), $this->template);
 	}
 
 	public function login()
 	{
-		$data = array();
-		$data["loginMode"] = true;
-		$data["registerFinished"] = false;
-
-		if ($this->util->checkMethod("POST") && isset($_POST["login"])) {
-			$email = (! empty($_POST["email"])) ? $this->util->formatHTMLInput($_POST["email"]) : "";
-			$pass = (! empty($_POST["password"])) ? $this->util->formatHTMLInput($_POST["password"]) : "";
-			$keep = (! empty($_POST["keep-session"])) ? true : false;
-			
-			if ($this->auth->login($email, $pass, true)) {
-				#header("Location: " .BASE_URL ."panel");
-				redirect($this->subdir);
-			} else {
-				$this->util->setErrorMessage("login", "Failed to login. Check your e-mail or password and try again.");
-			}
-		}
-
-		$data["error"] = $this->util->getErrorMessageArray();
-		$this->loadView("authentication", $data, "panel/panel");
+		$this->auth(true);
 	}
 
 	public function register()
 	{
-		$data = array();
-		$data["loginMode"] = false;
-		$data["registerFinished"] = false;
+		$this->auth(false);
+	}
 
-		if ($this->util->checkMethod("POST") && isset($_POST["register"])) {
-			$name = (! empty($_POST["name"])) ? $this->util->formatHTMLInput($_POST["name"]) : "";
-			$email = (! empty($_POST["email"])) ? $this->util->formatHTMLInput($_POST["email"]) : "";
-			$pass = (! empty($_POST["password"])) ? $this->util->formatHTMLInput($_POST["password"]) : "";
-
-			if ($this->auth->register(array("name" => $name, "email" => $email, "password" => $pass))) {
-				$data["registerFinished"] = true;
-			}
-		}
-
-		$data["error"] = $this->util->getErrorMessageArray();
-		$this->loadview("authentication", $data, "panel/panel");
+	public function logout()
+	{
+		$this->auth->logout();
+		redirect($this->subdir);
 	}
 
 	public function pages()
 	{
+		if (! $this->auth->checkUserSession()) {
+			redirect($this->subdir);
+		}
 		$data["pages"] = $this->database->pages->getAll();
 		$data["columns"] = $this->database->pages->getColumns();
 		$this->loadview($this->subdir ."pages", $data, $this->template);
@@ -75,6 +50,9 @@ class PanelController extends Controller
 
 	public function menus()
 	{
+		if (! $this->auth->checkUserSession()) {
+			redirect($this->subdir);
+		}
 		$data["menus"] = $this->database->menus->getAll();
 		$data["columns"] = $this->database->menus->getColumns();
 		$this->loadView($this->subdir ."menus", $data, $this->template);
@@ -82,6 +60,9 @@ class PanelController extends Controller
 
 	public function create($name)
 	{
+		if (! $this->auth->checkUserSession()) {
+			redirect($this->subdir);
+		}
 		$view = "";
 		$data = array();
 		$this->title = "Create";
@@ -105,6 +86,9 @@ class PanelController extends Controller
 
 	public function edit($name, $id)
 	{
+		if (! $this->auth->checkUserSession()) {
+			redirect($this->subdir);
+		}
 		$view = "";
 		$data = array();
 		$this->title = "Edit";
@@ -138,9 +122,38 @@ class PanelController extends Controller
 		redirect("panel/" .$name);
 	}
 
-	private function auth()
+	private function auth(bool $loginMode)
 	{
-		# todo: unify login and register
+		if ($this->auth->checkUserSession()) {
+			redirect($this->subdir);
+		}
+
+		$data = array();
+		$data["loginMode"] = $loginMode;
+		$data["registerFinished"] = false;
+
+		if ($this->util->checkMethod("POST")) {
+			$name = (! empty($_POST["name"])) ? $this->util->formatHTMLInput($_POST["name"]) : "";
+			$email = (! empty($_POST["email"])) ? $this->util->formatHTMLInput($_POST["email"]) : "";
+			$pass = (! empty($_POST["password"])) ? $this->util->formatHTMLInput($_POST["password"]) : "";
+			$keep = (! empty($_POST["keep-session"])) ? true : false;
+
+			if (isset($_POST["login"])) {
+				if ($this->auth->login($email, $pass, true)) {
+					#header("Location: " .BASE_URL ."panel");
+					redirect($this->subdir);
+				} else {
+					$this->util->setErrorMessage("login", "Failed to login. Check your e-mail or password and try again.");
+				}
+			} elseif (isset($_POST["register"])) {
+				if ($this->auth->register(array("name" => $name, "email" => $email, "password" => $pass))) {
+					$data["registerFinished"] = true;
+				}
+			}
+		}
+
+		$data["error"] = $this->util->getErrorMessageArray();
+		$this->loadView("authentication", $data, "blank");
 	}
 
 	private function validate($name)
@@ -194,7 +207,7 @@ class PanelController extends Controller
 			$res = false;
 			$this->util->setErrorMessage("url", "URL can't be empty.");
 		}
-		
+
 		$array = array("url" => $url, "title" => $title, "body" => $body);
 		if (! empty($id)) $array["id"] = $id;
 

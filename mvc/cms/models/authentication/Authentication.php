@@ -87,6 +87,12 @@ class Authentication extends Model
         return $user;
     }
 
+    public function logout()
+    {
+        $this->deleteUserSession();
+        $this->deleteUserCookie();
+    }
+
     # Private methods
     private function validation($userArray)
     {
