@@ -19,7 +19,9 @@ class PanelController extends Controller
 		if (! $this->auth->checkUserSession()) {
 			redirect($this->subdir ."login");
 		}
-		$this->loadView($this->subdir ."home", array(), $this->template);
+		#$this->loadView($this->subdir ."home", array(), $this->template);
+
+		$this->pages();
 	}
 
 	public function login()

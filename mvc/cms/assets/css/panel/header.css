@@ -1,5 +1,5 @@
 header {
-	padding: 0.5em 1em;
+	padding: 0.5em 0;
 	background-color: black;
 }
 
@@ -11,5 +11,5 @@ header ul {
 	/*justify-content: center;*/
 }
 
-header li { margin: 0.5em 1em; }
+header li { margin: 0.5em 1em 0.5em 0; }
 header li a { font-weight: 600; color: whitesmoke; }

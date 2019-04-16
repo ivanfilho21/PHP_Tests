@@ -20,9 +20,10 @@
 </head>
 <body>
 	<header>
-		<ul>
+		<ul class="container">
 			<li><a href="<?php echo BASE_URL; ?>panel/pages">Pages</a></li>
 			<li><a href="<?php echo BASE_URL; ?>panel/menus">Menus</a></li>
+			<li><a href="<?php echo BASE_URL; ?>panel/configuration">Site Configuration</a></li>
 
 			<?php if ($this->auth->checkUserSession()) : ?>
 			<li><a href="<?php echo BASE_URL; ?>panel/logout">Logout</a></li>
