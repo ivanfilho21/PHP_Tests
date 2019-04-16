@@ -1,0 +1,23 @@
+.preview-pages {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.page-preview {
+	flex: 1;
+	display: block;
+	margin: 0.5em;
+	padding: 0.5em 1em;
+	border: 1px solid whitesmoke;
+	border-radius: 0.25em;
+	box-shadow: 0 3px 7px rgba(0,0,0,0.19), 0 2px 2px rgba(0,0,0,0.23);
+}
+
+.page-title {
+	font-size: 1.25em;
+	color: black;
+}
+
+.page-body {
+	font-size: 1em;
+}

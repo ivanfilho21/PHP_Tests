@@ -153,7 +153,7 @@ class PanelController extends Controller
 		}
 
 		$data["error"] = $this->util->getErrorMessageArray();
-		$this->loadView("authentication", $data, "blank");
+		$this->loadView($this->subdir ."authentication", $data, "blank");
 	}
 
 	private function validate($name)
