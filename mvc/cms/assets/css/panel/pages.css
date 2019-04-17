@@ -3,6 +3,8 @@
 	flex-wrap: wrap;
 }
 
+.preview-pages a { color: black; }
+
 .page-preview {
 	flex: 1;
 	display: block;
