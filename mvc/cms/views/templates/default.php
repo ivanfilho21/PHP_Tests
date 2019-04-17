@@ -40,15 +40,6 @@
 
 		<!-- Main -->
 		<section class="main container">
-			<div class="banner">
-				<div class="banner-img" style="background-image: url('<?php echo BASE_URL ."assets/img/" .$this->siteConfig["home_banner"]; ?>')">
-				</div>
-				
-				<div class="home-welcome">
-					<p><?php echo $this->siteConfig["home_welcome"]; ?></p>
-				</div>
-			</div>			
-
 			<section class="content">
 				<?php $this->loadViewIntoTemplate($viewName, $viewData); ?>
 			</section>

@@ -1,4 +1,4 @@
-<div class="form-wrapper">
+<div class="container form-wrapper">
 	<h1><?php echo $this->title; ?></h1>
 
 	<form method="POST">

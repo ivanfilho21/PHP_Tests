@@ -60,6 +60,27 @@ class PanelController extends Controller
 		$this->loadView($this->subdir ."menus", $data, $this->template);
 	}
 
+	public function configuration()
+	{
+		if (! $this->auth->checkUserSession()) {
+			redirect($this->subdir);
+		}
+		if ($this->util->checkMethod("POST") && isset($_POST["save"])) {
+			$array = $this->validateConfig();
+			if ($array !== false) {
+				if (empty($this->siteConfig))
+					$this->database->siteConfig->insert($array);
+				else
+					$this->database->siteConfig->edit($array);
+				
+				redirect($this->subdir);
+			}
+		}
+		$data["sc"] = $this->siteConfig;
+		$data["error"] = $this->util->getErrorMessageArray();
+		$this->loadView($this->subdir ."configuration", $data, $this->template);
+	}
+
 	public function create($name)
 	{
 		if (! $this->auth->checkUserSession()) {
@@ -211,6 +232,47 @@ class PanelController extends Controller
 		}
 
 		$array = array("url" => $url, "title" => $title, "body" => $body);
+		if (! empty($id)) $array["id"] = $id;
+
+		return ($res) ? $array : false;
+	}
+
+	private function validateConfig()
+	{
+		$res = true;
+
+		$id = (! empty($_POST["id"])) ? $this->util->formatHTMLInput($_POST["id"]) : "";
+		
+		$title = (empty($_POST["title"])) ? (! empty($this->siteConfig["title"]) ? $this->siteConfig["title"] : "") : $this->util->formatHTMLInput($_POST["title"]);
+
+		$banner = (isset($_FILES["banner"]) && ! empty($_FILES["banner"]["name"])) ? $_FILES["banner"] : (! empty($this->siteConfig["home_banner"]) ? $this->siteConfig["home_banner"] : "");
+
+		$welcome = (empty($_POST["welcome"])) ? (! empty($this->siteConfig["home_welcome"]) ? $this->siteConfig["home_welcome"] : "") : $this->util->formatHTMLInput($_POST["welcome"]);
+
+		$template = (empty($_POST["template"])) ? (! empty($this->siteConfig["template"]) ? $this->siteConfig["template"] : "") : strtolower($this->util->formatHTMLInput($_POST["template"]));
+
+		if (empty($title)) {
+			$res = false;
+			$this->util->setErrorMessage("title", "Site name can't be empty.");
+		}
+
+		if (! empty($banner)) {
+			$supportedTypes = array("image/jpeg", "image/png");
+			
+			if (isset($banner["type"])) {
+				$type = $banner["type"];
+				if (in_array($type, $supportedTypes)) {
+					$tmpName = md5(time() .rand(0, 9999)) .".jpg";
+					$imagePath = "assets/img/banner/" .$tmpName;
+					move_uploaded_file($banner["tmp_name"], $imagePath);
+
+					$banner = $tmpName;
+				}
+			}
+		}
+		#echo $template; die;
+
+		$array = array("title" => $title, "template" => $template, "home_banner" => $banner, "home_welcome" => $welcome);
 		if (! empty($id)) $array["id"] = $id;
 
 		return ($res) ? $array : false;
