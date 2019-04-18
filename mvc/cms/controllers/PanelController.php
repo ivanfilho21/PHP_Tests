@@ -104,7 +104,7 @@ class PanelController extends Controller
 				}
 			}
 		}
-		$this->loadView($this->subdir .$view, $data, "blank");
+		$this->loadView($this->subdir .$view, $data, $this->template);
 	}
 
 	public function edit($name, $id)
@@ -129,7 +129,7 @@ class PanelController extends Controller
 				}
 			}
 		}
-		$this->loadView($this->subdir .$view, $data, "blank");
+		$this->loadView($this->subdir .$view, $data, $this->template);
 	}
 
 	public function delete($name, $id)

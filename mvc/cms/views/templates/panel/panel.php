@@ -19,11 +19,20 @@
 	<link rel="icon" href="<?php echo BASE_URL; ?>assets/img/favicon.png">
 </head>
 <body>
+	<?php
+	$a = explode("/", $viewName);
+	$active = "";
+
+	if (is_array($a)) {
+		$active = array_pop($a);
+	}
+	?>
 	<header>
 		<ul class="container">
-			<li><a href="<?php echo BASE_URL; ?>panel/pages">Pages</a></li>
-			<li><a href="<?php echo BASE_URL; ?>panel/menus">Menus</a></li>
-			<li><a href="<?php echo BASE_URL; ?>panel/configuration">Site Configuration</a></li>
+			<li><a href="<?php echo BASE_URL; ?>">My Site</a></li>
+			<li><a <?php echo ($active === "pages") ? "class='active'": ""; ?> href="<?php echo BASE_URL; ?>panel/pages">Pages</a></li>
+			<li><a <?php echo ($active === "menus") ? "class='active'": ""; ?> href="<?php echo BASE_URL; ?>panel/menus">Menus</a></li>
+			<li><a <?php echo ($active === "configuration") ? "class='active'": ""; ?> href="<?php echo BASE_URL; ?>panel/configuration">Site Configuration</a></li>
 
 			<?php if ($this->auth->checkUserSession()) : ?>
 			<li><a href="<?php echo BASE_URL; ?>panel/logout">Logout</a></li>

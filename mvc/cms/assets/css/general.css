@@ -34,6 +34,7 @@
 .form-wrapper {
 	max-width: 90%;
 	margin: auto;
+	margin-bottom: 5em;
 }
 .form-wrapper h1 { text-align: center; }
 .form-wrapper label { display: inline-block; margin: 0.5em 0 0.25em 0; font-weight: 600; }

@@ -2,6 +2,7 @@ header {
 	padding: 0.5em 0;
 	background-color: black;
 }
+header .active { padding-bottom: 0.15em; border-bottom: 1px solid whitesmoke; }
 
 header ul {
 	list-style: none;
