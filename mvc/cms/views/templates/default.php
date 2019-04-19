@@ -41,11 +41,12 @@
 		<!-- Main -->
 		<section class="main container">
 			<section class="content">
-				<?php $this->loadViewIntoTemplate($viewName, $viewData); ?>
+				<span><?php $this->loadViewIntoTemplate($viewName, $viewData); ?></span>
 			</section>
 
 			<aside class="sidebar">
-				<span>Sidebar</span>
+				<?php $user = $this->auth->getLoggedUser(); ?>
+				<?php $this->loadViewIntoTemplate("sidebar", array("user" => $user)); ?>
 			</aside>
 		</section>
 

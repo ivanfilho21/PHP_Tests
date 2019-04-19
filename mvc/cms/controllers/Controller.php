@@ -1,6 +1,8 @@
 <?php
 abstract class Controller
 {
+	protected $util;
+	protected $auth;
 	protected $database;
 	protected $title = "Catalog";
 	protected $siteConfig = array();
@@ -8,6 +10,8 @@ abstract class Controller
 	public function __construct($database, $title, $viewData=array())
 	{
 		$this->database = $database;
+		$this->util = new Util();
+		$this->auth = new Authentication($this->database, $this->util);
 		$this->title = $title;
 		$this->viewData = $viewData;
 		$this->siteConfig = $this->database->siteConfig->get();

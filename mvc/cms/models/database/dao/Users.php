@@ -36,7 +36,8 @@ class Users extends DAO
 		$where[] = DatabaseUtils::createCondition($this, "password", $userArray["password"]);
 
 		$user = parent::selectOne(array(), $where);
-		return ($user !== false) ? $user["id"] : false;
+		#return ($user !== false) ? $user["id"] : false;
+		return $user;
 	}
 
 	public function getAll()
@@ -47,12 +48,13 @@ class Users extends DAO
 	public function getIdByEmail($email)
 	{
 		# select
-		$select[] = DatabaseUtils::createSelection($this, "id");
+		#$select[] = DatabaseUtils::createSelection($this, "id");
 
 		# condition
 		$where[] = DatabaseUtils::createCondition($this, "email", $email);
 
-		$user = parent::selectOne(array(), $where);
-		return ($user !== false) ? $user["id"] : false;
+		$user = parent::selectOne($select, $where);
+		#return ($user !== false) ? $user["id"] : false;
+		return $user;
 	}
 }

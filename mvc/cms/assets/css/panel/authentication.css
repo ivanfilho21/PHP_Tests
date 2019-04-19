@@ -2,7 +2,7 @@ hr { margin: 2em 1em 1em 1em; }
 
 a { color: blue; }
 a:hover { text-decoration: underline; }
-img { margin-top: 2em; max-width: 20%; }
+img { display: block; margin-top: 2em; max-width: 20%; margin-left: auto; margin-right: auto; }
 #show-pass-btn { color: black; }
 
 .auth-btn {

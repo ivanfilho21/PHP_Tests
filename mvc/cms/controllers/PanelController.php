@@ -1,16 +1,12 @@
 <?php
 class PanelController extends Controller
 {
-	protected $auth;
-	private $util;
 	private $subdir = "panel/";
 	private $template = "";
 
 	public function __construct($database)
 	{
 		parent::__construct($database, "Main Panel");
-		$this->util = new Util();
-		$this->auth = new Authentication($this->database, $this->util);
 		$this->template = $this->subdir ."panel";
 	}
 
