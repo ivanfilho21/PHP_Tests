@@ -12,6 +12,14 @@ class Pages extends DAO
         $this->columns[] = new Column("body", VARCHAR, 100, false);
 	}
 
+	public function insert($array, $database="")
+	{
+		parent::insert($array);
+
+		$menu = array("name" => $array["title"], "url" => $array["url"]);
+		$database->menus->insert($menu);
+	}
+
 	public function getById($id)
 	{
 		$select = array();
@@ -34,15 +42,19 @@ class Pages extends DAO
 		return parent::selectAll(array(), array(), true);
 	}
 
-	public function edit($array)
+	public function edit($array, $database="")
 	{
 		$where[] = DatabaseUtils::createCondition($this, "id", $array["id"]);
 		parent::update($array, $where);
 	}
 	
-	public function delete($id)
+	public function delete($id, $database="")
 	{
+		$array = $this->getById($id);
+
 		$where[] = DatabaseUtils::createCondition($this, "id", $id);
 		parent::delete($where);
+
+		$database->menus->deleteByUrl($array["url"]);
 	}
 }

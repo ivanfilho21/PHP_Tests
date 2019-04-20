@@ -17,6 +17,12 @@ class Menus extends DAO
 		return parent::selectOne(array(), $where);
 	}
 
+	public function getByUrl($url)
+	{
+		$where[] = DatabaseUtils::createCondition($this, "url", $url);
+		return parent::selectOne(array(), $where);
+	}
+
 	public function getAll()
 	{
 		return parent::selectAll(array(), array(), true);
@@ -31,6 +37,12 @@ class Menus extends DAO
 	public function delete($id)
 	{
 		$where[] = DatabaseUtils::createCondition($this, "id", $id);
+		parent::delete($where);
+	}
+
+	public function deleteByUrl($url)
+	{
+		$where[] = DatabaseUtils::createCondition($this, "url", $url);
 		parent::delete($where);
 	}
 }

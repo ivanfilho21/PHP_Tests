@@ -15,8 +15,6 @@ class PanelController extends Controller
 		if (! $this->auth->checkUserSession()) {
 			redirect($this->subdir ."login");
 		}
-		#$this->loadView($this->subdir ."home", array(), $this->template);
-
 		$this->pages();
 	}
 
@@ -95,7 +93,7 @@ class PanelController extends Controller
 				$data["error"] = $this->util->getErrorMessageArray();
 
 				if ($array !== false) {
-					$this->database->$name->insert($array);
+					$this->database->$name->insert($array, $this->database);
 					redirect($this->subdir .$name);
 				}
 			}
@@ -103,7 +101,7 @@ class PanelController extends Controller
 		$this->loadView($this->subdir .$view, $data, $this->template);
 	}
 
-	public function edit($name, $id)
+	public function edit($name="", $id="")
 	{
 		if (! $this->auth->checkUserSession()) {
 			redirect($this->subdir);
@@ -112,19 +110,31 @@ class PanelController extends Controller
 		$data = array();
 		$this->title = "Edit";
 
-		if (property_exists($this->database, $name)) {
-			$view = substr($name, 0, -1);
-			$this->title .= " " .ucfirst($view);
-			$data[$view] = $this->database->$name->getById($id);
+		if ($name == "home" && empty($id)) {
+			$view = $name;
+			$data[$view] = $this->database->$name->get();
+		}
+		else {
+			if (empty($id) || empty($name)) {
+				$this->loadView("404", array(), "blank");
+				exit();
+			}
 
-			if ($this->util->checkMethod("POST") && isset($_POST["edit"])) {
-				$array = $this->validate($view);
-				if ($array !== false) {
-					$this->database->$name->edit($array);
-					redirect($this->subdir .$name);
+			if (property_exists($this->database, $name)) {
+				$view = substr($name, 0, -1);
+				$this->title .= " " .ucfirst($view);
+				$data[$view] = $this->database->$name->getById($id);
+
+				if ($this->util->checkMethod("POST") && isset($_POST["edit"])) {
+					$array = $this->validate($view);
+					if ($array !== false) {
+						$this->database->$name->edit($array, $this->database);
+						redirect($this->subdir .$name);
+					}
 				}
 			}
 		}
+		
 		$this->loadView($this->subdir .$view, $data, $this->template);
 	}
 
@@ -133,7 +143,7 @@ class PanelController extends Controller
 		if ($name === "menus") {
 			$this->database->menus->delete($id);
 		} elseif($name === "pages") {
-			$this->database->pages->delete($id);
+			$this->database->pages->delete($id, $this->database);
 		} else {
 			# Redirect to login
 			redirect("panel/login");

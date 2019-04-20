@@ -3,6 +3,7 @@
 
 	<a class="btn" href="<?php echo BASE_URL ."panel/"; ?>create/<?php echo $url; ?>">Add a <?php echo substr($name, 0, -1); ?></a>
 
+	<?php if ($list !== false) : ?>
 	<table class="table stripped-table">
 		<thead>
 			<tr>
@@ -13,6 +14,7 @@
 			</tr>
 		</thead>
 		<tbody>
+			
 			<?php foreach ($list as $obj) : ?>
 				<tr>
 					<?php foreach ($columns as $col) : ?>
@@ -27,4 +29,5 @@
 			<?php endforeach; ?>
 		</tbody>
 	</table>
+	<?php endif; ?>
 </div>
