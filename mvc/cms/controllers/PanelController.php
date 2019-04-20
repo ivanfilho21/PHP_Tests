@@ -39,6 +39,7 @@ class PanelController extends Controller
 		if (! $this->auth->checkUserSession()) {
 			redirect($this->subdir);
 		}
+		$data["home"] = $this->database->home->get();
 		$data["pages"] = $this->database->pages->getAll();
 		$data["columns"] = $this->database->pages->getColumns();
 		$this->loadview($this->subdir ."pages", $data, $this->template);
@@ -112,6 +113,7 @@ class PanelController extends Controller
 
 		if ($name == "home" && empty($id)) {
 			$view = $name;
+			$this->title .= " " .ucfirst($view);
 			$data[$view] = $this->database->$name->get();
 		}
 		else {
@@ -124,14 +126,14 @@ class PanelController extends Controller
 				$view = substr($name, 0, -1);
 				$this->title .= " " .ucfirst($view);
 				$data[$view] = $this->database->$name->getById($id);
+			}
+		}
 
-				if ($this->util->checkMethod("POST") && isset($_POST["edit"])) {
-					$array = $this->validate($view);
-					if ($array !== false) {
-						$this->database->$name->edit($array, $this->database);
-						redirect($this->subdir .$name);
-					}
-				}
+		if ($this->util->checkMethod("POST") && isset($_POST["edit"])) {
+			$array = $this->validate($view);
+			if ($array !== false) {
+				$this->database->$name->edit($array, $this->database);
+				redirect($this->subdir .$name);
 			}
 		}
 		
@@ -188,10 +190,52 @@ class PanelController extends Controller
 	private function validate($name)
 	{
 		switch ($name) {
+			case "home": return $this->validateHome();
 			case "menu": return $this->validateMenu();
 			case "page": return $this->validatePage();
 			default: return false;
 		}
+	}
+
+	private function validateHome()
+	{
+		$res = true;
+		$home = $this->database->home->get();
+
+		$id = (! empty($_POST["id"])) ? $this->util->formatHTMLInput($_POST["id"]) : (empty($home["id"]) ? "" : $home["id"]);
+		
+		$title = (empty($_POST["title"])) ? (empty($home["title"]) ? "" : $home["title"]) : $this->util->formatHTMLInput($_POST["title"]);
+
+		$banner = (isset($_FILES["banner"]) && ! empty($_FILES["banner"]["name"])) ? $_FILES["banner"] : (empty($home["banner"]) ? "" : $home["banner"]);
+
+		$welcome = (empty($_POST["welcome"])) ? (empty($home["welcome"]) ? "" : $home["welcome"]) : $this->util->formatHTMLInput($_POST["welcome"]);
+
+		$body = (! empty($_POST["body"])) ? $this->util->formatHTMLInput($_POST["body"]) : "";
+
+		if (empty($title)) {
+			$res = false;
+			$this->util->setErrorMessage("title", "Home title name can't be empty.");
+		}
+
+		if (! empty($banner)) {
+			$supportedTypes = array("image/jpeg", "image/png");
+			
+			if (isset($banner["type"])) {
+				$type = $banner["type"];
+				if (in_array($type, $supportedTypes)) {
+					$tmpName = md5(time() .rand(0, 9999)) .".jpg";
+					$imagePath = "assets/img/banner/" .$tmpName;
+					move_uploaded_file($banner["tmp_name"], $imagePath);
+
+					$banner = $tmpName;
+				}
+			}
+		}
+
+		$array = array("title" => $title, "banner" => $banner, "welcome" => $welcome, "body" => $body);
+		if (! empty($id)) $array["id"] = $id;
+
+		return ($res) ? $array : false;
 	}
 
 	private function validateMenu()
@@ -251,10 +295,6 @@ class PanelController extends Controller
 		
 		$title = (empty($_POST["title"])) ? (! empty($this->siteConfig["title"]) ? $this->siteConfig["title"] : "") : $this->util->formatHTMLInput($_POST["title"]);
 
-		$banner = (isset($_FILES["banner"]) && ! empty($_FILES["banner"]["name"])) ? $_FILES["banner"] : (! empty($this->siteConfig["home_banner"]) ? $this->siteConfig["home_banner"] : "");
-
-		$welcome = (empty($_POST["welcome"])) ? (! empty($this->siteConfig["home_welcome"]) ? $this->siteConfig["home_welcome"] : "") : $this->util->formatHTMLInput($_POST["welcome"]);
-
 		$template = (empty($_POST["template"])) ? (! empty($this->siteConfig["template"]) ? $this->siteConfig["template"] : "") : strtolower($this->util->formatHTMLInput($_POST["template"]));
 
 		if (empty($title)) {
@@ -262,23 +302,7 @@ class PanelController extends Controller
 			$this->util->setErrorMessage("title", "Site name can't be empty.");
 		}
 
-		if (! empty($banner)) {
-			$supportedTypes = array("image/jpeg", "image/png");
-			
-			if (isset($banner["type"])) {
-				$type = $banner["type"];
-				if (in_array($type, $supportedTypes)) {
-					$tmpName = md5(time() .rand(0, 9999)) .".jpg";
-					$imagePath = "assets/img/banner/" .$tmpName;
-					move_uploaded_file($banner["tmp_name"], $imagePath);
-
-					$banner = $tmpName;
-				}
-			}
-		}
-		#echo $template; die;
-
-		$array = array("title" => $title, "template" => $template, "home_banner" => $banner, "home_welcome" => $welcome);
+		$array = array("title" => $title, "template" => $template);
 		if (! empty($id)) $array["id"] = $id;
 
 		return ($res) ? $array : false;

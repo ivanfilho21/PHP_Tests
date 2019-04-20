@@ -3,6 +3,8 @@
 
 	<form method="POST">
 		<input type="hidden" name="id" value="<?php echo(! empty($menu['id'])) ? $menu['id'] : ''; ?>">
+		
+		<label>Name</label>
 		<div class="input-group">
 			<input autofocus type="text" name="name" placeholder="Name" value="<?php echo(! empty($menu['name'])) ? $menu['name'] : ''; ?>">
 		</div>
@@ -10,6 +12,7 @@
 			<span class="error"><i class="fas fa-exclamation-circle"></i><?php echo $error["name"]; ?></span>
 		<?php endif; ?>
 
+		<label>Url</label>
 		<div class="input-group">
 			<select name="url">
 				<option disabled>Select an URL</option>
@@ -23,6 +26,6 @@
 			<span class="error"><i class="fas fa-exclamation-circle"></i><?php echo $error["url"]; ?></span>
 		<?php endif; ?>
 
-		<input class="btn" type="submit" name="<?php echo(isset($menu)) ? 'edit' : 'create';?>" value="<?php echo(isset($menu)) ? 'Edit' : 'Create';?>">
+		<input class="btn" type="submit" name="<?php echo(isset($menu)) ? 'edit' : 'create';?>" value="<?php echo(isset($menu)) ? 'Edit Menu' : 'Create Menu';?>">
 	</form>
 </div>

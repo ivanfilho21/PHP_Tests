@@ -8,6 +8,7 @@ class HomeController extends Controller
 
 	public function index()
 	{
-		$this->loadView("home");
+		$data["home"] = $this->database->home->get();
+		$this->loadView("home", $data);
 	}
 }

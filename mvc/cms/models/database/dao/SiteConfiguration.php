@@ -9,8 +9,6 @@ class SiteConfiguration extends DAO
         $this->columns[] = new Column("id", INT, 0, false, "AUTO_INCREMENT", "PRIMARY KEY");
         $this->columns[] = new Column("title", VARCHAR, 100, false);
         $this->columns[] = new Column("template", VARCHAR, 100);
-        $this->columns[] = new Column("home_banner", VARCHAR, 100);
-        $this->columns[] = new Column("home_welcome", VARCHAR, 100);
 	}
 
 	public function edit($array)

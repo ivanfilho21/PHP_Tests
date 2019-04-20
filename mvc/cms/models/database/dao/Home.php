@@ -10,7 +10,7 @@ class Home extends DAO
         $this->columns[] = new Column("title", VARCHAR, 100, false);
         $this->columns[] = new Column("banner", VARCHAR, 100);
         $this->columns[] = new Column("welcome", VARCHAR, 100);
-        $this->columns[] = new Column("body", VARCHAR, 100);
+        $this->columns[] = new Column("body", LONGTEXT, -1);
 	}
 
 	public function edit($array)

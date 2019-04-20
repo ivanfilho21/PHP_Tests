@@ -24,6 +24,11 @@ class Database extends Model
 		$this->pages = new Pages($this->pdo);
 		$this->users = new Users($this->pdo);
 
+		#$this->home->drop();
+		#$this->home->create();
+		#$a = array("title" => "Home Page", "welcome" => "", "banner" => "", "body" => "");
+		#$this->home->insert($a);
+
 		#$this->siteConfig->create();
 		#$this->home->create();
 		#$this->menu->create();

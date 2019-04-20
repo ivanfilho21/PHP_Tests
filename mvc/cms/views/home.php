@@ -1,32 +1,22 @@
 <div class="banner">
-	<?php if (! empty($this->siteConfig["home_banner"])) : ?>
-	<div class="banner-img" style="background-image: url('<?php echo BASE_URL ."assets/img/banner/" .$this->siteConfig["home_banner"]; ?>')">
+	<?php if (! empty($home["banner"])) : ?>
+	<div class="banner-img" style="background-image: url('<?php echo BASE_URL ."assets/img/banner/" .$home["banner"]; ?>')">
 	</div>
 	<?php endif; ?>
 
-	<?php if (! empty($this->siteConfig["home_welcome"])) : ?>	
+	<?php if (! empty($home["welcome"])) : ?>	
 	<div class="home-welcome">
-		<p><?php echo $this->siteConfig["home_welcome"]; ?></p>
+		<p><?php echo $home["welcome"]; ?></p>
 	</div>
 	<?php endif; ?>
 </div>
 
-<h1>Home</h1>
-
-<!-- Reviews -->
-<div class="recent-posts">
-	...
-</div>
-
-<!-- Call to action -->
-<div class="home-cta">
-	...
-</div>
+<span class="body">
+	<?php echo htmlspecialchars_decode($home["body"]); ?>
+</span>
 
 <style>
-	.home-cta {
-		text-align: center;
-		margin-top: 1em;
-		margin-bottom: 1em;
+	.body p {
+		margin: 0.75em 0 0.5em 0;
 	}
 </style>

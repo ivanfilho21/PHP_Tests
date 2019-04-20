@@ -1,14 +1,14 @@
 <div class="container">
-	<!-- <?php #$this->loadCrudTable("Pages", "pages", $pages, $columns); ?> -->
 	<h1>Your Pages</h1>
 
 	<div class="preview-pages">
 		<a class="page-preview" href="<?php echo BASE_URL; ?>panel/create/pages" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1em;"><i class="fas fa-plus" style="font-size: 1.5em;"></i></a>
+		
 		<!-- HOME -->
 		<div class="page-preview">
 			<a class="content" href="<?php echo BASE_URL; ?>home" target="_blank">
 				<div>
-					<h1 class="page-title">Home Page</h1>
+					<h1 class="page-title"><?php echo $home["title"]; ?></h1>
 				</div>
 			</a>
 			<div class="options">
