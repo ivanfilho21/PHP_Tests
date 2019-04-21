@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($auth->login($email, $password, $keepUserLogged)) {
             $util->redirectToDashboard($relPath);
         } else {
-            $util->setErrorMessage("login", "E-mail ou Senha incorretos.");
+            $util->setErrorMessage("login", $lang->get("err-login", true));
         }
     }
 
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $registerFinished = true;
             }
             else {
-                $util->setErrorMessage("register-email", "Este e-mail já está cadastrado.");
+                $util->setErrorMessage("register-email", $lang->get("err-email-a", true));
                 $res = false;
             }
         }
@@ -45,13 +45,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 function validateFields()
 {
-    global $auth, $util, $email, $username, $password, $passRetype;
+    global $auth, $util, $lang, $email, $username, $password, $passRetype;
     $maxUsername = $auth->getDatabase()->getUserDAO()->getColumnByName("username")->getLength();
 
     $res = true;
 
     if (strlen($username) > $maxUsername) {
-        $util->setErrorMessage("register-username", "Nome de usuário deve conter no máximo {$maxUsername} caracteres.");
+        $util->setErrorMessage("register-username", $lang->get("err-maxlen", true) ." " .$maxUsername .".");
         $res = false;
     }
 
@@ -62,20 +62,16 @@ function validateFields()
 
 function validatePasswords($res, $password, $passRetype)
 {
-    global $util;
+    global $util, $lang;
     $minPassword = 8;
     
     if (strlen($password) < $minPassword) {
-        $util->setErrorMessage("register-pass1", "A senha deve conter no mínimo 8 caracteres.");
+        $util->setErrorMessage("register-pass1", $lang->get("err-pass-a", true));
         $res = false;
     }
-    /*else if (strlen($password) > 32) {
-        $util->setErrorMessage("register-pass1", "A senha deve conter no máximo 32 caracteres.");
-        $res = false;
-    }*/
     else {
         if ($password !== $passRetype) {
-            $util->setErrorMessage("register-pass2", "As senhas digitadas não são iguais.");
+            $util->setErrorMessage("register-pass2", $lang->get("err-pass-b", true));
             $res = false;
         }
     }

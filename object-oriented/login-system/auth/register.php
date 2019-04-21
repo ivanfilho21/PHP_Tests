@@ -11,11 +11,11 @@
 <main class="main">
     <section class="login-holder">
         <h1>
-            <?php echo ($registerFinished) ? "Conta criada com sucesso" : $lang->get("register-a"); ?>
+            <?php echo ($registerFinished) ? $lang->get("account-created") : $lang->get("register-a"); ?>
         </h1>
 
         <span>
-            <?php echo ($registerFinished) ? "Em breve um e-mail será enviado com seus dados de acesso." : ""; ?>
+            <?php echo ($registerFinished) ? $lang->get("email-sent") : ""; ?>
         </span>
 
         <?php if (! $registerFinished) : ?>

@@ -33,7 +33,12 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $request = $auth->getPasswordResetRequest($selector);
 
         if ($request == null) {
-            echo "<b>Requisição expirada</b>.<br>Você será redirecionado para a página de login...";
+            ?>
+            <b><?php $lang->get("expired-request"); ?></b>.
+            <br>
+            <?php $lang->get("you-are-redirected-to"); ?>
+            <?php $lang->get("login-page"); ?>...
+            <?php
             header("refresh: 5; url=login.php");
         }
         else {

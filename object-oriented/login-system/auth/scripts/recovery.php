@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $recoverySent = true;
         }
         else {
-            $util->setErrorMessage("recovery-email", "Não há uma conta associada a este e-mail.");
+            $util->setErrorMessage("recovery-email", $lang->get("err-recovery", true));
             $res = false;
         }
     }

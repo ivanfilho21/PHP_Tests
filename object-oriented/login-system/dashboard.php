@@ -11,7 +11,8 @@
 	<h1>Login System - Dashboard</h1>
 
 	<p>
-		<?php echo ($user != null) ? "Welcome, " . $user->getUsername() . "." : ""; ?>
+		<?php $lang->get("welcome"); ?>,
+		<?php echo ($user != null) ? $user->getUsername() . "." : ""; ?>
 	</p>
 </section>
 <!-- End of Main -->

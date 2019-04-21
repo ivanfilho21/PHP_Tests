@@ -2,8 +2,9 @@
 
 Login and Registration system in PHP.
 
-## Language
-* Português - Brasil
+## Languages
+* English (En)
+* Português - Brasil (Pt-Br)
 
 ## Features
 * Register.
@@ -14,7 +15,8 @@ Login and Registration system in PHP.
 [https://ivanfilho21.000webhostapp.com/auth/index.php](https://ivanfilho21.000webhostapp.com/auth/index.php)
 
 ### Screenshot
-![Login Screen](screenshots/home-page.png)
+![Login Screen](screenshots/home-en.png)
+![Login Screen](screenshots/home-pt.png)
 
 ### Author
 Ivan Filho
