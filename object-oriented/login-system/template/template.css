@@ -50,6 +50,23 @@ h5 {
     padding-top: 0.15em;
     padding-bottom: 0.05em;
 }
+
+button, input[type=submit], label, h1, h2, h3, h4, h5, a { text-transform: capitalize; }
+::-webkit-input-placeholder { /* WebKit browsers */
+    text-transform: capitalize;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    text-transform: capitalize;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    text-transform: capitalize;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    text-transform: capitalize;
+}
+::placeholder { /* Recent browsers */
+    text-transform: capitalize;
+}
 /* End of Reset */
 
 /* Header */
@@ -77,6 +94,8 @@ h5 {
 .top-navigation {
     margin-top: 1em;
 }
+.top-navigation .active { border-bottom: 2px solid white; }
+.top-navigation img { max-width: 100%; width: 24px; }
 
 .top-navigation li {
     /*display: inline-block;*/

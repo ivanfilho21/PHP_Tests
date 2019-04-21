@@ -8,28 +8,33 @@
 
 <!-- Main Content -->
 <section class="sub-header header-bg">
-	Login System é uma Aplicação Web feita em PHP que permite <a href="auth/register.php">criar uma conta</a> e fazer <a href="auth/login.php">Login</a>.
+	<?php $lang->get("site-name"); ?>
+	<?php $lang->get("home-subheader-a"); ?>
+	<a href="auth/register.php"><?php $lang->get("home-subheader-b"); ?></a>
+	<?php $lang->get("and"); ?>
+	<a href="auth/login.php"><?php $lang->get("login-a"); ?></a>.
 
-	Caso você esqueça sua senha, você pode <a href="auth/password-recovery.php">recuperá-la</a> facilmente.
+	<?php $lang->get("home-subheader-c")?>
+	<a href="auth/password-recovery.php"><?php $lang->get("recover-it-f"); ?></a>.
 </section>
 
 <section class="main">
-	<h1 class="title">Used Technologies</h1>
+	<h1 class="title"><?php $lang->get("used-techs"); ?></h1>
 	
 	<div class="card-holder">
 		<div class="card">
 			<h3>PHP 7</h3>
-			<p>PHP é uma popular linguagem de scripting de propósito geral que é especialmente adequada para o desenvolvimento web.</p>
+			<p><?php $lang->get("php-d"); ?></p>
 		</div>
 
 		<div class="card">
 			<h3>MySQL</h3>
-			<p>MySQL é um sistema de gerenciamento de banco de dados relacional open-source.</p>
+			<p><?php $lang->get("mysql-d"); ?></p>
 		</div>
 
 		<div class="card card-sublime">
 			<h3>Sublime Text</h3>
-			<p>Sublime Text é um editor de código fonte proprietário e multi-plataforma com uma interface feita em Python.</p>
+			<p><?php $lang->get("sublime-d"); ?></p>
 		</div>
 	</div>
 </section>

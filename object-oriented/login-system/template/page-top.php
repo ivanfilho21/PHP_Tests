@@ -16,5 +16,13 @@ require ROOT_PATH . "/dependencies.php";
 	<?php endif; ?>
 </head>
 <body>
+	<?php if (! empty($_GET["lang"])) : ?>
+	    <?php $_SESSION["lang"] = $_GET["lang"]; ?>
+	<?php endif; ?>
+	
+	<?php require ROOT_PATH . "/class/Language.php"; ?>
+	<?php $lang = new Language(); ?>
+	<?php #echo "Set language: " .$lang->getLanguage(); ?>
+
 	<?php include ROOT_PATH . "/auth/scripts/logout.php"; ?>
 	<?php include ROOT_PATH . "/template/parts/header.php"; ?>

@@ -13,24 +13,24 @@
         <h1>Login</h1>
 
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-            <input type="email" name="email" placeholder="E-mail" value="<?php echo (isset($_POST['email'])) ? $_POST['email'] : ''; ?>" autofocus>
+            <input type="email" name="email" placeholder="<?php $lang->get("email"); ?>" value="<?php echo (isset($_POST['email'])) ? $_POST['email'] : ''; ?>" autofocus>
             
-            <input type="password" name="password" placeholder="Senha">
+            <input type="password" name="password" placeholder="<?php $lang->get("password"); ?>">
 
             <label>
-                <input type="checkbox" name="keep-logged" <?php echo (isset($_POST["keep-logged"])) ? "checked" : ""; ?>>Manter-me Conectado<br>
+                <input type="checkbox" name="keep-logged" <?php echo (isset($_POST["keep-logged"])) ? "checked" : ""; ?>><?php $lang->get("keep-me-connected"); ?><br>
             </label>
 
             <div class="error-msg" id="error-auth">
                 <p><?php Util::showError("login"); ?></p>
             </div>
             
-            <input type="submit" name="login" value="Entrar">
+            <input type="submit" name="login" value="<?php $lang->get("login"); ?>">
         </form>
 
         <div class="options-link">
-            <a id="link-A" href="register.php">Criar Conta</a>
-            <a id="link-B" href="password-recovery.php">Esqueci a Senha</a>
+            <a id="link-A" href="register.php"><?php $lang->get("register"); ?></a>
+            <a id="link-B" href="password-recovery.php"><?php $lang->get("forgot-password-q"); ?></a>
             <div class="clear-fix"></div>
         </div>
         
