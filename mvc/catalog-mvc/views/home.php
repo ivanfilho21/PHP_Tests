@@ -1,8 +1,3 @@
-<section class="card" style="display: none;">
-	<h1>We now have <?php echo $totalAnnouncements; ?>  advertisement<?php echo ($totalAnnouncements > 1) ? "s" : ""; ?></h1>
-	<h3>And <?php echo $totalUsers; ?> registered user<?php echo ($totalUsers > 1) ? "s" : ""; ?></h3>
-</section>
-
 <div class="index-wrapper">
 	<section class="advanced-search">
 		<h3>Filter</h3>

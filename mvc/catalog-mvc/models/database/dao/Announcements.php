@@ -33,6 +33,26 @@ class Announcements extends DAO
 		$this->savePictures($database, $announcementArray["id"], $pictureArray);
 	}
 
+	public function search($name, $database, $page=1, $filter=array(), $maxPerPage=0)
+	{
+		$sp = ($page - 1) * $maxPerPage;
+
+		$db = $this->db;
+
+		$sql = "SELECT *, (SELECT `announcement_images`.`url` FROM `announcement_images` WHERE `announcement_images`.`announcementId` = `announcements`.`id` LIMIT 1) AS `url`, (SELECT `categories`.`name` FROM `categories` WHERE `categories`.`id` = `announcements`.`categoryId` LIMIT 1) AS `categoryName` FROM `" .$this->tableName ."` WHERE `title` LIKE '%" .$name ."%' LIMIT " .$sp .", " .$maxPerPage;
+
+		$res = $db->query($sql);
+		if ($res->rowCount() == 1) {
+			$list[] = $res->fetch();
+            return $list;
+		} elseif ($res->rowCount() > 1) {
+			return $res->fetchAll();
+		} else {
+			return array();
+		}
+
+	}
+
 	public function getLatest($database, $page=1, $filter=array(), $maxPerPage=0)
 	{
 		# select

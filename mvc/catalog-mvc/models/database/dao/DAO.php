@@ -23,7 +23,7 @@ abstract class DAO
 {
     protected $tableName = "";
     protected $columns = array();
-    #protected $db;
+    protected $db;
 
     public function __construct($db)
     {
@@ -71,12 +71,6 @@ abstract class DAO
         # echo $sql; die();
 
         $this->db->query($sql);
-    }
-    
-    # Executes a given query and returns the output.
-    protected function executeQuery($sql)
-    {
-        return $this->db->query($sql);
     }
 
     # Todo Methods: update and delete
