@@ -1,22 +1,24 @@
 <?php
-define("DB_TYPE", "mysql");
-define("DB_NAME", "blog_admin_db");
-define("DB_HOST", "127.0.0.1");
-define("DB_USER", "root");
-define("DB_PASS", "");
-
 class Contact
 {
     private $db;
+    private $tableName = "`contacts`";
 
-    public function __construct()
+    public function __construct($db)
     {
-        $dsn = DB_TYPE . ":dbname=" . DB_NAME . ";host=" . DB_HOST;
-        $dbUser = DB_USER;
-        $dbPass = DB_PASS;
+        $this->db = $db;
+        $this->createTable();
+    }
 
-        $this->db = new PDO($dsn, $dbUser, $dbPass);
-        # echo "Connected to Database.";
+    public function createTable()
+    {
+        $columns = "";
+        $columns .= "`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,";
+        $columns .= "`name` VARCHAR(100),";
+        $columns .= "`email` VARCHAR(100)";
+        $sql = "CREATE TABLE IF NOT EXISTS " .$this->tableName ." (" .$columns .")";
+        # echo $sql; die;
+        $res = $this->db->query($sql);
     }
 
     public function add($email, $name = "")
@@ -25,7 +27,7 @@ class Contact
         # add only if false
 
         if (! $this->emailExists($email)) {
-            $sql = "INSERT INTO contacts (name, email) VALUES (:name, :email)";
+            $sql = "INSERT INTO " .$this->tableName ." (`name`, `email`) VALUES (:name, :email)";
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":name", $name);
             $sql->bindValue(":email", $email);
@@ -38,7 +40,7 @@ class Contact
 
     public function getInfo($id)
     {
-        $sql = "SELECT * FROM contacts WHERE id = :id";
+        $sql = "SELECT * FROM " .$this->tableName ." WHERE `id` = :id";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id", $id);
         $sql->execute();
@@ -51,7 +53,7 @@ class Contact
 
     public function getAll()
     {
-        $sql = "SELECT * FROM contacts";
+        $sql = "SELECT * FROM " .$this->tableName;
         $res = $this->db->query($sql);
 
         if ($res->rowCount() > 0) {
@@ -62,7 +64,7 @@ class Contact
 
     public function update($contact, $id)
     {
-        $sql = "UPDATE contacts SET name = :name, email = :email WHERE id = :id";
+        $sql = "UPDATE " .$this->tableName ." SET `name` = :name, `email` = :email WHERE id = :id";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":name", $contact["name"]);
         $sql->bindValue(":email", $contact["email"]);
@@ -74,7 +76,7 @@ class Contact
 
     public function delete($id)
     {
-        $sql = "DELETE FROM contacts WHERE id = :id";
+        $sql = "DELETE FROM " .$this->tableName ." WHERE `id` = :id";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id", $id);
         $sql->execute();
@@ -84,7 +86,7 @@ class Contact
 
     private function emailExists($email)
     {
-        $sql = "SELECT * FROM contacts WHERE email = :email";
+        $sql = "SELECT * FROM " .$this->tableName ." WHERE `email` = :email";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":email", $email);
         $sql->execute();

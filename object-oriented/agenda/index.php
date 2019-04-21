@@ -2,7 +2,12 @@
 require "util.php";
 
 autoLoad();
-$contacts = new Contact();
+
+$db = DB::getInstance();
+$contacts = new Contact($db->getPDO());
+$logs = new Log($db->getPDO());
+
+$logs->register("Accessed Index page");
 ?>
 
 <!DOCTYPE html>
