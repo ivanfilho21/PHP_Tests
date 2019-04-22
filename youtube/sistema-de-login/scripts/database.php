@@ -50,11 +50,12 @@ function inserirUsuario($nome, $email, $senha)
 	}
 }
 
-function pegarUsuario($email)
+function emailExiste($email)
 {
 	global $db;
 	$tabela = "`usuarios`";
 	$sql = "SELECT * FROM " .$tabela ." WHERE `email` = '" .$email ."'";
+	#echo $sql; die();
 
 	$res = mysqli_query($db, $sql);
 
@@ -64,6 +65,29 @@ function pegarUsuario($email)
 	}
 
 	while ($a = mysqli_fetch_assoc($res)) {
-		return $a;
+		return true;
 	}
+
+	return false;
+}
+
+function pegarUsuario($email, $senha)
+{
+	global $db;
+	$tabela = "`usuarios`";
+	$sql = "SELECT * FROM " .$tabela ." WHERE `email` = '" .$email ."' AND `senha` = '" .md5($senha) ."'";
+	#echo $sql; die();
+
+	$res = mysqli_query($db, $sql);
+
+	if ($res == false) {
+		echo mysqli_error($db);
+		return $res;
+	}
+
+	return mysqli_fetch_array($res);
+
+	#while ($usuario = mysqli_fetch_assoc($res)) {
+	#	if (empty($usuario) == false) return $usuario;
+	#}
 }

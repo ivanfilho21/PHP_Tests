@@ -4,6 +4,11 @@ $erro = array();
 $nome = "";
 $email = "";
 
+if (usuarioLogado() == true) {
+	# redirecionar para area privada
+	redirecionar();
+}
+
 if (isset($_POST["cadastrar"])) {
 	$nome = $_POST["nome"];
 	$email = $_POST["email"];
@@ -13,6 +18,11 @@ if (isset($_POST["cadastrar"])) {
 		inserirUsuario($nome, $email, $senha);
 		$sucesso = "Usuário cadastrado com sucesso.";
 	}
+} elseif (isset($_POST["login"])) {
+	$email = $_POST["email"];
+	$senha = $_POST["senha"];
+
+	login($email, $senha);
 }
 
 function validacao($nome, $email, $senha)
@@ -29,7 +39,7 @@ function validacao($nome, $email, $senha)
 		$erro["email"] = "E-mail vazio.";
 		$res = false;
 	} else {
-		if (pegarUsuario($email) !== false) {
+		if (emailExiste($email) == true) {
 			$erro["email"] = "Este e-mail já existe.";
 			$res = false;
 		}
@@ -41,4 +51,25 @@ function validacao($nome, $email, $senha)
 	}
 
 	return $res;
+}
+
+function login($email, $senha)
+{
+	global $erro;
+	$usuario = pegarUsuario($email, $senha);
+
+	if ($usuario !== null) {
+		$_SESSION["sessao-usuario"] = $usuario["id"];
+
+		# redirecionar para area privada
+		redirecionar();
+	} else {
+		$erro["login"] = "E-mail ou senha incorretos.";
+	}
+}
+
+function redirecionar()
+{
+	header("Location: area-privada.php");
+	exit();
 }

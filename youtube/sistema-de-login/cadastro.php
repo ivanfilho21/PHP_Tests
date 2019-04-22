@@ -1,3 +1,4 @@
+<?php include "scripts/util.php"; ?>
 <?php include "scripts/database.php"; ?>
 <?php include "scripts/auth.php"; ?>
 <!DOCTYPE html>
