@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="assets/css/reset.css">
 	<link rel="stylesheet" href="assets/css/header.css">
 	<link rel="stylesheet" href="assets/css/footer.css">
+	<link rel="stylesheet" href="assets/css/index.css">
 </head>
 <body>
 	<header>
@@ -18,7 +19,7 @@
 						<li><a href="login.php">Entrar</a></li>
 						<li><a href="cadastro.php">Cadastrar-se</a></li>
 					<?php else: ?>
-						<li><a href="area-restrita.php">Área Restrita</a></li>
+						<li><a href="area-privada.php">Área Privada</a></li>
 						<li><a href="sair.php">Sair</a></li>
 					<?php endif; ?>
 				</ul>
@@ -27,9 +28,11 @@
 		</div>
 	</header>
 
-	<section class="container">
+	<section class="container main">
 		<h2>Sistema feito com PHP e MySQL</h2>
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<h3>Funcionalidades:</h3>
+		<p>Cadastro e login de Usuários</p>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	</section>
 
 	<footer>

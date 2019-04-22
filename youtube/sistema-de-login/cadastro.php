@@ -5,31 +5,44 @@
 <html lang="pt-br">
 <head>
 	<title>Cadastro</title>
+	<link rel="stylesheet" href="assets/css/reset.css">
+	<link rel="stylesheet" href="assets/css/auth.css">
 </head>
 <body>
-	<h1>Cadastro</h1>
+	<div class="container">
+		<h1 class="titulo"><a href="index.php">Login System</a></h1>
+		
+		<form method="POST">
+			<label for="nome">Nome</label>
+			<input type="text" name="nome" value="<?php echo $nome; ?>">
+			<?php if (isset($erro["nome"])) : ?>
+				<span class="erro"><?php echo $erro["nome"]; ?></span>
+			<?php endif; ?>
 
-	<form method="POST">
-		<label for="nome">Nome</label>
-		<input type="text" name="nome" value="<?php echo $nome; ?>">
-		<span><?php if (isset($erro["nome"])) echo $erro["nome"]; ?></span>
+			<label for="email">E-mail</label>
+			<input type="email" name="email" value="<?php echo $email; ?>">
+			<?php if (isset($erro["email"])) : ?>
+				<span class="erro"><?php echo $erro["email"]; ?></span>
+			<?php endif; ?>
 
-		<label for="email">E-mail</label>
-		<input type="email" name="email" value="<?php echo $email; ?>">
-		<span><?php if (isset($erro["email"])) echo $erro["email"]; ?></span>
+			<label for="senha">Senha</label>
+			<input type="password" name="senha">
+			<?php if (isset($erro["senha"])) : ?>
+				<span class="erro"><?php echo $erro["senha"]; ?></span>
+			<?php endif; ?>
 
-		<label for="senha">Senha</label>
-		<input type="password" name="senha">
-		<span><?php if (isset($erro["senha"])) echo $erro["senha"]; ?></span>
+			<input type="submit" name="cadastrar" value="Finalizar Cadastro">
+		</form>
 
-		<input type="submit" name="cadastrar" value="Finalizar Cadastro">
-	</form>
+		<div>
+			<?php if (isset($sucesso)) : ?>
+				<p><?php echo $sucesso; ?></p>
+				<a href="login.php">Fazer Login</a>
+			<?php endif; ?>
+		</div>
 
-	<div>
-		<?php if (isset($sucesso)) : ?>
-			<p><?php echo $sucesso; ?></p>
-			<a href="login.php">Fazer Login</a>
-		<?php endif; ?>
+		<hr>
+		<a class="link" href="login.php">Acessar minha Conta</a>
 	</div>
 </body>
 </html>

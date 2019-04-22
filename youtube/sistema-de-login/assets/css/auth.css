@@ -1,0 +1,83 @@
+body {
+	height: -webkit-fill-available;
+	/*background: linear-gradient(to bottom right, seagreen, dodgerblue);*/
+	background: black;
+	background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../img/bg.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: white;
+}
+
+.container {
+	max-width: 50%;
+	width: 100%;
+	margin: auto;
+	padding: 1em;
+}
+
+.titulo { margin-bottom: 1em; text-align: center; }
+.titulo a { color: white; }
+.titulo a:hover { color: whitesmoke; }
+
+label {
+	display: inline-block;
+	margin: 1em 0 0.25em 0.25em;
+	font-size: 1.1em;
+	font-weight: 600;
+	/*color: white;*/
+}
+
+input {
+	display: block;
+	padding: 0.5em 1em;
+	font-size: 1.2em;
+	border: 1px solid lightgray;
+	border-radius: 1em;
+	background: white;
+	background: rgba(255, 255, 255, 0.1);
+	color: white;
+
+	/* box-shadow transition */
+	-webkit-transition: box-shadow 300ms ease-in-out;
+	   -moz-transition: box-shadow 300ms ease-in-out;
+	    -ms-transition: box-shadow 300ms ease-in-out;
+	     -o-transition: box-shadow 300ms ease-in-out;
+	        transition: box-shadow 300ms ease-in-out;
+}
+
+input[type=text],
+input[type=email],
+input[type=password] {
+	width: 100%;
+	outline: none;
+}
+
+input[type=submit] {
+	margin: 1.5em auto;
+	color: cyan;
+	cursor: pointer;
+}
+input:focus, input[type=submit]:hover {
+	box-shadow: 0 0 12px cyan;
+}
+
+hr { margin-bottom: 1em; }
+
+.link { color: cyan; }
+.link:hover { text-decoration: underline; }
+
+.erro {
+	display: block;
+	margin: 0.75em 0 0 0.25em;
+	color: red;
+}
+
+.erro-login {
+	display: block;
+	padding: 2em 0;
+	font-size: 1.1em;
+	text-align: center;
+	border: 2px solid rgba(255, 0, 0, 0.7);
+	border-radius: 1em;
+	background: rgba(255, 0, 0, 0.4);
+}
