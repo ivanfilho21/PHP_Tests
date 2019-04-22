@@ -86,8 +86,4 @@ function pegarUsuario($email, $senha)
 	}
 
 	return mysqli_fetch_array($res);
-
-	#while ($usuario = mysqli_fetch_assoc($res)) {
-	#	if (empty($usuario) == false) return $usuario;
-	#}
 }
