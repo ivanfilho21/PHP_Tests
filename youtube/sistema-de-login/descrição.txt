@@ -1,0 +1,11 @@
+Projeto Tutorial de PHP no YouTube
+
+Nome do Projeto:
+	Sistema de Login em PHP e MySQLi procedural.
+
+
+Aula 01: explicação do sistema pronto e levantamento de requisitos.
+Aula 02: criando o index, o banco de dados, a tabela de usuários e os scripts para manipulação do BD.
+Aula 03: tela de cadastro com script de autenticação.
+Aula 04: tela de login com script de autenticação.
+Aula 05: criando o front-end do site.
