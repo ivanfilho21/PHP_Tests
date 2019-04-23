@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="container">
-		<h1 class="titulo"><a href="index.php">Login System</a></h1>
+		<h1 class="titulo"><a href="index.php">Sistema de Login</a></h1>
 		
 		<form method="POST">
 			<label for="nome">Nome</label>

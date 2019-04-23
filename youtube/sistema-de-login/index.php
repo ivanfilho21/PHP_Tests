@@ -28,12 +28,14 @@
 		</div>
 	</header>
 
-	<section class="container main">
+	<div style="height: -webkit-fill-available; ">
+	<section class="container main" style="display: none;">
 		<h2>Sistema feito com PHP e MySQL</h2>
 		<h3>Funcionalidades:</h3>
 		<p>Cadastro e login de Usuários</p>
 		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	</section>
+	</div>
 
 	<footer>
 		<p>© 2019 - Ivan Filho</p>
