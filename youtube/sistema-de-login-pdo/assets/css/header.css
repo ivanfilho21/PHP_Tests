@@ -1,0 +1,31 @@
+header {
+	padding: 1em 0;
+	background-color: darkslategray;
+}
+
+.container { max-width: 90%; width: 100%; margin: auto; }
+
+.logo { float: left; font-size: 2em; font-weight: 600; }
+.logo a { color: white; }
+.logo a:hover { color: whitesmoke; }
+
+.menu { float: right; }
+.menu ul { list-style: none; }
+.menu li { float: left; margin: 0.5em; }
+.menu li a { padding-bottom: 0.5em; font-weight: 600; color: white; }
+.clear-fix { clear: both; }
+
+.menu li a::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    margin-top: 0.5em;
+    background-color: white;
+    transition: width .3s;
+}
+
+.menu li a:hover::after {
+    width: 100%;
+    transition: width .1s;
+}

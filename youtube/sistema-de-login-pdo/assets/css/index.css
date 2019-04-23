@@ -1,0 +1,13 @@
+body {
+    background: url("../img/bg2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.main {
+	max-width: 70%;
+	padding: 1em;
+	background-color: white;
+	/*color: white;*/
+}
+.main h2 { margin-top: 0; }
