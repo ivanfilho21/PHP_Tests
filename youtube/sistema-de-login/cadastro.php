@@ -36,8 +36,7 @@
 
 		<div>
 			<?php if (isset($sucesso)) : ?>
-				<p><?php echo $sucesso; ?></p>
-				<a href="login.php">Fazer Login</a>
+				<p><?php echo $sucesso; ?><a href="login.php">Fazer Login</a></p>
 			<?php endif; ?>
 		</div>
 
