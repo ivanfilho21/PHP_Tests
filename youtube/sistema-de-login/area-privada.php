@@ -1,4 +1,10 @@
 <?php include "scripts/util.php"; ?>
+<?php
+	if (usuarioLogado() == false) {
+		header("Location: login.php");
+		exit();
+	}
+?>
 <?php include "scripts/database.php"; ?>
 <!DOCTYPE html>
 <html lang="pt-br">
