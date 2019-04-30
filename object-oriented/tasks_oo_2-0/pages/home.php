@@ -19,6 +19,14 @@
         <tr>
             <td><?php echo $task["id"]; ?></td>
 
+            <td><?php echo $task["name"]; ?></td>
+
+            <td><?php echo $task["description"]; ?></td>
+
+            <td><?php echo $task["date_creation"]; ?></td>
+
+            <td><?php echo $task["deadline"]; ?></td>
+
             <td>
                 <a href="#">Edit</a>
                 <a href="#">Duplicate</a>
