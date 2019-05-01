@@ -29,8 +29,8 @@
 
             <td>
                 <a href="#">Edit</a>
-                <a href="#">Duplicate</a>
-                <a href="#">Delete</a>
+                <a href="<?php echo URL; ?>scripts/duplicate.php?id=<?php echo $task["id"]; ?>">Duplicate</a>
+                <a href="<?php echo URL; ?>scripts/delete.php?id=<?php echo $task["id"]; ?>">Delete</a>
             </td>
         </tr>
         <?php endforeach ?>
