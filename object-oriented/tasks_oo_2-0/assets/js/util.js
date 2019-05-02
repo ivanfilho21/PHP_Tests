@@ -17,7 +17,7 @@ function updatePreviews() {
         let src = "";
         if (n == "") {
             src = "assets/img/no-ext-file.svg";
-        } else if (n == "jpeg" || n == "jpg" || n == "png" || n == "gif" || n == "svg") {
+        } else if (n == "jpeg" || n == "jpg" || n == "png" || n == "gif" || n == "svg" || n == "bmp") {
             src = "";
         } else if (n == "zip" || n == "7zip" || n == "rar" || n == "tar" || n == "tar.xz") {
             src = "assets/img/zip.svg";
