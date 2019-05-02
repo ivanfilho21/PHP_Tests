@@ -51,17 +51,30 @@ class TaskDB {
         $res->execute();
     }
 
-    public function update($id, $array) {
+    public function update($id, $array, $attachment) {
+        print_r($array);
+        echo "<br>";
+        print_r($attachment);
+        echo "<br>";
         $values = $this->getPseudoValuesFromArray($array);
 
         $sql = "UPDATE " . BQ .$this->tableName .BQ ." SET " .$values ." WHERE " .BQ ."id" .BQ ." = :id";
+        echo $sql;
+
         $res = $this->db->prepare($sql);
         $res->bindValue(":id", $id);
 
         foreach ($array as $key => $value) {
             $res->bindValue(":" .$key, $value);
+            echo ":" .$key ." = " .$value. ", ";
         }
+        die;
         $res->execute();
+
+        if (! empty($attach)) {
+            $attach["task_id"] = $id;
+            $this->insertAttachment($attach);
+        }
     }
 
     public function delete($id) {
@@ -72,7 +85,7 @@ class TaskDB {
     }
 
     public function get($id) {
-        $sql = "SELECT * FROM " . BQ .$this->tableName .BQ;
+        $sql = "SELECT * FROM " . BQ .$this->tableName .BQ ." WHERE " .BQ ."id" .BQ ." = :id";;
         $res = $this->db->prepare($sql);
         $res->bindValue(":id", $id);
         $res->execute();
@@ -95,5 +108,15 @@ class TaskDB {
             $array = $res->fetchAll();
 
         return $array;
+    }
+
+    public function getAttachments($taskId) {
+        $sql = "SELECT * FROM " . BQ ."attachment" .BQ ." WHERE " .BQ ."task_id" .BQ ." = :id";
+        # echo $sql;
+        $res = $this->db->prepare($sql);
+        $res->bindValue(":id", $taskId);
+        $res->execute();
+
+        return ($res->rowCount() > 0) ? $res->fetchAll() : array();
     }
 }

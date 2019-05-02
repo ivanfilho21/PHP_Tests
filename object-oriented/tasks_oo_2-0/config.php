@@ -21,4 +21,6 @@ try {
 }
 
 # Head variables
+$relPath = "";
 $stylesheets = array();
+$scripts = array();

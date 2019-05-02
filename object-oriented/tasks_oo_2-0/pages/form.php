@@ -1,14 +1,18 @@
-<?php $scripts = array("util"); ?>
 <?php include "../config.php"; ?>
+<?php $relPath = "../"; ?>
+<?php $scripts = array("util"); ?>
 <?php include "../pages/template/page-top.php"; ?>
-<?php include "../scripts/create.php"; ?>
-<script src="assets/js/util.js"></script>
+<?php include "../scripts/create-edit.php"; ?>
 
 <h1>New Task</h1>
 
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" enctype="multipart/form-data">
     <fieldset>
         <legend>New Task</legend>
+
+        <input type="hidden" name="id" value="<?php echo (! empty($task["id"])) ? $task["id"] : ""; ?>">
+        <input type="hidden" name="mode" value="<?php echo (! empty($task["id"])) ? "update" : "create"; ?>">
+
         <label>Task Name (*):</label>
         <input type="text" name="name" value="<?php echo $task["name"]; ?>">
         <span class="error"><?php getErrorMessage("name"); ?></span>
@@ -37,13 +41,34 @@
     </fieldset>
 
     <fieldset>
-        <legend>Attachment</legend>
+        <legend>Attachments</legend>
+
+        <?php if (! empty($attachments) && count($attachments) > 0) : ?>
+        <table>
+            <thead>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Options</th>
+            </thead>
+            <tbody>
+                <?php foreach ($attachments as $att): ?>
+                <tr>
+                    <td><?php echo $att["id"]; ?></td>
+                    <td><?php echo $att["name"]; ?></td>
+                    <td>
+                        <a target="_blank" href="../attachments/<?php echo $att["file"]; ?>">Download</a>
+                    </td>
+                </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+        <?php endif ?>        
 
         <div id="attachment" class="attachment"></div>
 
-        <input type="file" multiple="off" name="attachment" onchange="updatePreviews.call(this)">
-    </fieldset>
+        <input type="file" multiple="off" name="attachment" onchange="updatePreview.call(this)">
+    </fieldset> 
 
     <input type="submit" name="save-task" value="Save Task">
 </form>
-<?php include "pages/template/page-bottom.php"; ?>
+<?php include "../pages/template/page-bottom.php"; ?>

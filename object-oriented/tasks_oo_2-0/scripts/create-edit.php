@@ -16,11 +16,22 @@ $task = array(
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $attachment = "";
+    $id = $_POST["id"];
 
     if (validation()) {
-        $taskDB->insert($task, $attachment);
+        if ($_POST["mode"] == "create") {
+            $taskDB->insert($task, $attachment);
+        } else {
+            $taskDB->update($id, $task, $attachment);
+        }
+        
         header("Location: ../index.php");
         die;
+    }
+} elseif ($_SERVER["REQUEST_METHOD"] == "GET") {
+    if (! empty($_GET["id"])) {
+        $task = $taskDB->get($_GET["id"]);
+        $attachments = $taskDB->getAttachments($_GET["id"]);
     }
 }
 
@@ -31,6 +42,13 @@ function formatInput($input) {
 function validation() {
     global $err, $task, $attachment;
     $res = true;
+
+    $task["name"] = (! empty($_POST["name"])) ? formatInput($_POST["name"]) : $task["name"];
+    $task["description"] = (! empty($_POST["description"])) ? formatInput($_POST["description"]) : $task["description"];
+    $task["priority"] = (! empty($_POST["priority"])) ? formatInput($_POST["priority"]) : $task["priority"];
+    $task["finished"] = (! empty($_POST["finished"])) ? formatInput($_POST["finished"]) : $task["finished"];
+    $task["date_creation"] = (! empty($_POST["created"])) ? formatInput($_POST["created"]) : $task["date_creation"];
+    $task["deadline"] = (! empty($_POST["deadline"])) ? formatInput($_POST["deadline"]) : $task["deadline"];
 
     if (empty($task["name"])) {
         $res = false;

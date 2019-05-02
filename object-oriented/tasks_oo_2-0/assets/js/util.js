@@ -1,4 +1,4 @@
-function updatePreviews() {
+function updatePreview() {
     let files = this.files;
     let attachments = document.getElementById("attachment");
 
