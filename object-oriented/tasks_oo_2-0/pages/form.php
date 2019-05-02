@@ -1,3 +1,5 @@
+<?php include PATH ."scripts/create.php"; ?>
+
 <script src="assets/js/util.js"></script>
 <form method="POST" enctype="multipart/form-data">
     <fieldset>
