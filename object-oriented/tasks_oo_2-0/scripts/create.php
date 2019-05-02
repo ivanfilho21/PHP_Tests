@@ -9,6 +9,7 @@ $task = array(
 	"date_creation" => (! empty($_POST["created"])) ? formatInput($_POST["created"]) : date("Y-m-d"),
 	"deadline" => (! empty($_POST["deadline"])) ? formatInput($_POST["deadline"]) : date("Y-m-d")
 );
+$attachment = $_FILES["attachment"];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if (validation()) {
@@ -23,7 +24,7 @@ function formatInput($input) {
 }
 
 function validation() {
-	global $err;
+	global $err, $task, $attachment;
 	$res = true;
 
 	if (empty($task["name"])) {

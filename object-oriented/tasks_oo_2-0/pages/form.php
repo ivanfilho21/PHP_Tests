@@ -36,7 +36,7 @@
 
         <div id="attachments" class="attachments"></div>
 
-        <input id="files" type="file" multiple="off" name="attachment" onchange="updatePreviews.call(this)">
+        <input type="file" multiple="off" name="attachment" onchange="updatePreviews.call(this)">
     </fieldset>
 
     <input type="submit" name="save-task" value="Save Task">
