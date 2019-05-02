@@ -16,6 +16,7 @@ class TaskDB {
     private function getPseudoValuesFromArray($array) {
         $values = "";
         foreach ($array as $key => $value) {
+            if (empty($value)) continue;
             $values .= BQ .$key .BQ ." = :" .$key .COMMA;
         }
         return substr($values, 0, -strlen(COMMA));
@@ -25,9 +26,12 @@ class TaskDB {
         $values = $this->getPseudoValuesFromArray($array);
 
         $sql = "INSERT INTO " . BQ .$this->tableName .BQ ." SET " .$values;
+        // die($sql);
+
         $res = $this->db->prepare($sql);
 
         foreach ($array as $key => $value) {
+            if (empty($value)) continue;
             $res->bindValue(":" .$key, $value);
         }
         $res->execute();
