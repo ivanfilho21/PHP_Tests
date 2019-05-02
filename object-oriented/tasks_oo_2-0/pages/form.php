@@ -1,6 +1,11 @@
-<?php include PATH ."scripts/create.php"; ?>
-
+<?php $scripts = array("util"); ?>
+<?php include "../config.php"; ?>
+<?php include "../pages/template/page-top.php"; ?>
+<?php include "../scripts/create.php"; ?>
 <script src="assets/js/util.js"></script>
+
+<h1>New Task</h1>
+
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" enctype="multipart/form-data">
     <fieldset>
         <legend>New Task</legend>
@@ -32,12 +37,13 @@
     </fieldset>
 
     <fieldset>
-        <legend>Attachments</legend>
+        <legend>Attachment</legend>
 
-        <div id="attachments" class="attachments"></div>
+        <div id="attachment" class="attachment"></div>
 
         <input type="file" multiple="off" name="attachment" onchange="updatePreviews.call(this)">
     </fieldset>
 
     <input type="submit" name="save-task" value="Save Task">
 </form>
+<?php include "pages/template/page-bottom.php"; ?>

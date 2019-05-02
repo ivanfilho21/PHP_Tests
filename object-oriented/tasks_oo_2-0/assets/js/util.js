@@ -1,6 +1,6 @@
 function updatePreviews() {
     let files = this.files;
-    let attachments = document.getElementById("attachments");
+    let attachments = document.getElementById("attachment");
 
     if (! files) return;
 

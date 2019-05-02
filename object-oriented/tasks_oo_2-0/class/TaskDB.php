@@ -22,12 +22,26 @@ class TaskDB {
         return substr($values, 0, -strlen(COMMA));
     }
 
-    public function insert($array) {
+    public function insert($array, $attach="") {
         $values = $this->getPseudoValuesFromArray($array);
-
         $sql = "INSERT INTO " . BQ .$this->tableName .BQ ." SET " .$values;
-        // die($sql);
+        $res = $this->db->prepare($sql);
 
+        foreach ($array as $key => $value) {
+            if (empty($value)) continue;
+            $res->bindValue(":" .$key, $value);
+        }
+        $res->execute();
+
+        if (! empty($attach)) {
+            $attach["task_id"] = $this->db->lastInsertId();
+            $this->insertAttachment($attach);
+        }
+    }
+
+    private function insertAttachment($array) {
+        $values = $this->getPseudoValuesFromArray($array);
+        $sql = "INSERT INTO " . BQ ."attachment" .BQ ." SET " .$values;
         $res = $this->db->prepare($sql);
 
         foreach ($array as $key => $value) {
@@ -58,7 +72,7 @@ class TaskDB {
     }
 
     public function get($id) {
-        $sql = "SELECT * FROM " . BQ .$this->tableName .BQ ." WHERE " .BQ ."id" .BQ ." = :id";
+        $sql = "SELECT * FROM " . BQ .$this->tableName .BQ;
         $res = $this->db->prepare($sql);
         $res->bindValue(":id", $id);
         $res->execute();
@@ -67,7 +81,11 @@ class TaskDB {
     }
 
     public function getAll() {
-        $sql = "SELECT * FROM " . BQ .$this->tableName .BQ;
+        $add = ", (SELECT `attachment`.`file` FROM `attachment` WHERE `attachment`.`task_id` = `tasks`.`id` LIMIT 1)  AS `attachment`";
+
+        $sql = "SELECT *" .$add ." FROM " . BQ .$this->tableName .BQ;
+        # die($sql);
+
         $res = $this->db->query($sql);
         $array = array();
 
