@@ -1,4 +1,5 @@
-<form method="POST">
+<script src="assets/js/util.js"></script>
+<form method="POST" enctype="multipart/form-data">
     <fieldset>
         <legend>New Task</legend>
         <label>Task Name (*):</label>
@@ -10,7 +11,7 @@
         <label>Deadline:</label>
         <input type="date" name="deadline">
 
-        <label>Priority</label>
+        <label>Priority:</label>
         <input id="low-priority" type="radio" name="priority" value="1">
         <label for="low-priority">Low</label>
 
@@ -25,7 +26,15 @@
 
         <input id="task-finished" type="checkbox" name="finished">
         <label for="task-finished">Task is Finished</label>
+    </fieldset>
 
-        <input type="submit" name="save-task" value="Save Task">
-    </fieldset>    
+    <fieldset>
+        <legend>Attachments</legend>
+
+        <div id="attachments" class="attachments"></div>
+
+        <input id="files" type="file" multiple="off" name="attachment" onchange="updatePreviews.call(this)">
+    </fieldset>
+
+    <input type="submit" name="save-task" value="Save Task">
 </form>
