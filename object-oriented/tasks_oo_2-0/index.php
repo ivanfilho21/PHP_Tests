@@ -2,16 +2,22 @@
 <?php include "pages/template/page-top.php"; ?>
 <?php include "scripts/list.php"; ?>
 
-<h1>Task Manager</h1>
-
 <a href="pages/form.php">Create Task</a>
 
 <?php if (count($tasks) == 0) : ?>
 <?php else : ?>
-    <?php #print_r($tasks); ?>
+
+<button><i class="fa fa-check-double"></i> Check All</button>
+
+<div class="table-options" style="display: none;">
+    <button><i class="fa fa-calendar-check"></i> Mark as Finished</button>
+    <button><i class="fa fa-trash"></i> Delete</button>
+</div>
+
 <table>
     <thead>
         <tr>
+            <th></th>
             <?php foreach ($fields as $field): ?>
             <th><?php echo $field; ?></th>
             <?php endforeach ?>
@@ -20,6 +26,10 @@
     <tbody>
         <?php foreach ($tasks as $task): ?>
         <tr>
+            <td>
+                <input type="checkbox" name="select-row">
+            </td>
+
             <td><?php echo $task["id"]; ?></td>
 
             <td>
@@ -44,9 +54,5 @@
         <?php endforeach ?>
     </tbody>
 </table>
-
-<hr>
-<h4>Danger Zone</h4>
-<a href="#">Delete All Tasks</a>
 <?php endif ?>
 <?php include "pages/template/page-bottom.php"; ?>
