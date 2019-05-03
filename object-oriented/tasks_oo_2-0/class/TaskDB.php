@@ -51,13 +51,8 @@ class TaskDB {
         $res->execute();
     }
 
-    public function update($id, $array, $attachment) {
-        print_r($array);
-        echo "<br>";
-        print_r($attachment);
-        echo "<br>";
+    public function update($id, $array, $attach="") {
         $values = $this->getPseudoValuesFromArray($array);
-
         $sql = "UPDATE " . BQ .$this->tableName .BQ ." SET " .$values ." WHERE " .BQ ."id" .BQ ." = :id";
         echo $sql;
 
@@ -65,10 +60,10 @@ class TaskDB {
         $res->bindValue(":id", $id);
 
         foreach ($array as $key => $value) {
+            if (empty($value)) continue;
             $res->bindValue(":" .$key, $value);
-            echo ":" .$key ." = " .$value. ", ";
         }
-        die;
+
         $res->execute();
 
         if (! empty($attach)) {

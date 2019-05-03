@@ -56,14 +56,14 @@ function validation() {
     }
 
     if ($res) {
-        // attachment
+        # Attachment
         $att = (isset($_FILES["attachment"])) ? $_FILES["attachment"] : "";
 
         if (! empty($att)) {
             $extension = explode(".", $att["name"]);
             $extension = (count($extension) > 0) ? $extension[count($extension) -1] : "";
             $fileName = md5(time() .rand(0, 9999)) ."." .$extension;
-            $path = "attachments/" .$fileName;
+            $path = "../attachments/" .$fileName;
 
             # Remove old attachments
             /*foreach ($attachments as $key => $a) {
@@ -94,6 +94,8 @@ function validation() {
 
 function resizeImage($type, $imagePath)
 {
+    if (! file_exists($imagePath)) return;
+
     list($srcWidth, $srcHeight) = getimagesize($imagePath);
     $ratio = $srcWidth / $srcHeight;
     $width = 120;
@@ -131,7 +133,7 @@ function deleteFile($fileName) {
     if (file_exists($fileName)) {
         unlink($fileName);
     } else {
-        // echo 'Could not delete '.$fileName.', file does not exist';
+        # echo 'Could not delete '.$fileName.', file does not exist';
     }
 }
 
