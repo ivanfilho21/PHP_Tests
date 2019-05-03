@@ -1,0 +1,54 @@
+body {
+    background-color: whitesmoke;
+}
+
+table {
+    width: 100%;
+    margin: 0.5em 0;
+    border: 1px solid;
+}
+
+th {
+    padding: 0.5em;
+    background-color: gray;
+    color: white;
+}
+
+td {
+    padding: 0.5em;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid white;
+}
+
+tr:nth-child(even) td {
+    background-color: #eee;
+}
+
+tr:nth-child(odd) td {
+    background-color: #ddd;
+}
+
+.btn {
+    font-size: 14px;
+    display: inline-block;
+    padding: 0.5em 1em;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    background-color: white;
+    background-image: linear-gradient(white, #ddd);
+    color: black;
+}
+
+.btn:hover {
+    background: #eee;
+}
+
+#create-task { margin: 0.5em 0; text-decoration: none; }
+
+.row-option:first-child { margin-left: 0; }
+.row-option { margin-left: 0.25em; }
+
+#edit:hover { color: orange; } 
+#duplicate:hover { color: green; } 
+#delete:hover { color: red; } 

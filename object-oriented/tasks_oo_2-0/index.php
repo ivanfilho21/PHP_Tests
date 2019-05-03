@@ -1,12 +1,14 @@
 <?php include "config.php"; ?>
+<?php $stylesheets[] = "index"; ?>
 <?php include "pages/template/page-top.php"; ?>
 <?php include "scripts/list.php"; ?>
 
-<a href="pages/form.php">Create Task</a>
+<a id="create-task" class="btn" href="pages/form.php">Create Task</a>
 
 <?php if (count($tasks) == 0) : ?>
 <?php else : ?>
-
+<br>
+<br>
 <button><i class="fa fa-check-double"></i> Check All</button>
 
 <div class="table-options" style="display: none;">
@@ -35,8 +37,6 @@
             <td>
                 <a href="pages/view.php?id=<?php echo $task["id"]; ?>"><?php echo $task["name"]; ?></td></a>
 
-            <td><?php echo $task["description"]; ?></td>
-
             <td><?php echo $task["priority"]; ?></td>
 
             <td><?php echo $task["date_creation"]; ?></td>
@@ -46,9 +46,9 @@
             <td><?php echo count($task["attachments"]); ?></td>
 
             <td>
-                <a href="pages/form.php?id=<?php echo $task["id"]; ?>">Edit</a>
-                <a href="scripts/duplicate.php?id=<?php echo $task["id"]; ?>">Duplicate</a>
-                <a href="scripts/delete.php?id=<?php echo $task["id"]; ?>">Delete</a>
+                <a id="edit" class="btn row-option" href="pages/form.php?id=<?php echo $task["id"]; ?>" title="Edit"><i class="fa fa-pen"></i></a>
+                <a id="duplicate" class="btn row-option" href="scripts/duplicate.php?id=<?php echo $task["id"]; ?>" title="Duplicate"><i class="fa fa-copy"></i></a>
+                <a id="delete" class="btn row-option" href="scripts/delete.php?id=<?php echo $task["id"]; ?>" title="Delete"><i class="fa fa-trash"></i></a>
             </td>
         </tr>
         <?php endforeach ?>
