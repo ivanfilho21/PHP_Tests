@@ -22,17 +22,18 @@
         <tr>
             <td><?php echo $task["id"]; ?></td>
 
-            <td><?php echo $task["name"]; ?></td>
+            <td>
+                <a href="pages/view.php?id=<?php echo $task["id"]; ?>"><?php echo $task["name"]; ?></td></a>
 
             <td><?php echo $task["description"]; ?></td>
+
+            <td><?php echo $task["priority"]; ?></td>
 
             <td><?php echo $task["date_creation"]; ?></td>
 
             <td><?php echo $task["deadline"]; ?></td>
 
-            <td>
-                <a target="_blank" href="attachments/<?php echo $task["attachment"]; ?>">View</a>
-            </td>
+            <td><?php echo count($task["attachments"]); ?></td>
 
             <td>
                 <a href="pages/form.php?id=<?php echo $task["id"]; ?>">Edit</a>

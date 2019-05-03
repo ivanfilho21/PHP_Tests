@@ -23,15 +23,20 @@
         <label>Deadline:</label>
         <input type="date" name="deadline" value="<?php echo $task["deadline"]; ?>">
 
-        <label>Priority:</label>
-        <input id="low-priority" type="radio" name="priority" value="1" <?php echo ($task["priority"] == "1") ? "checked" : ""; ?>>
-        <label for="low-priority">Low</label>
+        <fieldset>
+            <legend>Priority</legend>
+            <input id="low-priority" type="radio" name="priority" value="1" <?php echo ($task["priority"] == "1") ? "checked" : ""; ?>>
+            <label for="low-priority">Low</label>
 
-        <input id="med-priority" type="radio" name="priority" value="2" checked>
-        <label for="med-priority">Medium</label>
+            <input id="med-priority" type="radio" name="priority" value="2" <?php echo ($task["priority"] == "2") ? "checked" : ""; ?>>
+            <label for="med-priority">Medium</label>
 
-        <input id="hig-priority" type="radio" name="priority" value="3" <?php echo ($task["priority"] == "3") ? "checked" : ""; ?>>
-        <label for="hig-priority">High</label>
+            <input id="hig-priority" type="radio" name="priority" value="3" <?php echo ($task["priority"] == "3") ? "checked" : ""; ?>>
+            <label for="hig-priority">High</label>
+
+            <br>
+            <span class="error"><?php echo getErrorMessage("priority"); ?></span>
+        </fieldset>        
 
         <label>Description:</label>
         <textarea name="description" cols="40"><?php echo $task["description"]; ?></textarea>

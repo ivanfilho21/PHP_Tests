@@ -32,23 +32,14 @@ class TaskDB {
             $res->bindValue(":" .$key, $value);
         }
         $res->execute();
+        $lastId = $this->db->lastInsertId();
 
         if (! empty($attach)) {
-            $attach["task_id"] = $this->db->lastInsertId();
+            $attach["task_id"] = $lastId;
             $this->insertAttachment($attach);
         }
-    }
 
-    private function insertAttachment($array) {
-        $values = $this->getPseudoValuesFromArray($array);
-        $sql = "INSERT INTO " . BQ ."attachment" .BQ ." SET " .$values;
-        $res = $this->db->prepare($sql);
-
-        foreach ($array as $key => $value) {
-            if (empty($value)) continue;
-            $res->bindValue(":" .$key, $value);
-        }
-        $res->execute();
+        return $lastId;
     }
 
     public function update($id, $array, $attach="") {
@@ -103,6 +94,21 @@ class TaskDB {
             $array = $res->fetchAll();
 
         return $array;
+    }
+
+    public function insertAttachment($array) {
+        $values = $this->getPseudoValuesFromArray($array);
+        $sql = "INSERT INTO " . BQ ."attachment" .BQ ." SET " .$values;
+        $res = $this->db->prepare($sql);
+        #echo $sql ."<br>";
+
+        foreach ($array as $key => $value) {
+            if (empty($value)) continue;
+            $res->bindValue(":" .$key, $value);
+            #echo ":".$key ." = " .$value ."<br>";
+        }
+        #die;
+        $res->execute();
     }
 
     public function getAttachments($taskId) {

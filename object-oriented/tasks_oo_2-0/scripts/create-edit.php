@@ -55,6 +55,11 @@ function validation() {
         $err["name"] = "Specify the Task Name.";
     }
 
+    if (empty($task["priority"])) {
+        $res = false;
+        $err["priority"] = "Choose the priority.";
+    }
+
     if ($res) {
         # Attachment
         $att = (isset($_FILES["attachment"])) ? $_FILES["attachment"] : "";
