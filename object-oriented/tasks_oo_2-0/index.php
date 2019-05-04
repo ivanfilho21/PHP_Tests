@@ -7,6 +7,7 @@
 <a id="create-task" class="btn" href="pages/form.php">Create Task</a>
 
 <?php if (count($tasks) == 0) : ?>
+    <h2>Nothing here yet.</h2>
 <?php else : ?>
 <br>
 <br>
@@ -14,7 +15,7 @@
 
 <div class="table-options" style="display: none;">
     <button onclick="markCheckedTasksAsFinished()"><i class="fa fa-calendar-check"></i> Mark as Finished</button>
-    <button><i class="fa fa-trash"></i> Delete Selected</button>
+    <button onclick="deleteCheckedTasks()"><i class="fa fa-trash"></i> Delete Selected</button>
 </div>
 
 <table id="tasks-table">
@@ -38,7 +39,8 @@
             <td><?php echo $task["id"]; ?></td>
 
             <td>
-                <a <?php echo ($task["finished"] == "1") ? "class='finished' title='Finished'" : ""; ?> href="pages/view.php?id=<?php echo $task["id"]; ?>"><?php echo $task["name"]; ?></td></a>
+                <a <?php echo ($task["finished"] == "1") ? "class='finished' title='Finished'" : ""; ?> href="pages/view.php?id=<?php echo $task["id"]; ?>"><?php echo $task["name"]; ?></a>
+            </td>
 
             <td><?php echo $task["priority"]; ?></td>
 

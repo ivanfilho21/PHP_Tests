@@ -67,11 +67,24 @@ function markCheckedTasksAsFinished() {
         let id = rows[i].getElementsByClassName("td-task-id")[0].value;
         url += "id" + i + "=" + id + "&";
     }
+
     url = url.substring(0, url.length - 1);
     goToUrlOnConfirm(msg, url);
 }
 
-function deleteCheckedTasks() {}
+function deleteCheckedTasks() {
+    let rows = document.getElementById("tasks-table").tBodies[0].rows;
+    let msg = "Delete all tasks?";
+    let url = "scripts/delete-all.php?";
+
+    for (var i = 0; i < rows.length; i++) {
+        let id = rows[i].getElementsByClassName("td-task-id")[0].value;
+        url += "id" + i + "=" + id + "&";
+    }
+
+    url = url.substring(0, url.length - 1);
+    goToUrlOnConfirm(msg, url);
+}
 
 function setCheckedRows(value) {
     let rows = document.getElementById("tasks-table").tBodies[0].rows;

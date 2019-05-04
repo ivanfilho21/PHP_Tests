@@ -8,5 +8,5 @@ $fields = array("ID", "Task Name", "Priority", "Created In", "Deadline", "Attach
 $tasks = $taskDB->getAll();
 
 for ($i = 0; $i < count($tasks); $i++) {
-	$tasks[$i]["attachments"] = $taskDB->getAttachments($tasks[$i]["id"]);
+    $tasks[$i]["attachments"] = $taskDB->getAttachments($tasks[$i]["id"]);
 }
