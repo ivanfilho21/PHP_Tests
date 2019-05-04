@@ -13,7 +13,7 @@
 <button data-value="true" onclick="checkRows.call(this)"><i class="fa fa-check-double"></i> Check All</button>
 
 <div class="table-options" style="display: none;">
-    <button><i class="fa fa-calendar-check"></i> Mark as Finished</button>
+    <button onclick="markCheckedTasksAsFinished()"><i class="fa fa-calendar-check"></i> Mark as Finished</button>
     <button><i class="fa fa-trash"></i> Delete Selected</button>
 </div>
 
@@ -32,6 +32,8 @@
             <td>
                 <input class="checkbox" type="checkbox" name="select-row">
             </td>
+
+            <input class="td-task-id" type="hidden" name="task-id" value="<?php echo $task["id"]; ?>">
 
             <td><?php echo $task["id"]; ?></td>
 

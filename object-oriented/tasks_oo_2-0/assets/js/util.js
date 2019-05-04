@@ -42,9 +42,39 @@ function updatePreview() {
     }
 }
 
+function goToUrlOnConfirm(msg, url) {
+    if (confirm(msg)) window.location.href = url;
+}
+
+function deleteTask() {
+    if (! this) return false;
+    let msg = "Delete \"" + this.getAttribute("data-task-name") + "\"?";
+    goToUrlOnConfirm(msg, this.href);
+}
+
+function duplicateTask() {
+    if (! this) return false;
+    let msg = "Duplicate \"" + this.getAttribute("data-task-name") + "\"?";
+    goToUrlOnConfirm(msg, this.href);
+}
+
+function markCheckedTasksAsFinished() {
+    let rows = document.getElementById("tasks-table").tBodies[0].rows;
+    let msg = "Mark all tasks as Finished?";
+    let url = "scripts/set-finished-all.php?";
+
+    for (var i = 0; i < rows.length; i++) {
+        let id = rows[i].getElementsByClassName("td-task-id")[0].value;
+        url += "id" + i + "=" + id + "&";
+    }
+    url = url.substring(0, url.length - 1);
+    goToUrlOnConfirm(msg, url);
+}
+
+function deleteCheckedTasks() {}
+
 function setCheckedRows(value) {
-    let table = document.getElementById("tasks-table");
-    let rows = table.tBodies[0].rows;
+    let rows = document.getElementById("tasks-table").tBodies[0].rows;
 
     for (var i = 0; i < rows.length; i++) {
         if (value) rows[i].getElementsByClassName("checkbox")[0].setAttribute("checked", "checked");
@@ -58,24 +88,5 @@ function checkRows() {
     setCheckedRows(v);
 
     document.getElementsByClassName("table-options")[0].style.display = v ? "block" : "none"; 
-
     this.setAttribute("data-value", !v);
 }
-
-function goToUrlOnConfirm(msg, url) {
-    if (confirm(msg)) window.location.href = url;
-}
-
-function deleteTask() {
-    if (! this) return false;
-    let msg = "Delete \"" + this.getAttribute("data-task-name") + "\"?";
-    return goToUrlOnConfirm(msg, this.href);
-}
-
-function duplicateTask() {
-    if (! this) return false;
-    let msg = "Duplicate \"" + this.getAttribute("data-task-name") + "\"?";
-    return goToUrlOnConfirm(msg, this.href);
-}
-
-function deleteCheckedTasks() {}
