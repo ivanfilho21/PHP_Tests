@@ -1,0 +1,49 @@
+#save-input {
+	display: block;
+	margin: 1em auto;
+	color: white;
+	background-image: linear-gradient(#b5e6a2, #3d9c32);
+}
+
+.error {
+	font-size: 12px;
+	color: red;
+}
+
+label {
+	margin-bottom: 2rem;
+}
+
+input[type=text],
+input[type=date],
+textarea
+{
+
+	font-size: 14px;
+	display: inline-block;
+	padding: 0.5em 0.5em;
+	border: 1px solid #bbb;
+	border-radius: 4px;
+	background-color: white;
+	background-image: linear-gradient(white, ghostwhite);
+	box-shadow: 0px 0px 2px 0px #ddd;
+	color: black;
+}
+
+input[type=text],
+textarea {
+	width: 100%;
+}
+
+input[type=submit] {
+	font-size: 14px;
+	display: inline-block;
+	padding: 0.5em 0.5em;
+	border: 1px solid #bbb;
+	border-radius: 4px;
+	background-color: white;
+	background-image: linear-gradient(white, ghostwhite);
+	box-shadow: 0px 0px 2px 0px #ddd;
+	color: black;
+	cursor: pointer;
+}

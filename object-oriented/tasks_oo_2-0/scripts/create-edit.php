@@ -24,10 +24,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $taskDB->update($id, $task, $attachment);
         }
-        
         header("Location: ../index.php");
         die;
     }
+    
 } elseif ($_SERVER["REQUEST_METHOD"] == "GET") {
     if (! empty($_GET["id"])) {
         $task = $taskDB->get($_GET["id"]);

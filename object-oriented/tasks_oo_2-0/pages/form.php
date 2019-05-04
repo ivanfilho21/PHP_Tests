@@ -1,6 +1,7 @@
 <?php include "../config.php"; ?>
 <?php $relPath = "../"; ?>
-<?php $scripts = array("util"); ?>
+<?php $stylesheets[] = "form"; ?>
+<?php $scripts[] = "util"; ?>
 <?php include "../pages/template/page-top.php"; ?>
 <?php include "../scripts/create-edit.php"; ?>
 
@@ -16,12 +17,14 @@
         <label>Task Name (*):</label>
         <input type="text" name="name" value="<?php echo $task["name"]; ?>">
         <span class="error"><?php getErrorMessage("name"); ?></span>
+        <br><br>
 
         <label>Created In:</label>
         <input type="date" name="created" value="<?php echo $task["date_creation"]; ?>">
 
         <label>Deadline:</label>
         <input type="date" name="deadline" value="<?php echo $task["deadline"]; ?>">
+        <br><br>
 
         <fieldset>
             <legend>Priority</legend>
@@ -36,14 +39,18 @@
 
             <br>
             <span class="error"><?php echo getErrorMessage("priority"); ?></span>
-        </fieldset>        
+        </fieldset>
+        <br>
 
         <label>Description:</label>
-        <textarea name="description" cols="40"><?php echo $task["description"]; ?></textarea>
+        <textarea name="description" cols="20"><?php echo $task["description"]; ?></textarea>
+        <br><br>
 
         <input id="task-finished" type="checkbox" name="finished" <?php echo ($task["finished"] == "1") ? "checked" : ""; ?>>
         <label for="task-finished">Task is Finished</label>
     </fieldset>
+
+    <br>
 
     <fieldset>
         <legend>Attachments</legend>
@@ -74,6 +81,6 @@
         <input type="file" multiple="off" name="attachment" onchange="updatePreview.call(this)">
     </fieldset> 
 
-    <input type="submit" name="save-task" value="Save Task">
+    <input id="save-input" type="submit" name="save-task" value="Save Task">
 </form>
 <?php include "../pages/template/page-bottom.php"; ?>
