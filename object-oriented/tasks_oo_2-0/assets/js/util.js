@@ -43,20 +43,16 @@ function updatePreview() {
 }
 
 function setCheckedRows() {
-    if (! this) return false;
-
     let value = this.getAttribute("data-value");
     let table = document.getElementById("tasks-table");
     let rows = table.tBodies[0].rows;
 
+    console.log("Before: ", value);
+
     for (var i = 0; i < rows.length; i++) {
-        let c = rows[i].getElementsByTagName("input")[0];
-        if (value)
-            c.checked = true;
-        else
-            c.checked = false;
+        if (value) rows[i].getElementsByClassName("checkbox")[0].setAttribute("checked", "checked");
+        else rows[i].getElementsByClassName("checkbox")[0].removeAttribute("checked");
     }
-    
 
     this.setAttribute("data-value", !value);
 }

@@ -30,7 +30,7 @@
         <?php foreach ($tasks as $task): ?>
         <tr>
             <td>
-                <input type="checkbox" name="select-row">
+                <input class="checkbox" type="checkbox" name="select-row">
             </td>
 
             <td><?php echo $task["id"]; ?></td>
