@@ -10,7 +10,7 @@
 <?php else : ?>
 <br>
 <br>
-<button data-value="true" onclick="setCheckedRows.call(this)"><i class="fa fa-check-double"></i> Check All</button>
+<button data-value="true" onclick="checkRows.call(this)"><i class="fa fa-check-double"></i> Check All</button>
 
 <div class="table-options" style="display: none;">
     <button><i class="fa fa-calendar-check"></i> Mark as Finished</button>

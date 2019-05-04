@@ -42,17 +42,18 @@ function updatePreview() {
     }
 }
 
-function setCheckedRows() {
-    let value = this.getAttribute("data-value");
+function setCheckedRows(value) {
     let table = document.getElementById("tasks-table");
     let rows = table.tBodies[0].rows;
-
-    console.log("Before: ", value);
 
     for (var i = 0; i < rows.length; i++) {
         if (value) rows[i].getElementsByClassName("checkbox")[0].setAttribute("checked", "checked");
         else rows[i].getElementsByClassName("checkbox")[0].removeAttribute("checked");
     }
+}
 
-    this.setAttribute("data-value", !value);
+function checkRows() {
+    let v = this.getAttribute("data-value") == "true" ? true : false;
+    this.setAttribute("data-value", !v);
+    setCheckedRows(v);
 }
