@@ -56,6 +56,7 @@ function setCheckedRows() {
         else
             c.checked = false;
     }
+    
 
     this.setAttribute("data-value", !value);
 }
