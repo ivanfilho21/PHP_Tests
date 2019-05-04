@@ -48,8 +48,8 @@
 
             <td>
                 <a id="edit" class="btn row-option" href="pages/form.php?id=<?php echo $task["id"]; ?>" title="Edit"><i class="fa fa-pen"></i></a>
-                <a id="duplicate" class="btn row-option" href="scripts/duplicate.php?id=<?php echo $task["id"]; ?>" title="Duplicate"><i class="fa fa-copy"></i></a>
-                <a id="delete" class="btn row-option" href="scripts/delete.php?id=<?php echo $task["id"]; ?>" title="Delete"><i class="fa fa-trash"></i></a>
+                <a id="duplicate" class="btn row-option" href="scripts/duplicate.php?id=<?php echo $task["id"]; ?>" title="Duplicate" data-task-name="<?php echo $task["name"]; ?>" onclick="duplicateTask.call(this); return false;"><i class="fa fa-copy"></i></a>
+                <a id="delete" class="btn row-option" href="scripts/delete.php?id=<?php echo $task["id"]; ?>" title="Delete" data-task-name="<?php echo $task["name"]; ?>" onclick="deleteTask.call(this); return false;"><i class="fa fa-trash"></i></a>
             </td>
         </tr>
         <?php endforeach ?>

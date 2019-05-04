@@ -57,3 +57,18 @@ function checkRows() {
     this.setAttribute("data-value", !v);
     setCheckedRows(v);
 }
+
+function goToUrlOnConfirm(msg, url) {
+    if (confirm(msg)) window.location.href = url;
+}
+
+function deleteTask() {
+    if (! this) return false;
+    let msg = "Delete \"" + this.getAttribute("data-task-name") + "\"?";
+    return goToUrlOnConfirm(msg, this.href);
+}
+
+function duplicateTask() {
+    let msg = "Duplicate \"" + this.getAttribute("data-task-name") + "\"?";
+    return goToUrlOnConfirm(msg, this.href);
+}
