@@ -45,7 +45,7 @@ class TaskDB {
     public function update($id, $array, $attach="") {
         $values = $this->getPseudoValuesFromArray($array);
         $sql = "UPDATE " . BQ .$this->tableName .BQ ." SET " .$values ." WHERE " .BQ ."id" .BQ ." = :id";
-        echo $sql;
+        // echo $sql; die;
 
         $res = $this->db->prepare($sql);
         $res->bindValue(":id", $id);

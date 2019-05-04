@@ -14,7 +14,7 @@
 
 <div class="table-options" style="display: none;">
     <button><i class="fa fa-calendar-check"></i> Mark as Finished</button>
-    <button><i class="fa fa-trash"></i> Delete</button>
+    <button><i class="fa fa-trash"></i> Delete Selected</button>
 </div>
 
 <table id="tasks-table">
@@ -36,7 +36,7 @@
             <td><?php echo $task["id"]; ?></td>
 
             <td>
-                <a href="pages/view.php?id=<?php echo $task["id"]; ?>"><?php echo $task["name"]; ?></td></a>
+                <a <?php echo ($task["finished"] == "1") ? "class='finished' title='Finished'" : ""; ?> href="pages/view.php?id=<?php echo $task["id"]; ?>"><?php echo $task["name"]; ?></td></a>
 
             <td><?php echo $task["priority"]; ?></td>
 
@@ -50,6 +50,9 @@
                 <a id="edit" class="btn row-option" href="pages/form.php?id=<?php echo $task["id"]; ?>" title="Edit"><i class="fa fa-pen"></i></a>
                 <a id="duplicate" class="btn row-option" href="scripts/duplicate.php?id=<?php echo $task["id"]; ?>" title="Duplicate" data-task-name="<?php echo $task["name"]; ?>" onclick="duplicateTask.call(this); return false;"><i class="fa fa-copy"></i></a>
                 <a id="delete" class="btn row-option" href="scripts/delete.php?id=<?php echo $task["id"]; ?>" title="Delete" data-task-name="<?php echo $task["name"]; ?>" onclick="deleteTask.call(this); return false;"><i class="fa fa-trash"></i></a>
+                <?php if ($task["finished"] != "1") : ?>
+                <a id="finish" class="btn row-option" href="scripts/finish.php?id=<?php echo $task["id"]; ?>" title="Mark as Finished"><i class="fa fa-calendar-check"></i></a>
+                <?php endif ?>                
             </td>
         </tr>
         <?php endforeach ?>

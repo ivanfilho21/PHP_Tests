@@ -53,9 +53,13 @@ function setCheckedRows(value) {
 }
 
 function checkRows() {
+    if (! this) return false;
     let v = this.getAttribute("data-value") == "true" ? true : false;
-    this.setAttribute("data-value", !v);
     setCheckedRows(v);
+
+    document.getElementsByClassName("table-options")[0].style.display = v ? "block" : "none"; 
+
+    this.setAttribute("data-value", !v);
 }
 
 function goToUrlOnConfirm(msg, url) {
@@ -69,6 +73,9 @@ function deleteTask() {
 }
 
 function duplicateTask() {
+    if (! this) return false;
     let msg = "Duplicate \"" + this.getAttribute("data-task-name") + "\"?";
     return goToUrlOnConfirm(msg, this.href);
 }
+
+function deleteCheckedTasks() {}

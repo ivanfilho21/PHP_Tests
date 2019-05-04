@@ -49,6 +49,8 @@ tr:nth-child(odd) td {
 .row-option:first-child { margin-left: 0; }
 .row-option { margin-left: 0.25em; }
 
-#edit:hover { color: orange; } 
-#duplicate:hover { color: green; } 
-#delete:hover { color: red; } 
+#edit:hover { color: orange; }
+#duplicate:hover { color: green; }
+#delete:hover { color: red; }
+
+.finished { color: green; }
