@@ -78,7 +78,7 @@
 
         <div id="attachment" class="attachment"></div>
 
-        <input type="file" multiple="off" name="attachment" onchange="updatePreview.call(this)">
+        <input type="file" name="attachment" onchange="updatePreview.call(this)">
     </fieldset> 
 
     <input id="save-input" type="submit" name="save-task" value="Save Task">
