@@ -62,7 +62,7 @@ function validation() {
 
     if ($res) {
         # Attachment
-        $att = (isset($_FILES["attachment"])) ? $_FILES["attachment"] : "";
+        $att = (! empty($_FILES["attachment"]["name"])) ? $_FILES["attachment"] : "";
 
         if (! empty($att)) {
             $extension = explode(".", $att["name"]);
@@ -91,7 +91,7 @@ function validation() {
                 "name" => $att["name"],
                 "file" => $fileName
             );
-        }   
+        }
     }
 
     return $res;
