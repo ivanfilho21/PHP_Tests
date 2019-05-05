@@ -1,3 +1,7 @@
+.table-options, .filter-options {
+    margin-top: 0.5rem;
+}
+
 table {
     width: 100%;
     margin: 0.5em 0;

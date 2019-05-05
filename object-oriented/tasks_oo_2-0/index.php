@@ -13,9 +13,22 @@
 <br>
 <button data-value="true" onclick="checkRows.call(this)"><i class="fa fa-check-double"></i> Check All</button>
 
+<button onclick="document.getElementsByClassName('filter-options')[0].style.display = (document.getElementsByClassName('filter-options')[0].style.display != 'none') ? 'none' : 'block';"><i class="fa fa-filter"></i> Filter</button>
+
 <div class="table-options" style="display: none;">
     <button onclick="markCheckedTasksAsFinished()"><i class="fa fa-calendar-check"></i> Mark as Finished</button>
     <button onclick="deleteCheckedTasks()"><i class="fa fa-trash"></i> Delete Selected</button>
+</div>
+
+<div class="filter-options" style="display: none;">
+    <input type="text" name="filter-by-name" placeholder="Filter by Name" onkeyup="filterByName(this.value)">
+
+    <select name="filter-by-priority" onchange="filterByPriority(this.value)">
+        <option value="0">Priority</option>
+        <option value="1">Low</option>
+        <option value="2">Medium</option>
+        <option value="3">High</option>
+    </select>
 </div>
 
 <table id="tasks-table">

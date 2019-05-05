@@ -103,3 +103,32 @@ function checkRows() {
     document.getElementsByClassName("table-options")[0].style.display = v ? "block" : "none"; 
     this.setAttribute("data-value", !v);
 }
+
+
+function filterByName(name) {
+    let rows = document.getElementById("tasks-table").tBodies[0].rows;
+    if (! rows) return;
+
+    for (var i = 0; i < rows.length; i++) {
+        let td = rows[i].getElementsByTagName("td")[2];
+        let v = td ? td.textContent || td.innerText : "";
+        console.log(v);
+
+        if (v == "") continue;
+        rows[i].style.display = v.toUpperCase().indexOf(name.toUpperCase()) > -1 ? "" : "none";
+    }
+}
+
+function filterByPriority(priority) {
+    let rows = document.getElementById("tasks-table").tBodies[0].rows;
+    if (! rows) return;
+
+    for (var i = 0; i < rows.length; i++) {
+        let td = rows[i].getElementsByTagName("td")[3];
+        let v = td ? td.textContent || td.innerText : "";
+        console.log(v);
+
+        if (v == "") continue;
+        rows[i].style.display = v == priority || priority == "0" ? "" : "none";
+    }
+}
