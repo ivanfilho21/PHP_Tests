@@ -43,7 +43,36 @@
 				<div class="panel">
 					<h4>Pictures</h4>
 
-					<input type="file" name="pictures[]" multiple>
+					<script>
+						function showImagePreview() {
+							var panel = document.getElementById("preview-pictures");
+
+							if (this.files) {
+								panel.innerHTML = "";
+								
+								for (var i = 0; i < this.files.length; i++) {
+									if (this.files[i]) {
+										var obj = new FileReader();
+										obj.onload = function(data) {
+											// var image = document.getElementById("image-preview");
+											var img = document.createElement("img");
+											img.setAttribute("src", data.target.result);
+											img.style.display = "block";
+											img.style.maxHeight = "120px";
+											panel.appendChild(img);
+										}
+										obj.readAsDataURL(this.files[i]);
+									}
+								}
+							}
+						}
+					</script>
+
+					<div id="preview-pictures" style="display: flex;">
+						
+					</div>
+
+					<input type="file" name="pictures[]" multiple onchange="showImagePreview.call(this)">
 
 					<?php if (isset($announcement["pictures"]) && count($announcement["pictures"]) > 0) : ?>
 						<?php foreach ($pictures as $picture) : ?>
