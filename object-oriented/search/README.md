@@ -1,6 +1,6 @@
-# Search System
+# Pokédex
 
-Sistema simples para fazer uma busca no banco de dados e exibir a lista de resultados em páginas.
+Faça uma busca dos Pokémon da região de Kanto.
 
 ### Author:
 Ivan Filho
