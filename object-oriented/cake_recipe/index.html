@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cake Recipe</title>
+	<script src="script.js"></script>
+</head>
+<body>
+	<h1>Cake Recipe</h1>
+
+	<h3>Ingredients</h3>
+
+	<input id="ingredient" type="text" name="ingredient" placeholder="New Ingredient" autocomplete="on">
+
+	<input id="amount" type="number" name="amount" value="1" min="1">
+
+	<button onclick="addIngredient()">Add</button>
+
+	<ul id="list"></ul>
+
+	<form id="form" style="display: none;" method="post" action="submit.php">
+		<input type="text" name="user" placeholder="Your name:">
+
+		<textarea placeholder="Description"></textarea>
+
+		<input type="submit" name="save" value="Save">
+	</form>
+</body>
+</html>
