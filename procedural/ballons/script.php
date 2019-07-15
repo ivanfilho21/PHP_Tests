@@ -4,8 +4,9 @@ $result = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $colors = array(
-        "red",
-        "blue"
+        "white", "lightgray", "gray", "lightgreen", "green", "darkslategray",
+        "lightblue", "blue", "red", "gold", "crimson", "darkseagreen",
+        "pink", "orange", "dodgerblue", "purple", "violet"
     );
 
     $result = json_encode($colors);

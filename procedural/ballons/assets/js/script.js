@@ -1,9 +1,4 @@
-var colors = [
-    "white", "lightgray", "gray", "lightgreen", "green", "darkslategray",
-    "lightblue", "blue", "red", "gold", "crimson", "darkseagreen",
-    "pink", "orange", "dodgerblue", "purple", "violet"
-];
-
+var colors = [];
 var score = 0;
 
 function addBall() {
