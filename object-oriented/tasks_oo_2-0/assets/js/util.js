@@ -41,3 +41,21 @@ function updatePreview() {
         obj.readAsDataURL(files[i]);
     }
 }
+
+function setCheckedRows() {
+    if (! this) return false;
+
+    let value = this.getAttribute("data-value");
+    let table = document.getElementById("tasks-table");
+    let rows = table.tBodies[0].rows;
+
+    for (var i = 0; i < rows.length; i++) {
+        let c = rows[i].getElementsByTagName("input")[0];
+        if (value)
+            c.checked = true;
+        else
+            c.checked = false;
+    }
+
+    this.setAttribute("data-value", !value);
+}

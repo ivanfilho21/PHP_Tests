@@ -1,5 +1,6 @@
 <?php include "config.php"; ?>
 <?php $stylesheets[] = "index"; ?>
+<?php $scripts[] = "util"; ?>
 <?php include "pages/template/page-top.php"; ?>
 <?php include "scripts/list.php"; ?>
 
@@ -9,14 +10,14 @@
 <?php else : ?>
 <br>
 <br>
-<button><i class="fa fa-check-double"></i> Check All</button>
+<button data-value="true" onclick="setCheckedRows.call(this)"><i class="fa fa-check-double"></i> Check All</button>
 
 <div class="table-options" style="display: none;">
     <button><i class="fa fa-calendar-check"></i> Mark as Finished</button>
     <button><i class="fa fa-trash"></i> Delete</button>
 </div>
 
-<table>
+<table id="tasks-table">
     <thead>
         <tr>
             <th></th>
