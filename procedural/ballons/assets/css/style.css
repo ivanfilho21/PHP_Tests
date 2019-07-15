@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+.score {
+    font-size: 3rem;
+    font-weight: bold;
+    padding: 2rem;
+    background:
+    linear-gradient(to bottom right, rgba(0, 0, 0, 0.3), rgba(0,0,0,.5)),
+    url("../image/wood.png") repeat fixed;
+    color: white;
+}
+
+.ball {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: black;
+}
