@@ -10,15 +10,24 @@
     <script src="assets/js/validation.js"></script>
 </head>
 <body>
-    <h1>Form</h1>
-    <form id="form" onsubmit="return validation();">
-        <input type="text" name="username" placeholder="Username" autocomplete="off">
+    <div class="wrapper">
+        <h1>Form</h1>
+        <form id="form" onsubmit="return validation();">
+            <input id="username" type="text" name="username" placeholder="Username" autocomplete="off">
+            <span id="error-name" class="error"></span>
 
-        <input type="text" name="email" placeholder="E-mail" autocomplete="off">
+            <input type="text" name="email" placeholder="E-mail" autocomplete="off">
+            <span id="error-email" class="error"></span>
 
-        <input type="password" name="password" placeholder="Password" autocomplete="off">
+            <input type="password" name="password" placeholder="Password" autocomplete="off">
+            <span id="error-pass" class="error"></span>
 
-        <input type="submit" name="save" value="Save">
-    </form>
+            <input type="submit" name="save" value="Save">
+        </form>
+    </div>
+
+    <footer>
+        &copy; 2019 - All Rights Reserved 
+    </footer>
 </body>
 </html>
