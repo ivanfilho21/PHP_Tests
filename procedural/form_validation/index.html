@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
     <title>Form</title>
+    <script src="validation.js"></script>
 </head>
 <body>
-    <form></form>
+    <form id="form" onsubmit="return validation();">
+        <input type="text" name="username" placeholder="Username" autocomplete="off">
+
+        <input type="text" name="email" placeholder="E-mail" autocomplete="off">
+
+        <input type="password" name="password" placeholder="Password" autocomplete="off">
+
+        <input type="submit" name="save" value="Save">
+    </form>
 </body>
 </html>
