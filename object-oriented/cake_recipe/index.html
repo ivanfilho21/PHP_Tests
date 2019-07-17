@@ -3,6 +3,7 @@
 <head>
 	<title>Cake Recipe</title>
 	<script src="script.js"></script>
+	<script src="validation.js"></script>
 </head>
 <body>
 	<h1>Cake Recipe</h1>
@@ -19,6 +20,7 @@
 			<option>Unity</option>
 			<option>Spoon</option>
 			<option>Cup</option>
+			<option>Portion</option>
 			<option>Gram</option>
 			<option>Kilogram</option>
 		</select>
@@ -28,7 +30,9 @@
 
 	<ul id="list"></ul>
 
-	<form id="new-form" style="display: none;" method="post" onsubmit="return true;" action="submit.php">
+	<span id="error-name" class="error"></span>
+
+	<form id="new-form" style="display: none;" method="post" onsubmit="return validateFields();" action="submit.php">
 		<input type="hidden" name="name" placeholder="Recipe Name">
 		<textarea name="recipe" style="display: none;"></textarea>
 		<input type="submit" name="save" value="Save">

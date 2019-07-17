@@ -3,6 +3,10 @@ function setRecipeName(name) {
 	form.name.value = name;
 }
 
+function getPlural(word) {
+	return word.indexOf("y") != -1 ? word.substring(0, word.length - 1) + "ies" : word + "s";
+} 
+
 function addIngredient() {
 	let form = document.getElementById("form");
 	let newForm = document.getElementById("new-form");
@@ -16,11 +20,11 @@ function addIngredient() {
 	if (ing.value != "" && parseInt(amount.value) > 0) {
 		let u = unity[unity.selectedIndex].value;
 		let aux = amount.value + " ";
-		let plural = (u.indexOf("y") != -1 ? u.substring(0, u.length-1) + "ies" : u + "s");
+		let plural = getPlural(u);
 		aux += parseInt(amount.value) > 1 ? plural : u;
 
 		let v = aux;
-		v += " of " + ing.value;
+		v += " of " + (parseInt(amount.value) > 1 ? getPlural(ing.value) : ing.value);
 		list.innerHTML += "<li>" + v + "</li>";
 		txtArea.innerHTML += v + "<br>";
 	}

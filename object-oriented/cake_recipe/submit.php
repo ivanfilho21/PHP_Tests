@@ -13,13 +13,10 @@ try {
 $cakeDB = new CakeDB();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	var_dump($_POST); die;
-	$a["name"] = formatInput($_POST["name"]);
+	$a["recipe_name"] = formatInput($_POST["name"]);
 	$a["recipe"] = formatInput($_POST["recipe"]);
 
-	if (validation($a)) {
-		$cakeDB->insert($a);
-	}
+	$cakeDB->insert($a);
 }
 header("Location: index.html");
 die;
@@ -31,15 +28,4 @@ function formatInput($input)
 	$input = htmlspecialchars($input);
 
 	return $input;
-}
-
-function validation($a)
-{
-	$res = true;
-
-	if (empty($a["user"])) {
-		$res = false;
-	}
-
-	return $res;
 }
