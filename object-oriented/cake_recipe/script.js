@@ -1,35 +1,35 @@
+function setRecipeName(name) {
+	let form = document.getElementById("form");
+	form.name.value = name;
+}
+
 function addIngredient() {
-	var amount = document.getElementById("amount");
-	var ing = document.getElementById("ingredient");
-	var list = document.getElementById("list");
-	var old = list.innerHTML;
-	var form = document.getElementById("form");
+	let amount = document.getElementById("amount");
+	let ing = document.getElementById("ingredient");
+	let list = document.getElementById("list");
+
+	let form = document.getElementById("form");
+	let txtArea = form.recipe;
+	txtArea.innerHTML = "";
 
 	if (ing.value != "" && parseInt(amount.value) > 0) {
-		list.innerHTML = old + "<li>" + amount.value + " " + ing.value + "</li>";
-
-		var a = document.createElement("input");
-		var i = document.createElement("input");
-		a.type = "hidden";
-		a.value = amount.value;
-		a.name = "amount";
-		i.type = "hidden";
-		i.value = ing.value;
-		i.name = "ingredient";
-
-		form.appendChild(a);
-		form.appendChild(i);
+		let v = amount.value + " " + ing.value;
+		list.innerHTML += "<li>" + v + "</li>";
+		txtArea.innerHTML += v + "<br>";
 	}
 
 	if (list.childNodes.length > 0) { form.style.display = "block"; }
 	else { form.style.display = "none"; }
 
-	focus(ing);
+	resetInputs();
+	return false;
 }
 
-function focus(element) {
-	// element.selectionStart = 0;
-	// element.selectionEnd = ing.value.length;
-	element.value = "";
-	element.focus();
+function resetInputs() {
+	let amount = document.getElementById("amount");
+	let ing = document.getElementById("ingredient");
+
+	amount.value = 1;
+	ing.value = "";
+	ing.focus();
 }

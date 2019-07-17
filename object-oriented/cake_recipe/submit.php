@@ -1,12 +1,24 @@
 <?php
 
+require "class/CakeDB.php";
+global $db;
+
+try {
+	$db = new PDO("mysql:dbname=cake_recipe_db;host=127.0.0.1", "root", "");
+    # echo "Connected to Database via PDO<br>"; die();
+} catch(PDOException $e) {
+    echo "Warning: Failed connecting to database.<br><strong>Returned Error:</strong> " .$e->getMessage() . "<br>";
+}
+
+$cakeDB = new CakeDB();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$a["user"] = formatInput($_POST["user"]);
-	$a["ing"] = formatInput($_POST["ingredient"]);
-	$a["amount"] = formatInput($_POST["amount"]);
+	var_dump($_POST); die;
+	$a["name"] = formatInput($_POST["name"]);
+	$a["recipe"] = formatInput($_POST["recipe"]);
 
 	if (validation($a)) {
-		save($a);
+		$cakeDB->insert($a);
 	}
 }
 header("Location: index.html");
