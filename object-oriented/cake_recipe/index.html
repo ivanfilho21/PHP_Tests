@@ -7,16 +7,20 @@
 <body>
 	<h1>Cake Recipe</h1>
 
-	<form onsubmit="return addIngredient();">
+	<form id="form" onsubmit="return addIngredient();">
 		<label>Recipe Name:</label>
-		<input type="text" name="user" placeholder="Recipe Name" autofocus="on" autocomplete="off" onkeyup="setRecipeName(this.value);"><br>
+		<input type="text" name="name" placeholder="Recipe Name" autofocus="on" autocomplete="off" onkeyup="setRecipeName(this.value);"><br>
 
-		<input id="ingredient" type="text" name="ingredient" placeholder="New Ingredient" autocomplete="off">
+		<input name="ingredient" type="text" name="ingredient" placeholder="New Ingredient" autocomplete="off">
 
-		<input id="amount" type="number" name="amount" value="1" min="1">
+		<input name="amount" type="number" name="amount" value="1" min="1">
 
-		<select>
-			
+		<select name="unity">
+			<option>Unity</option>
+			<option>Spoon</option>
+			<option>Cup</option>
+			<option>Gram</option>
+			<option>Kilogram</option>
 		</select>
 
 		<input type="submit" name="add" value="Add">
@@ -24,7 +28,7 @@
 
 	<ul id="list"></ul>
 
-	<form id="form" style="display: none;" method="post" onsubmit="return true;" action="submit.php">
+	<form id="new-form" style="display: none;" method="post" onsubmit="return true;" action="submit.php">
 		<input type="hidden" name="name" placeholder="Recipe Name">
 		<textarea name="recipe" style="display: none;"></textarea>
 		<input type="submit" name="save" value="Save">
