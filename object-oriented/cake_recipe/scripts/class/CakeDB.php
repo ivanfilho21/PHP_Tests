@@ -64,4 +64,13 @@ class CakeDB {
 
         return $array;
     }
+
+    public function get($id) {
+        $sql = "SELECT * FROM " . BQ .$this->tableName .BQ ." WHERE " .BQ ."id" .BQ ." = :id";;
+        $res = $this->db->prepare($sql);
+        $res->bindValue(":id", $id);
+        $res->execute();
+
+        return ($res->rowCount() > 0) ? $res->fetch() : array();
+    }
 }

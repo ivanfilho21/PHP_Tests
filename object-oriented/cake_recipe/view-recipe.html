@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=1.0, initial-scale=1.0">
+    <title>View Recipe | Cake Recipe</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/view.css">
+    <script src="assets/js/script.js"></script>
+</head>
+<body>
+    <script>
+        window.onload = function() {
+            let get = getFromUrl(window.location.href);
+            console.log(get);
+
+            if ("id" in get) ajax("scripts/recipe.php?id=" + get["id"], getRecipe);
+        }
+    </script>
+</body>
+</html>

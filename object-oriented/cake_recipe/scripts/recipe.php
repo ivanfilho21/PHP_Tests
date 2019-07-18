@@ -1,11 +1,21 @@
 <?php
 
 require "config.php";
-
 $response = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    if (! empty($_GET["list"])) {
+    if (! empty($_GET["id"])) {
+        $id = $_GET["id"];
+        $list = $cakeDB->get($id);
+        $list["recipe"] = htmlspecialchars_decode($list["recipe"]);
+
+        for ($i = 0; $i < count($list); $i++) {
+            unset($list[$i]);    
+        }
+
+        $response = $list;
+    }
+    else if (! empty($_GET["list"])) {
         $list = $cakeDB->getAll();
 
         for ($i = 0; $i < count($list); $i++) {

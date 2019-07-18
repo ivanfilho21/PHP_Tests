@@ -137,6 +137,40 @@ var getList = function(response) {
     }
 };
 
+// Get
+var getRecipe = function(response) {
+    let data = response != "" ? JSON.parse(response) : [];
+    let name = data["recipe_name"];
+    name = name == null ? "Untitled Recipe" : name;
+
+    let h1 = document.createElement("h1");
+    let p = document.createElement("p");
+
+    h1.innerHTML = name;
+    p.innerHTML = data["recipe"];
+
+    document.body.appendChild(h1);
+    document.body.appendChild(p);
+};
+
+// Extract GET from URL
+function getFromUrl(url) {
+    let get = url.substring(url.indexOf("?") + 1);
+    get = get.split("&");
+
+    let list = [];
+    for (let i = 0; i < get.length; i++) {
+        if (get.length > 1 && i == get.length -1) break;
+        if (i % 2 == 0) {
+            let aux = get[i].split("=");
+            list[aux[0]] = aux[1];
+        }
+    }
+
+    return list;
+}
+
+// Ajax
 function ajax(url, callback, form="") {
     var processResponseFunction = function() {
         if (this.readyState == 4 && this.status == 200) {
