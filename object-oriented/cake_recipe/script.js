@@ -43,11 +43,10 @@ function addIngredient() {
 var callback = function updateTableList(response) {
     let table = document.getElementById("recipe-list");
     let data = response != "" ? JSON.parse(response) : [];
-    // let tr = document.getElementById("table-head");
     
     console.log("Response from the Server:");
     console.log(data);
-    // console.log(data["head"]);
+    console.log(data["head"]);
 
     for (let j = 0; j < data["head"].length; j++) {
         let tr = table.tHead.getElementsByTagName("tr")[0];
@@ -56,41 +55,25 @@ var callback = function updateTableList(response) {
         tr.appendChild(th);
     }
 
-    // TODO: json is an object, doesn't have length... :P
+    for (let i = 0; i < Object.keys(data).length -1; i++) {
+        let tr = document.createElement("tr");
 
-    function objLength(obj){
-      var i=0;
-      for (var x in obj){
-        if(obj.hasOwnProperty(x)){
-          i++;
-        }
-      } 
-      return i;
-    }
+        let id = document.createElement("td");
+        let name = document.createElement("td");
+        let recipe = document.createElement("td");
+        id.innerHTML = data[i]["id"];
+        name.innerHTML = data[i]["recipe_name"];
+        recipe.innerHTML = data[i]["recipe"];
 
-    data = [data];
-    for (let i = 0; i < data.length; i++) {
-        // let t = document.createElement("tr");
+        console.log(data[i]["id"]);
+        console.log(data[i]["recipe_name"]);
+        console.log(data[i]["recipe"]);
 
-        // let id = document.createElement("td");
-        // let name = document.createElement("td");
-        // let recipe = document.createElement("td");
-        // id.innerHTML = data[i]["id"];
-        // name.innerHTML = data[i]["recipe_name"];
-        // recipe.innerHTML = data[i]["recipe"];
+        tr.append(id);
+        tr.append(name);
+        tr.append(recipe);
 
-        console.log(data["" + i + ""]);
-
-        // console.log(data["" + i + ""]["id"]);
-        // console.log(data[i]["recipe_name"]);
-        // console.log(data[i]["recipe"]);
-
-        // t.append(id);
-        // t.append(name);
-        // t.append(recipe);
-
-        // table.tBodies[0].append(t);
-        break;
+        table.tBodies[0].append(tr);
     }
 };
 

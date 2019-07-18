@@ -12,6 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             for ($j = 0; $j < count($list[$i]); $j++) {
                 unset($list[$i][$j]);
             }
+            $list[$i]["recipe"] = htmlspecialchars_decode($list[$i]["recipe"]);
         }
         // echo "<br>";
         // echo '<pre>' . var_export($list, true) . '</pre>';
@@ -24,6 +25,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             break;
         }
 
+        $head[0] = "Id";
+        $head[1] = "Name";
+        $head[2] = "Recipe";
+
         $list["head"] = $head;
         $response = $list;
     }
@@ -32,4 +37,5 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 // echo '<pre>' . var_export($head, true) . '</pre>';
 // die;
 
-echo json_encode($response, JSON_PRETTY_PRINT);
+// echo json_encode($response, JSON_PRETTY_PRINT);
+echo json_encode($response);
