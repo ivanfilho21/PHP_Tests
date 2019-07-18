@@ -1,5 +1,5 @@
 function setRecipeName(name) {
-    let form = document.getElementById("form");
+    let form = document.getElementById("new-form");
     form.name.value = name;
 }
 
@@ -44,7 +44,7 @@ function addIngredient() {
         list.tBodies[0].appendChild(tr);
 
         // list.innerHTML += "<li>" + v + "</li>";
-        // txtArea.innerHTML += v + "<br>";
+        txtArea.innerHTML += v + "<br>";
     }
 
     newForm.style.display = list.childNodes.length > 0 ? "block" : "none";
@@ -58,7 +58,29 @@ function addIngredient() {
 }
 
 function clearIngredient(name) {
-    alert(name);
+    let tr = document.getElementById("igredient-list").tBodies[0].rows;
+    console.log(tr.length);
+
+    // TODO: delete from form (textarea) and from table.
+    let form = document.getElementById("new-form");
+    let ta = form.recipe;
+    let text = name;
+    let regex = new RegExp(text, "gi");
+
+    // Remove name from textarea
+    if (ta.innerHTML.match(regex)) {
+        ta.innerHTML = ta.innerHTML.replace(regex, "");
+    }
+
+    // Remove name from table list
+    for (var i = 0; i < tr.length; i++) {
+        let td = tr[i].getElementsByTagName("td")[0];
+        let v = td.textContent || td.innerText;
+
+        if (v.toUpperCase() == name.toUpperCase()) {
+            tr[i].parentNode.removeChild(tr[i]);
+        }
+    }
 }
 
 // List
