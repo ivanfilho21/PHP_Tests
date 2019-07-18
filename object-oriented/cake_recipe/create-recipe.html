@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Recipe | Cake Recipe</title>
+    <script src="script.js"></script>
+    <script src="validation.js"></script>
+</head>
+<body>
+    <h1>New Recipe</h1>
+
+    <form id="form" onsubmit="return addIngredient();">
+        <label>Recipe Name:</label>
+        <input type="text" name="name" placeholder="Recipe Name" autofocus="on" autocomplete="off" onkeyup="setRecipeName(this.value);"><br>
+
+        <input name="ingredient" type="text" name="ingredient" placeholder="New Ingredient" autocomplete="off">
+
+        <input name="amount" type="number" name="amount" value="1" min="1">
+
+        <select name="unity">
+            <option>Unity</option>
+            <option>Spoon</option>
+            <option>Cup</option>
+            <option>Portion</option>
+            <option>Gram</option>
+            <option>Kilogram</option>
+        </select>
+
+        <input type="submit" name="add" value="Add">
+    </form>
+
+    <ul id="list"></ul>
+
+    <span id="error-name" class="error"></span>
+
+    <form id="new-form" style="display: none;" method="post" onsubmit="return validateFields();" action="scripts/submit.php">
+        <input type="hidden" name="name" placeholder="Recipe Name">
+        <textarea name="recipe" style="display: none;"></textarea>
+        <input type="submit" name="save" value="Save">
+    </form>
+</body>
+</html>

@@ -50,4 +50,18 @@ class CakeDB {
 
         return $this->db->lastInsertId();
     }
+
+    public function getAll() {
+        $sql = "SELECT * FROM " . BQ .$this->tableName .BQ;
+        # die($sql);
+        $res = $this->db->query($sql);
+        $array = array();
+
+        if ($res->rowCount() == 1)
+            $array[] = $res->fetch();
+        elseif ($res->rowCount() > 1)
+            $array = $res->fetchAll();
+
+        return $array;
+    }
 }
