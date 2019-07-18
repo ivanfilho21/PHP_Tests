@@ -84,8 +84,8 @@ function clearIngredient(name) {
 }
 
 // List
-var callback = function updateTableList(response) {
-    let table = document.getElementById("recipe-list");
+var getTableList = function updateTableList(response) {
+    let table = document.getElementById("recipe-table");
     let data = response != "" ? JSON.parse(response) : [];
     
     console.log("Response from the Server:");
@@ -118,6 +118,22 @@ var callback = function updateTableList(response) {
         tr.append(recipe);
 
         table.tBodies[0].append(tr);
+    }
+};
+
+var getList = function(response) {
+    let list = document.getElementById("recipe-list");
+    let data = response != "" ? JSON.parse(response) : [];
+    
+    console.log("Response from the Server:");
+    console.log(data);
+
+    for (let i = 0; i < Object.keys(data).length -1; i++) {
+        let id = data[i]["id"];
+        let name = data[i]["recipe_name"];
+        let url = "view-recipe.html?id=" + id;
+        name = name == null ? "Untitled Recipe" : name;
+        list.innerHTML += "<li class='recipe'><a href='" + url + "'>" + name + "</a></li>";
     }
 };
 

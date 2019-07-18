@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=1.0, initial-scale=1.0">
     <title>Home Page | Cake Recipe</title>
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <script src="assets/js/script.js"></script>
 </head>
 <body>
     <h1>Cake Recipes</h1>
 
     <a href="create-recipe.html">Create a New Recipe</a>
 
-    <table id="recipe-list">
-        <thead><tr></tr></thead>
-        <tbody></tbody>
-    </table>
+    <ul id="recipe-list"></ul>
 
     <script>
         window.onload = function() {
-            ajax("scripts/recipe.php?list=true", callback);
+            ajax("scripts/recipe.php?list=true", getList);
         }
     </script>
 </body>

@@ -1,0 +1,19 @@
+#recipe-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.recipe {
+    margin: 1em;
+    border-radius: 6px;
+    box-shadow: 1px 2px 8px 0px #ccc;
+}
+
+.recipe a {
+    display: block;
+    font-weight: bold;
+    padding: 2em 1em;
+    color: #444;
+}
+
+.recipe a:hover { color: dodgerblue; }
