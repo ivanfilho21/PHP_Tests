@@ -10,7 +10,8 @@ function getPlural(word) {
 function addIngredient() {
     let form = document.getElementById("form");
     let newForm = document.getElementById("new-form");
-    let list = document.getElementById("list");
+    let list = document.getElementById("igredient-list");
+    // let list = document.getElementById("list");
 
     let ing = form.ingredient;
     let amount = form.amount;
@@ -25,8 +26,25 @@ function addIngredient() {
 
         let v = aux;
         v += " of " + (parseInt(amount.value) > 1 ? getPlural(ing.value) : ing.value);
-        list.innerHTML += "<li>" + v + "</li>";
-        txtArea.innerHTML += v + "<br>";
+
+        let tr = document.createElement("tr");
+        let tdIng = document.createElement("td");
+        let tdBut = document.createElement("td");
+        let clearButton = document.createElement("button");
+
+        clearButton.innerHTML = "Remove";
+        clearButton.addEventListener("click", function() {
+            clearIngredient(v);
+        });
+        tdIng.innerHTML = v;
+        tdBut.appendChild(clearButton);
+
+        tr.appendChild(tdIng);
+        tr.appendChild(tdBut);
+        list.tBodies[0].appendChild(tr);
+
+        // list.innerHTML += "<li>" + v + "</li>";
+        // txtArea.innerHTML += v + "<br>";
     }
 
     newForm.style.display = list.childNodes.length > 0 ? "block" : "none";
@@ -39,6 +57,10 @@ function addIngredient() {
     return false;
 }
 
+function clearIngredient(name) {
+    alert(name);
+}
+
 // List
 var callback = function updateTableList(response) {
     let table = document.getElementById("recipe-list");
@@ -46,7 +68,7 @@ var callback = function updateTableList(response) {
     
     console.log("Response from the Server:");
     console.log(data);
-    console.log(data["head"]);
+    // console.log(data["head"]);
 
     for (let j = 0; j < data["head"].length; j++) {
         let tr = table.tHead.getElementsByTagName("tr")[0];
