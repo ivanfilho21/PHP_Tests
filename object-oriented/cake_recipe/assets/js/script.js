@@ -10,8 +10,7 @@ function getPlural(word) {
 function addIngredient() {
     let form = document.getElementById("form");
     let newForm = document.getElementById("new-form");
-    let list = document.getElementById("igredient-list");
-    // let list = document.getElementById("list");
+    let list = document.getElementById("ingredient-list");
 
     let ing = form.ingredient;
     let amount = form.amount;
@@ -32,7 +31,8 @@ function addIngredient() {
         let tdBut = document.createElement("td");
         let clearButton = document.createElement("button");
 
-        clearButton.innerHTML = "Remove";
+        clearButton.innerHTML = "<img src='assets/img/eraser.svg' alt='Remove'><span>Erase</span>";
+        clearButton.setAttribute("class", "remove-ingredient");
         clearButton.addEventListener("click", function() {
             clearIngredient(v);
         });
@@ -43,7 +43,6 @@ function addIngredient() {
         tr.appendChild(tdBut);
         list.tBodies[0].appendChild(tr);
 
-        // list.innerHTML += "<li>" + v + "</li>";
         txtArea.innerHTML += v + "<br>";
     }
 
@@ -58,10 +57,9 @@ function addIngredient() {
 }
 
 function clearIngredient(name) {
-    let tr = document.getElementById("igredient-list").tBodies[0].rows;
+    let tr = document.getElementById("ingredient-list").tBodies[0].rows;
     console.log(tr.length);
 
-    // TODO: delete from form (textarea) and from table.
     let form = document.getElementById("new-form");
     let ta = form.recipe;
     let text = name;
@@ -73,7 +71,7 @@ function clearIngredient(name) {
     }
 
     // Remove name from table list
-    for (var i = 0; i < tr.length; i++) {
+    for (let i = 0; i < tr.length; i++) {
         let td = tr[i].getElementsByTagName("td")[0];
         let v = td.textContent || td.innerText;
 

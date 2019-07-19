@@ -1,0 +1,40 @@
+label, input, select { font-size: 1rem; }
+input, select { padding: 0.25em 0.5em; }
+label { font-weight: bold; }
+
+.input-wrapper { margin-right: 1em; }
+.input-wrapper label { display: block; }
+
+#ingredient-list {
+    width: 100%;
+    border: 1px dotted;
+    border-collapse: collapse;
+}
+
+#ingredient-list tbody tr:nth-child(even) {
+    /*background-color: azure;*/
+}
+#ingredient-list tbody tr {
+    border-bottom: 1px solid cyan;
+}
+#ingredient-list tbody tr:last-child {
+    border: none;
+}
+
+
+#ingredient-list td {
+    padding: 0.5em;
+}
+
+.remove-ingredient {
+    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 0.5em;
+    padding: 0.15em 0.25em;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.remove-ingredient span { font-weight: bold; }
+.remove-ingredient img { max-width: 30%; }

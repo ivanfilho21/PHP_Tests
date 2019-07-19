@@ -12,9 +12,11 @@
     <script>
         window.onload = function() {
             let get = getFromUrl(window.location.href);
+            let url = "scripts/recipe.php";
             console.log(get);
 
-            if ("id" in get) ajax("scripts/recipe.php?id=" + get["id"], getRecipe);
+            if ("id" in get) ajax(url + "?id=" + get["id"], getRecipe);
+            else window.location.href = "index.html";
         }
     </script>
 </body>

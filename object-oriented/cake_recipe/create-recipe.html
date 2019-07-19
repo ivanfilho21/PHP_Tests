@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=1.0, initial-scale=1.0">
     <title>Create Recipe | Cake Recipe</title>
     <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/create-recipe.css">
+    <link rel="stylesheet" href="assets/css/create.css">
     <script src="assets/js/script.js"></script>
     <script src="assets/js/validation.js"></script>
 </head>
@@ -16,27 +16,48 @@
         <label>Recipe Name:</label>
         <input type="text" name="name" placeholder="Recipe Name" autofocus="on" autocomplete="off" onkeyup="setRecipeName(this.value);"><br>
 
-        <input name="ingredient" type="text" name="ingredient" placeholder="New Ingredient" autocomplete="off">
+        <div style="display: flex; margin: 1em 0;">
+            <div class="input-wrapper">
+                <label>Ingredient:</label>
+                <input name="ingredient" type="text" name="ingredient" placeholder="New Ingredient" autocomplete="off">
+            </div>
 
-        <input name="amount" type="number" name="amount" value="1" min="1">
+            <div class="input-wrapper">
+                <label>Amount:</label>
+                <input name="amount" type="number" name="amount" value="1" min="1">
+            </div>
 
-        <select name="unity">
-            <option>Unity</option>
-            <option>Spoon</option>
-            <option>Cup</option>
-            <option>Portion</option>
-            <option>Gram</option>
-            <option>Kilogram</option>
-        </select>
-
+            <div class="input-wrapper">
+                <label>Unity:</label>
+                <select name="unity">
+                    <option>Unity</option>
+                    <option>Spoon</option>
+                    <option>Cup</option>
+                    <option>Portion</option>
+                    <option>Gram</option>
+                    <option>Kilogram</option>
+                </select>
+            </div>
+        </div>
+        
         <input type="submit" name="add" value="Add">
     </form>
 
-    <ul id="list"></ul>
-
-    <table id="igredient-list">
-        <thead><tr></tr></thead>
-        <tbody></tbody>
+    <table id="ingredient-list">
+        <tbody>
+            <tr>
+                <td>a</td>
+                <td>a</td>
+            </tr>
+            <tr>
+                <td>a</td>
+                <td>a</td>
+            </tr>
+            <tr>
+                <td>a</td>
+                <td>a</td>
+            </tr>
+        </tbody>
     </table>
 
     <span id="error-name" class="error"></span>
