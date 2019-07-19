@@ -1,7 +1,25 @@
 label, input, select { font-size: 1rem; }
-input, select { padding: 0.25em 0.5em; }
+input, select {
+    padding: 0.35em 0.5em;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0px 0px 1px 0px #ccc;
+}
 label { font-weight: bold; }
+input[type=submit] { cursor: pointer; }
 
+.error {
+    display: block;
+    margin: 1em 0;
+    color: red;
+}
+
+.add-ingredient {
+    font-weight: bold;
+    background-image: linear-gradient(darkseagreen, lightseagreen);
+    color: white;
+}
 .input-wrapper { margin-right: 1em; }
 .input-wrapper label { display: block; }
 
@@ -38,3 +56,10 @@ label { font-weight: bold; }
 }
 .remove-ingredient span { font-weight: bold; }
 .remove-ingredient img { max-width: 30%; }
+
+
+.save {
+    font-weight: bold;
+    background-color: green;
+    color: white;
+}

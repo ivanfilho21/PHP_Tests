@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, user-scalable=1.0, initial-scale=1.0">
     <title>Create Recipe | Cake Recipe</title>
     <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/container.css">
     <link rel="stylesheet" href="assets/css/create.css">
     <script src="assets/js/script.js"></script>
     <script src="assets/js/validation.js"></script>
 </head>
 <body>
+    <section class="container">
     <h1>New Recipe</h1>
 
     <form id="form" method="POST" onsubmit="return addIngredient();">
@@ -38,34 +40,20 @@
                     <option>Kilogram</option>
                 </select>
             </div>
+
+            <input class="add-ingredient" type="submit" name="add" value="Add Ingredient">
         </div>
-        
-        <input type="submit" name="add" value="Add">
     </form>
 
-    <table id="ingredient-list">
-        <tbody>
-            <tr>
-                <td>a</td>
-                <td>a</td>
-            </tr>
-            <tr>
-                <td>a</td>
-                <td>a</td>
-            </tr>
-            <tr>
-                <td>a</td>
-                <td>a</td>
-            </tr>
-        </tbody>
-    </table>
+    <table id="ingredient-list"><tbody></tbody></table>
 
     <span id="error-name" class="error"></span>
 
     <form id="new-form" style="display: none;" method="post" onsubmit="return validateFields();" action="scripts/submit.php">
         <input type="hidden" name="name" placeholder="Recipe Name">
         <textarea name="recipe" style="display: none;"></textarea>
-        <input type="submit" name="save" value="Save">
+        <input class="save" type="submit" name="save" value="Save">
     </form>
+    </section>
 </body>
 </html>

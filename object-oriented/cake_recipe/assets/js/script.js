@@ -139,6 +139,7 @@ var getList = function(response) {
 var getRecipe = function(response) {
     let data = response != "" ? JSON.parse(response) : [];
     let name = data["recipe_name"];
+    let main = document.getElementById("main");
     name = name == null ? "Untitled Recipe" : name;
 
     let h1 = document.createElement("h1");
@@ -147,8 +148,8 @@ var getRecipe = function(response) {
     h1.innerHTML = name;
     p.innerHTML = data["recipe"];
 
-    document.body.appendChild(h1);
-    document.body.appendChild(p);
+    main.appendChild(h1);
+    main.appendChild(p);
 };
 
 // Extract GET from URL

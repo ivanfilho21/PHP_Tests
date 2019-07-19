@@ -17,3 +17,8 @@ a {
 }
 
 a:hover { text-decoration: underline; }
+
+h1 {
+    font-size: 1.75rem;
+    margin: 1em 0;
+}
