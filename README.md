@@ -35,14 +35,19 @@ PHP scripts with HTML5 and CSS3.
       <td><a href="https://github.com/ivanfilho21/PHP_Tests/tree/master/mvc/catalog-mvc">link</a></td>
     </tr>
     <tr>
-      <td><b><a href="https://ivanfilho21.000webhostapp.com/index.php">Task Manager</a></b></td>
+      <td><b><a href="https://ivanfilho21.000webhostapp.com/index.php">Task Manager 2.0</a></b></td>
       <td>CRUD of tasks.</td>
-      <td><a href="https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/agenda">link</a></td>
+      <td><a href="https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/tasks_oo_2-0">link</a></td>
     </tr>
     <tr>
       <td><b><a href="https://ivanfilho21.000webhostapp.com/auth/index.php">Login System</a></b></td>
       <td>A system to register and login users. <b>Bug in email sending.</b></td>
       <td><a href="https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/login-system">link</a></td>
+    </tr>
+    <tr>
+      <td><b><a href="http://ivanfilho21.epizy.com/oo/taskman/">Cake Recipe</a></b></td>
+      <td>A system to create cake recipes.</td>
+      <td><a href="https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/cake_recipe">link</a></td>
     </tr>
   </tbody>
 </table>
