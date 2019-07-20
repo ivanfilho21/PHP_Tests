@@ -21,9 +21,9 @@
 </div>
 
 <div class="filter-options" style="display: none;">
-    <input type="text" name="filter-by-name" placeholder="Filter by Name" onkeyup="filterByName(this.value)">
+    <input id="filter-by-name" type="text" name="filter-by-name" placeholder="Filter by Name" onkeyup="filterByName(this.value)">
 
-    <select name="filter-by-priority" onchange="filterByPriority(this.value)">
+    <select id="filter-by-priority" name="filter-by-priority" onchange="filterByPriority(this.value)">
         <option value="0">Priority</option>
         <option value="1">Low</option>
         <option value="2">Medium</option>

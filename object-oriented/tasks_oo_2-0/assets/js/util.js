@@ -104,6 +104,13 @@ function checkRows() {
     this.setAttribute("data-value", !v);
 }
 
+function resetFilterName() {
+    document.getElementById("filter-by-name").value = "";
+}
+
+function resetFilterPriority() {
+    document.getElementById("filter-by-priority").selectedIndex = 0;
+}
 
 function filterByName(name) {
     let rows = document.getElementById("tasks-table").tBodies[0].rows;
@@ -117,6 +124,8 @@ function filterByName(name) {
         if (v == "") continue;
         rows[i].style.display = v.toUpperCase().indexOf(name.toUpperCase()) > -1 ? "" : "none";
     }
+
+    resetFilterPriority();
 }
 
 function filterByPriority(priority) {
@@ -131,4 +140,6 @@ function filterByPriority(priority) {
         if (v == "") continue;
         rows[i].style.display = v == priority || priority == "0" ? "" : "none";
     }
+
+    resetFilterName();
 }
