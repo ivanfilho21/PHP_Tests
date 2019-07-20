@@ -24,7 +24,7 @@ PHP scripts with HTML5 and CSS3.
 | [Catalog](https://ivanfilho21.000webhostapp.com/mvc/catalog-mvc/)| A system to create and view announcements. | MVC | [Code](https://github.com/ivanfilho21/PHP_Tests/tree/master/mvc/catalog-mvc) |
 | [Login System](https://ivanfilho21.000webhostapp.com/login-system/) | A system to register and login users. | OO | [Code](https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/login-system) |
 | [Task Manager 1.0](https://ivanfilho21.000webhostapp.com/) | CRUD of tasks. | OO | [Code](https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/tasks_oo) |
-| [Task Manager 2.0](http://ivanfilho21.epizy.com/oo/taskman/) | CRUD of tasks. | OO [Code](https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/tasks_oo_2-0) |
+| [Task Manager 2.0](http://ivanfilho21.epizy.com/oo/taskman/) | CRUD of tasks. | OO | [Code](https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/tasks_oo_2-0) |
 
 ## Status:
 * You never stop learning something new :)
