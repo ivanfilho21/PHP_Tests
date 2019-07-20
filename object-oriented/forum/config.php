@@ -1,20 +1,31 @@
 <?php
 
-define("ROOTPATH", getcwd() ."/");
+define("ROOT", getcwd() ."/");
+define("PAGES", ROOT ."App/src/pages/");
+define("TEMPLATES", ROOT ."App/src/pages/templates/");
 define("ENVIRONMENT", "dev");
 
-if (ENVIRONMENT === "dev") {
+if (defined("ENVIRONMENT") && ENVIRONMENT === "dev") {
     define("DB_TYPE", "mysql");
     define("DB_NAME", "forum_db");
     define("DB_HOST", "127.0.0.1");
     define("DB_USER", "root");
     define("DB_PASS", "");
+    define("SITE_NAME", "Forum - [DEV MODE]");
+} else {
+    define("SITE_NAME", "Forum");
 }
 
 require "PackageLoader.php";
 
 $loader = new \PackageLoader\PackageLoader();
-$loader->load(ROOTPATH ."App/src");
+$loader->load(ROOT ."App/src");
 
 # Database Admin object
 $dba = \App\Database\DBA::getInstance();
+
+# Template Configuration
+$template = "default";
+$title = "";
+$scripts = array();
+$styles = array();
