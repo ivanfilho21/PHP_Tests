@@ -7,15 +7,15 @@
             "": [
                 "../../"
             ],
-            "IvanFilho\\Database\\": [
-                "packages/ivanfilho/database/src/"
+            "App\\": [
+                ""
             ],
             "App\\Database\\": [
                 "database/"
             ],
-            "App\\": [
-                ""
-            ]
+            "IvanFilho\\Database\\": [
+                "packages/ivanfilho/database/src/"
+            ]            
         }
     }
 }
