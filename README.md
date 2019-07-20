@@ -30,6 +30,11 @@ PHP scripts with HTML5 and CSS3.
       <td><a href="https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/agenda">link</a></td>
     </tr>
     <tr>
+      <td><b><a href="http://ivanfilho21.epizy.com/oo/taskman/">Cake Recipe</a></b></td>
+      <td>A system to create cake recipes.</td>
+      <td><a href="https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/cake_recipe">link</a></td>
+    </tr>
+    <tr>
       <td><b><a href="https://ivanfilho21.000webhostapp.com/mvc/catalog-mvc/">Catalog</a></b></td>
       <td>A system to create and view announcements.</td>
       <td><a href="https://github.com/ivanfilho21/PHP_Tests/tree/master/mvc/catalog-mvc">link</a></td>
@@ -43,11 +48,6 @@ PHP scripts with HTML5 and CSS3.
       <td><b><a href="https://ivanfilho21.000webhostapp.com/auth/index.php">Login System</a></b></td>
       <td>A system to register and login users. <b>Bug in email sending.</b></td>
       <td><a href="https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/login-system">link</a></td>
-    </tr>
-    <tr>
-      <td><b><a href="http://ivanfilho21.epizy.com/oo/taskman/">Cake Recipe</a></b></td>
-      <td>A system to create cake recipes.</td>
-      <td><a href="https://github.com/ivanfilho21/PHP_Tests/tree/master/object-oriented/cake_recipe">link</a></td>
     </tr>
   </tbody>
 </table>
