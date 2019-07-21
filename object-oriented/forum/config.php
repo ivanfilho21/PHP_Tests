@@ -11,6 +11,8 @@ if (defined("ENVIRONMENT") && ENVIRONMENT === "dev") {
     define("DB_HOST", "127.0.0.1");
     define("DB_USER", "root");
     define("DB_PASS", "");
+    define("URL", "http://localhost/dev/php-tests/object-oriented/forum/");
+    define("REL_PAGES", "http://localhost/dev/php-tests/object-oriented/forum/App/src/pages/");
     define("SITE_NAME", "Forum - [DEV MODE]");
 } else {
     define("SITE_NAME", "Forum");
