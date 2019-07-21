@@ -1,8 +1,8 @@
 <?php
 
 define("ROOT", getcwd() ."/");
-define("PAGES", ROOT ."App/src/pages/");
-define("TEMPLATES", ROOT ."App/src/pages/templates/");
+define("PAGES", ROOT ."app/src/pages/");
+define("TEMPLATES", ROOT ."app/src/pages/templates/");
 define("ENVIRONMENT", "dev");
 
 if (defined("ENVIRONMENT") && ENVIRONMENT === "dev") {
@@ -11,8 +11,8 @@ if (defined("ENVIRONMENT") && ENVIRONMENT === "dev") {
     define("DB_HOST", "127.0.0.1");
     define("DB_USER", "root");
     define("DB_PASS", "");
-    define("URL", "http://localhost/dev/php-tests/object-oriented/forum/");
-    define("REL_PAGES", "http://localhost/dev/php-tests/object-oriented/forum/App/src/pages/");
+    define("URL", "http://localhost/dev/php-tests/mvc/forum/");
+    define("REL_PAGES", "http://localhost/dev/php-tests/mvc/forum/app/src/pages/");
     define("SITE_NAME", "Forum - [DEV MODE]");
 } else {
     define("SITE_NAME", "Forum");
@@ -21,7 +21,7 @@ if (defined("ENVIRONMENT") && ENVIRONMENT === "dev") {
 require "PackageLoader.php";
 
 $loader = new \PackageLoader\PackageLoader();
-$loader->load(ROOT ."App/src");
+$loader->load(ROOT ."app/src");
 
 # Database Admin object
 $dba = \App\Database\DBA::getInstance();

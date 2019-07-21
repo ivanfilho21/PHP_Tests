@@ -2,32 +2,25 @@
 
 class FriendlyURL
 {
-    private $template = "";
-    private $title = "";
-
     public function __construct()
-    {
-        $this->template = "default";
-    }
+    {}
 
     public function run()
     {
         var_dump($_GET); echo "<br>";
 
-        $page = $this->getPage();
-        unset($_GET["url"]);
+        $controller = $this->getController();
+        // $action = $this->getAction();
         $params = $this->getParams();
 
-        echo "<br>Page: " .$page;
+        echo $controller;
 
-        // header("location: " .REL_PAGES .$page);
-
-        $this->loadPage();
+        // TODO: new controller...
     }
 
-    private function getPage()
+    private function getController()
     {
-        $page = "";
+        $cont = "";
         $url = "/";
         $url .= (! empty($_GET["url"])) ? $_GET["url"] : "";
 
@@ -36,13 +29,13 @@ class FriendlyURL
             array_shift($url);
             // var_dump($url);
 
-            $page = $url[0];
+            $cont = ucfirst($url[0]);
             // TODO:
             // $index = strpos($url[0], ".");
-            // $page .= (isset($index) && $index == strlen($page) -1) ? "php" : "";
-            // $page .= (! strpos($url[0], ".")) ? ".php" : "";
+            // $cont .= (isset($index) && $index == strlen($cont) -1) ? "php" : "";
+            // $cont .= (! strpos($url[0], ".")) ? ".php" : "";
         }
-        return $page;
+        return $cont;
     }
 
     private function getParams()

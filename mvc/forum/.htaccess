@@ -3,4 +3,4 @@ RewriteEngine on
 # Redirect to Index with url parameter
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ /dev/php-tests/object-oriented/forum/index.php?url=$1 [QSA,L]
+RewriteRule ^(.*)$ /dev/php-tests/mvc/forum/index.php?url=$1 [QSA,L]
