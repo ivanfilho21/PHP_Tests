@@ -1,8 +1,8 @@
 <?php
-include "config.php";
+require "config.php";
 
 $title = "Index";
-include "App/src/pages/templates/" .$template ."/" .$template .".php";
+require "App/src/pages/templates/" .$template ."/" .$template .".php";
 ?>
 
 <h1>Forum</h1>
