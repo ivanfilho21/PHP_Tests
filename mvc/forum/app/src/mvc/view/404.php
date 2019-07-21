@@ -1,0 +1,1 @@
+<style>body{text-align:center;}</style><h1>404 Not Found</h1><hr><?= SITE_NAME ?>
