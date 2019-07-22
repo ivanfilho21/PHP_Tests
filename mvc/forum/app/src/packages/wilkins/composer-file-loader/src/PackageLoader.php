@@ -1,6 +1,6 @@
 <?php
 
-namespace PackageLoader;
+namespace Wilkins\PackageLoader;
 
 class PackageLoader
 {

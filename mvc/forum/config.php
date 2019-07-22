@@ -1,8 +1,8 @@
 <?php
 
 define("ROOT", getcwd() ."/");
-define("PAGES", ROOT ."app/src/pages/");
-define("TEMPLATES", ROOT ."app/src/pages/templates/");
+define("VIEW", ROOT ."app/src/mvc/view/");
+define("TEMPLATE", ROOT ."app/src/mvc/view/templates/");
 define("ENVIRONMENT", "dev");
 
 if (defined("ENVIRONMENT") && ENVIRONMENT === "dev") {
@@ -18,9 +18,9 @@ if (defined("ENVIRONMENT") && ENVIRONMENT === "dev") {
     define("SITE_NAME", "Forum");
 }
 
-require "PackageLoader.php";
+require "app/src/packages/wilkins/composer-file-loader/src/PackageLoader.php";
 
-$loader = new \PackageLoader\PackageLoader();
+$loader = new \Wilkins\PackageLoader\PackageLoader();
 $loader->load(ROOT ."app/src");
 
 # Database Admin object

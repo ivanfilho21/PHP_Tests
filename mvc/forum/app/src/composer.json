@@ -5,17 +5,24 @@
     "autoload": {
         "psr-4": {
             "": [
-                "../../"
+                "../../",
+                "mvc/model/",
+                "mvc/controller/"
             ],
             "App\\": [
                 ""
             ],
-            "App\\Database\\": [
-                "database/"
+            "App\\Model\\": [
+                "mvc/model/"
             ],
-            "IvanFilho\\Database\\": [
-                "packages/ivanfilho/database/src/"
-            ]            
+            "App\\Controller\\": [
+                "mvc/controller/"
+            ],
+            "App\\Database\\": [
+                "mvc/model/database/"
+            ],
+            "IvanFilho\\Database\\": ["packages/ivanfilho/database/src/"],
+            "wilkins\\PackageLoader\\": ["packages/wilkins/composer-file-loader/src/"]
         }
     }
 }
