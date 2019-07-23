@@ -1,0 +1,19 @@
+FORUM
+
+Usuarios
+ id:
+ tipo: admin, normal, convidado.
+
+Boards
+ id:
+ nome:
+ lista_de_topicos_categorias.
+
+Threads
+ id:
+ titulo:
+ autor:
+ categoria:
+ data_criacao:
+ hora_criacao:
+

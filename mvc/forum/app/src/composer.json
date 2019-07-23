@@ -7,13 +7,11 @@
             "": [
                 "../../",
                 "mvc/model/",
+                "mvc/model/database/",
                 "mvc/controller/"
             ],
             "App\\": [
                 ""
-            ],
-            "App\\Model\\": [
-                "mvc/model/"
             ],
             "App\\Controller\\": [
                 "mvc/controller/"

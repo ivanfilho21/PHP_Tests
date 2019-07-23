@@ -18,7 +18,7 @@ use \PDO;
 
 class DBA
 {
-    private $db = null;
+    private $tables = [];
     private static $instance = null;
 
     public static function getInstance()
@@ -31,20 +31,30 @@ class DBA
 
     private function __construct()
     {
-        $this->db = $this->getPDOConnection();
+        $pdo = $this->getPDOConnection();
+        $this->tables[] = new \UserDAO($pdo);
+
+        $this->createTables();
+    }
+
+    private function createTables()
+    {
+        foreach ($this->tables as $t) {
+            $t->create();
+        }
     }
 
     private function getPDOConnection()
     {
-        $db = null;
+        $pdo = null;
 
         try {
-            $db = new PDO("mysql:dbname=" .DB_NAME .";host=" .DB_HOST, DB_USER, DB_PASS);
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pdo = new PDO("mysql:dbname=" .DB_NAME .";host=" .DB_HOST, DB_USER, DB_PASS);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch(PDOException $e) {
             die($e->getMessage());
         }
 
-        return $db;
+        return $pdo;
     }
 }

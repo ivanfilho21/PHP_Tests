@@ -2,6 +2,19 @@
 
 namespace IvanFilho\Database;
 
+/**
+* Class: Column
+* 
+* Contain information for every column in a database table.
+*
+* @package      Database
+* @subpackage   src
+* @author       Ivan Filho <ivanfilho21@gmail.com>
+*
+* Created: Jul 22, 2019.
+* Last Modified: Jul 22, 2019.
+*/
+
 class Column
 {
     private $name = "";
@@ -113,7 +126,7 @@ class Column
     public function setLength($length)
     {
         if ($length == 0) {
-            #$length = DB_Utils::getDefaultLength($this->getDataType());
+            #$length = Utils::getDefaultLength($this->getDataType());
         }
         elseif ($length == -1) {
             # Let SQL decide the default length for this datatype; 
