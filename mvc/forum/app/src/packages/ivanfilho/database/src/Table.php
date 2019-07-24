@@ -39,6 +39,10 @@ define("CL", ":"); #Colon
 * Last Modified: Jul 23, 2019.
 */
 
+# Last modified Jul 23, 2019
+# Local modifications that could be pushed later
+# Added common public methods, so that they won't be created in every DAO class 
+
 abstract class Table
 {
     private $db;
@@ -107,6 +111,29 @@ abstract class Table
     public function insert($obj)
     {
         $this->prepareValues("insert", $obj);
+    }
+
+    public function edit($obj)
+    {
+        $where[] = Utils::createCondition($this, "id", $obj->getId());
+        $this->update($obj, $where);
+    }
+
+    public function get($id)
+    {
+        $where[] = Utils::createCondition($this, "id", $id);
+        return $this->selectOne($where);
+    }
+
+    public function getAll()
+    {
+        return $this->selectAll();
+    }
+
+    public function remove($id)
+    {
+        $where[] = Utils::createCondition($this, "id", $id);
+        $this->delete($where);
     }
 
     protected function update($obj, $whereColumnArray)
