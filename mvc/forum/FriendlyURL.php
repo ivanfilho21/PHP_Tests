@@ -11,10 +11,22 @@ class FriendlyURL
 
     public function run()
     {
-        $controller = $this->getController();
-        $action = $this->getAction();
-        $params = $this->getParams();
+        $cont = "";
+        $url = "/";
+        $url .= (! empty($_GET["url"])) ? $_GET["url"] : "";
+        // var_dump($url);
+
+        $url = $this->checkRouters($url);
+        // echo $url ."<br>";
+        
+        $controller = $this->getController($url);
+        $action = $this->getAction($url);
+        $params = $this->getParams($url);
         $res = true;
+
+        /*echo "Controller: " .$controller ."<br>";
+        echo "Action: " .$action ."<br>";
+        echo "Params: " .$params ."<br>";*/
 
         $file = ROOT ."app/src/mvc/controller/" .$controller .".php";
         // echo $file ."<br>";
@@ -44,13 +56,54 @@ class FriendlyURL
         die;
     }
 
-    private function getController()
+    private function checkRouters($url)
+    {
+        global $routers;
+
+        foreach ($routers as $key => $newUrl) {
+            $regPart = "(\{[a-z0-9]{1,}\})";
+            # Identify the arguments and replace them by regex
+            $pattern = preg_replace($regPart, "([a-z0-9-]{1,})", $key);
+
+            // echo "Pattern: " .$pattern ."<br>Url: " .$url; die;
+
+            # Check if URL matches pattern
+            if (preg_match("#^(" .$pattern .")*$#i", $url, $matches) === 1) {
+                array_shift($matches);
+                array_shift($matches);
+
+                // var_dump($matches); die;
+
+                # Get the arguments (id, etc)
+                if (preg_match_all($regPart, $key, $m)) {
+                    $m = preg_replace("(\{|\})", "", $m[0]);
+                    // var_dump($m); die;
+                }
+
+                # Associate the items with their values
+                $arg = array();
+                foreach ($matches as $key => $match) {
+                    $arg[$m[$key]] = $match;
+                }
+
+                // var_dump($arg);
+
+                # Creates the new URL
+                foreach ($arg as $key => $a) {
+                    $key = ":" .$key;
+                    $newUrl = str_replace($key, $a, $newUrl);
+                }
+
+                $url = $newUrl;
+                break;
+            }
+        }
+        return $url;
+    }
+
+    private function getController($url)
     {
         $cont = "";
-        $url = "/";
-        $url .= (! empty($_GET["url"])) ? $_GET["url"] : "";
-        // var_dump($url);
-
         if ($url !== "/") {
             $url = explode("/", $url);
             array_shift($url);
@@ -67,15 +120,14 @@ class FriendlyURL
             // $cont .= (! strpos($url[0], ".")) ? ".php" : "";
         }
         // echo "<br> Controller: " .$cont ."<br>";
-        return (! empty($cont)) ? (($cont == "index") ? DEFAULT_CONTROLLER : ucfirst($cont)) : DEFAULT_CONTROLLER;
+        // return (! empty($cont)) ? (($cont == "index") ? DEFAULT_CONTROLLER : ucfirst($cont)) : DEFAULT_CONTROLLER;
+        // return (! empty($cont)) ? ucfirst($cont) : DEFAULT_CONTROLLER;
+        return ucfirst($cont);
     }
 
-    private function getAction()
+    private function getAction($url)
     {
         $action = "";
-        $url = "/";
-        $url .= (! empty($_GET["url"])) ? $_GET["url"] : "";
-        // var_dump($url);
 
         if ($url !== "/") {
             $url = explode("/", $url);
@@ -89,12 +141,9 @@ class FriendlyURL
         return (! empty($action)) ? (($action == "index") ? DEFAULT_ACTION : $action) : DEFAULT_ACTION;
     }
 
-    private function getParams()
+    private function getParams($url)
     {
         $params = "";
-        $url = "/";
-        $url .= (! empty($_GET["url"])) ? $_GET["url"] : "";
-        // var_dump($url);
 
         if ($url !== "/") {
             $url = explode("/", $url);
@@ -103,7 +152,7 @@ class FriendlyURL
             array_shift($url);
             // var_dump($url);
 
-            $params = (isset($url[0])) ? $url[0] : $params;
+            $params = implode("/", $url);
         }
         // echo "<br> Controller: " .$params ."<br>";
         return $params;
