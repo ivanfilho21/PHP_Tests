@@ -1,7 +1,7 @@
 <?php
 
 define("ROOT", getcwd() ."/");
-define("VIEW", ROOT ."app/src/mvc/view/");
+define("VIEW", ROOT ."app/src/mvc/view/pages/");
 define("TEMPLATE", ROOT ."app/src/mvc/view/templates/");
 define("ENVIRONMENT", "dev");
 
@@ -12,7 +12,8 @@ if (defined("ENVIRONMENT") && ENVIRONMENT === "dev") {
     define("DB_USER", "root");
     define("DB_PASS", "");
     define("URL", "http://localhost/dev/php-tests/mvc/forum/");
-    define("REL_PAGES", "http://localhost/dev/php-tests/mvc/forum/app/src/pages/");
+    define("REL_TEMPLATE", "http://localhost/dev/php-tests/mvc/forum/app/src/mvc/view/templates/");
+    define("REL_PAGE", "http://localhost/dev/php-tests/mvc/forum/app/src/mvc/view/pages/");
     define("SITE_NAME", "Forum - [DEV MODE]");
 } else {
     define("SITE_NAME", "Forum");

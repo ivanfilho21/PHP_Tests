@@ -1,0 +1,5 @@
+.rf::after {
+    content: "*";
+    margin-left: 0.4rem;
+    color: red;
+}
