@@ -14,9 +14,7 @@ abstract class Controller
 
     protected function loadView($view)
     {
-        require TEMPLATE ."top.php";
         require TEMPLATE .$this->template ."/" .$this->template .".php";
-        require TEMPLATE ."bottom.php";
     }
 
     private function requireView($view)

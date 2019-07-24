@@ -13,6 +13,7 @@ define("TEXT", "TEXT");
 define("DATE", "DATE");
 define("TIME", "TIME");
 define("DATETIME", "DATETIME");
+define("LONGTEXT", "LONGTEXT");
 
 define("COMMA", ", ");
 define("AND_A", " AND ");
@@ -39,9 +40,10 @@ define("CL", ":"); #Colon
 * Last Modified: Jul 23, 2019.
 */
 
-# Last modified Jul 23, 2019
+# Last modified Jul 24, 2019
 # Local modifications that could be pushed later
 # Added common public methods, so that they won't be created in every DAO class 
+# Added constant LONGTEXT
 
 abstract class Table
 {

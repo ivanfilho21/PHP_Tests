@@ -9,13 +9,10 @@ class BoardDAO extends Table
     {
         $columns = [
             new Column("id", INT, 11, false, "AUTO_INCREMENT", "PRIMARY KEY"),
-            new Column("name", VARCHAR, 50)
+            new Column("name", VARCHAR, 50),
+            new Column("creation_date", DATETIME)
         ];
+        
         parent::__construct($pdo, "\Board", "boards", $columns);
-    }
-
-    public function insert($obj)
-    {
-        parent::insert($obj);
     }
 }
