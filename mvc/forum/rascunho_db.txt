@@ -1,19 +1,42 @@
 FORUM
 
+Categorias
+ id:
+ nome:
+ lista_de_boards
+ lista_de_posts
+ lista_de_usuarios
+ etc
+
 Usuarios
  id:
  tipo: admin, normal, convidado.
+ nick:
+ name:
+ email:
+ senha:
+ data_nascimento:
+ data_criação:
+ lista_de_posts
+ lista_de_comentarios
+ lista_de_boards
+ lista_de_likes
 
 Boards
  id:
  nome:
- lista_de_topicos_categorias.
+ lista_de_categorias.
+ lista_de_posts.
+ lista_de_autores.
+ lista_de_comentarios.
 
-Threads
+Post
  id:
- titulo:
- autor:
  categoria:
+ autor:
+ titulo:
+ conteudo:
  data_criacao:
- hora_criacao:
-
+ data_atualizacao:
+ lista_de_likes
+ lista_de_comentarios, autores
