@@ -1,15 +1,14 @@
 <?php
 
-use \IvanFilho\Database\Utils;
-use \IvanFilho\Database\Column;
 use \IvanFilho\Database\Table;
+use \IvanFilho\Database\Column;
 
 class UserDAO extends Table
 {
-    public function __construct($pdo)
+    public function __construct(PDO $pdo)
     {
         $columns = [
-            new Column("id", INT, 11, false, "PRIMARY KEY", "AUTO_INCREMENT"),
+            new Column("id", INT, 11, false, "AUTO_INCREMENT", "PRIMARY KEY"),
             new Column("type", INT, 1, false)
         ];
 
