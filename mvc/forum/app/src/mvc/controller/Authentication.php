@@ -7,6 +7,7 @@ class Authentication extends Controller
     public function __construct()
     {
         parent::__construct("authentication");
+        $this->styles[] = "auth-general";
     }
 
     public function index()
@@ -22,6 +23,7 @@ class Authentication extends Controller
     {
         $this->title = "Sign Up";
         $this->styles[] = "sign-up";
+        $this->scripts[] = "sign-up-validation";
         $this->loadView("sign-up");
     }
 }
