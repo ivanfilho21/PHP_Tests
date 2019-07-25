@@ -12,6 +12,7 @@ if (defined("ENVIRONMENT") && ENVIRONMENT === "dev") {
     define("DB_USER", "root");
     define("DB_PASS", "");
     define("URL", "http://localhost/dev/php-tests/mvc/forum/");
+    define("ASSETS", "http://localhost/dev/php-tests/mvc/forum/assets/");
     define("REL_TEMPLATE", "http://localhost/dev/php-tests/mvc/forum/app/src/mvc/view/templates/");
     define("REL_PAGE", "http://localhost/dev/php-tests/mvc/forum/app/src/mvc/view/pages/");
     define("SITE_NAME", "Forum - [DEV MODE]");

@@ -5,6 +5,8 @@ $templateJs = array();
 <!DOCTYPE html><html lang="pt-br"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, user-scalable=1.0, initial-scale=1.0">
 <title><?= $this->title ." | " .SITE_NAME ?></title>
 
+<link rel="stylesheet" href="<?= ASSETS ?>css/reset.css">
+
 <!-- Template Styles -->
 <?php foreach ($templateCss as $style): ?>
 <link rel="stylesheet" href="<?= REL_TEMPLATE .$this->template ."/" .$style ?>.css">
