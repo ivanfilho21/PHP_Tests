@@ -1,21 +1,22 @@
 <section class="sign-up-wrapper">
     <h1>Criar Conta</h1>
 
-    <form>
+    <form id="sign-up-form">
         <label class="rf">Nome Completo</label>
-        <input type="text" name="name" onkeyup="validateName(this.value)">
+        <input type="text" name="name">
 
         <label class="rf">Nome de Usuário</label>
-        <input type="text" name="username">
+        <input type="text" name="username" onkeyup="validateName(this.value)">
+        <span class="error-msg"></span>
 
         <label class="rf">E-mail</label>
-        <input type="text" name="email">
+        <input type="text" name="email" onkeydown="validateEmail(this.value)">
 
         <label class="rf">Senha</label>
-        <input type="password" name="password">
+        <input type="password" name="pass" onkeyup="validatePassword(this.value)">
 
         <label class="rf">Repita a Senha</label>
-        <input type="password" name="password-retype">
+        <input type="password" name="pass2" onkeyup="validatePassword2(this.value)">
 
         <label class="cb-wrapper">
             <input id="user-terms" type="checkbox" name="user-terms-cb">

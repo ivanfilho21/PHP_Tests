@@ -19,7 +19,7 @@ $templateJs = array();
 
 <!-- TemplateScripts -->
 <?php foreach ($templateJs as $script): ?>
-<script src="<?= REL_TEMPLATE .$this->template ."/" .$script ?>.js"></script>
+<script src="<?= REL_TEMPLATE .$this->template ."/" .$script ?>.js" defer></script>
 <?php endforeach ?>
 <!-- View Scripts -->
 <?php foreach ($this->scripts as $script): ?>

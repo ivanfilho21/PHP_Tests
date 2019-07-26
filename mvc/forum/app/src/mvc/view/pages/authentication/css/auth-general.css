@@ -6,16 +6,15 @@ label {
 }
 
 input {
-    /*display: block;*/
     width: 100%;
-    /*font-size: 1rem;*/
-    margin: 0.3rem 0 1rem 0;
+    font-size: 0.9rem;
+    margin: 0.5rem 0 1rem 0;
     padding: 0.5rem 0.75rem;
     border: 1px solid #ccc;
     border-radius: 2rem;
     background-color: #fbfbfb;
-    /*box-shadow: 0px 0px 1px #ddd;*/
     outline: none;
+    transition: box-shadow 0.5s;
 }
 
 input:focus, input:active {
@@ -27,6 +26,23 @@ input[type="checkbox"] {
     width: auto;
     margin-left: 0.65rem;
     margin-bottom: 0.5rem;
+}
+
+.error-msg {
+    display: block;
+    font-size: 0.95rem;
+    margin: -0.2rem 0.65rem 1rem 0.65rem;
+    color: red;
+}
+
+.error, .error:focus, .error:active {
+    border-color: transparent;
+    box-shadow: 0px 0px 0.5rem #f44336;
+}
+
+.success, .success:focus, .success:active {
+    border-color: transparent;
+    box-shadow: 0px 0px 0.5rem green;
 }
 
 /* Custom Checkbox */
@@ -55,6 +71,7 @@ input[type="checkbox"] {
     height: 1rem;
     border: 1px solid #ccc;
     background: #eee;
+    transition: box-shadow 0.5s;
 }
 
 .checkmark::after {
@@ -80,10 +97,15 @@ input[type="checkbox"] {
     display: block;
 }
 
+.cb-wrapper:hover .checkmark {
+    box-shadow: 0px 0px 0.5rem #ddd;
+    transition: 0.25s;
+}
+
 input[type="submit"] {
     display: block;
     max-width: 300px;
-    margin: 1.5rem auto;
+    margin: 2rem auto;
     padding: 0.85rem 0.5rem;
     font-weight: bold;
     text-transform: uppercase;
