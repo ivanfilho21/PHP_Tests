@@ -47,7 +47,9 @@ input[type="checkbox"] {
 
 /* Custom Checkbox */
 .cb-wrapper {
-    display: inline-block;
+    display: block;
+    max-width: 25rem;
+    margin: 0 auto;
     position: relative;
     user-select: none;
 }
