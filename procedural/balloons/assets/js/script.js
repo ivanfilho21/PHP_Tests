@@ -13,8 +13,15 @@ function addBall() {
     let color = colors[ri];
     console.log(rx, ry);
 
+    let idAleatorio = Math.floor(Math.random() * 999999);
+    // console.log("ID " + idAleatorio);
+
     ball.setAttribute("style", "position: absolute; left:" + rx + "px; top:" + ry + "px; background-color: " + color + ";");
-    ball.setAttribute("onclick", "burst(this)");
+    ball.setAttribute("id", idAleatorio);
+    // ball.setAttribute("onclick", "burst(this)");
+    // ball.addEventListener("c", burst(this));
+    // ball.addEventListener("click", function() { burst(idAleatorio); });
+    ball.addEventListener("click", function() { burst(this); });
     document.body.appendChild(ball);
 }
 
@@ -22,6 +29,7 @@ function burst(ball) {
     score++;
     document.getElementById("score").innerHTML = "Pontuação: " + score;
     document.body.removeChild(ball);
+    ball.remove();
 }
 
 function createBalls() {
