@@ -17,13 +17,14 @@ $templateJs = array();
 <?php endforeach ?>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
+<script src="<?= ASSETS ?>js/ajax.js" defer></script>
 <!-- TemplateScripts -->
 <?php foreach ($templateJs as $script): ?>
 <script src="<?= REL_TEMPLATE .$this->template ."/" .$script ?>.js" defer></script>
 <?php endforeach ?>
 <!-- View Scripts -->
 <?php foreach ($this->scripts as $script): ?>
-<script src="<?= REL_PAGE .$this->controllerName ."js/" .$script ?>.js"></script>
+<script src="<?= REL_PAGE .$this->controllerName ."js/" .$script ?>.js" defer></script>
 <?php endforeach ?>
 </head>
 <body>

@@ -135,4 +135,5 @@ input[type="submit"]:hover {
 
 input[type="submit"].disabled {
     background-color: #5e8ae8;
+    cursor: default;
 }
