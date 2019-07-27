@@ -28,23 +28,6 @@ input[type="checkbox"] {
     margin-bottom: 0.5rem;
 }
 
-.error-msg {
-    display: block;
-    font-size: 0.95rem;
-    margin: -0.2rem 0.65rem 1rem 0.65rem;
-    color: red;
-}
-
-.error, .error:focus, .error:active {
-    border-color: transparent;
-    box-shadow: 0px 0px 0.5rem #f44336;
-}
-
-.success, .success:focus, .success:active {
-    border-color: transparent;
-    box-shadow: 0px 0px 0.5rem green;
-}
-
 /* Custom Checkbox */
 .cb-wrapper {
     display: block;
@@ -103,6 +86,34 @@ input[type="checkbox"] {
     box-shadow: 0px 0px 0.5rem #ddd;
     transition: 0.25s;
 }
+
+/* Input Wrapper */
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.error-icon {
+    display: none;
+    font-size: 1.25rem;
+    margin-top: -0.35rem;
+    margin-left: -1.75rem;
+    color: red;
+    cursor: pointer;
+}
+
+.error, .error:focus, .error:active {
+    border-color: transparent;
+    box-shadow: 0px 0px 0.5rem #f44336;
+}
+
+.success, .success:focus, .success:active {
+    border-color: transparent;
+    box-shadow: 0px 0px 0.5rem green;
+}
+
+/* Submit Input */
 
 input[type="submit"] {
     display: block;
