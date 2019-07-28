@@ -18,13 +18,13 @@ function initInputs() {
     inputs["email"] = form.email;
     inputs["pass"] = form.pass;
     inputs["pass2"] = form.pass2;
-    inputs["cb"] = document.getElementById("user-terms");
+    // inputs["cb"] = document.getElementById("user-terms");
 
-    inputName = document.getElementById("sign-up-form").name;
+    /*inputName = document.getElementById("sign-up-form").name;
     inputUsername = document.getElementById("sign-up-form").username;
     inputEmail = document.getElementById("sign-up-form").email;
     inputPass1 = document.getElementById("sign-up-form").pass;
-    inputPass2 = document.getElementById("sign-up-form").pass2;
+    inputPass2 = document.getElementById("sign-up-form").pass2;*/
     cb = document.getElementById("user-terms");
     submit = document.getElementById("sign-up-form").save;
 }
@@ -74,7 +74,7 @@ function validation(input) {
 
     return false;
 }
-
+/*
 function validateName(name) {
     let callback = function(response) {
         input["name"].setAttribute("class", response == "1" ? "success" : "error");
@@ -116,7 +116,7 @@ function validatePassword2(pass2, checkEmpty = true) {
         if (response == "0") inputPass2.removeAttribute("class");
     };
     ajax(validationUrl + "?pass=" + inputPass1.value + "&pass2=" + pass2, callback);
-}
+}*/
 
 function validateUserTerms(res, checkAlways = false) {
     let cm = document.getElementsByClassName("cb-wrapper")[0].
