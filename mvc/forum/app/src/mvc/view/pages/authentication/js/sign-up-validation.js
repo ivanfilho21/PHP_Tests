@@ -21,29 +21,22 @@ function validation(all = false) {
     if (ajaxSent) return false;
 
     let callback = function(response) {
-        // console.log(response);
         response = JSON.parse(response);
         console.log(response);
+
         ajaxSent = false;
         submit.removeAttribute("class");
 
         for (let key in response) {
-            inputs[key].setAttribute("class", response[key] == "1" ? "success" : "error");
-            if (response[key] == "0") inputs[key].removeAttribute("class");
+            if (inputs[key]) {
+                inputs[key].setAttribute("class", response[key] == "1" ? "success" : "error");
+                if (response[key] == "0") inputs[key].removeAttribute("class");
+            }
         }
 
         if (! all) return;
 
-        // Check validated
-        let valid = false;
-        for (let key in response) {
-            valid = response[key] == "1";
-            // console.log("v: ", valid);
-        }
-
-        // console.log("Validation ", valid);
-
-        if (valid) {
+        if (response["valid"]) {
             form.submit();
         }
     }

@@ -52,6 +52,15 @@ function validation()
         $res["pass2"] = $all ? 2 : 0;
     }
 
+    if ($all) {
+        $ok = "";
+        foreach ($res as $key => $value) {
+            $ok = $value == 1;
+        }
+
+        $res["valid"] = $ok;
+    }
+
     return $res;
 }
 
