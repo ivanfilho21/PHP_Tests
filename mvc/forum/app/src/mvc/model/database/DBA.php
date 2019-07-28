@@ -18,7 +18,6 @@ use \PDO;
 
 class DBA
 {
-    private $tables = [];
     private static $instance = null;
 
     public static function getInstance()
@@ -27,6 +26,18 @@ class DBA
             return new self();
         }
         return self::$instance;
+    }
+
+    public function getTable($name)
+    {
+        $table = false;
+        foreach ($this->tables as $t) {
+            if ($t->getName() === $name) {
+                $table = $t;
+                break;
+            }
+        }
+        return $table;
     }
 
     private function __construct()
