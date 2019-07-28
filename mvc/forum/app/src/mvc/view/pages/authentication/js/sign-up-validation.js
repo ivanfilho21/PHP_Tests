@@ -60,7 +60,9 @@ function validation(input) {
     let url = validationUrl + "?";
     if (input) {
         url += input.name + "=" + input.value;
+        if (input.name == "pass2") url += "&pass=" + inputs["pass"].value;
     } else {
+        url += "all=true&"
         for (let key in inputs) {
             let value = inputs[key].value;
             url += key + "=" + value + "&";

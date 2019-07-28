@@ -9,8 +9,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 function validation()
 {
     $res = array();
+    $all = isset($_GET["all"]) ? true : false;
 
     foreach ($_GET as $key => $value) {
+        if ($all) continue;
         $res[$key] = "";
     }
     // $res = array("name" => "", "username" => "", "email" => "", "pass" => "", "pass2" => "");
@@ -20,34 +22,34 @@ function validation()
     $pass = isset($_GET["pass"]) ? $_GET["pass"] : "";
     $pass2 = isset($_GET["pass2"]) ? $_GET["pass2"] : "";
 
-    $res["name"] = ! empty($name) ? 1 : 0;
+    $res["name"] = ! empty($name) ? 1 : ($all ? 2 : 0);
 
     if (! empty($username)) {
         $reg = "/[a-z0-9-]{6,}/";
         $res["username"] = preg_match($reg, $username) ? 1 : 2;
     } else {
-        $res["username"] = 0;
+        $res["username"] = $all ? 2 : 0;
     }
 
     if (! empty($email)) {
         $reg = "/[a-zA-Z0-9-\.,]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]{2,3}(\.[a-zA-Z0-9-]+)*/";
         $res["email"] = preg_match($reg, $email) ? 1 : 2;
     } else {
-        $res["email"] = 0;
+        $res["email"] = $all ? 2 : 0;
     }
 
     if (! empty($pass)) {
         $reg = "/[\w]{6,}/";
         $res["pass"] = preg_match($reg, $pass) ? 1 : 2;
     } else {
-        $res["pass"] = 0;
+        $res["pass"] = $all ? 2 : 0;
     }
 
     if (! empty($pass2)) {
         $reg = "/[\w]{6,}/";
         $res["pass2"] = preg_match($reg, $pass2) && strcasecmp($pass, $pass2) == 0 ? 1 : 2;
     } else {
-        $res["pass2"] = 0;
+        $res["pass2"] = $all ? 2 : 0;
     }
 
     return $res;
