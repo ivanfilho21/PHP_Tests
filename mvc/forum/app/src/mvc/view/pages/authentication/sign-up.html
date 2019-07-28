@@ -4,31 +4,31 @@
     <form id="sign-up-form" method="post" onsubmit="return validation()">
         <label class="rf">Nome Completo</label>
         <div class="input-wrapper">
-            <input type="text" name="name" onkeyup="validateName(this.value)">
+            <input type="text" name="name" onkeyup="validation(this)">
             <span class="error-icon"><i class="fa fa-exclamation-circle"></i></span>
         </div>
 
         <label class="rf">Nome de Usuário</label>
         <div class="input-wrapper">
-            <input type="text" name="username" onkeyup="validateUsername(this.value)">
+            <input type="text" name="username" onkeyup="validation(this)">
             <span class="error-icon"><i class="fa fa-exclamation-circle"></i></span>
         </div>
 
         <label class="rf">E-mail</label>
         <div class="input-wrapper">
-            <input type="text" name="email" onkeyup="validateEmail(this.value)">
+            <input type="text" name="email" onkeyup="validation(this)">
             <span class="error-icon"><i class="fa fa-exclamation-circle"></i></span>
         </div>
 
         <label class="rf">Senha</label>
         <div class="input-wrapper">
-            <input type="password" name="pass" onkeyup="validatePassword(this.value)">
+            <input type="password" name="pass" onkeyup="validation(this)">
             <span class="error-icon"><i class="fa fa-exclamation-circle"></i></span>
         </div>
 
         <label class="rf">Repita a Senha</label>
         <div class="input-wrapper">
-            <input type="password" name="pass2" onkeyup="validatePassword2(this.value)">
+            <input type="password" name="pass2" onkeyup="validation(this)">
             <span class="error-icon"><i class="fa fa-exclamation-circle"></i></span>
         </div>
         <br>

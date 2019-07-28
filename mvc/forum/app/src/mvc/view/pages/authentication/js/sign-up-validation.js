@@ -5,12 +5,21 @@ var inputName, inputUsername, inputEmail, inputPass1, inputPass2, cb, submit;
 var validationUrl = "scripts/auth-sign-up.php";
 
 var ajaxSent = false;
+var inputs = [];
 
 //
 // TODO: Refazer tudo via ajax :c
 // TODO: MOSTRAR MENSAGEM DE ERRO EM BALÃO OU AO PASSAR O MOUSE
 
 function initInputs() {
+    let form = document.getElementById("sign-up-form");
+    inputs["name"] = form.name;
+    inputs["username"] = form.username;
+    inputs["email"] = form.email;
+    inputs["pass"] = form.pass;
+    inputs["pass2"] = form.pass2;
+    inputs["cb"] = document.getElementById("user-terms");
+
     inputName = document.getElementById("sign-up-form").name;
     inputUsername = document.getElementById("sign-up-form").username;
     inputEmail = document.getElementById("sign-up-form").email;
@@ -20,44 +29,56 @@ function initInputs() {
     submit = document.getElementById("sign-up-form").save;
 }
 
-function validation() {
-    if (ajaxSent) {
-        return false;
-    }
+function validation(input) {
+    if (ajaxSent) return false;
 
     let callback = function(response) {
+        // console.log(response);
+        response = JSON.parse(response);
         console.log(response);
         ajaxSent = false;
         submit.removeAttribute("class");
+
+        if (input) {
+            input.setAttribute("class", response[input.name] == "1" ? "success" : "error");
+            if (response[input.name] == "0") input.removeAttribute("class");
+
+            // if (input.name == "pass" && response["pass2"] != "0") {
+                // alert("pass");
+                // inputs["pass2"].setAttribute("class", response["pass2"] == "1" ? "success" : "error");
+                // if (response[input.name] == "0") inputs["pass2"].removeAttribute("class");
+            // }
+            return;
+        }
+
+        for (let key in response) {
+            inputs[key].setAttribute("class", response[key] == "1" ? "success" : "error");
+            if (response[key] == "0") inputs[key].removeAttribute("class");
+        }
     }
-    let url = validationUrl;
-    let name, username, email, pass, pass2;
-    name = inputName.value;
-    username = inputUsername.value;
-    email = inputEmail.value;
-    pass = inputPass1.value;
-    pass2 = inputPass2.value;
-    url + "?name=" + name + "&username=" + username + "&email=" + email + "&pass=" + pass + "&pass2=" + pass2;
+
+    let url = validationUrl + "?";
+    if (input) {
+        url += input.name + "=" + input.value;
+    } else {
+        for (let key in inputs) {
+            let value = inputs[key].value;
+            url += key + "=" + value + "&";
+        }
+        url = url.substring(0, url.length - 1);
+    }
 
     ajax(url, callback);
     ajaxSent = true;
     submit.setAttribute("class", "disabled");
-    
-    /*let res = validateName(inputName.value) &
-        validateUsername(inputUsername.value, false) &
-        validateEmail(inputEmail.value, false) &
-        validatePassword(inputPass1.value, false) &
-        validatePassword2(inputPass2.value, false) &
-        validateUserTerms(cb.checked, true) ? true : false;
-    return res;*/
 
     return false;
 }
 
 function validateName(name) {
     let callback = function(response) {
-        inputName.setAttribute("class", response == "1" ? "success" : "error");
-        if (response == "0") inputName.removeAttribute("class");
+        input["name"].setAttribute("class", response == "1" ? "success" : "error");
+        if (response == "0") input["name"].removeAttribute("class");
     };
     ajax(validationUrl + "?name=" + name, callback);
 }
