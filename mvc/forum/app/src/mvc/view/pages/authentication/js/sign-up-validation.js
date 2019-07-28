@@ -49,8 +49,12 @@ function validation(all = false) {
 
         if (! all) return;
 
-        if (response["valid"]) {
-            form.submit();
+        /*if (response["valid"]) {
+            // form.submit();
+        }*/
+
+        if (response["finished"]) {
+            alert("Usuário Cadastrado com Sucesso!");
         }
     }
 

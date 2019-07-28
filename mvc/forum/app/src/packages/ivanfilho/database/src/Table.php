@@ -121,10 +121,10 @@ abstract class Table
         $this->update($obj, $where);
     }
 
-    public function get($id)
+    public function get($getBy, $value)
     {
-        $where[] = Utils::createCondition($this, "id", $id);
-        return $this->selectOne($where);
+        $where[] = Utils::createCondition($this, $getBy, $value);
+        return $this->selectOne(array(), $where);
     }
 
     public function getAll()
@@ -235,7 +235,7 @@ abstract class Table
 
     private function select($sql, $whereColumnArray = array(), $asList = false)
     {
-        # echo $sql ."<br>"; #die();
+        // echo $sql ."<br>"; #die();
 
         if (is_array($whereColumnArray) && count($whereColumnArray) > 0) {
             $sql = $this->db->prepare($sql);
@@ -282,6 +282,7 @@ abstract class Table
         $where = $this->formatWhereClause($whereColumnArray);
 
         $sql = "SELECT " .$select ." FROM " .$table .$where;
+        // echo $sql; die;
 
         #var_dump($order); die();
 
