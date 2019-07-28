@@ -21,6 +21,7 @@ function validation()
     $email = isset($_GET["email"]) ? $_GET["email"] : "";
     $pass = isset($_GET["pass"]) ? $_GET["pass"] : "";
     $pass2 = isset($_GET["pass2"]) ? $_GET["pass2"] : "";
+    $cb = isset($_GET["cb"]) ? $_GET["cb"] : "";
 
     $res["name"] = ! empty($name) ? 1 : ($all ? 2 : 0);
 
@@ -52,11 +53,14 @@ function validation()
         $res["pass2"] = $all ? 2 : 0;
     }
 
+    if (! empty($cb)) {
+        $res["cb"] = $cb == "true" ? 1 : 2;
+    } else {
+        $res["cb"] = $all ? 2 : 0;
+    }
+
     if ($all) {
-        $ok = "";
-        foreach ($res as $key => $value) {
-            $ok = $value == 1;
-        }
+        $ok = $res["name"] == 1 && $res["username"] == 1 && $res["email"] == 1 && $res["pass"] == 1 && $res["pass2"] == 1 && $res["cb"] == 1;
 
         $res["valid"] = $ok;
     }

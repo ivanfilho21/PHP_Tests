@@ -13,7 +13,7 @@ function initInputs() {
     inputs["email"] = form.email;
     inputs["pass"] = form.pass;
     inputs["pass2"] = form.pass2;
-    cb = document.getElementById("user-terms");
+    inputs["cb"] = document.getElementById("user-terms");
     submit = document.getElementById("sign-up-form").save;
 }
 
@@ -29,6 +29,19 @@ function validation(all = false) {
 
         for (let key in response) {
             if (inputs[key]) {
+                // Checkbox
+                if (key == "cb") {
+                    let cm = document.getElementsByClassName("cb-wrapper")[0].
+                        getElementsByClassName("checkmark")[0];
+
+                    if (response[key] == "2")
+                        cm.setAttribute("class", cm.getAttribute("class") + " " + "error");
+                    else
+                        cm.setAttribute("class", "checkmark");
+
+                    continue;
+                }
+
                 inputs[key].setAttribute("class", response[key] == "1" ? "success" : "error");
                 if (response[key] == "0") inputs[key].removeAttribute("class");
             }
@@ -41,35 +54,26 @@ function validation(all = false) {
         }
     }
 
-    let url = validationUrl + "?";
-    url += all ? "all=true&" : "";
-    
-    for (let key in inputs) {
-        if (inputs[key].value.length <= 0) continue;
-
-        let value = inputs[key].value;
-        url += key + "=" + value + "&";
-    }
-    url = url.substring(0, url.length - 1);
-
     ajaxSent = true;
     submit.setAttribute("class", "disabled");
-    ajax(url, callback);
+    ajax(generateURL(all), callback);
 
     return false;
 }
 
-function validateUserTerms(res, checkAlways = false) {
-    let cm = document.getElementsByClassName("cb-wrapper")[0].
-        getElementsByClassName("checkmark")[0];
-    if (checkAlways) {
-        if (! res)
-            cm.setAttribute("class", cm.getAttribute("class") + " " + "error");
-        else
-            cm.setAttribute("class", "checkmark");
-    }
+function generateURL(all) {
+    let url = validationUrl + "?";
+    url += all ? "all=true&" : "";
+    
+    for (let key in inputs) {
+        let value = key == "cb" ? inputs[key].checked : inputs[key].value;
+        if (! value) continue;
 
-    return res; 
+        url += key + "=" + value + "&";
+    }
+    url = url.substring(0, url.length - 1);
+
+    return url;
 }
 
-window.onload = initInputs;
+window.onload = function() { initInputs(); }

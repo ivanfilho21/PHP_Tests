@@ -1,9 +1,13 @@
 <?php
 
-define("ROOT", getcwd() ."/");
+use \Wilkins\PackageLoader\PackageLoader;
+
+// define("ROOT", getcwd() ."/");
+define("ROOT", __DIR__ ."/");
 define("VIEW", ROOT ."app/src/mvc/view/pages/");
 define("TEMPLATE", ROOT ."app/src/mvc/view/templates/");
 define("ENVIRONMENT", "dev");
+
 
 if (defined("ENVIRONMENT") && ENVIRONMENT === "dev") {
     define("DB_TYPE", "mysql");
@@ -22,7 +26,7 @@ if (defined("ENVIRONMENT") && ENVIRONMENT === "dev") {
 
 require "app/src/packages/wilkins/composer-file-loader/src/PackageLoader.php";
 
-$loader = new \Wilkins\PackageLoader\PackageLoader();
+$loader = new PackageLoader();
 $loader->load(ROOT ."app/src");
 
 # Database Admin object
