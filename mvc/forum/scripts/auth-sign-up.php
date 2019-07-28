@@ -1,5 +1,7 @@
 <?php
 
+require "../config.php";
+
 $response = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -28,6 +30,7 @@ function validation()
     if (! empty($username)) {
         $reg = "/[a-z0-9-]{6,}/";
         $res["username"] = preg_match($reg, $username) ? 1 : 2;
+        $res["username"] = ! checkUsername($username) ? 3 : $res["username"];
     } else {
         $res["username"] = $all ? 2 : 0;
     }
@@ -60,12 +63,32 @@ function validation()
     }
 
     if ($all) {
-        $ok = $res["name"] == 1 && $res["username"] == 1 && $res["email"] == 1 && $res["pass"] == 1 && $res["pass2"] == 1 && $res["cb"] == 1;
+        /*$ok = $res["name"] == 1 && $res["username"] == 1 && $res["email"] == 1 && $res["pass"] == 1 && $res["pass2"] == 1 && $res["cb"] == 1;
 
-        $res["valid"] = $ok;
+        $res["valid"] = $ok;*/
+        insertUser();
+        $res["finished"] = true;
     }
 
     return $res;
+}
+
+function checkUsername($un)
+{
+    global $dba;
+    return $dba->getTable("users")->get("nickname", $un) != false ? false : true;
+}
+
+function securePassword($pass)
+{
+    return md5($pass);
+}
+
+function insertUser()
+{
+    global $dba;
+    $user = new User(0, 1, $_GET["username"], $_GET["name"], $_GET["email"], securePassword($_GET["pass"]));
+    $dba->getTable("users")->insert($user);
 }
 
 echo json_encode($response);
