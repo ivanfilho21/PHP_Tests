@@ -1,15 +1,18 @@
+var form = document.getElementById("form");
+var newForm = document.getElementById("new-form");
+
 function setRecipeName(name) {
-    let form = document.getElementById("new-form");
-    form.name.value = name;
+    // let form = document.getElementById("new-form");
+    newForm.getElementsByTagName("input")[0].value = name;
 }
 
 function getPlural(word) {
     return word.indexOf("y") != -1 ? word.substring(0, word.length - 1) + "ies" : word + "s";
-} 
+}
 
 function addIngredient() {
-    let form = document.getElementById("form");
-    let newForm = document.getElementById("new-form");
+    // let form = document.getElementById("form");
+    // let newForm = document.getElementById("new-form");
     let list = document.getElementById("ingredient-list");
 
     let ing = form.ingredient;
@@ -60,8 +63,8 @@ function clearIngredient(name) {
     let tr = document.getElementById("ingredient-list").tBodies[0].rows;
     console.log(tr.length);
 
-    let form = document.getElementById("new-form");
-    let ta = form.recipe;
+    // let form = document.getElementById("new-form");
+    let ta = newForm.recipe;
     let text = name;
     let regex = new RegExp(text, "gi");
 
@@ -82,42 +85,6 @@ function clearIngredient(name) {
 }
 
 // List
-var getTableList = function updateTableList(response) {
-    let table = document.getElementById("recipe-table");
-    let data = response != "" ? JSON.parse(response) : [];
-    
-    console.log("Response from the Server:");
-    console.log(data);
-    // console.log(data["head"]);
-
-    for (let j = 0; j < data["head"].length; j++) {
-        let tr = table.tHead.getElementsByTagName("tr")[0];
-        let th = document.createElement("th");
-        th.innerHTML = "" + data["head"][j];
-        tr.appendChild(th);
-    }
-
-    for (let i = 0; i < Object.keys(data).length -1; i++) {
-        let tr = document.createElement("tr");
-
-        let id = document.createElement("td");
-        let name = document.createElement("td");
-        let recipe = document.createElement("td");
-        id.innerHTML = data[i]["id"];
-        name.innerHTML = data[i]["recipe_name"];
-        recipe.innerHTML = data[i]["recipe"];
-
-        console.log(data[i]["id"]);
-        console.log(data[i]["recipe_name"]);
-        console.log(data[i]["recipe"]);
-
-        tr.append(id);
-        tr.append(name);
-        tr.append(recipe);
-
-        table.tBodies[0].append(tr);
-    }
-};
 
 var getList = function(response) {
     let list = document.getElementById("recipe-list");
@@ -130,7 +97,7 @@ var getList = function(response) {
         console.log(key, data[key]);
     }
 
-    for (let i = 0; i < Object.keys(data).length -1; i++) {
+    for (let i = 0; i < Object.keys(data).length; i++) {
         let id = data[i]["id"];
         let name = data[i]["recipe_name"];
         let url = "view-recipe.html?id=" + id;
@@ -196,6 +163,7 @@ function ajax(url, callback, method = "GET", form = "") {
             object[key] = value;
         });
         var json = JSON.stringify(object);
+        alert(json);
 
         xmlhttp.open(form.method, form.action, true);
         xmlhttp.send(json);
