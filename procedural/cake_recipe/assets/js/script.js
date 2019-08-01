@@ -141,6 +141,18 @@ function getFromUrl(url) {
     return list;
 }
 
+// Validation
+function validateFields() {
+    let res = true;
+
+    if (newForm.name.value == "") {
+        res = false;
+        document.getElementById("error-name").innerHTML = "Enter the name of the recipe.";
+    }
+
+    return res;
+}
+
 // Ajax
 function ajax(url, callback, method = "GET", form = "") {
     var processResponseFunction = function() {
@@ -163,7 +175,7 @@ function ajax(url, callback, method = "GET", form = "") {
             object[key] = value;
         });
         var json = JSON.stringify(object);
-        alert(json);
+        // alert(json);
 
         xmlhttp.open(form.method, form.action, true);
         xmlhttp.send(json);

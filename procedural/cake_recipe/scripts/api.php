@@ -1,9 +1,5 @@
 <?php
 
-require "config.php";
-
-// http://localhost/dev/php-tests/procedural/cake_recipe/scripts/api.php/{$table}/{$id}
-
 // echo "<pre>" .var_export($_SERVER, true) ."</pre>";
 
 # Get the HTTP method, path, and body of the request
