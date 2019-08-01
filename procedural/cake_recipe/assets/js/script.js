@@ -126,6 +126,10 @@ var getList = function(response) {
     console.log("Response from the Server:");
     console.log(data);
 
+    for (let key in data) {
+        console.log(key, data[key]);
+    }
+
     for (let i = 0; i < Object.keys(data).length -1; i++) {
         let id = data[i]["id"];
         let name = data[i]["recipe_name"];
@@ -141,6 +145,7 @@ var getRecipe = function(response) {
     let name = data["recipe_name"];
     let main = document.getElementById("main");
     name = name == null ? "Untitled Recipe" : name;
+    console.log(response);
 
     let h1 = document.createElement("h1");
     let p = document.createElement("p");
@@ -170,7 +175,7 @@ function getFromUrl(url) {
 }
 
 // Ajax
-function ajax(url, callback, form="") {
+function ajax(url, callback, method = "GET", form = "") {
     var processResponseFunction = function() {
         if (this.readyState == 4 && this.status == 200) {
             callback(this.responseText);
@@ -182,10 +187,20 @@ function ajax(url, callback, form="") {
 
     if (form != "") {
         let formData = new FormData(form);
-        xmlhttp.open("POST", url, true);
-        xmlhttp.send(formData);
+        // let formData = JSON.stringify(form).serializeArray();
+        // let formData = JSON.stringify(formData).serializeArray();
+        
+        var object = {};
+        
+        formData.forEach(function(value, key) {
+            object[key] = value;
+        });
+        var json = JSON.stringify(object);
+
+        xmlhttp.open(form.method, form.action, true);
+        xmlhttp.send(json);
     } else {
-        xmlhttp.open("GET", url, true);
+        xmlhttp.open(method, url, true);
         xmlhttp.send();
     }
 }

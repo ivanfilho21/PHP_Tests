@@ -3,25 +3,22 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=1.0, initial-scale=1.0">
-    <title>Home Page | Cake Recipe</title>
+    <title>View Recipe | Cake Recipe</title>
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/container.css">
-    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/view.css">
     <script src="assets/js/script.js"></script>
 </head>
 <body>
-    <section class="container">
-    <h1>Cake Recipes</h1>
-
-    <a href="create-recipe.html">Create a New Recipe</a>
-    <br><br>
-
-    <ul id="recipe-list"></ul>
-    </section>
+    <section id="main" class="container"></section>
 
     <script>
         window.onload = function() {
-            ajax("scripts/recipe.php?list=true", getList);
+            let get = getFromUrl(window.location.href);
+            let url = "scripts/api.php/recipe/" + get["id"];
+            
+            if ("id" in get) ajax(url, getRecipe);
+            else window.location.href = "index.html";
         }
     </script>
 </body>

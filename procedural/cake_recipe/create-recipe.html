@@ -49,8 +49,8 @@
 
     <span id="error-name" class="error"></span>
 
-    <form id="new-form" style="display: none;" method="post" onsubmit="return validateFields();" action="scripts/submit.php">
-        <input type="hidden" name="name" placeholder="Recipe Name">
+    <form id="new-form" style="display: none;" method="post" onsubmit="let res = validateFields(); if (res) { ajax('', function(res) { res = JSON.parse(res); console.log(res); }, '', this); window.location.href = 'index.html'; } else { return false; }; return false;" action="scripts/api.php/recipe/">
+        <input type="hidden" name="recipe_name">
         <textarea name="recipe" style="display: none;"></textarea>
         <input class="save" type="submit" name="save" value="Save">
     </form>
