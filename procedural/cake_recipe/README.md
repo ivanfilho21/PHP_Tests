@@ -7,6 +7,4 @@ O sistema foi criado usando páginas estáticas HTML com AJAX para recuperar os 
 (Em progresso...)
 
 # Screenshot
-
-### Autor
-Ivan Filho
+(Em progresso...)
