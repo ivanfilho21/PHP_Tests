@@ -62,7 +62,8 @@ if ($method == "GET") {
 
     if ($rows > 1) {
         for ($i = 0; $i < $rows; $i++) {
-            $obj[] = mysqli_fetch_object($res);
+            $o = mysqli_fetch_object($res);
+            $obj[] = $o;
         }
     } elseif ($rows == 1) {
         $obj = mysqli_fetch_object($res);

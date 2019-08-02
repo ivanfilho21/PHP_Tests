@@ -102,7 +102,9 @@ var getList = function(response) {
         let name = data[i]["recipe_name"];
         let url = "view-recipe.html?id=" + id;
         name = name == null ? "Untitled Recipe" : name;
-        list.innerHTML += "<li class='recipe'><a href='" + url + "'>" + name + "</a></li>";
+
+        let rcp = "<span>" + data[i]["recipe"] + "</span>";
+        list.innerHTML += "<li class='recipe'><a href='" + url + "'>" + name + "<br>" + rcp + "</a></li>";
     }
 };
 

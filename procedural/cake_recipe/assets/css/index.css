@@ -1,3 +1,7 @@
+body {
+    background-color: whitesmoke;
+}
+
 #recipe-list {
     display: flex;
     flex-wrap: wrap;
@@ -6,11 +10,13 @@
 .recipe {
     margin: 1em;
     border-radius: 6px;
+    background-color: white;
     box-shadow: 1px 2px 8px 0px #ccc;
 }
 
 .recipe a {
     display: block;
+    min-width: 100px;
     font-weight: bold;
     padding: 2em 1em;
     color: #444;
