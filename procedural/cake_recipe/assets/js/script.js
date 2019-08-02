@@ -104,7 +104,9 @@ var getList = function(response) {
         name = name == null ? "Untitled Recipe" : name;
 
         let rcp = "<span>" + data[i]["recipe"] + "</span>";
-        list.innerHTML += "<li class='recipe'><a href='" + url + "'>" + name + "<br>" + rcp + "</a></li>";
+        let li = "<li class='recipe col-sm'><a href='" + url + "'>" + name + "<br>" + rcp + "</a></li>";
+
+        list.innerHTML += (i % 2 == 0 ? "<li class='w-100'></li>" : "") + li;
     }
 };
 
