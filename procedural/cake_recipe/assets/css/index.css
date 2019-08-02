@@ -1,8 +1,9 @@
 body {
-    background-color: whitesmoke;
+    background-color: ghostwhite;
 }
 
 #recipe-list {
+    list-style: none;
     display: flex;
     flex-wrap: wrap;
 }

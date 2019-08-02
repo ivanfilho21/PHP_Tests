@@ -106,7 +106,7 @@ var getList = function(response) {
         let rcp = "<span>" + data[i]["recipe"] + "</span>";
         let li = "<li class='recipe col-sm'><a href='" + url + "'>" + name + "<br>" + rcp + "</a></li>";
 
-        list.innerHTML += (i % 2 == 0 ? "<li class='w-100'></li>" : "") + li;
+        list.innerHTML += li;
     }
 };
 
