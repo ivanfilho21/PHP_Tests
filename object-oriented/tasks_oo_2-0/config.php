@@ -3,6 +3,10 @@
 define("ENVIRONMENT", "dev");
 define("DEBUGGING", true);
 define("DB_TYPE", "mysql");
+define("BASE", __DIR__ ."/");
+define("BASE_URL", "http://localhost/dev/php-tests/object-oriented/tasks_oo_2-0/");
+
+// echo BASE; die;
 
 if (defined("ENVIRONMENT") && ENVIRONMENT == "dev") {
     define("DB_NAME", "tasks");
