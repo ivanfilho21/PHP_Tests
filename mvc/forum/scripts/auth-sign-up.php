@@ -28,9 +28,9 @@ function validation()
     $res["name"] = ! empty($name) ? 1 : ($all ? 2 : 0);
 
     if (! empty($username)) {
-        $reg = "/[a-z0-9-]{6,}/";
-        $res["username"] = preg_match($reg, $username) ? 1 : 2;
-        $res["username"] = ! checkUsername($username) ? 3 : $res["username"];
+        $reg = "/[a-z0-9-]{6,12}/";
+        $res["username"] = preg_match($reg, $username) ? 1 : "O nome de usuário deve ter de 6 a 12 caracteres.";
+        $res["username"] = ! checkUsername($username) ? "Este nome já está em uso." : $res["username"];
     } else {
         $res["username"] = $all ? 2 : 0;
     }
@@ -62,11 +62,13 @@ function validation()
         $res["cb"] = $all ? 2 : 0;
     }
 
-    if ($all) {
+    if ($all && $res["username"] == 1 && $res["name"] == 1 && $res["email"] == 1 && $res["pass"] == 1 && $res["pass2"] == 1) {
         /*$ok = $res["name"] == 1 && $res["username"] == 1 && $res["email"] == 1 && $res["pass"] == 1 && $res["pass2"] == 1 && $res["cb"] == 1;
 
         $res["valid"] = $ok;*/
-        insertUser();
+
+        $user = new User(0, 1, $username, $name, $email, securePassword($pass));
+        insertUser($user);
         $res["finished"] = true;
     }
 
@@ -84,10 +86,10 @@ function securePassword($pass)
     return md5($pass);
 }
 
-function insertUser()
+function insertUser($user)
 {
     global $dba;
-    $user = new User(0, 1, $_GET["username"], $_GET["name"], $_GET["email"], securePassword($_GET["pass"]));
+    // $user = new User(0, 1, $_GET["username"], $_GET["name"], $_GET["email"], securePassword($_GET["pass"]));
     $dba->getTable("users")->insert($user);
 }
 

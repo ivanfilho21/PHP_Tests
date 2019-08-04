@@ -34,12 +34,33 @@ function validation(all = false) {
                     let cm = document.getElementsByClassName("cb-wrapper")[0].
                         getElementsByClassName("checkmark")[0];
 
-                    if (response[key] == "2")
+                    if (response[key] != "1") {
                         cm.setAttribute("class", cm.getAttribute("class") + " " + "error");
+                    }
                     else
                         cm.setAttribute("class", "checkmark");
 
                     continue;
+                }
+                // SHOW ERRO MSG
+
+                let parent = inputs[key].parentNode;
+                let errorIcon = parent.getElementsByClassName("error-icon")[0];
+                let errorMsg = document.getElementsByClassName("error-msg")[0];
+
+                // alert(response[key]);
+                if (response[key] != "0" && response[key] != "1") {
+                    
+                    errorIcon.style.display = "block";
+                    
+                    errorMsg = (parent.contains(errorMsg)) ? errorMsg : document.createElement("span");
+                    errorMsg.innerHTML = response[key];
+                    errorMsg.setAttribute("class", "error-msg");
+                    parent.appendChild(errorMsg);
+                } else if (response[key] == "0") {
+                    errorIcon.style.display = "none";
+                    // if (typeof errorMsg != typeof undefined)
+                    // errorMsg.parentNode.removeChild(errorMsg);
                 }
 
                 inputs[key].setAttribute("class", response[key] == "1" ? "success" : "error");

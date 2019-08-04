@@ -1,3 +1,22 @@
+body {
+    background-color: #222;
+    color: whitesmoke;
+}
+
+a {
+    color: cyan;
+}
+
+form label {
+    color: whitesmoke;
+}
+
+form input {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+/* END OF DARK THEME */
+
 .sign-up-wrapper {
     width: 70%;
     margin: 0 auto;
