@@ -103,8 +103,10 @@ var getList = function(response) {
         let url = "view-recipe.html?id=" + id;
         name = name == null ? "Untitled Recipe" : name;
 
-        let rcp = "<span>" + data[i]["recipe"] + "</span>";
-        let li = "<li class='recipe col-sm'><a href='" + url + "'>" + name + "<br>" + rcp + "</a></li>";
+        let rcp = "<div>" + data[i]["recipe"] + "</div>";
+        // rcp = "";
+        let a = "<a href='" + url + "'><span>" + name + rcp + "</span></a>";
+        let li = "<li class='recipe'>" + a + "</li>";
 
         list.innerHTML += li;
     }
