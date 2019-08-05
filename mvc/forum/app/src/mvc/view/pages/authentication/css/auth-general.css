@@ -128,7 +128,7 @@ input[type="checkbox"] {
 }*/
 
 .error-icon:hover ~ .error-msg { visibility: visible; opacity: 1; }
-.error-msg:hover { visibility: visible; opacity: 1; }
+/*.error-msg:hover { visibility: visible; opacity: 1; }*/
 
 .error, .error:focus, .error:active {
     border-color: transparent;

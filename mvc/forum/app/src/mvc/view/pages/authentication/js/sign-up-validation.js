@@ -80,17 +80,27 @@ function showErrorMessage(res, parent) {
     msg.setAttribute("class", "error-msg");
     msg.innerHTML = res;
 
-    let msgMargin = 24;
-    let msgLeft = icon.offsetLeft + icon.offsetWidth + msgMargin;
-    let msgTop = icon.offsetTop - icon.offsetHeight/2 - msgMargin/6;
+    // CLONE
+    let clone = document.createElement("span");
+    clone.innerHTML = res;
+    clone.style.position = "absolute";
+    clone.style.visibility = "hidden";
+    clone.style.opacity = "0";
+    document.body.appendChild(clone);
 
-    if (msgLeft + msg.offsetWidth < window.innerWidth) {
-        msg.style.top = msgTop + "px";
-        msg.style.left = msgLeft + "px";
-    } else {
-        // TODO:
-        // Put below input
-    }
+    let msgWidth = clone.offsetWidth;
+    let msgHeight = clone.offsetHeight;
+    let msgMargin = 26;
+    let msgLeft = icon.offsetLeft + icon.offsetWidth + msgMargin;
+    let msgRight = icon.offsetLeft + icon.offsetWidth - msgMargin - msgWidth;
+    let msgTop = icon.offsetTop - icon.offsetHeight - msgMargin - msgHeight;
+    let msgBottom = icon.offsetTop + icon.offsetHeight + msgMargin;
+
+    document.body.removeChild(clone);
+
+    msg.style.top = msgTop + "px";
+    msg.style.left = icon.offsetLeft + icon.offsetWidth - (msgWidth <= 250 ? 250 : msgWidth) + "px";
+    
     parent.appendChild(msg);
 }
 
