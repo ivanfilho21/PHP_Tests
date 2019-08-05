@@ -4,32 +4,27 @@
     <form id="sign-up-form" method="post" onsubmit="return validation(true)" action="scripts/submit-sign-up.php">
         <label class="rf">Nome Completo</label>
         <div class="input-wrapper">
-            <input type="text" name="name" onchange="validation()">
-            <span class="error-icon"><i class="fa fa-exclamation-circle"></i></span>
+            <input type="text" name="name" oninput="validation()">
         </div>
 
         <label class="rf">Nome de Usuário</label>
         <div class="input-wrapper">
-            <input type="text" name="username" onkeyup="validation()" onchange="validation()">
-            <span class="error-icon"><i class="fa fa-exclamation-circle"></i></span>
+            <input type="text" name="username" oninput="validation()">
         </div>
 
         <label class="rf">E-mail</label>
         <div class="input-wrapper">
-            <input type="text" name="email" onkeyup="validation()" onchange="validation()">
-            <span class="error-icon"><i class="fa fa-exclamation-circle"></i></span>
+            <input type="text" name="email" oninput="validation()">
         </div>
 
         <label class="rf">Senha</label>
         <div class="input-wrapper">
-            <input type="password" name="pass" onkeyup="validation()" onchange="validation()">
-            <span class="error-icon"><i class="fa fa-exclamation-circle"></i></span>
+            <input type="password" name="pass" oninput="validation()">
         </div>
 
         <label class="rf">Repita a Senha</label>
         <div class="input-wrapper">
-            <input type="password" name="pass2" onkeyup="validation()" onchange="validation()">
-            <span class="error-icon"><i class="fa fa-exclamation-circle"></i></span>
+            <input type="password" name="pass2" oninput="validation()">
         </div>
         <br>
 
