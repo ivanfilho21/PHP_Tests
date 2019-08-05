@@ -3,9 +3,6 @@ var inputs = [];
 var ajaxSent = false;
 var validationUrl = "scripts/auth-sign-up.php";
 
-//
-// TODO: MOSTRAR MENSAGEM DE ERRO EM BALÃO OU AO PASSAR O MOUSE
-
 function initInputs() {
     form = document.getElementById("sign-up-form");
     inputs["name"] = form.name;
@@ -43,7 +40,6 @@ function validation(all = false) {
                     continue;
                 }
 
-                // SHOW ERROR MSG
                 showErrorMessage(response[key], inputs[key].parentNode);
 
                 inputs[key].setAttribute("class", response[key] == "1" ? "success" : "error");
@@ -52,10 +48,6 @@ function validation(all = false) {
         }
 
         if (! all) return;
-
-        /*if (response["valid"]) {
-            // form.submit();
-        }*/
 
         if (response["finished"]) {
             alert("Usuário Cadastrado com Sucesso!");
@@ -70,6 +62,36 @@ function validation(all = false) {
 }
 
 function showErrorMessage(res, parent) {
+    let icon = parent.getElementsByClassName("error-icon")[0];
+    let msg = parent.getElementsByClassName("error-msg")[0];
+    
+    if (res == "0" || res == "1") {
+        if (typeof icon != typeof undefined) icon.remove();
+        if (typeof msg != typeof undefined) msg.remove();
+        return;
+    }
+
+    icon = (typeof icon != typeof undefined) ? icon : document.createElement("span");
+    icon.setAttribute("class", "error-icon");
+    icon.innerHTML = "<i class='fa fa-exclamation-circle'></i>";
+    parent.appendChild(icon);
+
+    msg = (typeof msg != typeof undefined) ? msg : document.createElement("span");
+    msg.setAttribute("class", "error-msg");
+    msg.innerHTML = res;
+
+    let msgMargin = 24;
+    let msgLeft = icon.offsetLeft + icon.offsetWidth + msgMargin;
+    let msgTop = icon.offsetTop - icon.offsetHeight/2 - msgMargin/6;
+
+    msg.style.top = msgTop + "px";
+    msg.style.left = msgLeft + "px";
+
+    parent.appendChild(msg);
+}
+
+// Not using this function anymore
+function showErrorMessageOLD(res, parent) {
     // Remove all messages first
     let msgs = document.getElementsByClassName("error-msg");
     for (let i; i < msgs.length; i++) {
@@ -117,7 +139,10 @@ function showErrorMessage(res, parent) {
 
     // TODO: KEEP TESTING SCROLL AND FIX BUG of 2nd time
 
+    msg.style.left = msgLeft + "px";
+
     if ((msgLeft + msgWidth) < window.innerWidth) {
+        msg.style.top = icon.offsetTop - icon.offsetHeight/2 - 6 + "px";
         msg.style.left = msgLeft + "px";
     } else {
         if (msgTop > window.scrollY) {
@@ -147,3 +172,4 @@ function generateURL(all) {
 }
 
 window.onload = function() { initInputs(); }
+window.onresize = function() { validation(); }
