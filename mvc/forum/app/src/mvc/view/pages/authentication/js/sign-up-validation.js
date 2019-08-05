@@ -84,9 +84,13 @@ function showErrorMessage(res, parent) {
     let msgLeft = icon.offsetLeft + icon.offsetWidth + msgMargin;
     let msgTop = icon.offsetTop - icon.offsetHeight/2 - msgMargin/6;
 
-    msg.style.top = msgTop + "px";
-    msg.style.left = msgLeft + "px";
-
+    if (msgLeft + msg.offsetWidth < window.innerWidth) {
+        msg.style.top = msgTop + "px";
+        msg.style.left = msgLeft + "px";
+    } else {
+        // TODO:
+        // Put below input
+    }
     parent.appendChild(msg);
 }
 
