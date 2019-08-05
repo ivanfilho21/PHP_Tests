@@ -23,7 +23,7 @@ function validation()
     $email = isset($_GET["email"]) ? $_GET["email"] : "";
     $pass = isset($_GET["pass"]) ? $_GET["pass"] : "";
     $pass2 = isset($_GET["pass2"]) ? $_GET["pass2"] : "";
-    $cb = isset($_GET["cb"]) ? $_GET["cb"] : "";
+    // $cb = isset($_GET["cb"]) ? $_GET["cb"] : "";
 
     $res["name"] = ! empty($name) ? 1 : ($all ? 2 : 0);
 
@@ -37,36 +37,33 @@ function validation()
 
     if (! empty($email)) {
         $reg = "/[a-zA-Z0-9-\.,]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]{2,3}(\.[a-zA-Z0-9-]+)*/";
-        $res["email"] = preg_match($reg, $email) ? 1 : 2;
+        $res["email"] = preg_match($reg, $email) ? 1 : "E-mail inválido.";
     } else {
         $res["email"] = $all ? 2 : 0;
     }
 
     if (! empty($pass)) {
         $reg = "/[\w]{6,}/";
-        $res["pass"] = preg_match($reg, $pass) ? 1 : 2;
+        $res["pass"] = preg_match($reg, $pass) ? 1 : "A senha deve conter no mínimo 6 caracteres.";
     } else {
         $res["pass"] = $all ? 2 : 0;
     }
 
     if (! empty($pass2)) {
         $reg = "/[\w]{6,}/";
-        $res["pass2"] = preg_match($reg, $pass2) && strcasecmp($pass, $pass2) == 0 ? 1 : 2;
+        $res["pass2"] = preg_match($reg, $pass2) && strcasecmp($pass, $pass2) == 0 ? 1 : "As senhas não coincidem.";
     } else {
         $res["pass2"] = $all ? 2 : 0;
     }
 
     if (! empty($cb)) {
         $res["cb"] = $cb == "true" ? 1 : 2;
-    } else {
-        $res["cb"] = $all ? 2 : 0;
     }
+    /*else {
+        $res["cb"] = $all ? 2 : 0;
+    }*/
 
     if ($all && $res["username"] == 1 && $res["name"] == 1 && $res["email"] == 1 && $res["pass"] == 1 && $res["pass2"] == 1) {
-        /*$ok = $res["name"] == 1 && $res["username"] == 1 && $res["email"] == 1 && $res["pass"] == 1 && $res["pass2"] == 1 && $res["cb"] == 1;
-
-        $res["valid"] = $ok;*/
-
         $user = new User(0, 1, $username, $name, $email, securePassword($pass));
         insertUser($user);
         $res["finished"] = true;
@@ -78,7 +75,7 @@ function validation()
 function checkUsername($un)
 {
     global $dba;
-    return $dba->getTable("users")->get("nickname", $un) != false ? false : true;
+    return $dba->getTable("users")->get("username", $un) != false ? false : true;
 }
 
 function securePassword($pass)

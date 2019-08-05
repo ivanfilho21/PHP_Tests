@@ -5,8 +5,7 @@ label {
     color: #333;
 }
 
-input {
-    width: 100%;
+input, select {
     font-size: 0.9rem;
     margin: 0.5rem 0 1rem 0;
     padding: 0.5rem 0.75rem;
@@ -15,6 +14,10 @@ input {
     background-color: #fbfbfb;
     outline: none;
     transition: box-shadow 0.5s;
+}
+
+input {
+    width: 100%;
 }
 
 input:focus, input:active {
@@ -93,6 +96,29 @@ input[type="checkbox"] {
     display: flex;
     align-items: center;
 }
+
+.info-icon {
+    margin: 0 0 0 0.65rem;
+    color: #333;
+    cursor: pointer;
+}
+
+.info-msg {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    max-width: 250px;
+    z-index: 100;
+    font-size: 0.9rem;
+    padding: 1em;
+    border-radius: 4px;
+    background-color: #444;
+    color: white;
+    transition: 0.25s;
+}
+
+.info-icon:hover ~ .info-msg { visibility: visible; opacity: 1; }
+.info-msg:hover { visibility: visible; opacity: 1; }
 
 .error-icon {
     margin-top: -0.35rem;

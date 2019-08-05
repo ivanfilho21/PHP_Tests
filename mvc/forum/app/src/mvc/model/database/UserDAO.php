@@ -10,7 +10,7 @@ class UserDAO extends Table
         $columns = [
             new Column("id", INT, 11, false, "AUTO_INCREMENT", "PRIMARY KEY"),
             new Column("type_id", INT),
-            new Column("nickname", VARCHAR, 12),
+            new Column("username", VARCHAR, 12),
             new Column("name", VARCHAR, 255),
             new Column("email", VARCHAR, 100),
             new Column("password", VARCHAR, 32),

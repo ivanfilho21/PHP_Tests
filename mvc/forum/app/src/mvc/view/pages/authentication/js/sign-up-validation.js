@@ -78,7 +78,7 @@ function showErrorMessage(res, parent) {
 
     msg = (typeof msg != typeof undefined) ? msg : document.createElement("span");
     msg.setAttribute("class", "error-msg");
-    msg.innerHTML = res;
+    msg.innerHTML = res == "2" ? "Preencha este campo." : res;
 
     // CLONE
     let clone = document.createElement("span");
@@ -184,6 +184,3 @@ function generateURL(all) {
 
     return url;
 }
-
-window.onload = function() { initInputs(); }
-window.onresize = function() { validation(); }
