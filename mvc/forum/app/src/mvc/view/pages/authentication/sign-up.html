@@ -70,7 +70,7 @@
                 let months = document.forms[0].birthmonth;
                 let years = document.forms[0].birthyear;
 
-                let maxDays = new Date(today.getUTCMonth(), today.getUTCFullYear(), 0).getDate();
+                let maxDays = new Date(today.getUTCFullYear(), today.getUTCMonth(), 0).getDate();
                 for (let i = 1; i <= maxDays; i++) {
                     days.innerHTML += "<option value='" + i + "' " + (i == today.getDate() ? "selected" : "") + ">" + i + "</option>";
                 }
