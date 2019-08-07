@@ -141,17 +141,19 @@ input[type="checkbox"] {
     transition: 0.25s;
 }
 
-/*.error-msg::after {
+.error-msg::after {
     content: "";
     position: absolute;
-    top: 95%;
-    left: 44%;
+    /*top: 95%;*/
+    top: 75%;
+    right: 2%;
     width: 0;
     height: 0;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    border-top: 18px solid #444;
-}*/
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 32px solid #444;
+    transform: rotate(-35deg);
+}
 
 .error-icon:hover ~ .error-msg { visibility: visible; opacity: 1; }
 /*.error-msg:hover { visibility: visible; opacity: 1; }*/

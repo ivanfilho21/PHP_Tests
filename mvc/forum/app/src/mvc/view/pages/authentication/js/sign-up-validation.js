@@ -5,12 +5,12 @@ var validationUrl = "scripts/auth-sign-up.php";
 
 function initInputs() {
     form = document.getElementById("sign-up-form");
-    inputs["name"] = form.name;
+    // inputs["name"] = form.name;
     inputs["username"] = form.username;
     inputs["email"] = form.email;
     inputs["pass"] = form.pass;
     inputs["pass2"] = form.pass2;
-    inputs["cb"] = document.getElementById("user-terms");
+    // inputs["cb"] = document.getElementById("user-terms");
     submit = document.getElementById("sign-up-form").save;
 }
 
@@ -27,7 +27,7 @@ function validation(all = false) {
         for (let key in response) {
             if (inputs[key]) {
                 // Checkbox
-                if (key == "cb") {
+                /*if (key == "cb") {
                     let cm = document.getElementsByClassName("cb-wrapper")[0].
                         getElementsByClassName("checkmark")[0];
 
@@ -38,7 +38,7 @@ function validation(all = false) {
                         cm.setAttribute("class", "checkmark");
 
                     continue;
-                }
+                }*/
 
                 showErrorMessage(response[key], inputs[key].parentNode);
 

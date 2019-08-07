@@ -1,6 +1,7 @@
 <?php
 
 require "../config.php";
+date_default_timezone_set('America/Sao_Paulo');
 
 $response = "";
 
@@ -18,17 +19,17 @@ function validation()
         $res[$key] = "";
     }
     // $res = array("name" => "", "username" => "", "email" => "", "pass" => "", "pass2" => "");
-    $name = isset($_GET["name"]) ? $_GET["name"] : "";
+    // $name = isset($_GET["name"]) ? $_GET["name"] : "";
     $username = isset($_GET["username"]) ? $_GET["username"] : "";
     $email = isset($_GET["email"]) ? $_GET["email"] : "";
     $pass = isset($_GET["pass"]) ? $_GET["pass"] : "";
     $pass2 = isset($_GET["pass2"]) ? $_GET["pass2"] : "";
     // $cb = isset($_GET["cb"]) ? $_GET["cb"] : "";
 
-    $res["name"] = ! empty($name) ? 1 : ($all ? 2 : 0);
+    // $res["name"] = ! empty($name) ? 1 : ($all ? 2 : 0);
 
     if (! empty($username)) {
-        $reg = "/[a-z0-9-]{6,12}/";
+        $reg = '/[a-z0-9-]{6,12}/';
         $res["username"] = preg_match($reg, $username) ? 1 : "O nome de usuário deve ter de 6 a 12 caracteres.";
         $res["username"] = ! checkUsername($username) ? "Este nome já está em uso." : $res["username"];
     } else {
@@ -63,8 +64,10 @@ function validation()
         $res["cb"] = $all ? 2 : 0;
     }*/
 
-    if ($all && $res["username"] == 1 && $res["name"] == 1 && $res["email"] == 1 && $res["pass"] == 1 && $res["pass2"] == 1) {
-        $user = new User(0, 1, $username, $name, $email, securePassword($pass));
+    if ($all && $res["username"] == 1 && $res["email"] == 1 && $res["pass"] == 1 && $res["pass2"] == 1) {
+        $date = date("Y-m-d H:i:s");
+
+        $user = new User(0, 1, $username, $email, securePassword($pass), $date);
         insertUser($user);
         $res["finished"] = true;
     }

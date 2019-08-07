@@ -2,12 +2,12 @@
     <h1>Criar Conta</h1>
 
     <form id="sign-up-form" method="post" onsubmit="return validation(true)" action="scripts/submit-sign-up.php">
-        <label class="rf">Nome Completo</label>
+        <!-- <label class="rf">Nome Completo</label>
         <div class="input-wrapper">
             <input type="text" name="name" oninput="validation()">
-        </div>
+        </div> -->
 
-        <div class="input-wrapper">
+        <!-- <div class="input-wrapper">
             <span class="info-icon" data-info="birthday" onmouseover="showInfoMessage.call(this)"><i class="fa fa-question-circle"></i></span>
             <label class="rf">Data de Aniversário</label>
         </div>
@@ -21,19 +21,19 @@
             <select name="birthyear">
                 <option value="0">Ano</option>
             </select>
-        </div>
+        </div> -->
 
         <div class="input-wrapper">
             <span class="info-icon" data-info="username" onmouseover="showInfoMessage.call(this)"><i class="fa fa-info-circle"></i></span>
             <label class="rf">Nome de Usuário</label>
         </div>
         <div class="input-wrapper">
-            <input type="text" name="username" oninput="validation()">
+            <input type="text" name="username" maxlength="12" oninput="validation()">
         </div>
 
         <label class="rf">E-mail</label>
         <div class="input-wrapper">
-            <input type="text" name="email" oninput="validation()">
+            <input type="text" name="email" maxlength="100" oninput="validation()">
         </div>
 
         <div class="input-wrapper">
@@ -41,12 +41,12 @@
             <label class="rf">Senha</label>
         </div>
         <div class="input-wrapper">
-            <input type="password" name="pass" oninput="validation()">
+            <input type="password" name="pass" maxlength="255" oninput="validation()">
         </div>
 
         <label class="rf">Repita a Senha</label>
         <div class="input-wrapper">
-            <input type="password" name="pass2" oninput="validation()">
+            <input type="password" name="pass2" maxlength="255" oninput="validation()">
         </div>
         <!--<br>
 
@@ -139,7 +139,7 @@
             }
 
             window.onload = function() {
-                initBirthday();
+                // initBirthday();
                 initInputs();
             }
             window.onresize = function() { validation(); }

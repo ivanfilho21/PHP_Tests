@@ -2,25 +2,25 @@
 
 class User
 {
-    public function __construct($id = "", $typeId = "", $nickname = "", $name = "", $email = "", $password = "", $last_seen = "", $birthday = "", $creation_date = "")
+    public function __construct($id = "", $typeId = "", $username = "", $email = "", $password = "", $creation_date = "", $name = "", $last_seen = "", $birthday = "")
     {
         $this->id = $id;
         $this->typeId = $typeId;
-        $this->nickname = $nickname;
-        $this->name = $name;
+        $this->username = $username;
         $this->email = $email;
         $this->password = $password;
+        $this->creation_date = $creation_date;
+        $this->name = $name;
         $this->last_seen = $last_seen;
         $this->birthday = $birthday;
-        $this->creation_date = $creation_date;
     }
 
     public function setId($id) { $this->id = $id; }
     public function getId() { return $this->id; }
     public function setTypeId($typeId) { $this->typeId = $type; }
     public function getTypeId() { return $this->typeId; }
-    public function setNickname($nickname) { $this->nickname = $nickname; }
-    public function getNickname() { return $this->nickname; }
+    public function setUsername($username) { $this->username = $username; }
+    public function getUsername() { return $this->username; }
     public function setName($name) { $this->name = $name; }
     public function getName() { return $this->name; }
     public function setEmail($email) { $this->email = $email; }
