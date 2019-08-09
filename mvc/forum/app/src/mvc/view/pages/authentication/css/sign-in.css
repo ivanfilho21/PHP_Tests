@@ -1,0 +1,24 @@
+/* FORM */
+
+.form-wrapper {
+    width: 75%;
+    margin: 0 auto;
+}
+
+@media(min-width: 560px) {
+    .form-wrapper {
+        width: 65%;
+    }
+}
+
+@media(min-width: 720px) {
+    .form-wrapper {
+        width: 55%;
+    }
+}
+
+@media(min-width: 1024px) {
+    .form-wrapper {
+        width: 40%;
+    }
+}
