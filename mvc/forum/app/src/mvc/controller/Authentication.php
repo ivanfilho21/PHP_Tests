@@ -15,13 +15,15 @@ class Authentication extends Controller
 
     public function login()
     {
-        $this->title = "Sign In";
+        $this->title = "Login";
+        $this->styles[] = "sign-in";
+        $this->scripts[] = "sign-in-validation";
         $this->loadView("sign-in");
     }
 
     public function register()
     {
-        $this->title = "Sign Up";
+        $this->title = "Nova Conta";
         $this->styles[] = "sign-up";
         $this->scripts[] = "sign-up-validation";
         $this->loadView("sign-up");
