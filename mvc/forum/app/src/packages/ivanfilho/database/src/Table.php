@@ -40,7 +40,8 @@ define("CL", ":"); #Colon
 * Last Modified: Jul 23, 2019.
 */
 
-# Last modified Jul 24, 2019
+# Last modified Ago 09, 2019
+# Provides a condition to the get method, when I want do a select with more than one param in WHERE query
 # Local modifications that could be pushed later
 # Added common public methods, so that they won't be created in every DAO class 
 # Added constant LONGTEXT
@@ -123,7 +124,13 @@ abstract class Table
 
     public function get($getBy, $value)
     {
-        $where[] = Utils::createCondition($this, $getBy, $value);
+        if (is_array($getBy)) {
+            foreach ($getBy as $key => $value) {
+                $where[] = Utils::createCondition($this, $key, $value);
+            }
+        } else {
+            $where[] = Utils::createCondition($this, $getBy, $value);
+        }
         return $this->selectOne(array(), $where);
     }
 
