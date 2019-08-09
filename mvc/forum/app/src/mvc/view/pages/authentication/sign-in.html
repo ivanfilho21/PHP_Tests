@@ -4,7 +4,7 @@
     <form id="sign-in-form" method="post" onsubmit="return validation()">
         <label class="rf">Nome de Usuário</label>
         <div class="input-wrapper">
-            <input type="text" name="username" maxlength="12">
+            <input type="text" name="username" maxlength="12" autofocus="on">
         </div>
 
         <label class="rf">Senha</label>
@@ -20,6 +20,7 @@
 
         <input type="submit" name="submit" value="Entrar">
 
-        <script>window.onload = initInputs();</script>
+        <script>const URL = "<?php echo URL; ?>";</script>
+        <script>window.onload = function() { initInputs() };</script>
     </form>
 </section>

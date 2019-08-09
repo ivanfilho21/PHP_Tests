@@ -1,7 +1,7 @@
 <section class="sign-up-wrapper">
     <h1>Criar Conta</h1>
 
-    <form id="sign-up-form" method="post" onsubmit="return validation(true)" action="scripts/submit-sign-up.php">
+    <form id="sign-up-form" method="post" onsubmit="return validation(true)">
         <!-- <label class="rf">Nome Completo</label>
         <div class="input-wrapper">
             <input type="text" name="name" oninput="validation()">
@@ -28,7 +28,7 @@
             <label class="rf">Nome de Usuário</label>
         </div>
         <div class="input-wrapper">
-            <input type="text" name="username" maxlength="12" oninput="validation()">
+            <input type="text" name="username" maxlength="12" autofocus="on" oninput="validation()">
         </div>
 
         <label class="rf">E-mail</label>
@@ -48,22 +48,16 @@
         <div class="input-wrapper">
             <input type="password" name="pass2" maxlength="255" oninput="validation()">
         </div>
-        <!--<br>
-
-         <label class="cb-wrapper">
-            <input id="user-terms" type="checkbox" name="user-terms-cb">
-            <span class="checkmark"></span>
-            <span class="label">Declaro que li e aceito os <a href="#">Termos de Serviço</a> do Fórum.</span>
-        </label> -->
 
         <p style="font-size: 0.9rem; padding: 0 4em; text-align: center;">
             Ao se cadastrar, você estará concordando com nossos <a href="#" title="Termos de Serviço">Termos de Serviço</a> e com nossa <a href="#" title="Política de Privacidade">Política de Privacidade</a>.
         </p>
 
-        <input type="submit" name="save" value="Cadastrar">
-
+        <input type="submit" name="submit" value="Cadastrar">
+        
+        <script>const URL = "<?php echo URL; ?>";</script>
         <script>
-            function initBirthday() {
+            /*function initBirthday() {
                 let monthsList = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
                 let today = new Date();
                 let days = document.forms[0].birthday;
@@ -80,7 +74,7 @@
                 for (let i = today.getUTCFullYear(); i >= 1905; i--) {
                     years.innerHTML += "<option value='" + i + "' " + (i == today.getUTCFullYear() ? "selected" : "") + ">" + i + "</option>";
                 }
-            }
+            }*/
 
             function showInfoMessage() {
                 if (! this) return;
@@ -138,10 +132,7 @@
                 parent.appendChild(msg);
             }
 
-            window.onload = function() {
-                // initBirthday();
-                initInputs();
-            }
+            window.onload = function() { initInputs(); }
             window.onresize = function() { validation(); }
         </script>
     </form>

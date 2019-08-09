@@ -1,7 +1,12 @@
+.text-align-center {
+    text-align: center;
+}
+
+
 .alert {
-    margin: 0.5em 0 1em 0;
-    padding: 1em;
-    border-radius: 0.25em;
+    margin: 0.5rem 0 1rem 0;
+    padding: 1rem;
+    border-radius: 0.25rem;
 }
 
 .alert-danger {

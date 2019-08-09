@@ -6,6 +6,7 @@ $templateJs = array();
 <title><?= $this->title ." | " .SITE_NAME ?></title>
 
 <link rel="stylesheet" href="<?= ASSETS ?>css/reset.css">
+<link rel="stylesheet" href="<?= ASSETS ?>css/general.css">
 
 <!-- Template Styles -->
 <?php foreach ($templateCss as $style): ?>

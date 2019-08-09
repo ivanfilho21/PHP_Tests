@@ -1,29 +1,8 @@
-/*body {
-    background-color: #222;
-    color: whitesmoke;
-}
-
-a {
-    color: cyan;
-}
-
-form label {
-    color: whitesmoke;
-}
-
-form input {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: white;
-}*/
-/* END OF DARK THEME */
+/* FORM */
 
 .sign-up-wrapper {
     width: 90%;
     margin: 0 auto;
-}
-
-form {
-    margin-top: 2rem;
 }
 
 /* Required Field */

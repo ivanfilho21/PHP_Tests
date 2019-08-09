@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 require "../config.php";
 
 $response = "";
@@ -20,15 +21,13 @@ function validation()
 
     $username = isset($_GET["username"]) ? $_GET["username"] : "";
     $pass = isset($_GET["pass"]) ? $_GET["pass"] : "";
+    $session = isset($_GET["cb"]) ? $_GET["cb"] : "";
 
-    $reg = '/[a-z0-9-]{6,12}/';
-    $res["username"] = preg_match($reg, $username) ? 1 : "O nome de usuário deve ter de 6 a 12 caracteres.";
+    $user = login($username, $pass);
+    $res["finished"] = ! empty($user);
 
-    $reg = "/[\w]{6,}/";
-    $res["pass"] = preg_match($reg, $pass) ? 1 : "A senha deve conter no mínimo 6 caracteres.";
-
-    if ($res["username"] == 1 && $res["pass"] == 1) {
-        $res["finished"] = login($username, $pass);
+    if ($res["finished"] && $session == "true") {
+        $_SESSION["user-id"] = $user->getId();
     }
 
     return $res;
@@ -37,7 +36,7 @@ function validation()
 function login($un, $pass)
 {
     global $dba;
-    return $dba->getTable("users")->get(array("username" => $un, "password" => $pass), null) != false;
+    return $dba->getTable("users")->get(array("username" => $un, "password" => securePassword($pass)), null);
 }
 
 function securePassword($pass)

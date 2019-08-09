@@ -1,3 +1,7 @@
+form {
+    margin-top: 2rem;
+}
+
 label {
     display: block;
     font-size: 0.95rem;
@@ -33,10 +37,7 @@ input[type="checkbox"] {
 
 /* Custom Checkbox */
 .cb-wrapper {
-    display: block;
-    max-width: 25rem;
-    margin: 0 auto;
-    position: relative;
+    display: inline-block;
     user-select: none;
 }
 
