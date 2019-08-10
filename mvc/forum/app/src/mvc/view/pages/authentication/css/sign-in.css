@@ -1,24 +1,45 @@
 /* FORM */
 
-.form-wrapper {
+/*.form-wrapper {
     width: 75%;
     margin: 0 auto;
+}*/
+
+.account-options {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    text-align: center;
 }
 
-@media(min-width: 560px) {
+.account-options a {
+    margin-bottom: 1rem;
+}
+
+.account-options a:last-child {
+    margin-bottom: 0;
+}
+
+@media only screen and (min-width : 480px) {
     .form-wrapper {
-        width: 65%;
+        width: 70%;
     }
 }
 
-@media(min-width: 720px) {
+@media only screen and (min-width : 768px) {
     .form-wrapper {
-        width: 55%;
+        width: 60%;
     }
 }
 
-@media(min-width: 1024px) {
+@media only screen and (min-width : 992px) {
     .form-wrapper {
-        width: 40%;
+        width: 50%;
+    }
+}
+
+@media only screen and (min-width : 1200px) {
+    .form-wrapper {
+        width: 45%;
     }
 }

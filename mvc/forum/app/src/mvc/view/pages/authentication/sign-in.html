@@ -1,26 +1,33 @@
 <section class="form-wrapper">
-    <h1>Login</h1>
+    <div class="container">
+        <h1>Login</h1>
 
-    <form id="sign-in-form" method="post" onsubmit="return validation()">
-        <label class="rf">Nome de Usuário</label>
-        <div class="input-wrapper">
-            <input type="text" name="username" maxlength="12" autofocus="on">
-        </div>
+        <form id="sign-in-form" method="post" onsubmit="return validation()">
+            <label class="rf">Nome de Usuário</label>
+            <div class="input-wrapper">
+                <input type="text" name="username" maxlength="12" autofocus="on">
+            </div>
 
-        <label class="rf">Senha</label>
-        <div class="input-wrapper">
-            <input type="password" name="pass" maxlength="255">
-        </div>
+            <label class="rf">Senha</label>
+            <div class="input-wrapper">
+                <input type="password" name="pass" maxlength="255">
+            </div>
 
-        <label class="cb-wrapper">
-            <input id="user-terms" type="checkbox" name="session">
-            <span class="checkmark"></span>
-            <span class="label">Lembrar-me</span>
-        </label>
+            <label class="cb-wrapper">
+                <input id="user-terms" type="checkbox" name="session">
+                <span class="checkmark"></span>
+                <span class="label">Lembrar-me</span>
+            </label>
 
-        <input type="submit" name="submit" value="Entrar">
+            <input type="submit" name="submit" value="Entrar">
 
-        <script>const URL = "<?php echo URL; ?>";</script>
-        <script>window.onload = function() { initInputs() };</script>
-    </form>
+            <div class="account-options">
+                <a href="#">Recuperar Conta</a>
+                <a href="#">Criar uma Conta</a>
+            </div>
+
+            <script>const URL = "<?php echo URL; ?>";</script>
+            <script>window.onload = function() { initInputs() };</script>
+        </form>
+    </div>
 </section>

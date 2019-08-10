@@ -1,8 +1,13 @@
 /* FORM */
 
-.sign-up-wrapper {
+/*.form-wrapper {
     width: 90%;
     margin: 0 auto;
+}*/
+
+.legal-warning {
+    font-size: 0.9rem;
+    text-align: center;
 }
 
 /* Required Field */
@@ -12,8 +17,30 @@
     color: red;
 }
 
+/*@media(min-width: 320px) {
+    
+}
+
 @media(min-width: 1024px) {
-    .sign-up-wrapper {
+    .form-wrapper {
         width: 40%;
     }
 }
+
+@media(min-width: 560px) {
+    .form-wrapper {
+        width: 65%;
+    }
+}
+
+@media(min-width: 720px) {
+    .form-wrapper {
+        width: 55%;
+    }
+}
+
+@media(min-width: 1024px) {
+    .form-wrapper {
+        width: 40%;
+    }
+}*/

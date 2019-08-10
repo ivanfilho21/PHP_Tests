@@ -1,3 +1,38 @@
+.form-wrapper {
+    width: 95%;
+    margin: 0 auto;
+}
+
+@media only screen and (min-width : 320px) {
+    .form-wrapper {
+        width: 90%;
+    }
+}
+
+@media only screen and (min-width : 480px) {
+    .form-wrapper {
+        width: 70%;
+    }
+}
+
+@media only screen and (min-width : 768px) {
+    .form-wrapper {
+        width: 60%;
+    }
+}
+
+@media only screen and (min-width : 992px) {
+    .form-wrapper {
+        width: 50%;
+    }
+}
+
+@media only screen and (min-width : 1200px) {
+    .form-wrapper {
+        width: 45%;
+    }
+}
+
 form {
     margin-top: 2rem;
 }
