@@ -15,6 +15,3 @@ A PHP project with the MVC architecture usually follows this structure:
 ## Example
 
 #### [Hello World](https://github.com/ivanfilho21/PHP_Tests/edit/master/mvc/hello-world)
-
-### Author:
-> Ivan Filho
