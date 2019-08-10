@@ -1,7 +1,17 @@
+.h1 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
 .text-align-center {
     text-align: center;
 }
 
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.75rem 0.5rem;
+}
 
 .alert {
     margin: 0.5rem 0 1rem 0;
@@ -13,4 +23,39 @@
     border: 1px solid #ef9a9a;
     background: #ffebee;
     color: #b71c1c;
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (min-width : 320px) {
+    .container {
+        width: 98%;
+    }
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 480px) {
+    .container {
+        width: 96%;
+    }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+    .container {
+        width: 94%;
+    }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+    .container {
+        width: 92%;
+    }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+    .container {
+        width: 90%;
+    }
 }
