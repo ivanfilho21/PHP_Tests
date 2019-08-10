@@ -2,5 +2,4 @@
 
 Sistema de Fórum em PHP.
 
-### Autor:
-Ivan Filho
+![Screenshot](print.png)
