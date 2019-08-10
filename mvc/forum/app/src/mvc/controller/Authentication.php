@@ -15,6 +15,8 @@ class Authentication extends Controller
 
     public function login()
     {
+        $this->checkUserLogged();
+
         $this->title = "Login";
         $this->styles[] = "sign-in";
         $this->scripts[] = "sign-in-validation";
@@ -23,9 +25,27 @@ class Authentication extends Controller
 
     public function register()
     {
+        $this->checkUserLogged();
+
         $this->title = "Nova Conta";
         $this->styles[] = "sign-up";
         $this->scripts[] = "sign-up-validation";
         $this->loadView("sign-up");
+    }
+
+    public function logout()
+    {
+        deleteUserSession();
+        deleteUserCookie();
+
+        echo "Saindo...";
+        redirect("home", true, 3000);
+    }
+
+    private function checkUserLogged()
+    {
+        if (! empty($this->user)) {
+            redirect("home");
+        }
     }
 }

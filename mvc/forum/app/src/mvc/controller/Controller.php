@@ -13,10 +13,14 @@ abstract class Controller
     public function __construct($name = "")
     {
         $this->controllerName = (! empty($name)) ? strtolower($name) ."/" : "";
+
+        global $user;
+        $this->user = $user;
     }
 
     protected function loadView($view)
     {
+
         require TEMPLATE .$this->template ."/" .$this->template .".php";
     }
 

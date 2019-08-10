@@ -13,5 +13,7 @@ class Home extends Controller
     {
         $this->title = "Home Page";
         $this->loadView("home");
+
+        echo (! empty($this->user)) ? "Bem vindo, " .$this->user->getUsername() : "";
     }
 }

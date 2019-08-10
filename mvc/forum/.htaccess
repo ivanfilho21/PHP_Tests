@@ -1,5 +1,6 @@
 RewriteEngine on
 
+
 # Redirect to Index with url parameter
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f

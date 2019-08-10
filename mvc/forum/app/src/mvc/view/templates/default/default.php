@@ -33,8 +33,12 @@ $templateJs = array();
     <nav>
         <ul>
             <li><a href="<?= URL ?>">Home</a></li>
-            <li><a href="<?= URL ?>register">Sign Up</a></li>
-            <li><a href="<?= URL ?>login">Sign In</a></li>
+        <?php if (! empty($this->user)): ?>
+            <li><a href="<?= URL ?>logout">Sair</a></li>
+        <?php else: ?>
+            <li><a href="<?= URL ?>register">Criar Conta</a></li>
+            <li><a href="<?= URL ?>login">Entrar</a></li>
+        <?php endif; ?>
         </ul>
     </nav>
 </header>

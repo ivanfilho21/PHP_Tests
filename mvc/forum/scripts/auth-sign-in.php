@@ -1,8 +1,8 @@
 <?php
 
-session_start();
 require "../config.php";
 
+global $dba;
 $response = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -23,23 +23,21 @@ function validation()
     $pass = isset($_GET["pass"]) ? $_GET["pass"] : "";
     $session = isset($_GET["cb"]) ? $_GET["cb"] : "";
 
-    $user = login($username, $pass);
+    $user = $dba->getTable("users")->get(array("username" => $username, "password" => securePassword($pass)), null);
     $res["finished"] = ! empty($user);
 
-    if ($res["finished"] && $session == "true") {
-        $_SESSION["user-id"] = $user->getId();
+    if ($res["finished"]) {
+        $_SESSION["user-session"]["username"] = $user->getUsername();
+        $_SESSION["user-session"]["password"] = $user->getPassword();
+
+        if ($session == "true") {
+            # TODO: encrypt userInfo to put in a cookie
+            $username = encode($username);
+            $pass = encode($pass);
+
+            setrawcookie("user-session", $username . md5(":") . $pass . "", time() + (86400 * 30), "/");
+        }
     }
 
     return $res;
-}
-
-function login($un, $pass)
-{
-    global $dba;
-    return $dba->getTable("users")->get(array("username" => $un, "password" => securePassword($pass)), null);
-}
-
-function securePassword($pass)
-{
-    return md5($pass);
 }

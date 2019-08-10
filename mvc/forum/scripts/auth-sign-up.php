@@ -61,6 +61,7 @@ function validation()
 
             $user = new User(0, 1, $username, $email, securePassword($pass), $date);
             insertUser($user);
+
             $res["finished"] = true;
         }
     }
@@ -72,11 +73,6 @@ function checkUsername($un)
 {
     global $dba;
     return $dba->getTable("users")->get("username", $un) != false ? false : true;
-}
-
-function securePassword($pass)
-{
-    return md5($pass);
 }
 
 function insertUser($user)
