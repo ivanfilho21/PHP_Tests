@@ -28,6 +28,3 @@ PHP scripts with HTML5, CSS3, and JavaScript.
 
 ## Status:
 * You never stop learning something new :)
-
-### Author:
-> Ivan Filho.
