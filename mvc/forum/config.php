@@ -23,9 +23,9 @@ if (defined("ENVIRONMENT") && ENVIRONMENT === "dev") {
     define("ASSETS", URL ."assets/");
     define("REL_TEMPLATE", URL ."forum/app/src/mvc/view/templates/");
     define("REL_PAGE", URL ."app/src/mvc/view/pages/");
-    define("SITE_NAME", "Forum - [DEV MODE]");
+    define("SITE_NAME", "Fórum - [DEV MODE]");
 } else {
-    define("SITE_NAME", "Forum");
+    define("SITE_NAME", "Fórum");
 }
 
 require "app/src/packages/wilkins/composer-file-loader/src/PackageLoader.php";
