@@ -12,8 +12,9 @@ echo json_encode($response);
 
 function validation()
 {
-    global $dba;
+    global $auth;
     $res = array();
+    $res["finished"] = "false";
 
     foreach ($_GET as $key => $value) {
         $res[$key] = "";
@@ -21,22 +22,12 @@ function validation()
 
     $username = isset($_GET["username"]) ? $_GET["username"] : "";
     $pass = isset($_GET["pass"]) ? $_GET["pass"] : "";
-    $session = isset($_GET["cb"]) ? $_GET["cb"] : "";
+    $session = isset($_GET["cb"]) ? $_GET["cb"] == "true" : "";
 
-    $user = $dba->getTable("users")->get(array("username" => $username, "password" => securePassword($pass)), null);
-    $res["finished"] = ! empty($user);
-
-    if ($res["finished"]) {
-        $_SESSION["user-session"]["username"] = $username;
-        $_SESSION["user-session"]["password"] = $pass;
-
-        if ($session == "true") {
-            # TODO: encrypt userInfo to put in a cookie
-            $username = encode($username);
-            $pass = encode($pass);
-
-            setrawcookie("user-cookie", $username . md5(":") . $pass . "", time() + (86400 * 30), "/");
-        }
+    $user = $auth->getUser(array("username" => $username, "password" => $auth->securePassword($pass)));
+    if (! empty($user)) {
+        $auth->login($user, $session);
+        $res["finished"] = "true";
     }
 
     return $res;

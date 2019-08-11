@@ -13,6 +13,8 @@ echo json_encode($response);
 
 function validation()
 {
+    global $auth;
+
     $res = array();
     $all = isset($_GET["all"]) ? true : false;
 
@@ -37,6 +39,7 @@ function validation()
     if (! empty($email)) {
         $reg = "/[a-zA-Z0-9-\.,]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]{2,3}(\.[a-zA-Z0-9-]+)*/";
         $res["email"] = preg_match($reg, $email) ? 1 : "E-mail inválido.";
+        $res["email"] = ! checkEmail($email) ? "Este e-mail já está em uso." : $res["email"];
     } else {
         $res["email"] = $all ? 2 : 0;
     }
@@ -59,8 +62,11 @@ function validation()
         if ($res["username"] == 1 && $res["email"] == 1 && $res["pass"] == 1 && $res["pass2"] == 1) {
             $date = date("Y-m-d H:i:s");
 
-            $user = new User(0, 1, $username, $email, securePassword($pass), $date);
-            insertUser($user);
+            $user = new User(0, 1, $username, $email, $auth->securePassword($pass), $date);
+            $auth->insertUser($user);
+
+            # Log user
+            $auth->login($user);
 
             $res["finished"] = true;
         }
@@ -71,12 +77,12 @@ function validation()
 
 function checkUsername($un)
 {
-    global $dba;
-    return $dba->getTable("users")->get("username", $un) != false ? false : true;
+    global $auth;
+    return ! $auth->checkField("username", $un);
 }
 
-function insertUser($user)
+function checkEmail($email)
 {
-    global $dba;
-    $dba->getTable("users")->insert($user);
+    global $auth;
+    return ! $auth->checkField("email", $email);
 }

@@ -14,8 +14,9 @@ abstract class Controller
     {
         $this->controllerName = (! empty($name)) ? strtolower($name) ."/" : "";
 
-        global $user;
-        $this->user = $user;
+        global $auth;
+        $this->auth = $auth;
+        $this->user = $auth->getLoggedUser();
     }
 
     protected function loadView($view)

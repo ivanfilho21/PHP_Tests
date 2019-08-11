@@ -35,8 +35,8 @@ class Authentication extends Controller
 
     public function logout()
     {
-        deleteUserSession();
-        deleteUserCookie();
+        $this->auth->deleteUserSession();
+        $this->auth->deleteUserCookie();
 
         echo "Saindo...";
         redirect("home", true, 2000);
