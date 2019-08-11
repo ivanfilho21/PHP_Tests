@@ -17,9 +17,14 @@ class Home extends Controller
         echo (! empty($this->user)) ? "Bem vindo, " .$this->user->getUsername() : "";
     }
 
-    public function dashboard()
+    public function dashboard($table = "", $mode = "")
     {
+        $this->scripts[] = "category-validation";
+
+        $view = (! empty($table) && ! empty($mode)) ? $mode ."-" .$table : "dashboard";
+        $categories = $this->dba->getTable("categories")->getAll(null, null, true);
+        
         $this->title = "Dashboard";
-        $this->loadView("dashboard");
+        $this->loadView($view, array("categories" => $categories));
     }
 }

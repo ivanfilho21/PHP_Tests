@@ -120,4 +120,4 @@ $templateJs = array();
         </nav>
     </div>
 </header>
-<section class="container"><?php $this->requireView($view); ?></section></body></html>
+<section class="container"><?php $this->requireView($view, $data); ?></section></body></html>

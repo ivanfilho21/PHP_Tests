@@ -22,6 +22,7 @@ class FriendlyURL
         $controller = $this->getController($url);
         $action = $this->getAction($url);
         $params = $this->getParams($url);
+        // echo $params; die;
         $res = true;
 
         /*echo "Controller: " .$controller ."<br>";
@@ -39,7 +40,12 @@ class FriendlyURL
             // $controller = __NAMESPACE__ ."\\" .$controller;
 
             $obj = new $controller();
-            if (method_exists($obj, $action)) $obj->$action();
+            if (method_exists($obj, $action)) {
+                if (is_callable(array($obj, $action))) {
+                    call_user_func_array(array($obj, $action), $params);
+                }
+                #$obj->$action($params);
+            }
             else $res = false;
         } else {
             $res = false;
@@ -51,7 +57,10 @@ class FriendlyURL
             $action = DEFAULT_ACTION;
 
             $obj = new $controller;
-            $obj->$action();
+            if (is_callable(array($obj, $action))) {
+                call_user_func_array(array($obj, $action), $params);
+            }
+            #$obj->$action($params);
         }
         die;
     }
@@ -152,7 +161,8 @@ class FriendlyURL
             array_shift($url);
             // var_dump($url);
 
-            $params = implode("/", $url);
+            // $params = implode("/", $url);
+            $params = $url;
         }
         // echo "<br> Controller: " .$params ."<br>";
         return $params;

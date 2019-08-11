@@ -1,11 +1,11 @@
 function ajax(url, callback, form="") {
-    var processResponseFunction = function() {
+    let processResponseFunction = function() {
         if (this.readyState == 4 && this.status == 200) {
             callback(this.responseText);
         }
     };
 
-    var xmlhttp = new XMLHttpRequest();
+    let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = processResponseFunction;
 
     if (form != "") {

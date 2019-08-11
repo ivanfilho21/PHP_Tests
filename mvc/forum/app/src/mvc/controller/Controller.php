@@ -14,19 +14,22 @@ abstract class Controller
     {
         $this->controllerName = (! empty($name)) ? strtolower($name) ."/" : "";
 
-        global $auth;
+        global $dba, $auth;
+        $this->dba = $dba;
         $this->auth = $auth;
         $this->user = $auth->getLoggedUser();
     }
 
-    protected function loadView($view)
+    protected function loadView($view, $data = array())
     {
-
+        if (! empty($data)) extract($data);
         require TEMPLATE .$this->template ."/" .$this->template .".php";
     }
 
-    private function requireView($view)
+    private function requireView($view, $data = array())
     {
+        if (! empty($data)) extract($data);
+        
         $file = VIEW .$this->controllerName .$view;
         // echo $file;
         

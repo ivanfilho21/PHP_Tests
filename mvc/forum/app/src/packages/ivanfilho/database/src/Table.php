@@ -40,7 +40,8 @@ define("CL", ":"); #Colon
 * Last Modified: Jul 23, 2019.
 */
 
-# Last modified Ago 09, 2019
+# Last modified Ago 11, 2019
+# Added select, where and asList params in getAll method.
 # Provides a condition to the get method, when I want do a select with more than one param in WHERE query
 # Local modifications that could be pushed later
 # Added common public methods, so that they won't be created in every DAO class 
@@ -134,9 +135,9 @@ abstract class Table
         return $this->selectOne(array(), $where);
     }
 
-    public function getAll()
+    public function getAll($select = array(), $where = array(), $asList = false)
     {
-        return $this->selectAll();
+        return $this->selectAll($select, $where, $asList);
     }
 
     public function remove($id)
