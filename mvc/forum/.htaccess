@@ -1,5 +1,6 @@
 RewriteEngine on
 
+# ErrorDocument 404 /dev/php-tests/mvc/forum/error-docs/404.html
 
 # Redirect to Index with url parameter
 RewriteCond %{REQUEST_FILENAME} !-d

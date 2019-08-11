@@ -78,6 +78,5 @@ function checkUsername($un)
 function insertUser($user)
 {
     global $dba;
-    // $user = new User(0, 1, $_GET["username"], $_GET["name"], $_GET["email"], securePassword($_GET["pass"]));
     $dba->getTable("users")->insert($user);
 }

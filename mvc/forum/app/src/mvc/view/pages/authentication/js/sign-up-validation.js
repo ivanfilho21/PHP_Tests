@@ -35,7 +35,7 @@ function validation(all = false) {
         if (! all) return;
 
         if (response["finished"]) {
-            window.location.replace(URL + "home");
+            window.location.replace(URL + "dashboard");
         }
     }
 

@@ -2,6 +2,8 @@
 
 use \Wilkins\PackageLoader\PackageLoader;
 
+session_start();
+
 // define("ROOT", getcwd() ."/");
 define("ROOT", __DIR__ ."/");
 define("VIEW", ROOT ."app/src/mvc/view/pages/");
@@ -35,6 +37,9 @@ $loader->load(ROOT ."app/src");
 
 # Database Admin object
 $dba = \App\Database\DBA::getInstance();
+
+# Logged User
+$user = getLoggedUser();
 
 # Template Configuration
 $template = "default";
@@ -91,7 +96,7 @@ function deleteUserSession()
 
 function deleteUserCookie()
 {
-    setcookie("user-session", "", time()-3600, "/");
+    setcookie("user-cookie", "", time()-3600, "/");
 }
 
 function getLoggedUser()
@@ -102,8 +107,8 @@ function getLoggedUser()
     if (isset($_SESSION["user-session"])) {
         $un = $_SESSION["user-session"]["username"];
         $pass = $_SESSION["user-session"]["password"];
-    } else if (isset($_COOKIE["user-session"])) {
-        $cookie = $_COOKIE["user-session"];
+    } else if (isset($_COOKIE["user-cookie"])) {
+        $cookie = $_COOKIE["user-cookie"];
         #echo $cookie; die();
         $cookie = explode(md5(":"), $cookie);
 

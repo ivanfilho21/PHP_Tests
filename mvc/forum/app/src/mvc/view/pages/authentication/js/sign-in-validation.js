@@ -23,7 +23,7 @@ function validation() {
         submit.removeAttribute("class");
 
         if (response["finished"]) {
-            window.location.replace(URL + "home");
+            window.location.replace(URL + "dashboard");
         } else {
             let error = document.body.getElementsByClassName("alert-danger")[0];
             error = ! error ? document.createElement("div") : error;

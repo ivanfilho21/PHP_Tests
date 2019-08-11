@@ -39,7 +39,7 @@ class Authentication extends Controller
         deleteUserCookie();
 
         echo "Saindo...";
-        redirect("home", true, 3000);
+        redirect("home", true, 2000);
     }
 
     private function checkUserLogged()

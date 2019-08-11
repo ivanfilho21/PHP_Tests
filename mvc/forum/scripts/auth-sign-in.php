@@ -2,7 +2,6 @@
 
 require "../config.php";
 
-global $dba;
 $response = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -13,6 +12,7 @@ echo json_encode($response);
 
 function validation()
 {
+    global $dba;
     $res = array();
 
     foreach ($_GET as $key => $value) {
@@ -27,15 +27,15 @@ function validation()
     $res["finished"] = ! empty($user);
 
     if ($res["finished"]) {
-        $_SESSION["user-session"]["username"] = $user->getUsername();
-        $_SESSION["user-session"]["password"] = $user->getPassword();
+        $_SESSION["user-session"]["username"] = $username;
+        $_SESSION["user-session"]["password"] = $pass;
 
         if ($session == "true") {
             # TODO: encrypt userInfo to put in a cookie
             $username = encode($username);
             $pass = encode($pass);
 
-            setrawcookie("user-session", $username . md5(":") . $pass . "", time() + (86400 * 30), "/");
+            setrawcookie("user-cookie", $username . md5(":") . $pass . "", time() + (86400 * 30), "/");
         }
     }
 

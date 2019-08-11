@@ -16,4 +16,10 @@ class Home extends Controller
 
         echo (! empty($this->user)) ? "Bem vindo, " .$this->user->getUsername() : "";
     }
+
+    public function dashboard()
+    {
+        $this->title = "Dashboard";
+        $this->loadView("dashboard");
+    }
 }
