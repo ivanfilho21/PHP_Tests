@@ -34,10 +34,7 @@ class FriendlyURL
 
         if (file_exists($file)) {
             // echo "File Exists";
-
-            // $controller = "\App\Controller\\" .$controller;
-            // $controller = "\\App\\Controller\\" .$controller;
-            // $controller = __NAMESPACE__ ."\\" .$controller;
+            $controller = "\App\Controller\\" .$controller;
 
             $obj = new $controller();
             if (method_exists($obj, $action)) {
@@ -55,6 +52,8 @@ class FriendlyURL
         if (! $res) {
             $controller = NOT_FOUND_CONTROLLER;
             $action = DEFAULT_ACTION;
+            
+            $controller = "\App\Controller\\" .$controller;
 
             $obj = new $controller;
             if (is_callable(array($obj, $action))) {

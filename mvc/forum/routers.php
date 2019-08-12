@@ -9,8 +9,8 @@ $routers["/index/"] = "/home/index";
 $routers["/authentication"] = "/home/index";
 $routers["/authentication/"] = "/home/index";
 
-$routers["/dashboard"] = "/home/dashboard";
-$routers["/dashboard/"] = "/home/dashboard";
+$routers["/board/{id}"] = "/board/open/:id";
+$routers["/board/{id}/"] = "/board/open/:id";
 
 $routers["/logout"] = "/authentication/logout";
 $routers["/logout/"] = "/authentication/logout";

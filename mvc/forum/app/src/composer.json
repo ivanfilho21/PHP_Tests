@@ -4,21 +4,10 @@
     "description": "Load composer file",
     "autoload": {
         "psr-4": {
-            "": [
-                "../../",
-                "mvc/model/",
-                "mvc/model/database/",
-                "mvc/controller/"
-            ],
-            "App\\": [
-                ""
-            ],
-            "App\\Controller\\": [
-                "mvc/controller/"
-            ],
-            "App\\Database\\": [
-                "mvc/model/database/"
-            ],
+            "": ["../../", "mvc/model/", "mvc/model/database/", "mvc/controller/"],
+            "App\\": [""],
+            "App\\Controller\\": ["mvc/controller/"],
+            "App\\Database\\": ["mvc/model/database/"],
             "IvanFilho\\Database\\": ["packages/ivanfilho/database/src/"],
             "IvanFilho\\Authentication": ["packages/ivanfilho/authentication/src/"],
             "wilkins\\PackageLoader\\": ["packages/wilkins/composer-file-loader/src/"]
