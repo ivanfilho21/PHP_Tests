@@ -10,6 +10,7 @@ class Board
         $this->url = $url;
         $this->description = $description;
         $this->creation_date = $creation_date;
+        $this->latest_topic = new Topic();
     }
 
     public function setId($id) { $this->id = $id; }
@@ -24,4 +25,6 @@ class Board
     public function getDescription() { return $this->description; }
     public function setCreationDate($creation_date) { $this->creation_date = $creation_date; }
     public function getCreationDate() { return $this->creation_date; }
+    public function setLatestTopic($latest_topic) { $this->latest_topic = $latest_topic; }
+    public function getLatestTopic() { return $this->latest_topic; }
 }

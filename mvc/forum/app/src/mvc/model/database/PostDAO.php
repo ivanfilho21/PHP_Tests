@@ -9,11 +9,9 @@ class PostDAO extends Table
     {
         $columns = [
             new Column("id", INT, 11, false, "AUTO_INCREMENT", "PRIMARY KEY"),
+            new Column("topic_id", INT),
             new Column("author_id", INT),
-            new Column("category_id", INT),
-            new Column("title", VARCHAR, 150),
             new Column("content", LONGTEXT),
-            new Column("publish_date", DATETIME),
             new Column("update_date", DATETIME),
             new Column("creation_date", DATETIME)
         ];

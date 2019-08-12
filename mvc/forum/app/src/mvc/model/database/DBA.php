@@ -46,6 +46,7 @@ class DBA
         $this->tables[] = new \UserDAO($pdo);
         $this->tables[] = new \BoardDAO($pdo);
         $this->tables[] = new \CategoryDAO($pdo);
+        $this->tables[] = new \TopicDAO($pdo);
         $this->tables[] = new \PostDAO($pdo);
 
         $this->createTables();
