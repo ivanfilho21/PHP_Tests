@@ -40,7 +40,8 @@ define("CL", ":"); #Colon
 * Last Modified: Jul 23, 2019.
 */
 
-# Last modified Ago 11, 2019
+# Last modified Ago 12, 2019
+# Updated select method so when selectAll with whereColumns is called it will return correctly.
 # Added select, where and asList params in getAll method.
 # Provides a condition to the get method, when I want do a select with more than one param in WHERE query
 # Local modifications that could be pushed later
@@ -135,8 +136,18 @@ abstract class Table
         return $this->selectOne(array(), $where);
     }
 
-    public function getAll($select = array(), $where = array(), $asList = false)
+    public function getAll($selectArray = array(), $whereArray = array(), $asList = false)
     {
+        $select = array();
+        $where = array();
+
+        foreach ($selectArray as $key => $value) {
+            $select[] = Utils::createSelection($this, $key, $value);
+        }
+
+        foreach ($whereArray as $key => $value) {
+            $where[] = Utils::createCondition($this, $key, $value);
+        }
         return $this->selectAll($select, $where, $asList);
     }
 
@@ -159,7 +170,7 @@ abstract class Table
     protected function selectOne($selectColumnArray = array(), $whereColumnArray = array(), $asList = false)
     {
         $sql = $this->createSelectSQL($selectColumnArray, $whereColumnArray, 1);
-        return $this->select($sql, $whereColumnArray, $asList);
+        return $this->select($sql, $whereColumnArray, $asList, 1);
     }
 
     protected function selectAll($selectColumnArray = array(), $whereColumnArray = array(), $asList = false)
@@ -241,11 +252,11 @@ abstract class Table
         $sql->execute();
     }
 
-    private function select($sql, $whereColumnArray = array(), $asList = false)
+    private function select($sql, $whereColumnArray = array(), $asList = false, $limit = 0)
     {
         // echo $sql ."<br>"; #die();
 
-        if (is_array($whereColumnArray) && count($whereColumnArray) > 0) {
+        /*if (is_array($whereColumnArray) && count($whereColumnArray) > 0) {
             $sql = $this->db->prepare($sql);
 
             foreach ($whereColumnArray as $column) {
@@ -254,7 +265,7 @@ abstract class Table
                 if ($column->getExtra() == "like") {
                     $value = QT ."%" .$column->getValue() ."%" .QT;
                 }
-                # echo CL .$column->getName() ." = " .$value ."<br>";
+                echo CL .$column->getName() ." = " .$value ."<br>";
                 $sql->bindValue(CL .$column->getName(), $value);
             }
 
@@ -277,6 +288,39 @@ abstract class Table
             elseif ($sql->rowCount() > 1) {
                 return $sql->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, get_class($object));
             }
+        }*/
+
+        $object = new $this->classType();
+
+        if (is_array($whereColumnArray) && count($whereColumnArray) > 0) {
+            $sql = $this->db->prepare($sql);
+
+            foreach ($whereColumnArray as $column) {
+                $value = $column->getValue();
+
+                if ($column->getExtra() == "like") {
+                    $value = QT ."%" .$column->getValue() ."%" .QT;
+                }
+                // echo CL .$column->getName() ." = " .$value ."<br>";
+                $sql->bindValue(CL .$column->getName(), $value);
+            }
+
+            // $sql->setFetchMode(PDO::FETCH_INTO, new $this->classType());
+            $sql->execute();
+        } else {
+            $sql = $this->db->query($sql);
+        }
+
+        if ($sql->rowCount() == 1) {
+            # It could be a selectAll but only 1 was fetched
+            $fetch = $sql->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, get_class($object));
+            return ($limit == 1) ? ($asList ? $fetch : $fetch[0]) : $fetch;
+            // return ($asList) ? array($fetch) : $fetch;
+        }
+        elseif ($sql->rowCount() > 1) {
+            $fetch = $sql->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, get_class($object));
+            // echo "<pre>" .print_r($fetch, true) ."</pre>";
+            return $fetch;
         }
 
         return ($asList) ? array() : false;

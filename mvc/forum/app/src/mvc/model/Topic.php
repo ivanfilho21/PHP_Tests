@@ -6,7 +6,6 @@ class Topic
     {
         $this->id = $id;
         $this->author_id = $author_id;
-        $this->category_id = $category_id;
         $this->board_id = $board_id;
         $this->title = $title;
         $this->content = $content;
@@ -19,8 +18,6 @@ class Topic
     public function getId() { return $this->id; }
     public function setAuthorId($author_id) { $this->author_id = $author_id; }
     public function getAuthorId() { return $this->author_id; }
-    public function setCategoryId($category_id) { $this->category_id = $category_id; }
-    public function getCategoryId() { return $this->category_id; }
     public function setBoardId($board_id) { $this->board_id = $board_id; }
     public function getBoardId() { return $this->board_id; }
     public function setTitle($title) { $this->title = $title; }

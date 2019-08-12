@@ -9,6 +9,7 @@ class BoardDAO extends Table
     {
         $columns = [
             new Column("id", INT, 11, false, "AUTO_INCREMENT", "PRIMARY KEY"),
+            new Column("moderator_id", INT, 11, false),
             new Column("category_id", INT, 11, false),
             new Column("name", VARCHAR, 60),
             new Column("url", VARCHAR, 60),
