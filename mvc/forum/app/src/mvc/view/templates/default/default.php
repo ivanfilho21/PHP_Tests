@@ -7,6 +7,7 @@ $templateJs = array();
 
 <link rel="stylesheet" href="<?= ASSETS ?>css/reset.css">
 <link rel="stylesheet" href="<?= ASSETS ?>css/general.css">
+<link rel="stylesheet" href="<?= ASSETS ?>css/forum.css">
 
 <!-- Template Styles -->
 <?php foreach ($templateCss as $style): ?>

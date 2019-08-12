@@ -24,6 +24,7 @@ class Board extends Controller
 
         $where = array("id" => $board->getId());
         $topics = $this->dba->getTable("topics")->getAll(array(), array("board_id" => $board->getId()));
+        $topics = (! empty($topics)) ? $topics : array();
 
         for ($i=0; $i < count($topics); $i++) {
             $where = array("id" => $topics[$i]->getAuthorId());

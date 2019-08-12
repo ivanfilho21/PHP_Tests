@@ -3,7 +3,7 @@
 <table>
     <thead>
         <tr>
-            <th>Ícone</th>
+            <th></th>
             <th>Título</th>
             <th>Último Post</th>
             <th>Respostas (qty)</th>
@@ -59,6 +59,6 @@
 
     <div>
         <img src="<?php echo URL; ?>assets/img/topic-fixed.ico" alt="Board Icon" width="24">
-        <span>Tópico Fixado.</span>
+        <span>Tópico Fixo.</span>
     </div>
 </div>
