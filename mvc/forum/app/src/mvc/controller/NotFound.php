@@ -1,6 +1,6 @@
 <?php
 
-use \App\Controller\Controller;
+namespace App\Controller;
 
 class NotFound extends Controller
 {

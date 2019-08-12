@@ -1,6 +1,6 @@
 <?php
 
-use \App\Controller\Controller;
+namespace App\Controller;
 
 class Home extends Controller
 {
@@ -11,20 +11,18 @@ class Home extends Controller
 
     public function index()
     {
+        $categories = $this->dba->getTable("categories")->getAll();
+        $categories = ! empty($categories) ? $categories : array();
+
+        $boards = $this->dba->getTable("boards")->getAll();
+        $boards = ! empty($boards) ? $boards : array();
+
+        $viewData["categories"] = $categories;
+        $viewData["boards"] = $boards;
+         
         $this->title = "Home Page";
-        $this->loadView("home");
+        $this->loadView("home", $viewData);
 
         echo (! empty($this->user)) ? "Bem vindo, " .$this->user->getUsername() : "";
-    }
-
-    public function dashboard($table = "", $mode = "")
-    {
-        $this->scripts[] = "category-validation";
-
-        $view = (! empty($table) && ! empty($mode)) ? $mode ."-" .$table : "dashboard";
-        $categories = $this->dba->getTable("categories")->getAll(null, null, true);
-        
-        $this->title = "Dashboard";
-        $this->loadView($view, array("categories" => $categories));
     }
 }
