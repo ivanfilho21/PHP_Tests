@@ -17,6 +17,22 @@ class Home extends Controller
         $boards = $this->dba->getTable("boards")->getAll();
         $boards = ! empty($boards) ? $boards : array();
 
+        for ($i=0; $i < count($boards); $i++) { 
+            $where = array(
+                "category_id" => $boards[$i]->getCategoryId(),
+                "board_id" => $boards[$i]->getId()
+            );
+            $topic = $this->dba->getTable("topics")->get($where, null);
+            if (! empty($topic)) {
+                $where = array(
+                    "id" => $topic->getAuthorId()
+                );
+                $author = $this->dba->getTable("users")->get($where, null);
+                $topic->setAuthor($author);
+                $boards[$i]->setLatestTopic($topic);
+            }
+        }
+
         $viewData["categories"] = $categories;
         $viewData["boards"] = $boards;
          
