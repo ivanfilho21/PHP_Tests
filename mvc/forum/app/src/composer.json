@@ -8,6 +8,7 @@
             "App\\": [""],
             "App\\Controller\\": ["mvc/controller/"],
             "App\\Database\\": ["mvc/model/database/"],
+            "IvanFilho\\Date\\": ["packages/ivanfilho/date/src/"],
             "IvanFilho\\Database\\": ["packages/ivanfilho/database/src/"],
             "IvanFilho\\Authentication": ["packages/ivanfilho/authentication/src/"],
             "wilkins\\PackageLoader\\": ["packages/wilkins/composer-file-loader/src/"]
