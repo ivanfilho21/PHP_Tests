@@ -29,14 +29,19 @@
             </td>
 
             <td width="30%">
-                <?php $latestTopic = $board->getLatestTopic(); ?>
-                <?php if (! empty($latestTopic->getTitle())): ?>
                 <div class="latest-topic">
+                <?php $latestTopic = $board->getLatestTopic(); ?>
+                <?php $date = \IvanFilho\Date\Date::timeDiff( $latestTopic->getCreationDate(), true ); ?>
+                <?php if (! empty($latestTopic->getTitle())): ?>
                     <a href="#" class="title"><?php echo utf8_encode($board->getLatestTopic()->getTitle()); ?></a>
                     <div>por <a href="#" class="user"><?php echo $latestTopic->getAuthor()->getUsername(); ?></a></div>
-                    <div>Postado em <?php echo date("d/m/Y", strtotime($latestTopic->getCreationDate())); ?>, às <?php echo date("H:i", strtotime($latestTopic->getCreationDate())); ?>.</div>
-                </div>
+                    <div>Postado há <?php echo $date; ?>.</div>
+                    <!-- <div>por <a href="#" class="user"><?php #echo $latestTopic->getAuthor()->getUsername(); ?></a></div> -->
+                    <!-- <div>Postado em <?php #echo date("d/m/Y", strtotime($latestTopic->getCreationDate())); ?>, às <?php #echo date("G:i", strtotime($latestTopic->getCreationDate())); ?>.</div> -->
+                <?php else: ?>
+                    <div>Não há tópicos.</div>
                 <?php endif; ?>
+                </div>
             </td>
         </tr>
         <?php endif; ?>

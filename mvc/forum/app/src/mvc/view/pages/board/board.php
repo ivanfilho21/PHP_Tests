@@ -1,39 +1,52 @@
-<h1><?php echo $board->getName(); ?></h1>
+<div class="category"><?php echo $board->getName(); ?></div>
 
 <table>
     <thead>
         <tr>
             <th></th>
-            <th>Título</th>
-            <th>Último Post</th>
-            <th>Respostas (qty)</th>
-            <th>Visualizações (qty)</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($topics as $topic): ?>
+        <?php
+        $where = array("topic_id" => $topic->getId());
+        $posts = $this->dba->getTable("posts")->get($where, null);
+        $posts = (! empty($posts)) ? $posts : array();
+        ?>
         <tr>
             <td>
                 <img src="<?php echo URL; ?>assets/img/topic.ico" alt="Topic Status Icon">
             </td>
 
-            <td width="60%">
+            <td width="50%">
                 <div>
-                    <a href="#"><?php echo utf8_encode($topic->getTitle()); ?></a>
-                    <p>Autor: <a href="<?php echo URL; ?>users/<?php echo $topic->getAuthor()->getUsername(); ?>"><?php echo $topic->getAuthor()->getUsername(); ?></a></p>
+                    <a href="#" class="title"><?php echo utf8_encode($topic->getTitle()); ?></a>
+                    <div>Autor: <a href="<?php echo URL; ?>users/<?php echo $topic->getAuthor()->getUsername(); ?>"><?php echo $topic->getAuthor()->getUsername(); ?></a></div>
                 </div>
             </td>
 
             <td>
-                ...
+                <div>
+                <?php if (! empty($posts)): ?>
+                    <div>
+                        <?php echo $posts[0]->getTitle(); ?>
+                    </div>
+                <?php else: ?>
+                    <div>Não há postagens.</div>
+                <?php endif; ?>
+                </div>
             </td>
 
             <td>
-                ...
+                <div><?php echo count($posts); ?> respostas.</div>
             </td>
 
             <td>
-                <p>...<?php #echo $topic->getViews(); ?></p>
+                <div><?php echo $topic->getViews(); ?> visualizações.</div>
             </td>
         </tr>
         <?php endforeach ?>

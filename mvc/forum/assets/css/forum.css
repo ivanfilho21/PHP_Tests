@@ -17,6 +17,14 @@ td {
     background-color: whitesmoke;
 }
 
+.title {
+    font-weight: bold;
+}
+
+.user {
+    text-decoration: underline;
+}
+
 .category {
     display: block;
     padding: 0.5rem;
@@ -31,11 +39,3 @@ td {
 }
 
 .board {}
-
-.board .title {
-    font-weight: bold;
-}
-
-.user {
-    text-decoration: underline;
-}
