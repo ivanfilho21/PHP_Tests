@@ -27,8 +27,8 @@ td {
 
 .category {
     display: block;
-    padding: 0.5rem;
-    border: 1px solid;
+    padding: 0.25rem 0.5rem;
+    /*border: 1px solid;*/
     background-color: blue;
     background-image: linear-gradient(to right, #3f51b5, #2196f3);
     color: white;
