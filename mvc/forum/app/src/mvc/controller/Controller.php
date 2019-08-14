@@ -26,6 +26,13 @@ abstract class Controller
         require TEMPLATE .$this->template ."/" .$this->template .".php";
     }
 
+    protected function checkUserLogged(bool $value = true)
+    {
+        if (empty($this->user) === $value) {
+            redirect("home");
+        }
+    }
+
     private function requireView($view, $data = array())
     {
         if (! empty($data)) extract($data);

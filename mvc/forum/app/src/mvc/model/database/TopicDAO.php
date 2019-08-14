@@ -19,4 +19,13 @@ class TopicDAO extends Table
         
         parent::__construct($pdo, "\Topic", "topics", $columns);
     }
+
+    public function getLatest($boardId)
+    {
+        $order = array(
+            array("column" => $this->findColumn("id"), "criteria" => "DESC")
+        );
+        $where = array("board_id" => $boardId);
+        return $this->get($where, null, $order);
+    }
 }

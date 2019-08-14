@@ -124,7 +124,7 @@ abstract class Table
         $this->update($obj, $where);
     }
 
-    public function get($getBy, $value)
+    public function get($getBy, $value, $order = array())
     {
         if (is_array($getBy)) {
             foreach ($getBy as $key => $value) {
@@ -133,7 +133,7 @@ abstract class Table
         } else {
             $where[] = Utils::createCondition($this, $getBy, $value);
         }
-        return $this->selectOne(array(), $where);
+        return $this->selectOne(array(), $where, false, $order);
     }
 
     public function getAll($selectArray = array(), $whereArray = array(), $asList = false)
@@ -167,9 +167,9 @@ abstract class Table
         $this->prepareValues("delete", null, $whereColumnArray);
     }
 
-    protected function selectOne($selectColumnArray = array(), $whereColumnArray = array(), $asList = false)
+    protected function selectOne($selectColumnArray = array(), $whereColumnArray = array(), $asList = false, $order = array())
     {
-        $sql = $this->createSelectSQL($selectColumnArray, $whereColumnArray, 1);
+        $sql = $this->createSelectSQL($selectColumnArray, $whereColumnArray, 1, array(), $order);
         return $this->select($sql, $whereColumnArray, $asList, 1);
     }
 

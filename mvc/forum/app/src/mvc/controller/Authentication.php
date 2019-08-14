@@ -7,7 +7,10 @@ class Authentication extends Controller
     public function __construct()
     {
         parent::__construct("authentication");
-        $this->styles[] = "auth-general";
+        $this->styles[] = array(
+            "path" => REL_PAGE .$this->controllerName ."css/",
+            "name" => "auth-general"
+        );
     }
 
     public function index()
@@ -15,21 +18,35 @@ class Authentication extends Controller
 
     public function login()
     {
-        $this->checkUserLogged();
+        $this->checkUserLogged(false);
 
         $this->title = "Login";
-        $this->styles[] = "sign-in";
-        $this->scripts[] = "sign-in-validation";
+        $this->styles[] = array(
+            "path" => REL_PAGE .$this->controllerName ."css/",
+            "name" => "sign-in"
+        );
+        $this->scripts[] = array(
+            "path" => REL_PAGE .$this->controllerName ."js/",
+            "name" => "sign-in-validation",
+            "defer" => "on"
+        );
         $this->loadView("sign-in");
     }
 
     public function register()
     {
-        $this->checkUserLogged();
+        $this->checkUserLogged(false);
 
         $this->title = "Nova Conta";
-        $this->styles[] = "sign-up";
-        $this->scripts[] = "sign-up-validation";
+        $this->styles[] = array(
+            "path" => REL_PAGE .$this->controllerName ."css/",
+            "name" => "sign-up"
+        );
+        $this->scripts[] = array(
+            "path" => REL_PAGE .$this->controllerName ."js/",
+            "name" => "sign-up-validation",
+            "defer" => "on"
+        );
         $this->loadView("sign-up");
     }
 
@@ -40,12 +57,5 @@ class Authentication extends Controller
 
         echo "Saindo...";
         redirect("home", true, 2000);
-    }
-
-    private function checkUserLogged()
-    {
-        if (! empty($this->user)) {
-            redirect("home");
-        }
     }
 }

@@ -23,7 +23,7 @@ if (defined("ENVIRONMENT") && ENVIRONMENT === "dev") {
     define("URL", $_SERVER["REQUEST_SCHEME"] ."://" .$_SERVER["SERVER_NAME"] ."/" .implode("/", $array) ."/");
 
     define("ASSETS", URL ."assets/");
-    define("REL_TEMPLATE", URL ."forum/app/src/mvc/view/templates/");
+    define("REL_TEMPLATE", URL ."app/src/mvc/view/templates/");
     define("REL_PAGE", URL ."app/src/mvc/view/pages/");
     define("SITE_NAME", "Fórum - [DEV MODE]");
 } else {

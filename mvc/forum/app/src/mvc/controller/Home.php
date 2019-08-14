@@ -18,8 +18,9 @@ class Home extends Controller
         $boards = ! empty($boards) ? $boards : array();
 
         for ($i=0; $i < count($boards); $i++) {
-            $where = array("board_id" => $boards[$i]->getId());
-            $topic = $this->dba->getTable("topics")->get($where, null);
+            // $where = array("board_id" => $boards[$i]->getId());
+            // $topic = $this->dba->getTable("topics")->getLatest($where, null);
+            $topic = $this->dba->getTable("topics")->getLatest($boards[$i]->getId());
             
             if (! empty($topic)) {
                 $where = array(
