@@ -35,8 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $res = preg_match($reg, $pass2) && strcasecmp($pass, $pass2) == 0;
     if (! $res) $_SESSION["error-register"]["password2"] = "As senhas devem ser iguais.";
 
-    var_dump($res);
-
     if ($res) {
         unset($_SESSION["error-register"]);
         $date = \IvanFilho\Date\Date::getCurrentDate();

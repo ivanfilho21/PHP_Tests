@@ -24,7 +24,7 @@
             <div class="alert alert-danger">Usuário ou Senha incorretos.</div>
             <?php endif ?>
 
-            <input type="submit" name="submit" value="Entrar">
+            <input class="btn btn-default" type="submit" name="submit" value="Entrar">
 
             <div class="account-options">
                 <a href="#">Recuperar Conta</a>

@@ -25,12 +25,7 @@ class Authentication extends Controller
         $this->title = "Login";
         $this->styles[] = array(
             "path" => REL_PAGE .$this->controllerName ."css/",
-            "name" => "sign-in"
-        );
-        $this->scripts[] = array(
-            "path" => REL_PAGE .$this->controllerName ."js/",
-            "name" => "sign-in-validation",
-            "defer" => "on"
+            "name" => "login"
         );
         $this->loadView("login");
     }
@@ -44,12 +39,7 @@ class Authentication extends Controller
         $this->title = "Nova Conta";
         $this->styles[] = array(
             "path" => REL_PAGE .$this->controllerName ."css/",
-            "name" => "sign-up"
-        );
-        $this->scripts[] = array(
-            "path" => REL_PAGE .$this->controllerName ."js/",
-            "name" => "sign-up-validation",
-            "defer" => "on"
+            "name" => "register"
         );
         $this->loadView("register");
     }

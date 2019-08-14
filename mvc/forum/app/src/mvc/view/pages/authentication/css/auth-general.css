@@ -23,16 +23,22 @@
 
 @media only screen and (min-width : 992px) {
     .form-wrapper {
-        width: 50%;
+        width: 55%;
     }
 }
 
 @media only screen and (min-width : 1200px) {
     .form-wrapper {
-        width: 45%;
+        width: 50%;
     }
 }
 
 form {
     margin-top: 2rem;
+}
+
+input[type="submit"] {
+    display: block;
+    max-width: 260px;
+    margin: 1.5rem auto;
 }

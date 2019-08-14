@@ -1,0 +1,12 @@
+.legal-warning {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Required Field */
+.rf::after {
+    content: "*";
+    margin-left: 0.4rem;
+    color: red;
+}

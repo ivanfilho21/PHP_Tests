@@ -5,7 +5,7 @@
         <form method="post">
             <!-- <label class="rf">Nome Completo</label>
             <div class="input-wrapper">
-                <input type="text" name="name" oninput="validation()">
+                <input type="text" name="name">
             </div> -->
 
             <!-- <div class="input-wrapper">
@@ -64,11 +64,11 @@
                 <input type="password" name="password2" maxlength="255">
             </div>
 
-            <p class="legal-warning container">
+            <p class="container legal-warning">
                 Ao se cadastrar, você estará concordando com nossos <a href="#" title="Termos de Serviço">Termos de Serviço</a> e com nossa <a href="#" title="Política de Privacidade">Política de Privacidade</a>.
             </p>
 
-            <input type="submit" name="submit" value="Cadastrar">
+            <input class="btn btn-default" type="submit" name="submit" value="Cadastrar">
             
             <script>const URL = "<?php echo URL; ?>";</script>
             <script>
@@ -99,14 +99,11 @@
 
                     let type = icon.getAttribute("data-info");
                     switch(type) {
-                        case "birthday":
-                            res = "<b>Data de Aniversário:</b><br>&#8226; Usamos essa informação para prover uma melhor experiência de usuário.<br>&#8226; Nós não compartilhamos essa informação com outros membros.";
-                            break;
                         case "username":
-                            res = "<b>Nome de Usuário:</b><br>&#8226; De 6 a 12 caracteres.<br>&#8226; Não inclua caracteres especiais.";
+                            res = "<b>Nome de Usuário:</b><ul class='ul ul-circle'><li>De 6 a 12 caracteres.</li><li>Não incluir caracteres epeciais.</li></ul>";
                             break;
                         case "password":
-                            res = "<b>Senha:</b><br>&#8226; No mínimo 6 caracteres.";
+                            res = "<b>Senha:</b><ul class='ul ul-circle'><li>No mínimo 6 caracteres.</li></ul>";
                             break;
                         default:
                             res = "";
@@ -146,7 +143,6 @@
                     
                     parent.appendChild(msg);
                 }
-                window.onresize = function() { validation(); }
             </script>
         </form>
     </div>
