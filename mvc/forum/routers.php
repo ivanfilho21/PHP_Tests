@@ -24,5 +24,3 @@ $routers["/register"] = "/authentication/register";
 $routers["/register/"] = "/authentication/register";
 $routers["/sign-up"] = "/authentication/register";
 $routers["/sign-up/"] = "/authentication/register";
-
-// $routers["/login/{id}"] = "/authentication/login/:id";

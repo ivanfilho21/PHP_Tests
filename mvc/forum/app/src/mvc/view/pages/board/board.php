@@ -14,7 +14,7 @@
         <?php foreach ($topics as $topic): ?>
         <?php
         $where = array("topic_id" => $topic->getId());
-        $posts = $this->dba->getTable("posts")->get($where, null);
+        $posts = $this->dba->getTable("posts")->get($where);
         $posts = (! empty($posts)) ? $posts : array();
         ?>
         <tr>

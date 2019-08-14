@@ -40,7 +40,8 @@ define("CL", ":"); #Colon
 * Last Modified: Jul 23, 2019.
 */
 
-# Last modified Ago 12, 2019
+# Last modified Ago 14, 2019
+# Updated get and getAll methods
 # Updated select method so when selectAll with whereColumns is called it will return correctly.
 # Added select, where and asList params in getAll method.
 # Provides a condition to the get method, when I want do a select with more than one param in WHERE query
@@ -124,25 +125,27 @@ abstract class Table
         $this->update($obj, $where);
     }
 
-    public function get($getBy, $value, $order = array())
+    public function get($whereArray, $selectArray = array(), $order = array())
     {
-        if (is_array($getBy)) {
-            foreach ($getBy as $key => $value) {
-                $where[] = Utils::createCondition($this, $key, $value);
-            }
-        } else {
-            $where[] = Utils::createCondition($this, $getBy, $value);
+        $select = array();
+        foreach ($selectArray as $key => $value) {
+            $select[] = Utils::createSelection($this, $key);
         }
-        return $this->selectOne(array(), $where, false, $order);
+
+        $where = array();
+        foreach ($whereArray as $key => $value) {
+            $where[] = Utils::createCondition($this, $key, $value);
+        }
+        return $this->selectOne($select, $where, false, $order);
     }
 
-    public function getAll($selectArray = array(), $whereArray = array(), $asList = false)
+    public function getAll($whereArray = array(), $selectArray = array(), $asList = false)
     {
         $select = array();
         $where = array();
 
         foreach ($selectArray as $key => $value) {
-            $select[] = Utils::createSelection($this, $key, $value);
+            $select[] = Utils::createSelection($this, $key);
         }
 
         foreach ($whereArray as $key => $value) {

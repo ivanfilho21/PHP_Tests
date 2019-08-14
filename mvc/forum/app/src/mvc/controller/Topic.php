@@ -16,16 +16,6 @@ class Topic extends Controller
             "name" => "validation",
             "defer" => "on"
         );
-        $this->scripts[] = array(
-            "path" => REL_PAGE .$this->controllerName ."js/",
-            "name" => "initialize",
-            "defer" => "on"
-        );
-        $this->scripts[] = array(
-            "path" => REL_PAGE .$this->controllerName ."js/",
-            "name" => "validation",
-            "defer" => "on"
-        );
     }
 
     public function index()
@@ -46,8 +36,22 @@ class Topic extends Controller
 
         require "scripts/topic-submit.php";
 
+        $boards = array();
+        $cats = array();
+        $categories = $this->dba->getTable("categories")->getAll();
+        foreach ($categories as $c) {
+            $where = array("category_id" => $c->getId());
+            $b = $this->dba->getTable("boards")->getAll($where);
+            if (empty($b)) continue;
+
+            $cats[$c->getName()] = $b;
+        }
+
         $viewData["boardId"] = (! empty($boardId)) ? $boardId : 0;
-        $viewData["boards"] = $this->dba->getTable("boards")->getAll();
+        $viewData["boards"] = $cats;
+
+
+
         $this->title = "Novo Tópico";
         $this->loadView("create-topic", $viewData);
     }

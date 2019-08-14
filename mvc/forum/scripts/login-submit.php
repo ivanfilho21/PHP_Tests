@@ -15,14 +15,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $this->auth->getUser(array("username" => $username, "password" => $this->auth->securePassword($pass)));
 
         if (empty($user)) {
-            $_SESSION["error-login"] = "Usuário ou Senha incorretos.";
+            $_SESSION["error-msg"] = "Usuário ou Senha incorretos.";
         } else {
-            unset($_SESSION["error-login"]);
+            unset($_SESSION["error-msg"]);
             $this->auth->login($user, $session);
             redirect("home");
         }
     } else {
-        $_SESSION["error-login"] = "Usuário ou Senha incorretos.";
+        $_SESSION["error-msg"] = "Usuário ou Senha incorretos.";
     }
 
     return $res;

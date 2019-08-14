@@ -21,28 +21,34 @@
     text-align: center;
 }
 
+/* FLEX */
+
+.flex { display: flex; flex-wrap: wrap; }
+.flex-1 { flex: 1; }
+.flex.justify-content-spc-ar { justify-content: space-around; }
+.flex.justify-content-spc-btw { justify-content: space-between; }
+
+/* CONTAINER */
+
 .container {
     width: 100%;
     margin: 0 auto;
     padding: 0.75rem 0.5rem;
 }
 
-.alert {
-    margin: 0.5rem 0 1rem 0;
-    padding: 1rem;
-    border-radius: 0.25rem;
-}
-
-.alert-danger {
-    border: 1px solid #ef9a9a;
-    background: #ffebee;
-    color: #b71c1c;
+.container-narrow {
+    width: 98%;
+    margin: 0 auto;
+    padding: 0.75rem 0.5rem;
 }
 
 /* Custom, iPhone Retina */ 
 @media only screen and (min-width : 320px) {
     .container {
         width: 98%;
+    }
+    .container-narrow {
+        width: 94%;
     }
 }
 
@@ -51,12 +57,18 @@
     .container {
         width: 96%;
     }
+    .container-narrow {
+        width: 80%;
+    }
 }
 
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
     .container {
         width: 94%;
+    }
+    .container-narrow {
+        width: 75%;
     }
 }
 
@@ -65,6 +77,9 @@
     .container {
         width: 92%;
     }
+    .container-narrow {
+        width: 65%;
+    }
 }
 
 /* Large Devices, Wide Screens */
@@ -72,6 +87,24 @@
     .container {
         width: 90%;
     }
+    .container-narrow {
+        width: 60%;
+    }
+}
+
+
+
+
+.alert {
+    margin: 0.75rem 0 0.5rem 0;
+    padding: 1rem;
+    border-radius: 0.25rem;
+}
+
+.alert-danger {
+    border: 1px solid #ef9a9a;
+    background: #ffebee;
+    color: #b71c1c;
 }
 
 /* BUTTONS */
@@ -145,20 +178,16 @@ input, textarea {
     width: 100%;
 }
 
-.input-round {
-    border-radius: 15px;
-    background-color: #fbfbfb;
-}
-
-.input-round:focus, .input-round:active {
-    box-shadow: 0px 0px 0.5rem #bcb;
-    transition: 0.25s;
-}
-
 input[type="checkbox"] {
     width: auto;
     margin-left: 0.65rem;
     margin-bottom: 0.5rem;
+}
+
+input[type="submit"] {
+    display: block;
+    max-width: 260px;
+    margin: 1.5rem auto;
 }
 
 /* Custom Checkbox */

@@ -29,12 +29,12 @@ class TopicDAO extends Table
             )
         );
         $where = array("board_id" => $boardId);
-        return $this->get($where, null, $order);
+        return $this->get($where, array(), $order);
     }
 
     public function getAuthor($dba, $topic)
     {
         $where = array("id" => $topic->getAuthorId());
-        return $dba->getTable("users")->get($where, null);
+        return $dba->getTable("users")->get($where);
     }
 }

@@ -19,16 +19,15 @@ class Board extends Controller
         if (empty($url)) {
             redirect("home");
         }
-        $board = $this->dba->getTable("boards")->get("url", $url);
-        $category = $this->dba->getTable("categories")->get("id", $board->getCategoryId());
-
-        $where = array("id" => $board->getId());
-        $topics = $this->dba->getTable("topics")->getAll(array(), array("board_id" => $board->getId()));
+        $board = $this->dba->getTable("boards")->get(array("url" => $url));
+        $category = $this->dba->getTable("categories")->get(array("id" => $board->getCategoryId()));
+        
+        $topics = $this->dba->getTable("topics")->getAll(array("board_id" => $board->getId()));
         $topics = (! empty($topics)) ? $topics : array();
 
         for ($i=0; $i < count($topics); $i++) {
             $where = array("id" => $topics[$i]->getAuthorId());
-            $author = $this->dba->getTable("users")->get($where, null);
+            $author = $this->dba->getTable("users")->get($where);
             $topics[$i]->setAuthor($author);
         }
 

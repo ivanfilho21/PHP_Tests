@@ -1,4 +1,4 @@
-<section class="form-wrapper">
+<section class="container-narrow">
     <div class="container">
         <h1>Criar Conta</h1>
 
@@ -24,18 +24,18 @@
                 </select>
             </div> -->
 
-            <?php if (! empty($_SESSION["error-register"])): ?>
+            <?php if (! empty($_SESSION["error-msg"])): ?>
             <div class="alert alert-danger">
                 <span class="b">Foram encontrados os seguintes erros:</span>
                 <ul class="ul ul-circle">
-                <?php foreach($_SESSION["error-register"] as $err): ?>
+                <?php foreach($_SESSION["error-msg"] as $err): ?>
                     <?php if (! empty($err)): ?>
                     <li><?= $err ?></li>
                     <?php endif ?>
                 <?php endforeach ?>
                 </ul>
             </div>
-            <?php unset($_SESSION["error-register"]) ?>
+            <?php unset($_SESSION["error-msg"]) ?>
             <?php endif ?>
 
             <div class="input-wrapper">
@@ -70,7 +70,7 @@
 
             <input class="btn btn-default" type="submit" name="submit" value="Cadastrar">
             
-            <script>const URL = "<?php echo URL; ?>";</script>
+            <script>const URL = "<?php echo URL ?>";</script>
             <script>
                 /*function initBirthday() {
                     let monthsList = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];

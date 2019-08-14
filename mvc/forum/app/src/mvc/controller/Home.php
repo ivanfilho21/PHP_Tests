@@ -26,7 +26,7 @@ class Home extends Controller
                 $boards[$i]->setLatestTopic($topic);
             }
             $where = array("id" => $boards[$i]->getModeratorId());
-            $moderator = $this->dba->getTable("users")->get($where, null);
+            $moderator = $this->dba->getTable("users")->get($where);
 
             if (! empty($moderator)) {
                 $boards[$i]->setModerator($moderator);

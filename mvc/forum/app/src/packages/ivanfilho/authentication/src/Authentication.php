@@ -14,12 +14,12 @@ class Authentication
 
     public function checkField($field, $value)
     {
-        return $this->userDAO->get($field, $value) !== false;
+        return $this->userDAO->get(array($field => $value)) !== false;
     }
 
     public function getUser(array $fields)
     {
-        return $this->userDAO->get($fields, null);
+        return $this->userDAO->get($fields);
     }
 
     public function insertUser(User $user)
@@ -103,7 +103,7 @@ class Authentication
         # Now, user might not exist anymore in database.
         # Check user in database
 
-        $user = $this->userDAO->get(array("username" => $un, "password" => $pass), null);
+        $user = $this->userDAO->get(array("username" => $un, "password" => $pass));
 
         if (empty($user)) {
             $this->deleteUserSession();

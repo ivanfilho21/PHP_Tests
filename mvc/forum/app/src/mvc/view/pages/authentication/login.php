@@ -1,5 +1,5 @@
-<section class="form-wrapper">
-    <div class="container">
+<section class="container-narrow">
+    <div class="container-narrow">
         <h1>Login</h1>
 
         <form method="post">
@@ -19,8 +19,8 @@
                 <span class="label">Continuar logado</span>
             </label>
 
-            <?php if (! empty($_SESSION["error-login"])): ?>
-            <?php unset($_SESSION["error-login"]) ?>
+            <?php if (! empty($_SESSION["error-msg"])): ?>
+            <?php unset($_SESSION["error-msg"]) ?>
             <div class="alert alert-danger">Usuário ou Senha incorretos.</div>
             <?php endif ?>
 
