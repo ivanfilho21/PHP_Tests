@@ -73,3 +73,13 @@ function redirect($url = "", $replace = false, $timeInMillis = false)
     <?php
     exit();
 }
+
+function format(String $d)
+{
+    $d = trim($d);
+    $d = stripslashes($d);
+    $d = htmlspecialchars($d);
+    // $d = utf8_encode($d);
+
+    return $d;
+}

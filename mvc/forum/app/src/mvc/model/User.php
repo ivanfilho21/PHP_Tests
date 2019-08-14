@@ -2,7 +2,7 @@
 
 class User
 {
-    public function __construct($id = "", $typeId = "", $username = "", $email = "", $password = "", $creation_date = "", $name = "", $last_seen = "", $birthday = "")
+    public function __construct($id = 0, $typeId = 1, $username = "", $email = "", $password = "", $creation_date = "", $name = "", $last_seen = "", $birthday = "")
     {
         $this->id = $id;
         $this->typeId = $typeId;

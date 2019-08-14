@@ -2,7 +2,7 @@
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $boardId = $_POST["board"];
-    $title = $_POST["topic-title"];
+    $title = format($_POST["topic-title"]);
     $content = $_POST["topic-content"];
 
     $res = true;
@@ -19,10 +19,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if ($res) {
-        $now = date("Y-m-d H:i:s");
+        $now = \IvanFilho\Date\Date::getCurrentDate();
         $topic = new \Topic(0, $this->user->getId(), $boardId, $title, $content, $now, $now, 0);
         // echo "<pre>" .print_r($topic, true) ."</pre>";
 
         $this->dba->getTable("topics")->insert($topic);
+        redirect("home");
     }
 }

@@ -8,10 +8,10 @@ class Topic
         $this->author_id = $author_id;
         $this->board_id = $board_id;
         $this->title = $title;
-        $this->views = $views;
         $this->content = $content;
         $this->update_date = $update_date;
         $this->creation_date = $creation_date;
+        $this->views = $views;
         $this->author = new User();
         $this->latest_post = new Post();
     }

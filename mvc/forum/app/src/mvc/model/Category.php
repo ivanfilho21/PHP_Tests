@@ -2,7 +2,7 @@
 
 class Category
 {
-    public function __construct($id = "", $name = "", $creation_date = "")
+    public function __construct($id = 0, $name = "", $creation_date = "")
     {
         $this->id = $id;
         $this->name = $name;

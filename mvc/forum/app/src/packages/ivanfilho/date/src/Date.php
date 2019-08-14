@@ -16,6 +16,12 @@ class Date
         return ($diff == 1) ? "" : "s";
     }
 
+    public static function getCurrentDate()
+    {
+        date_default_timezone_set("America/Sao_Paulo");
+        return date("Y-m-d H:i:s");
+    }
+
     public static function timeDiff(String $date = "", $asString = false)
     {
         if (empty($date)) return 0;

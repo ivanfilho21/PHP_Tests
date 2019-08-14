@@ -2,15 +2,15 @@
 
 class Board
 {
-    public function __construct($id = "", $moderator_id = "", $category_id = "", $name = "", $url = "", $description = "", $creation_date = "")
+    public function __construct($id = 0, $moderator_id = 0, $category_id = 0, $name = "", $description = "", $url = "", $creation_date = "")
     {
         $this->id = $id;
         $this->moderator_id = $moderator_id;
         $this->category_id = $category_id;
         $this->name = $name;
-        $this->url = $url;
         $this->description = $description;
         $this->creation_date = $creation_date;
+        $this->url = implode("-", explode(" ", strtolower($name)));
         $this->latest_topic = new Topic();
         $this->moderator = new User();
     }
@@ -23,13 +23,13 @@ class Board
     public function getModeratorId() { return $this->moderator_id; }
     public function setName($name) { $this->name = $name; }
     public function getName() { return $this->name; }
-    public function setUrl($url) { $this->url = $url; }
-    public function getUrl() { return $this->url; }
     public function setDescription($description) { $this->description = $description; }
     public function getDescription() { return $this->description; }
     public function setCreationDate($creation_date) { $this->creation_date = $creation_date; }
     public function getCreationDate() { return $this->creation_date; }
 
+    public function setUrl($url) { $this->url = $url; }
+    public function getUrl() { return $this->url; }
     public function setModerator($moderator) { $this->moderator = $moderator; }
     public function getModerator() { return $this->moderator; }
     public function setLatestTopic($latest_topic) { $this->latest_topic = $latest_topic; }

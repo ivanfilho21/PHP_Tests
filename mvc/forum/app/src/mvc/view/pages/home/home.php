@@ -23,7 +23,7 @@
             </td>
 
             <td class="board" width="70%">
-                <a href="<?php echo URL; ?>board/<?php echo implode("-", explode(" ", strtolower($board->getName()))); ?>" class="title"><?php echo utf8_encode($board->getName()); ?></a>
+                <a href="<?php echo URL; ?>board/<?php echo $board->getUrl() ?>" class="title"><?php echo utf8_encode($board->getName()); ?></a>
                 <div><?php echo utf8_encode($board->getDescription()); ?></div>
                 <div>Moderador: <a href="<?php echo URL; ?>users/<?php echo $board->getModerator()->getUsername(); ?>" class="user"><?php echo $board->getModerator()->getUsername(); ?></a></div>
             </td>

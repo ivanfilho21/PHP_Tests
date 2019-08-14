@@ -23,9 +23,18 @@ class TopicDAO extends Table
     public function getLatest($boardId)
     {
         $order = array(
-            array("column" => $this->findColumn("id"), "criteria" => "DESC")
+            array(
+                "column" => $this->findColumn("id"),
+                "criteria" => "DESC"
+            )
         );
         $where = array("board_id" => $boardId);
         return $this->get($where, null, $order);
+    }
+
+    public function getAuthor($dba, $topic)
+    {
+        $where = array("id" => $topic->getAuthorId());
+        return $dba->getTable("users")->get($where, null);
     }
 }

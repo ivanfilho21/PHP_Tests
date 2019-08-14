@@ -18,15 +18,10 @@ class Home extends Controller
         $boards = ! empty($boards) ? $boards : array();
 
         for ($i=0; $i < count($boards); $i++) {
-            // $where = array("board_id" => $boards[$i]->getId());
-            // $topic = $this->dba->getTable("topics")->getLatest($where, null);
             $topic = $this->dba->getTable("topics")->getLatest($boards[$i]->getId());
             
             if (! empty($topic)) {
-                $where = array(
-                    "id" => $topic->getAuthorId()
-                );
-                $author = $this->dba->getTable("users")->get($where, null);
+                $author = $this->dba->getTable("topics")->getAuthor($this->dba, $topic);
                 $topic->setAuthor($author);
                 $boards[$i]->setLatestTopic($topic);
             }
@@ -36,6 +31,7 @@ class Home extends Controller
             if (! empty($moderator)) {
                 $boards[$i]->setModerator($moderator);
             }
+            // $boards[$i]->setUrl(implode("-", explode(" ", strtolower($boards[$i]->getName()))));
         }
 
         $viewData["categories"] = $categories;
