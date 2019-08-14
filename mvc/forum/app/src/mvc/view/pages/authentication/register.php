@@ -2,7 +2,7 @@
     <div class="container">
         <h1>Criar Conta</h1>
 
-        <form id="sign-up-form" method="post" onsubmit="return validation(true)">
+        <form method="post">
             <!-- <label class="rf">Nome Completo</label>
             <div class="input-wrapper">
                 <input type="text" name="name" oninput="validation()">
@@ -24,17 +24,31 @@
                 </select>
             </div> -->
 
+            <?php if (! empty($_SESSION["error-register"])): ?>
+            <div class="alert alert-danger">
+                <span class="b">Foram encontrados os seguintes erros:</span>
+                <ul class="ul ul-circle">
+                <?php foreach($_SESSION["error-register"] as $err): ?>
+                    <?php if (! empty($err)): ?>
+                    <li><?= $err ?></li>
+                    <?php endif ?>
+                <?php endforeach ?>
+                </ul>
+            </div>
+            <?php unset($_SESSION["error-register"]) ?>
+            <?php endif ?>
+
             <div class="input-wrapper">
                 <label class="rf">Nome de Usuário</label>
                 <span class="info-icon" data-info="username" onmouseover="showInfoMessage.call(this)"><i class="fa fa-info-circle"></i></span>
             </div>
             <div class="input-wrapper">
-                <input type="text" name="username" maxlength="12" autofocus="on" oninput="validation()">
+                <input type="text" name="username" maxlength="12" autofocus="on" value="<?= (isset($_POST["username"])) ? $_POST["username"] : "" ?>">
             </div>
 
             <label class="rf">E-mail</label>
             <div class="input-wrapper">
-                <input type="text" name="email" maxlength="100" oninput="validation()">
+                <input type="text" name="email" maxlength="100" value="<?= (isset($_POST["email"])) ? $_POST["email"] : "" ?>">
             </div>
 
             <div class="input-wrapper">
@@ -42,12 +56,12 @@
                 <span class="info-icon" data-info="password" onmouseover="showInfoMessage.call(this)"><i class="fa fa-info-circle"></i></span>
             </div>
             <div class="input-wrapper">
-                <input type="password" name="pass" maxlength="255" oninput="validation()">
+                <input type="password" name="password" maxlength="255">
             </div>
 
             <label class="rf">Repita a Senha</label>
             <div class="input-wrapper">
-                <input type="password" name="pass2" maxlength="255" oninput="validation()">
+                <input type="password" name="password2" maxlength="255">
             </div>
 
             <p class="legal-warning container">
@@ -132,8 +146,6 @@
                     
                     parent.appendChild(msg);
                 }
-
-                window.onload = function() { initInputs(); }
                 window.onresize = function() { validation(); }
             </script>
         </form>

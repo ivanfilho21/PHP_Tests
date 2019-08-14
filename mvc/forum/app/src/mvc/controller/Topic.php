@@ -44,7 +44,7 @@ class Topic extends Controller
     {
         $this->checkUserLogged();
 
-        require "scripts/server/topic-submit.php";
+        require "scripts/topic-submit.php";
 
         $viewData["boardId"] = (! empty($boardId)) ? $boardId : 0;
         $viewData["boards"] = $this->dba->getTable("boards")->getAll();

@@ -20,7 +20,7 @@ class Authentication extends Controller
     {
         $this->checkUserLogged(false);
 
-        require "scripts/server/login-submit.php";
+        require "scripts/login-submit.php";
 
         $this->title = "Login";
         $this->styles[] = array(
@@ -39,6 +39,8 @@ class Authentication extends Controller
     {
         $this->checkUserLogged(false);
 
+        require "scripts/register-submit.php";
+
         $this->title = "Nova Conta";
         $this->styles[] = array(
             "path" => REL_PAGE .$this->controllerName ."css/",
@@ -49,7 +51,7 @@ class Authentication extends Controller
             "name" => "sign-up-validation",
             "defer" => "on"
         );
-        $this->loadView("sign-up");
+        $this->loadView("register");
     }
 
     public function logout()

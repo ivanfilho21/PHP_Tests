@@ -1,7 +1,21 @@
+.ul {
+}
+
+.ul li {
+    margin-top: 0.5rem;
+    margin-left: 2rem;
+}
+
+.ul.ul-circle {
+    list-style: circle;
+}
+
 .h1 {
     font-size: 2rem;
     font-weight: bold;
 }
+
+.b { font-weight: bold; }
 
 .text-align-center {
     text-align: center;

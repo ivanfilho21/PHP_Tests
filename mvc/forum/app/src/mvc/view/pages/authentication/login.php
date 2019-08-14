@@ -14,7 +14,7 @@
             </div>
 
             <label class="cb-wrapper">
-                <input id="user-terms" type="checkbox" name="session">
+                <input id="user-terms" type="checkbox" name="session" <?= (isset($_POST["session"])) ? "checked" : "" ?>>
                 <span class="checkmark"></span>
                 <span class="label">Continuar logado</span>
             </label>

@@ -17,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($user)) {
             $_SESSION["error-login"] = "Usuário ou Senha incorretos.";
         } else {
+            unset($_SESSION["error-login"]);
             $this->auth->login($user, $session);
             redirect("home");
         }
