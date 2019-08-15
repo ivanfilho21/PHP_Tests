@@ -14,6 +14,12 @@ class Date
     public function __construct()
     {}
 
+    public function getCurrentDateTime()
+    {
+        date_default_timezone_set("America/Sao_Paulo");
+        return date("Y-m-d H:i:s");
+    }
+
     public function translateToDate(String $str)
     {
         date_default_timezone_set("America/Sao_Paulo");
@@ -32,34 +38,27 @@ class Date
         return date("d/m/Y\, H:i", strtotime($str));
     }
 
-    public static function getCurrentDate()
+    public function translateTime(String $str, $mode = 0)
     {
         date_default_timezone_set("America/Sao_Paulo");
-        return date("Y-m-d H:i:s");
-    }
 
-    public static function timeDiff(String $date = "", $asString = false)
-    {
-        if (empty($date)) return 0;
-
-        date_default_timezone_set("America/Sao_Paulo");
-
-        $date = strtotime($date);
+        $date = strtotime($str);
         $now = time();
-
-        // $diff = abs($now - $date);
         $diff = $now - $date;
-        return ($asString) ? self::translateTimeToString($diff) : $diff;
+
+        switch ($mode) {
+            case 0:
+                return self::translateTimeToString($diff);
+                break;
+            case 1:
+                return $this->basedOnToday($str, $diff);
+                break;
+            default: break;
+        }
     }
 
-    private static function checkPlural($diff)
+    private function basedOnSeconds(int $diff)
     {
-        return ($diff == 1) ? "" : "s";
-    }
-
-    private static function translateTimeToString(int $time)
-    {
-        $diff = $time;
         $append = "";
 
         if ($diff < MINUTE) {
@@ -82,5 +81,23 @@ class Date
         }
 
         return $diff .$append;
+    }
+
+    private function basedOnToday(String $date, int $diff)
+    {
+        if ($diff < DAY) {
+            return "Hoje";
+        } elseif ($diff >= DAY && $diff < 2*DAY) {
+            return "Ontem";
+        } else {
+            return $this->translateToDate($date);
+        }
+
+        return $append;
+    }
+
+    private static function checkPlural($diff)
+    {
+        return ($diff == 1) ? "" : "s";
     }
 }

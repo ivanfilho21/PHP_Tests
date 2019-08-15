@@ -9,9 +9,10 @@ class TopicDAO extends Table
     {
         $columns = [
             new Column("id", INT, 11, false, "AUTO_INCREMENT", "PRIMARY KEY"),
-            new Column("author_id", INT),
-            new Column("board_id", INT),
+            new Column("author_id", INT, 11, false),
+            new Column("board_id", INT, 11, false),
             new Column("title", VARCHAR, 150),
+            new Column("views", INT),
             new Column("url", VARCHAR, 60),
             new Column("update_date", DATETIME),
             new Column("creation_date", DATETIME)

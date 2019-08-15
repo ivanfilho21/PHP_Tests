@@ -58,7 +58,7 @@
 
             <div class="body">
                 <div class="container">
-                    <div class="date"><?= date("d/m/Y", strtotime($post->getCreationDate())) ?></div>
+                    <div class="date"><?= $this->date->translateTime($post->getCreationDate(), 1) ?> às <?= $this->date->translateToTime($post->getCreationDate()) ?></div>
                     <div class="content"><?= $post->getContent() ?></div>
                 </div>
             </div>

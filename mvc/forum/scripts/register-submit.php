@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($res) {
         unset($_SESSION["error-msg"]);
-        $date = \IvanFilho\Date\Date::getCurrentDate();
+        $date = $this->getCurrentDateTime();
 
         $user = new User(0, 1, $username, $email, $this->auth->securePassword($pass), $date);
         $this->auth->insertUser($user);

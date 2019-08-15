@@ -5,9 +5,9 @@
         <tr>
             <th></th>
             <th>Assunto</th>
-            <th>Última Mensagem</th>
             <th>Respostas</th>
             <th>Visualizações</th>
+            <th>Última Mensagem</th>
         </tr>
     </thead>
     <tbody>
@@ -33,22 +33,22 @@
             </td>
 
             <td>
+                <div><?= $postsQty ?></div>
+            </td>
+
+            <td>
+                <div><?= $topic->getViews() ?></div>
+            </td>
+
+            <td>
                 <div>
                 <?php if (! empty($posts)): ?>
                     <div>por <a href="<?= URL ?>users/<?= $posts[0]->getAuthor()->getUsername() ?>"><?= $posts[0]->getAuthor()->getUsername() ?></a></div>
                     <div title="<?= $this->date->translateToDateTime($posts[0]->getCreationDate(), "às") ?>"><?= $this->date->translateToDate($posts[0]->getCreationDate()) ?></div>
                 <?php else: ?>
-                    <div>Não há postagens.</div>
+                    <div>0</div>
                 <?php endif ?>
                 </div>
-            </td>
-
-            <td>
-                <div><?= $postsQty ?> resposta<?= ($postsQty == 1) ? "" : "s" ?>.</div>
-            </td>
-
-            <td>
-                <div><?= $topic->getViews() ?> visualizações.</div>
             </td>
         </tr>
         <?php endforeach ?>

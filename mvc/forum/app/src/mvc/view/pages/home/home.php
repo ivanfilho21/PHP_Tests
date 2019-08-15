@@ -37,11 +37,12 @@
             <td width="20%">
                 <div class="latest-topic">
                 <?php $latestTopic = $board->getLatestTopic() ?>
-                <?php $date = \IvanFilho\Date\Date::timeDiff($latestTopic->getCreationDate(), true) ?>
+                <?php $date = $this->date->translateTime($latestTopic->getCreationDate(), 1) ?>
+                <?php $time = $this->date->translateToTime($latestTopic->getCreationDate()) ?>
                 <?php if (! empty($latestTopic->getTitle())): ?>
                     <a href="<?= URL ?>topics/<?= $latestTopic->getUrl() ?>" class="title"><?= $latestTopic->getTitle() ?></a>
                     <div>por <a href="#" class="user"><?= $latestTopic->getAuthor()->getUsername() ?></a></div>
-                    <div>Postado há <?= $date ?>.</div>
+                    <div>Postado <?= $date ?> às <?= $time ?>.</div>
                 <?php else: ?>
                     <div>Não há tópicos.</div>
                 <?php endif ?>
