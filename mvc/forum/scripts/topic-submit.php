@@ -37,6 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $this->dba->getTable("posts")->insert($post);
         }
 
-        redirect("board/open/" .$board->getUrl());
+        redirect("boards/" .$board->getUrl());
     }
 }

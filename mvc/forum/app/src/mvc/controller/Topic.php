@@ -45,6 +45,8 @@ class Topic extends Controller
         $viewData["topic"] = $topic;
         $viewData["posts"] = $posts;
 
+        require "scripts/post-submit.php";
+
         $this->title = $topic->getTitle();
         $this->loadView("topic", $viewData);
     }

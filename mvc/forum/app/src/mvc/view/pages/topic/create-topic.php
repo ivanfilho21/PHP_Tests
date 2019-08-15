@@ -36,7 +36,7 @@
         </div>
 
         <label>Conteúdo:</label>
-        <textarea id="txtarea" name="topic-content" rows="25"><?= (! empty($_POST["topic-title"])) ? $_POST["topic-content"] : "" ?></textarea>
+        <textarea id="txtarea" name="topic-content" rows="25"><?= (! empty($_POST["topic-content"])) ? $_POST["topic-content"] : "" ?></textarea>
 
         <input class="btn btn-default" type="submit" name="submit" value="Publicar">
     </form>
