@@ -140,7 +140,7 @@ abstract class Table
         return $this->selectOne($select, $where, false, $order);
     }
 
-    public function getAll($whereArray = array(), $selectArray = array(), $asList = false)
+    public function getAll($whereArray = array(), $selectArray = array(), $limit = "", $order = array(), $asList = false)
     {
         $select = array();
         $where = array();
@@ -152,7 +152,8 @@ abstract class Table
         foreach ($whereArray as $key => $value) {
             $where[] = Utils::createCondition($this, $key, $value);
         }
-        return $this->selectAll($select, $where, $asList);
+
+        return $this->selectAll($select, $where, $limit, $order, $asList);
     }
 
     public function remove($id)
@@ -177,10 +178,10 @@ abstract class Table
         return $this->select($sql, $whereColumnArray, $asList, 1);
     }
 
-    protected function selectAll($selectColumnArray = array(), $whereColumnArray = array(), $asList = false)
+    protected function selectAll($selectColumnArray = array(), $whereColumnArray = array(), $limit = "", $order = array(), $asList = false)
     {
-        $sql = $this->createSelectSQL($selectColumnArray, $whereColumnArray);
-        return $this->select($sql, $whereColumnArray, $asList);
+        $sql = $this->createSelectSQL($selectColumnArray, $whereColumnArray, $limit, array(), $order);
+        return $this->select($sql, $whereColumnArray, $asList, $limit);
     }
 
     protected function selectWithAdditionalColumn($select=array(), $where=array(), $limit="", $additionalSelect=array(), $order=array(), $asList=false)

@@ -43,5 +43,5 @@
 
 
 <section class="container"><?php $this->requireView("parts/navigation", null, true) ?>
-
+<br>
 <?php $this->requireView($view, $data) ?></section></body></html>

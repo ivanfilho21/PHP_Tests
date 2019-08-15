@@ -23,7 +23,8 @@ class BoardDAO extends Table
     public function getTopics($dba, $board)
     {
         $where = array("board_id" => $board->getId());
-        $topics = $dba->getTable("topics")->getAll($where);
+        $order = array(array("column" => $this->findColumn("id"), "criteria" => "DESC"));
+        $topics = $dba->getTable("topics")->getAll($where, array(), 3, $order);
         $topics = (! empty($topics)) ? $topics : array();
         return $topics;
     }
