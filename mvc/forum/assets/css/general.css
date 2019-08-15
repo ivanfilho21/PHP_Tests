@@ -28,6 +28,7 @@
 .flex-1 { flex: 1; }
 .flex.justify-content-spc-ar { justify-content: space-around; }
 .flex.justify-content-spc-btw { justify-content: space-between; }
+.flex.justify-content-flex-end { justify-content: flex-end; }
 
 /* CONTAINER */
 
@@ -112,14 +113,27 @@
 
 .btn {
     display: inline-block;
+    padding: 0.4rem;
     text-transform: uppercase;
     text-shadow:0px 1px 0px #7cacde;
     border:1px solid #3866a3;
     border-radius: 6px;
+    background-color: #e4e3e4;
     cursor: pointer;
     -webkit-box-shadow:inset 0px 1px 0px 0px #bee2f9;
        -moz-box-shadow:inset 0px 1px 0px 0px #bee2f9;
             box-shadow:inset 0px 1px 0px 0px #bee2f9;
+}
+
+.btn:hover {
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0061a7', endColorstr='#007dc1',GradientType=0);
+    background-color: #c6cad2;
+    transition: 0.3s;
+}
+
+.btn:active {
+    position:relative;
+    top:1px;
 }
 
 .btn.btn-default {
@@ -140,17 +154,10 @@
     background:-o-linear-gradient(top, #0061a7 5%, #007dc1 100%);
     background:-ms-linear-gradient(top, #0061a7 5%, #007dc1 100%);
     background:linear-gradient(to bottom, #0061a7 5%, #007dc1 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0061a7', endColorstr='#007dc1',GradientType=0);
     background-color:#0061a7;
-    transition: 0.3s;
 }
 
-.btn.btn-default:active {
-    position:relative;
-    top:1px;
-}
-
-.btn:focus {
+.btn.btn-default:focus {
     outline: #5d9dd5 solid 1px;
     -webkit-box-shadow: 0px 0px 8px #5e9ed6;
        -moz-box-shadow: 0px 0px 8px #5e9ed6;

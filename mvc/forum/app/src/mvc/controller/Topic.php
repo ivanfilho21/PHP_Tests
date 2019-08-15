@@ -36,7 +36,7 @@ class Topic extends Controller
 
         $topicAuthor = $this->dba->getTable("topics")->getAuthor($this->dba, $topic);
         $posts = $this->dba->getTable("topics")->getPosts($this->dba, $topic);
-
+        
         # Topic Views
         $topic->setViews($topic->getViews() + 1);
         $this->dba->getTable("topics")->edit($topic);
