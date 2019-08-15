@@ -41,6 +41,9 @@ $dba = \App\Database\DBA::getInstance();
 # Authentication
 $auth = new \IvanFilho\Authentication\Authentication($dba->getTable("users"));
 
+# Date and Time
+$date = new \IvanFilho\Date\Date();
+
 # Template Configuration
 $template = "default";
 $title = "";

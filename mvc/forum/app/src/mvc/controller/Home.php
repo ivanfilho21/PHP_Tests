@@ -17,8 +17,20 @@ class Home extends Controller
         $boards = $this->dba->getTable("boards")->getAll();
         $boards = ! empty($boards) ? $boards : array();
 
+        $topicsQty = 0;
+        $postsQty = 0;
+
         for ($i=0; $i < count($boards); $i++) {
-            $topic = $this->dba->getTable("topics")->getLatest($boards[$i]->getId());
+            $tpcs = $this->dba->getTable("boards")->getTopics($this->dba, $boards[$i]);
+            $topicsQty += count($tpcs);
+            foreach ($tpcs as $t) {
+                $pts = $this->dba->getTable("topics")->getPosts($this->dba, $t);
+                $postsQty += count($pts);
+            }
+
+            # Get latest topic
+            // $topic = $this->dba->getTable("topics")->getLatest($boards[$i]->getId());
+            $topic = $tpcs[count($tpcs) -1];
             
             if (! empty($topic)) {
                 $author = $this->dba->getTable("topics")->getAuthor($this->dba, $topic);
@@ -36,6 +48,8 @@ class Home extends Controller
 
         $viewData["categories"] = $categories;
         $viewData["boards"] = $boards;
+        $viewData["topicsQty"] = $topicsQty;
+        $viewData["postsQty"] = $postsQty;
          
         $this->title = "Home Page";
         $this->loadView("home", $viewData);

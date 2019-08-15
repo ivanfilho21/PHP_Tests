@@ -12,7 +12,6 @@ class TopicDAO extends Table
             new Column("author_id", INT),
             new Column("board_id", INT),
             new Column("title", VARCHAR, 150),
-            new Column("content", LONGTEXT),
             new Column("url", VARCHAR, 60),
             new Column("update_date", DATETIME),
             new Column("creation_date", DATETIME)
@@ -37,5 +36,17 @@ class TopicDAO extends Table
     {
         $where = array("id" => $topic->getAuthorId());
         return $dba->getTable("users")->get($where);
+    }
+
+    public function getPosts($dba, $topic)
+    {
+        $where = array("topic_id" => $topic->getId());
+        $posts = $dba->getTable("posts")->getAll($where);
+        $posts = (! empty($posts)) ? $posts : array();
+        for ($i=0; $i < count($posts); $i++) {
+            $author = $dba->getTable("users")->get(array("id" => $posts[$i]->getAuthorId()));
+            $posts[$i]->setAuthor($author);
+        }
+        return $posts;
     }
 }

@@ -4,22 +4,25 @@
     <thead>
         <tr>
             <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th>Assunto</th>
+            <th>Última Mensagem</th>
+            <th>Respostas</th>
+            <th>Visualizações</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($topics as $topic): ?>
-        <?php
-        $where = array("topic_id" => $topic->getId());
-        $posts = $this->dba->getTable("posts")->get($where);
-        $posts = (! empty($posts)) ? $posts : array();
-        ?>
+        <?php $posts = $this->dba->getTable("topics")->getPosts($this->dba, $topic) ?>
+        <?php $postsQty = count($posts) ?>
         <tr>
             <td>
-                <img src="<?= URL ?>assets/img/topic.ico" alt="Topic Status Icon">
+                <?php
+                $icon = "topic";
+                if ($postsQty > 20) {
+                    $icon .= "-hot";
+                }
+                ?>
+                <img src="<?= URL ?>assets/img/<?= $icon ?>.ico" alt="Topic Status Icon">
             </td>
 
             <td width="50%">
@@ -32,9 +35,8 @@
             <td>
                 <div>
                 <?php if (! empty($posts)): ?>
-                    <div>
-                        <?= $posts[0]->getTitle() ?>
-                    </div>
+                    <div>por <a href="<?= URL ?>users/<?= $posts[0]->getAuthor()->getUsername() ?>"><?= $posts[0]->getAuthor()->getUsername() ?></a></div>
+                    <div title="<?= $this->date->translateToDateTime($posts[0]->getCreationDate(), "às") ?>"><?= $this->date->translateToDate($posts[0]->getCreationDate()) ?></div>
                 <?php else: ?>
                     <div>Não há postagens.</div>
                 <?php endif ?>
@@ -42,7 +44,7 @@
             </td>
 
             <td>
-                <div><?= count($posts) ?> respostas.</div>
+                <div><?= $postsQty ?> resposta<?= ($postsQty == 1) ? "" : "s" ?>.</div>
             </td>
 
             <td>

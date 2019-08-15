@@ -14,9 +14,10 @@ abstract class Controller
     {
         $this->controllerName = (! empty($name)) ? strtolower($name) ."/" : "";
 
-        global $dba, $auth;
+        global $dba, $auth, $date;
         $this->dba = $dba;
         $this->auth = $auth;
+        $this->date = $date;
         $this->user = $auth->getLoggedUser();
     }
 

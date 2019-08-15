@@ -20,14 +20,15 @@ class Board extends Controller
             redirect("home");
         }
         $board = $this->dba->getTable("boards")->get(array("url" => $url));
+        $topics = $this->dba->getTable("boards")->getTopics($this->dba, $board);
         $category = $this->dba->getTable("categories")->get(array("id" => $board->getCategoryId()));
         
-        $topics = $this->dba->getTable("topics")->getAll(array("board_id" => $board->getId()));
-        $topics = (! empty($topics)) ? $topics : array();
+        // $topics = $this->dba->getTable("topics")->getAll(array("board_id" => $board->getId()));
+        // $topics = (! empty($topics)) ? $topics : array();
 
         for ($i=0; $i < count($topics); $i++) {
-            $where = array("id" => $topics[$i]->getAuthorId());
-            $author = $this->dba->getTable("users")->get($where);
+            // $where = array("id" => $topics[$i]->getAuthorId());
+            $author = $this->dba->getTable("topics")->getAuthor($this->dba, $topics[$i]);
             $topics[$i]->setAuthor($author);
             $topics[$i]->setUrl(encodeUrlFromName($topics[$i]->getTitle()));
         }

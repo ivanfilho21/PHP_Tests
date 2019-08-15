@@ -27,10 +27,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($res) {
         $now = \IvanFilho\Date\Date::getCurrentDate();
-        $topic = new \Topic(0, $this->user->getId(), $boardId, $title, $content, $now, $now, 0);
+        $topic = new \Topic(0, $this->user->getId(), $boardId, $title, $now, $now, 0);
+        $post = new \Post(0, $this->user->getId(), 0, $content, $now, $now);
         // echo "<pre>" .print_r($topic, true) ."</pre>";
 
-        $this->dba->getTable("topics")->insert($topic);
+        $id = $this->dba->getTable("topics")->insert($topic);
+        if (! empty($id)) {
+            $post->setTopicId($id);
+            $this->dba->getTable("posts")->insert($post);
+        }
+
         redirect("board/open/" .$board->getUrl());
     }
 }

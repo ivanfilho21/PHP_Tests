@@ -9,6 +9,7 @@
             <th></th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>                
@@ -22,18 +23,23 @@
                 </a>
             </td>
 
-            <td class="board" width="70%">
-                <a href="<?= URL ?>board/open/<?= $board->getUrl() ?>" class="title"><?= $board->getName() ?></a>
+            <td class="board" width="65%">
+                <a href="<?= URL ?>boards/<?= $board->getUrl() ?>" class="title"><?= $board->getName() ?></a>
                 <div><?= $board->getDescription() ?></div>
                 <div>Moderador: <a href="<?= URL ?>users/<?= $board->getModerator()->getUsername() ?>" class="user"><?= $board->getModerator()->getUsername() ?></a></div>
             </td>
 
-            <td width="30%">
+            <td width="15%">
+                <div><?= $postsQty ?> Mensage<?= ($postsQty == 1) ? "m" : "ns" ?></div>
+                <div><?= $topicsQty ?> Tópico<?= ($topicsQty == 1) ? "" : "s" ?></div>
+            </td>
+
+            <td width="20%">
                 <div class="latest-topic">
                 <?php $latestTopic = $board->getLatestTopic() ?>
                 <?php $date = \IvanFilho\Date\Date::timeDiff($latestTopic->getCreationDate(), true) ?>
                 <?php if (! empty($latestTopic->getTitle())): ?>
-                    <a href="<?= URL ?>topic/open/<?= $board->getLatestTopic()->getUrl() ?>" class="title"><?= $board->getLatestTopic()->getTitle() ?></a>
+                    <a href="<?= URL ?>topics/<?= $latestTopic->getUrl() ?>" class="title"><?= $latestTopic->getTitle() ?></a>
                     <div>por <a href="#" class="user"><?= $latestTopic->getAuthor()->getUsername() ?></a></div>
                     <div>Postado há <?= $date ?>.</div>
                 <?php else: ?>

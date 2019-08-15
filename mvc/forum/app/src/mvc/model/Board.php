@@ -2,7 +2,7 @@
 
 class Board
 {
-    public function __construct($id = 0, $moderator_id = 0, $category_id = 0, $name = "", $description = "", $url = "", $creation_date = "")
+    public function __construct($id = 0, $moderator_id = 0, $category_id = 0, $name = "", $description = "", $creation_date = "", $url = "")
     {
         $this->id = $id;
         $this->moderator_id = $moderator_id;

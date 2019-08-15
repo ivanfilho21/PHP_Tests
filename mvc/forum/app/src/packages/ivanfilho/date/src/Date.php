@@ -11,9 +11,25 @@ const MINUTE = 60;
 
 class Date
 {
-    private static function checkPlural($diff)
+    public function __construct()
+    {}
+
+    public function translateToDate(String $str)
     {
-        return ($diff == 1) ? "" : "s";
+        date_default_timezone_set("America/Sao_Paulo");
+        return date("d/m/Y", strtotime($str));
+    }
+
+    public function translateToTime(String $str)
+    {
+        date_default_timezone_set("America/Sao_Paulo");
+        return date("H:i", strtotime($str));
+    }
+
+    public function translateToDateTime(String $str)
+    {
+        date_default_timezone_set("America/Sao_Paulo");
+        return date("d/m/Y\, H:i", strtotime($str));
     }
 
     public static function getCurrentDate()
@@ -34,6 +50,11 @@ class Date
         // $diff = abs($now - $date);
         $diff = $now - $date;
         return ($asString) ? self::translateTimeToString($diff) : $diff;
+    }
+
+    private static function checkPlural($diff)
+    {
+        return ($diff == 1) ? "" : "s";
     }
 
     private static function translateTimeToString(int $time)

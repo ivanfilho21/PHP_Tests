@@ -40,7 +40,8 @@ define("CL", ":"); #Colon
 * Last Modified: Jul 23, 2019.
 */
 
-# Last modified Ago 14, 2019
+# Last modified Ago 15, 2019
+# Returning lastInsertedId when operation is insert in prepareValues.
 # Updated get and getAll methods
 # Updated select method so when selectAll with whereColumns is called it will return correctly.
 # Added select, where and asList params in getAll method.
@@ -116,7 +117,7 @@ abstract class Table
 
     public function insert($obj)
     {
-        $this->prepareValues("insert", $obj);
+        return $this->prepareValues("insert", $obj);
     }
 
     public function edit($obj)
@@ -253,6 +254,7 @@ abstract class Table
         }
 
         $sql->execute();
+        return ($operation == "insert") ? $this->db->lastInsertId() : true;
     }
 
     private function select($sql, $whereColumnArray = array(), $asList = false, $limit = 0)

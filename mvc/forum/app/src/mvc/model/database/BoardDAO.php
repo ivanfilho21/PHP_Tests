@@ -19,4 +19,12 @@ class BoardDAO extends Table
         
         parent::__construct($pdo, "\Board", "boards", $columns);
     }
+
+    public function getTopics($dba, $board)
+    {
+        $where = array("board_id" => $board->getId());
+        $topics = $dba->getTable("topics")->getAll($where);
+        $topics = (! empty($topics)) ? $topics : array();
+        return $topics;
+    }
 }

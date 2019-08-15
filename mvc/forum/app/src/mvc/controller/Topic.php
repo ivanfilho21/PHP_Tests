@@ -30,10 +30,16 @@ class Topic extends Controller
         }
 
         $topic = $this->dba->getTable("topics")->get(array("url" => $url));
-        $author = $this->dba->getTable("users")->get(array("id" => $topic->getAuthorId()));
+        if (empty($topic)) {
+            redirect("home");
+        }
 
-        $viewData["author"] = $author;
+        $topicAuthor = $this->dba->getTable("topics")->getAuthor($this->dba, $topic);
+        $posts = $this->dba->getTable("topics")->getPosts($this->dba, $topic);
+
+        $viewData["author"] = $topicAuthor;
         $viewData["topic"] = $topic;
+        $viewData["posts"] = $posts;
 
         $this->title = $topic->getTitle();
         $this->loadView("topic", $viewData);
