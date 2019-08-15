@@ -1,6 +1,6 @@
 <?php $this->styles[] = array("path" => REL_TEMPLATE .$this->template ."/css/", "name" => "header") ?>
 <!DOCTYPE html><html lang="pt-br"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, user-scalable=1.0, initial-scale=1.0">
-<title><?= $this->title ." | " .SITE_NAME ?></title>
+<title><?= ((! empty($this->title)) ? $this->title ." | " : "") .SITE_NAME ?></title>
 
 <!-- Styles -->
 <link rel="stylesheet" href="<?= ASSETS ?>css/reset.css">
@@ -40,4 +40,8 @@
         </nav>
     </div>
 </header>
-<section class="container"><?php $this->requireView($view, $data) ?></section></body></html>
+
+
+<section class="container"><?php $this->requireView("parts/navigation", null, true) ?>
+
+<?php $this->requireView($view, $data) ?></section></body></html>

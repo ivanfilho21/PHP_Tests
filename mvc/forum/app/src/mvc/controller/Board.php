@@ -29,11 +29,14 @@ class Board extends Controller
             $topics[$i]->setUrl(encodeUrlFromName($topics[$i]->getTitle()));
         }
 
+        $this->title = $board->getName();
+        $this->pages[] = array("name" => "Início", "url" => URL);
+        $this->pages[] = array("name" => $this->title, "url" => URL ."boards/" .$board->getUrl(), "active" => true);
+
         $viewData["category"] = $category;
         $viewData["board"] = $board;
         $viewData["topics"] = $topics;
          
-        $this->title = $board->getName();
         $this->loadView("board", $viewData);
     }
 }

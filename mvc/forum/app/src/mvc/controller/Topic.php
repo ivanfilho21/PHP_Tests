@@ -33,6 +33,12 @@ class Topic extends Controller
         if (empty($topic)) {
             redirect("home");
         }
+        $board = $this->dba->getTable("boards")->get(array("id" => $topic->getBoardId()));
+
+        $this->title = $topic->getTitle();
+        $this->pages[] = array("name" => "Início", "url" => URL);
+        $this->pages[] = array("name" => $board->getName(), "url" => URL ."boards/" .$board->getUrl());
+        $this->pages[] = array("name" => $topic->getTitle(), "url" => URL ."topics/create", "active" => true);
 
         $topicAuthor = $this->dba->getTable("topics")->getAuthor($this->dba, $topic);
         $posts = $this->dba->getTable("topics")->getPosts($this->dba, $topic);
@@ -47,7 +53,6 @@ class Topic extends Controller
 
         require "scripts/post-submit.php";
 
-        $this->title = $topic->getTitle();
         $this->loadView("topic", $viewData);
     }
 
@@ -56,6 +61,11 @@ class Topic extends Controller
         $this->checkUserLogged();
 
         require "scripts/topic-submit.php";
+
+        $this->title = "Novo Tópico";
+        $this->pages[] = array("name" => "Início", "url" => URL);
+        // $this->pages[] = array("name" => $board->getName(), "url" => URL ."boards/" .$board->getUrl());
+        $this->pages[] = array("name" => $this->title, "url" => URL ."topic/create", "active" => true);
 
         $boards = array();
         $cats = array();
@@ -73,7 +83,6 @@ class Topic extends Controller
 
 
 
-        $this->title = "Novo Tópico";
         $this->loadView("create-topic", $viewData);
     }
 }

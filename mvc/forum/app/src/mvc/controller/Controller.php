@@ -7,6 +7,7 @@ abstract class Controller
     protected $controllerName = "";
     protected $title = "";
     protected $template = "default";
+    protected $pages = array();
     protected $styles = array();
     protected $scripts = array();
 
@@ -34,11 +35,11 @@ abstract class Controller
         }
     }
 
-    private function requireView($view, $data = array())
+    protected function requireView($view, $data = array(), $fromRoot = false)
     {
         if (! empty($data)) extract($data);
         
-        $file = VIEW .$this->controllerName .$view;
+        $file = VIEW .(! $fromRoot ? "pages/" .$this->controllerName : "") .$view;
         // echo $file;
         
         if (file_exists($file .".php")) require $file .".php";

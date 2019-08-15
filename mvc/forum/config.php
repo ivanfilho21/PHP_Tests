@@ -6,7 +6,7 @@ session_start();
 
 // define("ROOT", getcwd() ."/");
 define("ROOT", __DIR__ ."/");
-define("VIEW", ROOT ."app/src/mvc/view/pages/");
+define("VIEW", ROOT ."app/src/mvc/view/");
 define("TEMPLATE", ROOT ."app/src/mvc/view/templates/");
 define("ENVIRONMENT", "dev");
 
