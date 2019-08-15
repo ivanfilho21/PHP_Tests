@@ -70,7 +70,7 @@
 
             <input class="btn btn-default" type="submit" name="submit" value="Cadastrar">
             
-            <script>const URL = "<?php echo URL ?>";</script>
+            <script>const URL = "<?= URL ?>";</script>
             <script>
                 /*function initBirthday() {
                     let monthsList = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];

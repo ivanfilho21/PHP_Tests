@@ -1,4 +1,4 @@
-<?php $this->styles[] = array("path" => REL_TEMPLATE .$this->template ."/css/", "name" => "header"); ?>
+<?php $this->styles[] = array("path" => REL_TEMPLATE .$this->template ."/css/", "name" => "header") ?>
 <!DOCTYPE html><html lang="pt-br"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, user-scalable=1.0, initial-scale=1.0">
 <title><?= $this->title ." | " .SITE_NAME ?></title>
 

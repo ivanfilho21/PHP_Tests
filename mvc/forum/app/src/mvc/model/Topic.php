@@ -2,7 +2,7 @@
 
 class Topic
 {
-    public function __construct($id = 0, $author_id = 0, $board_id = 0, $title = "", $content = "", $update_date = "", $creation_date = "", $views = 0)
+    public function __construct($id = 0, $author_id = 0, $board_id = 0, $title = "", $content = "", $update_date = "", $url = "", $creation_date = "", $views = 0)
     {
         $this->id = $id;
         $this->author_id = $author_id;
@@ -12,6 +12,7 @@ class Topic
         $this->update_date = $update_date;
         $this->creation_date = $creation_date;
         $this->views = $views;
+        $this->url = encodeUrlFromName($title);
         $this->author = new User();
         $this->latest_post = new Post();
     }
@@ -33,6 +34,8 @@ class Topic
     public function setViews($views) { $this->views = $views; }
     public function getViews() { return $this->views; }
 
+    public function setUrl($url) { $this->url = $url; }
+    public function getUrl() { return $this->url; }
     public function setAuthor($author) { $this->author = $author; }
     public function getAuthor() { return $this->author; }
     public function setLatestPost($latest_post) { $this->latest_post = $latest_post; }

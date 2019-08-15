@@ -13,6 +13,7 @@ class TopicDAO extends Table
             new Column("board_id", INT),
             new Column("title", VARCHAR, 150),
             new Column("content", LONGTEXT),
+            new Column("url", VARCHAR, 60),
             new Column("update_date", DATETIME),
             new Column("creation_date", DATETIME)
         ];

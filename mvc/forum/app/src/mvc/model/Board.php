@@ -10,7 +10,7 @@ class Board
         $this->name = $name;
         $this->description = $description;
         $this->creation_date = $creation_date;
-        $this->url = implode("-", explode(" ", strtolower($name)));
+        $this->url = encodeUrlFromName($name);
         $this->latest_topic = new Topic();
         $this->moderator = new User();
     }

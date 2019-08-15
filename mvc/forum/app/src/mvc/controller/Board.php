@@ -29,6 +29,7 @@ class Board extends Controller
             $where = array("id" => $topics[$i]->getAuthorId());
             $author = $this->dba->getTable("users")->get($where);
             $topics[$i]->setAuthor($author);
+            $topics[$i]->setUrl(encodeUrlFromName($topics[$i]->getTitle()));
         }
 
         $viewData["category"] = $category;

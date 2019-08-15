@@ -24,7 +24,7 @@
             <?php foreach ($boards as $cat => $boardArray): ?>
                 <option disabled><?= $cat ?></option>
             <?php foreach ($boardArray as $board): ?>
-                <option value="<?php echo $board->getId() ?>" <?php echo ($boardId == $board->getId()) ? "selected" : "" ?>><?php echo "&nbsp; &nbsp; &nbsp;" .$board->getName() ?></option>
+                <option value="<?= $board->getId() ?>" <?= ($boardId == $board->getId()) ? "selected" : "" ?>><?= "&nbsp; &nbsp; &nbsp;" .$board->getName() ?></option>
             <?php endforeach ?>
             <?php endforeach ?>
             </select>
@@ -32,11 +32,11 @@
 
         <label>Assunto:</label>
         <div class="input-wrapper">
-            <input type="text" name="topic-title">
+            <input type="text" name="topic-title" autofocus="on" value="<?= (! empty($_POST["topic-title"])) ? $_POST["topic-title"] : "" ?>">
         </div>
 
         <label>Conteúdo:</label>
-        <textarea id="txtarea" name="topic-content" rows="25"></textarea>
+        <textarea id="txtarea" name="topic-content" rows="25"><?= (! empty($_POST["topic-title"])) ? $_POST["topic-content"] : "" ?></textarea>
 
         <input class="btn btn-default" type="submit" name="submit" value="Publicar">
     </form>

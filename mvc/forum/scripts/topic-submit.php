@@ -8,8 +8,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $res = true;
     if (empty($boardId)) {
         $res = false;
-        $_SESSION["error-msg"]["board"] = "Selecione uma <b>Board</b>.";
+    } else {
+        # Check if $boardId exists in DB
+        $board = $this->dba->getTable("boards")->get(array("id" => $boardId));
+        $res = ! empty($board);
     }
+    if (! $res) $_SESSION["error-msg"]["board"] = "Selecione uma <b>Board</b>.";
 
     if (empty($title)) {
         $res = false;
@@ -27,6 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // echo "<pre>" .print_r($topic, true) ."</pre>";
 
         $this->dba->getTable("topics")->insert($topic);
-        redirect("home");
+        redirect("board/open/" .$board->getUrl());
     }
 }

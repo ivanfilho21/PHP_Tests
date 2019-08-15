@@ -31,7 +31,7 @@ class Home extends Controller
             if (! empty($moderator)) {
                 $boards[$i]->setModerator($moderator);
             }
-            // $boards[$i]->setUrl(implode("-", explode(" ", strtolower($boards[$i]->getName()))));
+            // $boards[$i]->setUrl(encodeUrlFromName($boards[$i]->getName()));
         }
 
         $viewData["categories"] = $categories;

@@ -28,6 +28,15 @@ class Topic extends Controller
         if (empty($url)) {
             redirect("home");
         }
+
+        $topic = $this->dba->getTable("topics")->get(array("url" => $url));
+        $author = $this->dba->getTable("users")->get(array("id" => $topic->getAuthorId()));
+
+        $viewData["author"] = $author;
+        $viewData["topic"] = $topic;
+
+        $this->title = $topic->getTitle();
+        $this->loadView("topic", $viewData);
     }
 
     public function create($boardId = "")

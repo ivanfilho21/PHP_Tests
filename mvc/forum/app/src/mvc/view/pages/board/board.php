@@ -1,4 +1,4 @@
-<div class="category"><?php echo $board->getName(); ?></div>
+<div class="category"><?= $board->getName() ?></div>
 
 <table>
     <thead>
@@ -19,13 +19,13 @@
         ?>
         <tr>
             <td>
-                <img src="<?php echo URL; ?>assets/img/topic.ico" alt="Topic Status Icon">
+                <img src="<?= URL ?>assets/img/topic.ico" alt="Topic Status Icon">
             </td>
 
             <td width="50%">
                 <div>
-                    <a href="#" class="title"><?php echo utf8_encode($topic->getTitle()); ?></a>
-                    <div>Autor: <a href="<?php echo URL; ?>users/<?php echo $topic->getAuthor()->getUsername(); ?>"><?php echo $topic->getAuthor()->getUsername(); ?></a></div>
+                    <a href="<?= URL ?>topic/open/<?= $topic->getUrl() ?>" class="title"><?= $topic->getTitle() ?></a>
+                    <div>Autor: <a href="<?= URL ?>users/<?= $topic->getAuthor()->getUsername() ?>"><?= $topic->getAuthor()->getUsername() ?></a></div>
                 </div>
             </td>
 
@@ -33,20 +33,20 @@
                 <div>
                 <?php if (! empty($posts)): ?>
                     <div>
-                        <?php echo $posts[0]->getTitle(); ?>
+                        <?= $posts[0]->getTitle() ?>
                     </div>
                 <?php else: ?>
                     <div>Não há postagens.</div>
-                <?php endif; ?>
+                <?php endif ?>
                 </div>
             </td>
 
             <td>
-                <div><?php echo count($posts); ?> respostas.</div>
+                <div><?= count($posts) ?> respostas.</div>
             </td>
 
             <td>
-                <div><?php echo $topic->getViews(); ?> visualizações.</div>
+                <div><?= $topic->getViews() ?> visualizações.</div>
             </td>
         </tr>
         <?php endforeach ?>
@@ -56,22 +56,22 @@
 <div>
     <h4>Legenda</h4>
     <div>
-        <img src="<?php echo URL; ?>assets/img/topic.ico" alt="Board Icon" width="24">
+        <img src="<?= URL ?>assets/img/topic.ico" alt="Board Icon" width="24">
         <span>Tópico Normal.</span>
     </div>
 
     <div>
-        <img src="<?php echo URL; ?>assets/img/topic-hot.ico" alt="Board Icon" width="24">
+        <img src="<?= URL ?>assets/img/topic-hot.ico" alt="Board Icon" width="24">
         <span>Tópico Quente (Mais de 20 postagens).</span>
     </div>
 
     <div>
-        <img src="<?php echo URL; ?>assets/img/topic-locked.ico" alt="Board Icon" width="24">
+        <img src="<?= URL ?>assets/img/topic-locked.ico" alt="Board Icon" width="24">
         <span>Tópico Trancado (Não recebe novas postagens).</span>
     </div>
 
     <div>
-        <img src="<?php echo URL; ?>assets/img/topic-fixed.ico" alt="Board Icon" width="24">
+        <img src="<?= URL ?>assets/img/topic-fixed.ico" alt="Board Icon" width="24">
         <span>Tópico Fixo.</span>
     </div>
 </div>
