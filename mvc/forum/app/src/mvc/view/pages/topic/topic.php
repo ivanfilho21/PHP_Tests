@@ -88,6 +88,8 @@
         </article>
     <?php endforeach ?>
 
+    <?php $this->requireView("parts/pagination", array("page" => $page, "pages" => $pages, "baseUrl" => $baseUrl), true) ?>
+
     <?php if (! empty($this->user)): ?>
         <div class="reply-topic">
             <form class="container" method="post">

@@ -27,7 +27,7 @@
 
             <td width="50%">
                 <div>
-                    <a href="<?= URL ?>topic/open/<?= $topic->getUrl() ?>" class="title"><?= $topic->getTitle() ?></a>
+                    <a href="<?= URL ?>topics/<?= $topic->getUrl() ?>" class="title"><?= $topic->getTitle() ?></a>
                     <div>Autor: <a href="<?= URL ?>users/<?= $topic->getAuthor()->getUsername() ?>"><?= $topic->getAuthor()->getUsername() ?></a></div>
                 </div>
             </td>
@@ -55,7 +55,7 @@
     </tbody>
 </table>
 
-<?php $this->requireView("parts/pagination", array("page" => $page, "pages" => $pages), true) ?>
+<?php $this->requireView("parts/pagination", array("page" => $page, "pages" => $pages, "baseUrl" => $baseUrl), true) ?>
 
 <div>
     <h4>Legenda</h4>

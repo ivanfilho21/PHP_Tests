@@ -44,10 +44,10 @@
 
 <nav class="pagination">
     <ul>
-        <li><a title="Página Anterior"<?= ($page > 1) ? "href='" .($page - 1) ."'" : "class='disabled'" ?>>«</a></li>
+        <li><a title="Página Anterior"<?= ($page > 1) ? "href='" .$baseUrl .($page - 1) ."'" : "class='disabled'" ?>>«</a></li>
     <?php for ($i = 1; $i <= $pages; $i++): ?>
-        <li><a title="Ir para a página <?= $i ?>" href="<?= $i ?>" <?= ($page == $i) ? "class='active'" : "" ?>><?= $i ?></a></li>
+        <li><a title="Ir para a página <?= $i ?>" href="<?= $baseUrl .$i ?>" <?= ($page == $i) ? "class='active'" : "" ?>><?= $i ?></a></li>
     <?php endfor ?>
-        <li><a title="Próxima Página"<?= ($page < $pages) ? "href='" .($page + 1) ."'" : "class='disabled'" ?>>»</a></li>
+        <li><a title="Próxima Página"<?= ($page < $pages) ? "href='" .$baseUrl .($page + 1) ."'" : "class='disabled'" ?>>»</a></li>
     </ul>
 </nav>

@@ -30,9 +30,8 @@ class BoardDAO extends Table
             # Id starts from
             $startPoint = ($page - 1) * $limit;
             $limitTxt = ($startPoint >= 0) ? $startPoint .", " .$limit : "";
-        }            
+        }
 
-        
         $order = array(array("column" => $this->findColumn("id"), "criteria" => "DESC"));
         $topics = $dba->getTable("topics")->getAll($where, $select, $limitTxt, $order);
         $topics = (! empty($topics)) ? $topics : array();

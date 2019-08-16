@@ -16,6 +16,9 @@ $routers["/boards/{id}/{page}/"] = "/board/open/:id/:page";
 
 $routers["/topics/{id}"] = "/topic/open/:id";
 $routers["/topics/{id}/"] = "/topic/open/:id";
+$routers["/topics/{id}/{page}"] = "/topic/open/:id/:page";
+$routers["/topics/{id}/{page}/"] = "/topic/open/:id/:page";
+
 $routers["/users/{id}"] = "/user/open/:id";
 $routers["/users/{id}/"] = "/user/open/:id";
 

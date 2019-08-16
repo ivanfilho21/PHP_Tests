@@ -23,6 +23,7 @@ class Board extends Controller
         $limitPerPage = 15;
 
         $board = $this->dba->getTable("boards")->get(array("url" => $url));
+        // var_dump($board); die;
         $topics = $this->dba->getTable("boards")->getTopics($this->dba, $board, $limitPerPage, $page);
         $category = $this->dba->getTable("categories")->get(array("id" => $board->getCategoryId()));
 
@@ -48,6 +49,8 @@ class Board extends Controller
         $viewData["topics"] = $topics;
         $viewData["page"] = $page;
         $viewData["pages"] = $pages;
+        $viewData["baseUrl"] = URL ."boards/" .$board->getUrl() ."/";
+
          
         $this->loadView("board", $viewData);
     }

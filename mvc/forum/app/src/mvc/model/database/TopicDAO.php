@@ -39,10 +39,19 @@ class TopicDAO extends Table
         return $dba->getTable("users")->get($where);
     }
 
-    public function getPosts($dba, $topic)
+    public function getPosts($dba, $topic, $limit = 1, $page = 1)
     {
+        $select = array();
         $where = array("topic_id" => $topic->getId());
-        $posts = $dba->getTable("posts")->getAll($where);
+        $limitTxt = "";
+
+        if ($limit > 1) {
+            $startPoint = ($page - 1) * $limit;
+            $limitTxt = ($startPoint >= 0) ? $startPoint .", " .$limit : "";
+        }
+        $order = array(array("column" => $this->findColumn("id"), "criteria" => "ASC"));
+
+        $posts = $dba->getTable("posts")->getAll($where, $select, $limitTxt, $order);
         $posts = (! empty($posts)) ? $posts : array();
         for ($i=0; $i < count($posts); $i++) {
             $author = $dba->getTable("users")->get(array("id" => $posts[$i]->getAuthorId()));

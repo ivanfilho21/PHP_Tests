@@ -23,16 +23,19 @@ class Topic extends Controller
         redirect("home");
     }
 
-    public function open($url = "")
+    public function open($url = "", $page = 1)
     {
         if (empty($url)) {
             redirect("home");
         }
 
         $topic = $this->dba->getTable("topics")->get(array("url" => $url));
+
         if (empty($topic)) {
             redirect("home");
         }
+
+        $limitPerPage = 2;
         $board = $this->dba->getTable("boards")->get(array("id" => $topic->getBoardId()));
 
         $this->title = $topic->getTitle();
@@ -41,15 +44,25 @@ class Topic extends Controller
         $this->pages[] = array("name" => $topic->getTitle(), "url" => URL ."topics/create", "active" => true);
 
         $topicAuthor = $this->dba->getTable("topics")->getAuthor($this->dba, $topic);
-        $posts = $this->dba->getTable("topics")->getPosts($this->dba, $topic);
+        $posts = $this->dba->getTable("topics")->getPosts($this->dba, $topic, $limitPerPage, $page);
         
         # Topic Views
         $topic->setViews($topic->getViews() + 1);
         $this->dba->getTable("topics")->edit($topic);
 
+        $postsQty = count($this->dba->getTable("topics")->getPosts($this->dba, $topic));
+        $pages = ($limitPerPage > 0) ? ceil($postsQty / $limitPerPage) : 1;
+
+        if ($page <= 0 || $page > $pages) {
+            redirect("boards/" .$board->getUrl() ."/1");
+        }
+
         $viewData["author"] = $topicAuthor;
         $viewData["topic"] = $topic;
         $viewData["posts"] = $posts;
+        $viewData["page"] = $page;
+        $viewData["pages"] = $pages;
+        $viewData["baseUrl"] = URL ."topics/" .$topic->getUrl() ."/";
 
         require "scripts/post-submit.php";
 
