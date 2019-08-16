@@ -50,7 +50,7 @@ $date = new \IvanFilho\Date\Date();
 # Default values
 /*$now = $date->getCurrentDateTime();
 
-#$u = new \User(0, 3, "admin", "", md5("prec"), $now);
+#$u = new \User(0, \User::TYPE_ADMIN_USER, "admin", "", md5("prec"), $now);
 #$dba->getTable("users")->insert($u);
 
 $c = new \Category(0, "Categoria", $now);

@@ -1,6 +1,7 @@
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $operation = $_POST["operation"];
     $boardId = $_POST["board"];
     $mode = $_POST["mode"];
     $type = $_POST["type"];
@@ -51,12 +52,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($res) {
         $now = $this->date->getCurrentDateTime();
 
-        if ($mode == "insert") {
-            $topic = new \Topic(0, $this->user->getId(), $boardId, \Topic::MODE_OPEN_TOPIC, \Topic::TYPE_NORMAL_TOPIC, $title, $now, $now);
+        if ($operation == "insert") {
+            $topic = new \Topic(0, $this->user->getId(), $boardId, $mode, $type, $title, $now, $now);
             $topicId = $this->dba->getTable("topics")->insert($topic);
             $post = new \Post(0, $this->user->getId(), $topicId, $content, $now, $now);
             $this->dba->getTable("posts")->insert($post);
-        } elseif ($mode == "edit") {
+        } elseif ($operation == "edit") {
             if ($topic->getPostId() == $post->getId()) {
                 $topic->setTitle($title);
                 $topic->setBoardId($boardId);
