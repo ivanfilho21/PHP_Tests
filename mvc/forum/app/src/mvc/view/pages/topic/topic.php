@@ -159,8 +159,12 @@
 
 <script>
     function updateLikes(topic) {
+        let limit = "<?= $limitPerPage ?>";
+        let page = "<?= $page ?>";
         let callback = function(res) {
             let likes = JSON.parse(res);
+            // console.log(likes);
+
             let btn = document.getElementsByClassName("btn like-button");
             for (let i = 0; i < btn.length; i++) {
                 let button = btn[i].getAttribute("data-post") ? btn[i] : "";
@@ -175,13 +179,14 @@
                 button.appendChild(likeCount);
             }
         };
-        ajax("<?= URL ?>scripts/ajax-get-likes.php?topic=" + topic, callback);
+        ajax("<?= URL ?>scripts/ajax-get-likes.php?limit=" + limit + "&page=" + page + "&topic=" + topic, callback);
     }
 
     function likePost() {
         if (! this) return;
 
         let callback = function(res) {
+            if (res != "true") alert(res);
             updateLikes(topic);
         };
         let topic = this.getAttribute("data-topic");

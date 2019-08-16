@@ -11,12 +11,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($userId == $post->getAuthorId()) {
         // Can't like, user is the author
-        $response = "false";
+        $response = "Você não pode curtir sua própria mensagem.";
     } else {
         $ul = $dba->getTable("likes")->get(array("user_id" => $userId, "post_id" => $postId));
         if (! empty($ul)) {
             // Can't like, your already liked this post
-            $response = "false";
+            $response = "Você já deu gostei nessa mensagem!";
         } else {
             $now = $date->getCurrentDateTime();
             $like = new Like(0, $userId, $postId, $now, $now);
@@ -24,4 +24,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-echo json_encode($response);
+echo $response;

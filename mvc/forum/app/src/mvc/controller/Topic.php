@@ -75,6 +75,7 @@ class Topic extends Controller
         $viewData["posts"] = $posts;
         $viewData["page"] = $page;
         $viewData["pages"] = $pages;
+        $viewData["limitPerPage"] = $limitPerPage;
         $viewData["baseUrl"] = URL ."topics/" .$topic->getUrl() ."/";
 
 
