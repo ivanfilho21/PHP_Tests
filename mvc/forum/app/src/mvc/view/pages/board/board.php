@@ -44,7 +44,7 @@
                 <div>
                 <?php if (! empty($posts)): ?>
                     <div>por <a href="<?= URL ?>users/<?= $posts[$postsQty-1]->getAuthor()->getUsername() ?>"><?= $posts[$postsQty-1]->getAuthor()->getUsername() ?></a></div>
-                    <div title="<?= $this->date->translateToDateTime($posts[0]->getCreationDate(), "às") ?>"><?= $this->date->translateToDate($posts[0]->getCreationDate()) ?></div>
+                    <div title="<?= $this->date->translateToDateTime($posts[$postsQty-1]->getCreationDate(), "às") ?>"><?= $this->date->translateTime($posts[$postsQty-1]->getCreationDate(), 1) ?> às <?= $this->date->translateToTime($posts[$postsQty-1]->getCreationDate()) ?></div>
                 <?php else: ?>
                     <div>0</div>
                 <?php endif ?>

@@ -32,7 +32,7 @@ class Home extends Controller
             }
 
             # Get latest topic
-            $topic = (count($tpcs) > 0) ? $tpcs[count($tpcs) -1] : false;
+            $topic = (count($tpcs) > 0) ? $tpcs[0] : false;
             
             if (! empty($topic)) {
                 $author = $this->dba->getTable("topics")->getAuthor($this->dba, $topic);
