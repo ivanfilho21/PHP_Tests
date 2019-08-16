@@ -37,18 +37,20 @@
 
             <div>
                 <label>Modo:</label>
+                <?php $mode = (! empty($_POST["mode"])) ? $_POST["mode"] : (! empty($topic) ? $topic->getMode() : "") ?>
                 <select name="mode">
-                    <option value="<?= \topic::MODE_OPEN_TOPIC ?>">Aberto</option>
-                    <option value="<?= \topic::MODE_LOCKED_TOPIC ?>">Trancado</option>
+                    <option value="<?= \topic::MODE_OPEN_TOPIC ?>" <?= ($mode == \topic::MODE_OPEN_TOPIC) ? "selected" : "" ?>>Aberto</option>
+                    <option value="<?= \topic::MODE_LOCKED_TOPIC ?>" <?= ($mode == \topic::MODE_LOCKED_TOPIC) ? "selected" : "" ?>>Trancado</option>
                 </select>
             </div>
 
             <?php if ($this->user->getType() != \User::TYPE_NORMAL_USER): ?>
             <div>
                 <label>Tipo:</label>
+                <?php $type = (! empty($_POST["type"])) ? $_POST["type"] : (! empty($topic) ? $topic->getType() : "") ?>
                 <select name="type">
-                    <option value="<?= \topic::TYPE_NORMAL_TOPIC ?>">Normal</option>
-                    <option value="<?= \topic::TYPE_FIXED_TOPIC ?>">Fixo</option>
+                    <option value="<?= \topic::TYPE_NORMAL_TOPIC ?>" <?= ($type == \topic::TYPE_NORMAL_TOPIC) ? "selected" : "" ?>>Normal</option>
+                    <option value="<?= \topic::TYPE_FIXED_TOPIC ?>" <?= ($type == \topic::TYPE_FIXED_TOPIC) ? "selected" : "" ?>>Fixo</option>
                 </select>
             </div>
             <?php else: ?>

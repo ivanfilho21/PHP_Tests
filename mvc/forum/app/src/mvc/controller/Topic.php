@@ -113,8 +113,9 @@ class Topic extends Controller
         $board = $this->dba->getTable("boards")->get(array("id" => $topic->getBoardId()));
         if (empty($board)) redirect("home");
         
-        $post = $topic->getPost();
-        if (empty($post)) redirect("boards/" .$board->getUrl());
+        $firstPost = $this->dba->getTable("topics")->getPost($this->dba, $topic, $topic->getId());
+        if (empty($firstPost)) redirect("boards/" .$board->getUrl());
+        $topic->setPost($firstPost);
 
         $this->title = "Editar Tópico";
         $this->pages[] = array("name" => "Início", "url" => URL);
@@ -126,7 +127,7 @@ class Topic extends Controller
         $viewData["boardId"] = $board->getId();
         $viewData["boards"] = $cats;
         $viewData["topic"] = $topic;
-        $viewData["post"] = $post;
+        $viewData["post"] = $topic->getPost();
 
         require "scripts/topic-submit.php";
         $this->loadView("create-topic", $viewData);

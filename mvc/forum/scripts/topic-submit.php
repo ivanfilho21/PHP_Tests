@@ -57,19 +57,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $topicId = $this->dba->getTable("topics")->insert($topic);
             $post = new \Post(0, $this->user->getId(), $topicId, $content, $now, $now);
             $this->dba->getTable("posts")->insert($post);
+
+            redirect("boards/" .$board->getUrl());
         } elseif ($operation == "edit") {
-            if ($topic->getPostId() == $post->getId()) {
-                $topic->setTitle($title);
-                $topic->setBoardId($boardId);
-                $topic->setUpdateDate($now);
-                $this->dba->getTable("topics")->edit($topic);
+            $topic->setTitle($title);
+            $topic->setBoardId($boardId);
+            $topic->setUpdateDate($now);
+            $this->dba->getTable("topics")->edit($topic);
 
-                $post->setContent($content);
-                $post->setUpdateDate($now);
-                $this->dba->getTable("posts")->edit($post);
-            }
+            $post = $topic->getPost();
+            $post->setContent($content);
+            $post->setUpdateDate($now);
+            $this->dba->getTable("posts")->edit($post);
+
+            redirect("topics/" .$topic->getUrl());
         }
-
-        redirect("boards/" .$board->getUrl());
     }
 }
