@@ -10,7 +10,9 @@ function ajax(url, callback, form="") {
 
     if (form != "") {
         let formData = new FormData(form);
-        xmlhttp.open("POST", url, true);
+        let method = form.method;
+        // xmlhttp.open("POST", url, true);
+        xmlhttp.open(method, url, true);
         xmlhttp.send(formData);
     } else {
         xmlhttp.open("GET", url, true);

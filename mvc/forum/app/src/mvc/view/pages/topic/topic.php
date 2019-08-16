@@ -58,6 +58,10 @@
         font-size: 1.25rem;
         text-align: center;
     }
+
+    button .likes {
+        margin-left: 0.5rem;
+    }
 </style>
 
 <section class="topic">
@@ -78,10 +82,11 @@
             <div class="body">
                 <div class="flex justify-content-spc-btw">
                     <div class="date"><?= $this->date->translateTime($post->getCreationDate(), 1) ?> às <?= $this->date->translateToTime($post->getCreationDate()) ?></div>
+                <?php if (! empty($this->user)): ?>
                     <!-- <button class="btn">Responder</button> -->
+                    <button class="btn" onclick="likePost.call(this)" data-topic="<?= $topic->getId() ?>" data-post="<?= $post->getId() ?>"><i class="fa fa-thumbs-up"></i></button>
+                <?php endif ?>
                 </div>
-
-                
 
                 <div class="content"><?= $post->getContent() ?></div>
             </div>
@@ -122,3 +127,53 @@
         </div>
     <?php endif ?>
 </section>
+
+<script>
+    function updateLikes(topic) {
+        let callback = function(res) {
+            let likes = JSON.parse(res);
+            let btn = document.getElementsByTagName("button");
+            for (let i = 0; i < btn.length; i++) {
+                let button = btn[i].getAttribute("data-post") ? btn[i] : "";
+                if (button == "" || i >= Object.keys(likes).length) continue;
+                // console.log(likes[i]);
+
+                let likeCount = button.getElementsByClassName("likes")[0];
+                likeCount = (likeCount) ? likeCount : document.createElement("span");
+                likeCount.setAttribute("class", "likes");
+                likeCount.innerHTML = likes[i];
+
+                button.appendChild(likeCount);
+            }
+        };
+        ajax("<?= URL ?>scripts/ajax-get-likes.php?topic=" + topic, callback);
+    }
+
+    function likePost() {
+        if (this) {
+            let callback = function(res) {
+                // console.log("Resposta: " + res);
+                if (res) {
+                    updateLikes(topic);
+                }
+            };
+            let topic = this.getAttribute("data-topic");
+            let post = this.getAttribute("data-post");
+            let form = document.createElement("form");
+
+            let i = document.createElement("input");
+            i.type = "text";
+            i.name = "post";
+            i.value = post;
+
+            form.appendChild(i);
+            form.method = "post";
+            ajax("<?= URL ?>scripts/ajax-like-post.php", callback, form);
+        }
+    }
+
+    window.onload = function() {
+        let topic = "<?= $topic->getId() ?>";
+        updateLikes(topic);
+    }
+</script>
