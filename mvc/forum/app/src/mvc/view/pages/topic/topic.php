@@ -59,7 +59,14 @@
         text-align: center;
     }
 
-    button .likes {
+    .like-button {
+        font-size: 1.15rem;
+    }
+    .like-button i {
+        color: royalblue;
+    }
+    .like-button .likes {
+        font-size: 0.9rem;
         margin-left: 0.5rem;
     }
 </style>
@@ -84,7 +91,7 @@
                     <div class="date"><?= $this->date->translateTime($post->getCreationDate(), 1) ?> às <?= $this->date->translateToTime($post->getCreationDate()) ?></div>
                 <?php if (! empty($this->user)): ?>
                     <!-- <button class="btn">Responder</button> -->
-                    <button class="btn" onclick="likePost.call(this)" data-topic="<?= $topic->getId() ?>" data-post="<?= $post->getId() ?>"><i class="fa fa-thumbs-up"></i></button>
+                    <button title="Gostei" class="btn like-button" onclick="likePost.call(this)" data-topic="<?= $topic->getId() ?>" data-post="<?= $post->getId() ?>"><i class="fa fa-thumbs-up"></i></button>
                 <?php endif ?>
                 </div>
 
