@@ -6,8 +6,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = format($_POST["topic-title"]);
     $content = $_POST["topic-content"];
 
-
     $res = true;
+
     if (empty($boardId)) {
         $res = false;
     } else {
@@ -31,14 +31,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $now = $this->date->getCurrentDateTime();
 
         if ($mode == "insert") {
-            $topic = new \Topic(0, $this->user->getId(), $boardId, $title, $now, $now, 0);
-            $post = new \Post(0, $this->user->getId(), 0, $content, $now, $now);
-
-            $id = $this->dba->getTable("topics")->insert($topic);
-            if (! empty($id)) {
-                $post->setTopicId($id);
-                $this->dba->getTable("posts")->insert($post);
-            }
+            $topic = new \Topic(0, $this->user->getId(), $boardId, $title, $now, $now);
+            $topicId = $this->dba->getTable("topics")->insert($topic);
+            $post = new \Post(0, $this->user->getId(), $topicId, $content, $now, $now);
+            $this->dba->getTable("posts")->insert($post);
         } elseif ($mode == "edit") {
             if ($topic->getPostId() == $post->getId()) {
                 $topic->setTitle($title);

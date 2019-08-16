@@ -2,17 +2,16 @@
 
 class Topic
 {
-    public function __construct($id = 0, $author_id = 0, $board_id = 0, $post_id = 0, $title = "", $update_date = "", $creation_date = "", $views = 0, $url = "")
+    public function __construct($id = 0, $author_id = 0, $board_id = 0, $title = "", $update_date = "", $creation_date = "", $views = 0, $url = "")
     {
         $this->id = $id;
         $this->author_id = $author_id;
         $this->board_id = $board_id;
-        $this->post_id = $post_id;
         $this->setTitle($title);
         $this->update_date = $update_date;
         $this->creation_date = $creation_date;
         $this->views = $views;
-        
+        $this->post = new Post();
         $this->author = new User();
         $this->latest_post = new Post();
     }
@@ -23,8 +22,6 @@ class Topic
     public function getAuthorId() { return $this->author_id; }
     public function setBoardId($board_id) { $this->board_id = $board_id; }
     public function getBoardId() { return $this->board_id; }
-    public function setPostId($post_id) { $this->post_id = $post_id; }
-    public function getPostId() { return $this->post_id; }
     public function setTitle($title) { $this->title = $title; $this->url = encodeUrlFromName($title); }
     public function getTitle() { return $this->title; }
     public function setUpdateDate($update_date) { $this->update_date = $update_date; }
@@ -36,6 +33,8 @@ class Topic
 
     public function setUrl($url) { $this->url = $url; }
     public function getUrl() { return $this->url; }
+    public function setPost($post) { $this->post = $post; }
+    public function getPost() { return $this->post; }
     public function setAuthor($author) { $this->author = $author; }
     public function getAuthor() { return $this->author; }
     public function setLatestPost($latest_post) { $this->latest_post = $latest_post; }

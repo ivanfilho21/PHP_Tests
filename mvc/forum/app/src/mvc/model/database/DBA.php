@@ -51,18 +51,6 @@ class DBA
         $this->tables[] = new \LikeDAO($pdo);
 
         $this->createTables();
-
-        /*# Default values
-        $date = \IvanFilho\Date\Date::getCurrentDate();
-        
-        #$u = new \User(0, 3, "admin", "", md5("prec"), $date);
-        #$this->getTable("users")->insert($u);
-
-        $c = new \Category(0, "Categoria", $date);
-        $this->getTable("categories")->insert($c);
-
-        $b = new \Board(0, 1, 1, "Board de Exemplo", "Descrição da Board.", $date);
-        $this->getTable("boards")->insert($b);*/
     }
 
     private function createTables()

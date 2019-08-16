@@ -30,13 +30,15 @@ class Topic extends Controller
         }
 
         $topic = $this->dba->getTable("topics")->get(array("url" => $url));
+        if (empty($topic)) redirect("home");
 
-        if (empty($topic)) {
-            redirect("home");
-        }
+        $post = $this->dba->getTable("posts")->get(array("topic_id" => $topic->getId()));
+        $topic->setPost($post);
 
-        $limitPerPage = 10;
+
+        $limitPerPage = 1;
         $board = $this->dba->getTable("boards")->get(array("id" => $topic->getBoardId()));
+        if (empty($board)) redirect("home");
 
         $this->title = $topic->getTitle();
         $this->pages[] = array("name" => "Início", "url" => URL);
@@ -45,6 +47,7 @@ class Topic extends Controller
 
         $topicAuthor = $this->dba->getTable("topics")->getAuthor($this->dba, $topic);
         $posts = $this->dba->getTable("topics")->getPosts($this->dba, $topic, $limitPerPage, $page);
+        // var_dump($posts);
         
         # Topic Views
         $topic->setViews($topic->getViews() + 1);
@@ -52,6 +55,7 @@ class Topic extends Controller
 
         $postsQty = count($this->dba->getTable("topics")->getPosts($this->dba, $topic));
         $pages = ($limitPerPage > 0) ? ceil($postsQty / $limitPerPage) : 1;
+        $pages = ($pages == 0) ? 1 : $pages;
 
         if ($page <= 0 || $page > $pages) {
             redirect("boards/" .$board->getUrl() ."/1");

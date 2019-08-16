@@ -10,6 +10,9 @@ html {
     box-sizing: border-box;
 }
 
+body {
+    background-color: whitesmoke;
+}
 
 ul {
     list-style: none;

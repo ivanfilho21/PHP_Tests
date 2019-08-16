@@ -40,7 +40,8 @@ define("CL", ":"); #Colon
 * Last Modified: Jul 23, 2019.
 */
 
-# Last modified Ago 15, 2019
+# Last modified Ago 16, 2019
+# Did refactoring in code
 # Returning lastInsertedId when operation is insert in prepareValues.
 # Updated get and getAll methods
 # Updated select method so when selectAll with whereColumns is called it will return correctly.
@@ -126,7 +127,7 @@ abstract class Table
         $this->update($obj, $where);
     }
 
-    public function get($whereArray, $selectArray = array(), $order = array())
+    public function get($whereArray, $selectArray = array(), $order = array(), $asList = false)
     {
         $select = array();
         foreach ($selectArray as $key => $value) {
@@ -137,10 +138,10 @@ abstract class Table
         foreach ($whereArray as $key => $value) {
             $where[] = Utils::createCondition($this, $key, $value);
         }
-        return $this->selectOne($select, $where, false, $order);
+        return $this->selectOne($select, $where, $order, $asList);
     }
 
-    public function getAll($whereArray = array(), $selectArray = array(), $limit = "", $order = array(), $asList = false)
+    public function getAll($whereArray = array(), $selectArray = array(), $limit = "", $order = array(), $asList = true)
     {
         $select = array();
         $where = array();
@@ -172,16 +173,19 @@ abstract class Table
         $this->prepareValues("delete", null, $whereColumnArray);
     }
 
-    protected function selectOne($selectColumnArray = array(), $whereColumnArray = array(), $asList = false, $order = array())
+    protected function selectOne($select = array(), $where = array(), $order = array(), $asList = false)
     {
-        $sql = $this->createSelectSQL($selectColumnArray, $whereColumnArray, 1, array(), $order);
-        return $this->select($sql, $whereColumnArray, $asList, 1);
+        $limit = 1;
+        $additional = array();
+        $sql = $this->createSelectSQL($select, $where, $limit, $additional, $order);
+        return $this->select($sql, $where, $asList);
     }
 
-    protected function selectAll($selectColumnArray = array(), $whereColumnArray = array(), $limit = "", $order = array(), $asList = false)
+    protected function selectAll($select = array(), $where = array(), $limit = "", $order = array(), $asList = false)
     {
-        $sql = $this->createSelectSQL($selectColumnArray, $whereColumnArray, $limit, array(), $order);
-        return $this->select($sql, $whereColumnArray, $asList, $limit);
+        $additional = array();
+        $sql = $this->createSelectSQL($select, $where, $limit, $additional, $order);
+        return $this->select($sql, $where, $asList);
     }
 
     protected function selectWithAdditionalColumn($select=array(), $where=array(), $limit="", $additionalSelect=array(), $order=array(), $asList=false)
@@ -258,14 +262,14 @@ abstract class Table
         return ($operation == "insert") ? $this->db->lastInsertId() : true;
     }
 
-    private function select($sql, $whereColumnArray = array(), $asList = false, $limit = 0)
+    private function select($sql, $where = array(), $asList = false)
     {
         // echo $sql ."<br>"; #die();
 
-        /*if (is_array($whereColumnArray) && count($whereColumnArray) > 0) {
+        /*if (is_array($where) && count($where) > 0) {
             $sql = $this->db->prepare($sql);
 
-            foreach ($whereColumnArray as $column) {
+            foreach ($where as $column) {
                 $value = $column->getValue();
 
                 if ($column->getExtra() == "like") {
@@ -296,12 +300,10 @@ abstract class Table
             }
         }*/
 
-        $object = new $this->classType();
-
-        if (is_array($whereColumnArray) && count($whereColumnArray) > 0) {
+        if (is_array($where) && count($where) > 0) {
             $sql = $this->db->prepare($sql);
 
-            foreach ($whereColumnArray as $column) {
+            foreach ($where as $column) {
                 $value = $column->getValue();
 
                 if ($column->getExtra() == "like") {
@@ -310,34 +312,32 @@ abstract class Table
                 // echo CL .$column->getName() ." = " .$value ."<br>";
                 $sql->bindValue(CL .$column->getName(), $value);
             }
-
-            // $sql->setFetchMode(PDO::FETCH_INTO, new $this->classType());
             $sql->execute();
         } else {
             $sql = $this->db->query($sql);
         }
 
+        $object = new $this->classType();
+
         if ($sql->rowCount() == 1) {
             # It could be a selectAll but only 1 was fetched
             $fetch = $sql->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, get_class($object));
-            return ($limit == 1) ? ($asList ? $fetch : $fetch[0]) : $fetch;
-            // return ($asList) ? array($fetch) : $fetch;
+            return (is_array($fetch)) ? (($asList) ? $fetch : $fetch[0]) : $fetch;
         }
         elseif ($sql->rowCount() > 1) {
             $fetch = $sql->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, get_class($object));
-            // echo "<pre>" .print_r($fetch, true) ."</pre>";
-            return $fetch;
+            return (is_array($fetch)) ? $fetch : array($fetch);
         }
 
         return ($asList) ? array() : false;
     }
 
-    private function createSelectSQL($selectColumnArray=array(), $whereColumnArray=array(), $limit="", $additionalColumnArray=array(), $order=array())
+    private function createSelectSQL($select = array(), $where = array(), $limit = "", $additional = array(), $order = array())
     {
         $table = BQ .$this->tableName .BQ;
-        $select = $this->formatSelectClause($selectColumnArray);
-        $select = $this->formatAdditionalSelectClause($select, $additionalColumnArray);
-        $where = $this->formatWhereClause($whereColumnArray);
+        $select = $this->formatSelectClause($select);
+        $select = $this->formatAdditionalSelectClause($select, $additional);
+        $where = $this->formatWhereClause($where);
 
         $sql = "SELECT " .$select ." FROM " .$table .$where;
         // echo $sql; die;

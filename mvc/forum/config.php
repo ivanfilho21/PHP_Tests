@@ -44,6 +44,23 @@ $auth = new \IvanFilho\Authentication\Authentication($dba->getTable("users"));
 # Date and Time
 $date = new \IvanFilho\Date\Date();
 
+
+
+
+# Default values
+/*$now = $date->getCurrentDateTime();
+
+#$u = new \User(0, 3, "admin", "", md5("prec"), $now);
+#$dba->getTable("users")->insert($u);
+
+$c = new \Category(0, "Categoria", $now);
+$dba->getTable("categories")->insert($c);
+
+$b = new \Board(0, 1, 1, "Board de Exemplo", "Descrição da Board.", $now);
+$dba->getTable("boards")->insert($b);*/
+
+
+
 # Template Configuration
 $template = "default";
 $title = "";

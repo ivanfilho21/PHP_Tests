@@ -18,8 +18,6 @@ $routers["/topics/{url}"] = "/topic/open/:url";
 $routers["/topics/{url}/"] = "/topic/open/:url";
 $routers["/topics/{url}/{page}"] = "/topic/open/:url/:page";
 $routers["/topics/{url}/{page}/"] = "/topic/open/:url/:page";
-
-// TODOOOO
 $routers["/topics/{url}/{page}/{post}"] = "/topic/open/:url/:page/:post";
 $routers["/topics/{url}/{page}/{post}/"] = "/topic/open/:url/:page/:post";
 

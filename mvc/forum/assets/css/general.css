@@ -40,6 +40,12 @@
     padding: 0.75rem 0.5rem;
 }
 
+.container-wider {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+}
+
 .container-narrow {
     width: 98%;
     margin: 0 auto;

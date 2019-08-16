@@ -1,17 +1,15 @@
 <style>
     .topic {
         padding: 0.5rem;
-        border: 1px solid transparent;
-        border-radius: 6px;
         background-color: #d6e0ea;
     }
     .topic-title {
-        font-size: 1.25rem;
-        padding: 0.5rem 1rem;
-        background-color: #333;
+        background-color: #111;
         color: ghostwhite;
     }
-
+    .topic-title .title {
+        font-size: 1.25rem;
+    }
     .post {
         display: flex;
         flex-wrap: wrap;
@@ -79,7 +77,8 @@
     }
 </style>
 
-<div class="topic-title"><?= $topic->getTitle() ?></div>
+<div class="topic-title"><div class="container-wider title"><?= $topic->getTitle() ?></div></div>
+
 <?php $this->requireView("parts/pagination", array("page" => $page, "pages" => $pages, "baseUrl" => $baseUrl), true) ?>
 
 <section class="topic">
@@ -107,7 +106,7 @@
                     </div>
                 <?php if (! empty($this->user)): ?>
                     <div class="flex flex-childs-ml">
-                    <?php $cond = ($topic->getPostId() == $post->getId() && $this->user->getId() && $post->getAuthorId()) ?>
+                    <?php $cond = ($topic->getPost()->getId() == $post->getId() && $this->user->getId() == $topic->getAuthorId() && $this->user->getId() == $post->getAuthorId()) ?>
                     <?php if ($this->user->getId() == $post->getAuthorId()): ?>
                         <a href="<?= URL .(($cond) ? "topic/edit/" : "topics/") .$topic->getUrl() .(($cond) ? "" : "/" .$page ."/" .$post->getId()) ?>" class="btn <?= ($cond) ? "btn-default" : "" ?> edit-button">Editar<?= ($cond) ? " Tópico" : "" ?></a>
                     <?php endif ?>
@@ -121,11 +120,9 @@
         </article>
     <?php endforeach ?>
 
-    <?php $this->requireView("parts/pagination", array("page" => $page, "pages" => $pages, "baseUrl" => $baseUrl), true) ?>
-
     <?php if (! empty($this->user)): ?>
         <div id="reply-topic" class="reply-topic">
-            <form class="container" method="post">
+            <form class="containerx" method="post">
                 <?php if (! empty($_SESSION["error-msg"])): ?>
                 <div class="alert alert-danger">
                     <span class="b">Foram encontrados os seguintes erros:</span>
@@ -142,7 +139,7 @@
 
                 <input type="hidden" name="post-id" value="<?= (! empty($editPost)) ? $editPost->getId() : "" ?>">
                 
-                <label>Escreva sua resposta para o Tópico <span class="i">"<?= $topic->getTitle() ?>"</span>:</label>
+                <!-- <label>Escreva sua resposta para o Tópico <span class="i">"<?= $topic->getTitle() ?>"</span>:</label> -->
                 <textarea id="txtarea" name="post-content" rows="15"><?= (! empty($_POST["post-content"])) ? $_POST["post-content"] : (! empty($editPost) ? $editPost->getContent() : "") ?></textarea>
 
                 <input class="btn btn-default" type="submit" name="submit" value="Responder">
@@ -157,6 +154,8 @@
         </div>
     <?php endif ?>
 </section>
+
+<?php $this->requireView("parts/pagination", array("page" => $page, "pages" => $pages, "baseUrl" => $baseUrl), true) ?>
 
 <script>
     function updateLikes(topic) {
