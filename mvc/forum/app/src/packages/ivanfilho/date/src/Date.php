@@ -85,9 +85,10 @@ class Date
 
     private function basedOnToday(String $date, int $diff)
     {
-        if ($diff < DAY) {
+        // echo $diff, ", ", DAY, " ";
+        if ($diff < DAY - HOUR*12) {
             return "Hoje";
-        } elseif ($diff >= DAY && $diff < 2*DAY) {
+        } elseif ($diff < 2*DAY - HOUR*12) {
             return "Ontem";
         } else {
             return $this->translateToDate($date);

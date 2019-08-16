@@ -35,7 +35,7 @@ class Topic extends Controller
             redirect("home");
         }
 
-        $limitPerPage = 2;
+        $limitPerPage = 10;
         $board = $this->dba->getTable("boards")->get(array("id" => $topic->getBoardId()));
 
         $this->title = $topic->getTitle();
