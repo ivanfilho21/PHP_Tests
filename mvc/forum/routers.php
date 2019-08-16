@@ -11,6 +11,9 @@ $routers["/authentication/"] = "/home/index";
 
 $routers["/boards/{id}"] = "/board/open/:id";
 $routers["/boards/{id}/"] = "/board/open/:id";
+$routers["/boards/{id}/{page}"] = "/board/open/:id/:page";
+$routers["/boards/{id}/{page}/"] = "/board/open/:id/:page";
+
 $routers["/topics/{id}"] = "/topic/open/:id";
 $routers["/topics/{id}/"] = "/topic/open/:id";
 $routers["/users/{id}"] = "/user/open/:id";

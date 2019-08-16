@@ -55,6 +55,8 @@
     </tbody>
 </table>
 
+<?php $this->requireView("parts/pagination", array("page" => $page, "pages" => $pages), true) ?>
+
 <div>
     <h4>Legenda</h4>
     <div>
