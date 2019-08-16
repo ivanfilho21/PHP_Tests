@@ -15,6 +15,7 @@
 
     .breadcrumb-nav li.active {
         font-weight: bold;
+        font-style: italic;
     }
 
     .breadcrumb-nav li::after {
