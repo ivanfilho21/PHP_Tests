@@ -77,7 +77,7 @@
     }
 </style>
 
-<div class="topic-title"><div class="container-wider title"><?= $topic->getTitle() ?></div></div>
+<div class="topic-title"><div class="container-wider title"><?= (($topic->getType() == \Topic::TYPE_FIXED_TOPIC) ? " [Fixo] " : "") .$topic->getTitle() .(($topic->getMode() == \Topic::MODE_LOCKED_TOPIC) ? " (Trancado)" : "") ?></div></div>
 
 <?php $this->requireView("parts/pagination", array("page" => $page, "pages" => $pages, "baseUrl" => $baseUrl), true) ?>
 
@@ -105,7 +105,7 @@
                         <?php endif ?>
                     </div>
                 <?php if (! empty($this->user)): ?>
-                    <div class="flex flex-childs-ml">
+                    <div class="flex flex-children-ml">
                     <?php $cond = ($topic->getPost()->getId() == $post->getId() && $this->user->getId() == $topic->getAuthorId() && $this->user->getId() == $post->getAuthorId()) ?>
                     <?php if ($this->user->getId() == $post->getAuthorId()): ?>
                         <a href="<?= URL .(($cond) ? "topic/edit/" : "topics/") .$topic->getUrl() .(($cond) ? "" : "/" .$page ."/" .$post->getId()) ?>" class="btn <?= ($cond) ? "btn-default" : "" ?> edit-button">Editar<?= ($cond) ? " Tópico" : "" ?></a>
@@ -120,7 +120,7 @@
         </article>
     <?php endforeach ?>
 
-    <?php if (! empty($this->user)): ?>
+    <?php if (! empty($this->user) && $topic->getMode() != \Topic::MODE_LOCKED_TOPIC): ?>
         <div id="reply-topic" class="reply-topic">
             <form class="containerx" method="post">
                 <?php if (! empty($_SESSION["error-msg"])): ?>

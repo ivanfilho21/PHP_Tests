@@ -2,10 +2,14 @@
 
 class User
 {
-    public function __construct($id = 0, $typeId = 1, $username = "", $email = "", $password = "", $creation_date = "", $name = "", $last_seen = "", $birthday = "")
+    const TYPE_NORMAL_USER = 1;
+    const TYPE_MODERATOR_USER = 2;
+    const TYPE_ADMIN_USER = 3;
+
+    public function __construct($id = 0, $type = self::TYPE_NORMAL_USER, $username = "", $email = "", $password = "", $creation_date = "", $name = "", $last_seen = "", $birthday = "")
     {
         $this->id = $id;
-        $this->typeId = $typeId;
+        $this->type = $type;
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
@@ -17,8 +21,8 @@ class User
 
     public function setId($id) { $this->id = $id; }
     public function getId() { return $this->id; }
-    public function setTypeId($typeId) { $this->typeId = $type; }
-    public function getTypeId() { return $this->typeId; }
+    public function setType($type) { $this->type = $type; }
+    public function getType() { return $this->type; }
     public function setUsername($username) { $this->username = $username; }
     public function getUsername() { return $this->username; }
     public function setName($name) { $this->name = $name; }

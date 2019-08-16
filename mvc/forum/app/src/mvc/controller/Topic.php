@@ -113,8 +113,7 @@ class Topic extends Controller
         $board = $this->dba->getTable("boards")->get(array("id" => $topic->getBoardId()));
         if (empty($board)) redirect("home");
         
-        # Check if current user is author of post to edit
-        $post = $this->dba->getTable("topics")->getPost($this->dba, $topic, $topic->getPostId());
+        $post = $topic->getPost();
         if (empty($post)) redirect("boards/" .$board->getUrl());
 
         $this->title = "Editar Tópico";

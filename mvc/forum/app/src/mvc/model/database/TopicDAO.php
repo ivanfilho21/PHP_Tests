@@ -11,6 +11,8 @@ class TopicDAO extends Table
             new Column("id", INT, 11, false, "AUTO_INCREMENT", "PRIMARY KEY"),
             new Column("author_id", INT, 11, false),
             new Column("board_id", INT, 11, false),
+            new Column("mode", INT, 1, false),
+            new Column("type", INT, 1, false),
             new Column("title", VARCHAR, 150),
             new Column("views", INT),
             new Column("url", VARCHAR, 60),

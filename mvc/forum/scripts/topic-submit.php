@@ -1,8 +1,9 @@
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $mode = $_POST["mode"];
     $boardId = $_POST["board"];
+    $mode = $_POST["mode"];
+    $type = $_POST["type"];
     $title = format($_POST["topic-title"]);
     $content = $_POST["topic-content"];
 
@@ -16,6 +17,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $res = ! empty($board);
     }
     if (! $res) $_SESSION["error-msg"]["board"] = "Selecione uma <b>Board</b>.";
+
+    # Check if Mode is a Correct value
+    switch ($mode) {
+        case \Topic::MODE_OPEN_TOPIC: break;
+        case \Topic::MODE_LOCKED_TOPIC: break;
+        default:
+            $res = false;
+            $_SESSION["error-msg"]["mode"] = "O <b>modo</b> escolhido é inválido.";
+            break;
+    }
+
+    # Check if Type is a Correct value
+    switch ($type) {
+        case \Topic::TYPE_NORMAL_TOPIC: break;
+        case \Topic::TYPE_FIXED_TOPIC: break;
+        default:
+            $res = false;
+            $_SESSION["error-msg"]["type"] = "O <b>tipo</b> de tópico escolhido é inválido.";
+            break;
+    }
 
     if (empty($title)) {
         $res = false;
@@ -31,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $now = $this->date->getCurrentDateTime();
 
         if ($mode == "insert") {
-            $topic = new \Topic(0, $this->user->getId(), $boardId, $title, $now, $now);
+            $topic = new \Topic(0, $this->user->getId(), $boardId, \Topic::MODE_OPEN_TOPIC, \Topic::TYPE_NORMAL_TOPIC, $title, $now, $now);
             $topicId = $this->dba->getTable("topics")->insert($topic);
             $post = new \Post(0, $this->user->getId(), $topicId, $content, $now, $now);
             $this->dba->getTable("posts")->insert($post);

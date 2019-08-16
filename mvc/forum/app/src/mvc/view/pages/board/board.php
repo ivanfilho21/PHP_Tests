@@ -18,9 +18,18 @@
             <td>
                 <?php
                 $icon = "topic";
-                if ($postsQty > 20) {
-                    $icon .= "-hot";
+                // TODO:
+                /*if ($topic->getMode() == \Topic::MODE_LOCKED_TOPIC) {
+                    $icon .= "-locked";
                 }
+                if ($topic->getType() == \Topic::TYPE_FIXED_TOPIC) {
+                    $icon .= "-fixed";
+                } else {
+                    if ($postsQty > 20) {
+                        $icon .= "-hot";
+                    }
+                }*/
+                
                 ?>
                 <img src="<?= URL ?>assets/img/<?= $icon ?>.ico" alt="Topic Status Icon">
             </td>
