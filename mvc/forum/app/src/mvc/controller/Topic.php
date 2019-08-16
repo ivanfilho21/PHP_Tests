@@ -98,4 +98,13 @@ class Topic extends Controller
 
         $this->loadView("create-topic", $viewData);
     }
+
+    public function edit($url = "", $postId = 0)
+    {
+        $this->checkUserLogged();
+
+        if (empty($url) || empty($postId)) { redirect("home"); }
+
+        # Check if current user is author of post to edit
+    }
 }

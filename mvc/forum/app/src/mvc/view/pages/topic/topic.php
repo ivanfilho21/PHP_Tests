@@ -93,9 +93,9 @@
                 <?php if (! empty($this->user)): ?>
                     <div class="flex flex-childs-ml">
                     <?php if ($this->user->getId() == $post->getAuthorId()): ?>
-                        <a href="javascript:void(0);" class="btn edit-button">Editar</a>
+                        <a href="<?= URL ?>topic/edit/<?= $topic->getUrl() ?>/<?= $post->getId() ?>" class="btn edit-button">Editar</a>
                     <?php endif ?>
-                        <button href="javascript:void(0);" title="Gostei" class="btn like-button" onclick="likePost.call(this)" data-topic="<?= $topic->getId() ?>" data-post="<?= $post->getId() ?>"><i class="fa fa-thumbs-up"></i></button>
+                        <button title="Gostei" class="btn like-button" onclick="likePost.call(this)" data-topic="<?= $topic->getId() ?>" data-post="<?= $post->getId() ?>"><i class="fa fa-thumbs-up"></i></button>
                     </div>
                 <?php endif ?>
                 </div>
