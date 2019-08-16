@@ -1,9 +1,11 @@
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $mode = $_POST["mode"];
     $boardId = $_POST["board"];
     $title = format($_POST["topic-title"]);
     $content = $_POST["topic-content"];
+
 
     $res = true;
     if (empty($boardId)) {
@@ -27,14 +29,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($res) {
         $now = $this->date->getCurrentDateTime();
-        $topic = new \Topic(0, $this->user->getId(), $boardId, $title, $now, $now, 0);
-        $post = new \Post(0, $this->user->getId(), 0, $content, $now, $now);
-        // echo "<pre>" .print_r($topic, true) ."</pre>";
 
-        $id = $this->dba->getTable("topics")->insert($topic);
-        if (! empty($id)) {
-            $post->setTopicId($id);
-            $this->dba->getTable("posts")->insert($post);
+        if ($mode == "insert") {
+            $topic = new \Topic(0, $this->user->getId(), $boardId, $title, $now, $now, 0);
+            $post = new \Post(0, $this->user->getId(), 0, $content, $now, $now);
+
+            $id = $this->dba->getTable("topics")->insert($topic);
+            if (! empty($id)) {
+                $post->setTopicId($id);
+                $this->dba->getTable("posts")->insert($post);
+            }
+        } elseif ($mode == "edit") {
+            if ($topic->getPostId() == $post->getId()) {
+                $topic->setTitle($title);
+                $topic->setBoardId($boardId);
+                $topic->setUpdateDate($now);
+                $this->dba->getTable("topics")->edit($topic);
+
+                $post->setContent($content);
+                $post->setUpdateDate($now);
+                $this->dba->getTable("posts")->edit($post);
+            }
         }
 
         redirect("boards/" .$board->getUrl());

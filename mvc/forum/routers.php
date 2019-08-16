@@ -9,15 +9,19 @@ $routers["/index/"] = "/home/index";
 $routers["/authentication"] = "/home/index";
 $routers["/authentication/"] = "/home/index";
 
-$routers["/boards/{id}"] = "/board/open/:id";
-$routers["/boards/{id}/"] = "/board/open/:id";
-$routers["/boards/{id}/{page}"] = "/board/open/:id/:page";
-$routers["/boards/{id}/{page}/"] = "/board/open/:id/:page";
+$routers["/boards/{url}"] = "/board/open/:url";
+$routers["/boards/{url}/"] = "/board/open/:url";
+$routers["/boards/{url}/{page}"] = "/board/open/:url/:page";
+$routers["/boards/{url}/{page}/"] = "/board/open/:url/:page";
 
-$routers["/topics/{id}"] = "/topic/open/:id";
-$routers["/topics/{id}/"] = "/topic/open/:id";
-$routers["/topics/{id}/{page}"] = "/topic/open/:id/:page";
-$routers["/topics/{id}/{page}/"] = "/topic/open/:id/:page";
+$routers["/topics/{url}"] = "/topic/open/:url";
+$routers["/topics/{url}/"] = "/topic/open/:url";
+$routers["/topics/{url}/{page}"] = "/topic/open/:url/:page";
+$routers["/topics/{url}/{page}/"] = "/topic/open/:url/:page";
+
+// TODOOOO
+$routers["/topics/{url}/{page}/{post}"] = "/topic/open/:url/:page/:post";
+$routers["/topics/{url}/{page}/{post}/"] = "/topic/open/:url/:page/:post";
 
 $routers["/users/{id}"] = "/user/open/:id";
 $routers["/users/{id}/"] = "/user/open/:id";

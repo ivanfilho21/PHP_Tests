@@ -23,7 +23,7 @@ class Topic extends Controller
         redirect("home");
     }
 
-    public function open($url = "", $page = 1)
+    public function open($url = "", $page = 1, $postId = 0)
     {
         if (empty($url)) {
             redirect("home");
@@ -57,6 +57,15 @@ class Topic extends Controller
             redirect("boards/" .$board->getUrl() ."/1");
         }
 
+        if (! empty($postId)) {
+            # Editing a post different from the Topic First Post
+            $editPost = $this->dba->getTable("topics")->getPost($this->dba, $topic, $postId);
+            $viewData["editPost"] = $editPost;
+            require "scripts/post-edit-submit.php";
+        } else {
+            require "scripts/post-submit.php";
+        }
+
         $viewData["author"] = $topicAuthor;
         $viewData["topic"] = $topic;
         $viewData["posts"] = $posts;
@@ -64,7 +73,6 @@ class Topic extends Controller
         $viewData["pages"] = $pages;
         $viewData["baseUrl"] = URL ."topics/" .$topic->getUrl() ."/";
 
-        require "scripts/post-submit.php";
 
         $this->loadView("topic", $viewData);
     }
@@ -80,7 +88,48 @@ class Topic extends Controller
         // $this->pages[] = array("name" => $board->getName(), "url" => URL ."boards/" .$board->getUrl());
         $this->pages[] = array("name" => $this->title, "url" => URL ."topic/create", "active" => true);
 
-        $boards = array();
+        $cats = $this->getCategoriesAndBoards();
+
+        $viewData["boardId"] = (! empty($boardId)) ? $boardId : 0;
+        $viewData["boards"] = $cats;
+
+        $this->loadView("create-topic", $viewData);
+    }
+
+    public function edit($url = "")
+    {
+        $this->checkUserLogged();
+        if (empty($url)) redirect("home");
+
+        $topic = $this->dba->getTable("topics")->get(array("url" => $url));
+        if (empty($topic)) redirect("topics/" .$url);
+        if ($topic->getAuthorId() != $this->user->getId()) redirect("topics/" .$url);
+
+        $board = $this->dba->getTable("boards")->get(array("id" => $topic->getBoardId()));
+        if (empty($board)) redirect("home");
+        
+        # Check if current user is author of post to edit
+        $post = $this->dba->getTable("topics")->getPost($this->dba, $topic, $topic->getPostId());
+        if (empty($post)) redirect("boards/" .$board->getUrl());
+
+        $this->title = "Editar Tópico";
+        $this->pages[] = array("name" => "Início", "url" => URL);
+        $this->pages[] = array("name" => $board->getName(), "url" => URL ."boards/" .$board->getUrl());
+        $this->pages[] = array("name" => $this->title, "url" => URL ."topic/create", "active" => true);
+
+        $cats = $this->getCategoriesAndBoards();
+
+        $viewData["boardId"] = $board->getId();
+        $viewData["boards"] = $cats;
+        $viewData["topic"] = $topic;
+        $viewData["post"] = $post;
+
+        require "scripts/topic-submit.php";
+        $this->loadView("create-topic", $viewData);
+    }
+
+    private function getCategoriesAndBoards()
+    {
         $cats = array();
         $categories = $this->dba->getTable("categories")->getAll();
         foreach ($categories as $c) {
@@ -90,21 +139,6 @@ class Topic extends Controller
 
             $cats[$c->getName()] = $b;
         }
-
-        $viewData["boardId"] = (! empty($boardId)) ? $boardId : 0;
-        $viewData["boards"] = $cats;
-
-
-
-        $this->loadView("create-topic", $viewData);
-    }
-
-    public function edit($url = "", $postId = 0)
-    {
-        $this->checkUserLogged();
-
-        if (empty($url) || empty($postId)) { redirect("home"); }
-
-        # Check if current user is author of post to edit
+        return (! empty($cats)) ? $cats : array();
     }
 }

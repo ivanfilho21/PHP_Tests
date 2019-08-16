@@ -43,7 +43,7 @@
             <td>
                 <div>
                 <?php if (! empty($posts)): ?>
-                    <div>por <a href="<?= URL ?>users/<?= $posts[0]->getAuthor()->getUsername() ?>"><?= $posts[0]->getAuthor()->getUsername() ?></a></div>
+                    <div>por <a href="<?= URL ?>users/<?= $posts[$postsQty-1]->getAuthor()->getUsername() ?>"><?= $posts[$postsQty-1]->getAuthor()->getUsername() ?></a></div>
                     <div title="<?= $this->date->translateToDateTime($posts[0]->getCreationDate(), "às") ?>"><?= $this->date->translateToDate($posts[0]->getCreationDate()) ?></div>
                 <?php else: ?>
                     <div>0</div>

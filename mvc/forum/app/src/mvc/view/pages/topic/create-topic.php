@@ -3,6 +3,8 @@
 
     <form id="form" method="post" data-validation-url="<?= URL ?>scripts/topic.php">
 
+        <input type="hidden" name="mode" value="<?= (empty($post)) ? "insert" : "edit" ?>">
+
         <?php if (! empty($_SESSION["error-msg"])): ?>
         <div class="alert alert-danger">
             <span class="b">Foram encontrados os seguintes erros:</span>
@@ -32,11 +34,11 @@
 
         <label>Assunto:</label>
         <div class="input-wrapper">
-            <input type="text" name="topic-title" autofocus="on" value="<?= (! empty($_POST["topic-title"])) ? $_POST["topic-title"] : "" ?>">
+            <input type="text" name="topic-title" autofocus="on" value="<?= (! empty($_POST["topic-title"])) ? $_POST["topic-title"] : ((! empty($topic)) ? $topic->getTitle() : "") ?>">
         </div>
 
         <label>Conteúdo:</label>
-        <textarea id="txtarea" name="topic-content" rows="25"><?= (! empty($_POST["topic-content"])) ? $_POST["topic-content"] : "" ?></textarea>
+        <textarea id="txtarea" name="topic-content" rows="25"><?= (! empty($_POST["topic-content"])) ? $_POST["topic-content"] : ((! empty($post)) ? $post->getContent() : "") ?></textarea>
 
         <input class="btn btn-default" type="submit" name="submit" value="Publicar">
     </form>

@@ -11,6 +11,7 @@ class TopicDAO extends Table
             new Column("id", INT, 11, false, "AUTO_INCREMENT", "PRIMARY KEY"),
             new Column("author_id", INT, 11, false),
             new Column("board_id", INT, 11, false),
+            new Column("post_id", INT, 11, false),
             new Column("title", VARCHAR, 150),
             new Column("views", INT),
             new Column("url", VARCHAR, 60),
@@ -39,13 +40,19 @@ class TopicDAO extends Table
         return $dba->getTable("users")->get($where);
     }
 
+    public function getPost($dba, $topic, $postId)
+    {
+        $where = array("id" => $postId, "topic_id" => $topic->getId());
+        return $dba->getTable("posts")->get($where);
+    }
+
     public function getPosts($dba, $topic, $limit = 1, $page = 1)
     {
         $select = array();
         $where = array("topic_id" => $topic->getId());
         $limitTxt = "";
 
-        if ($limit > 1) {
+        if (! empty($page) && $limit > 1) {
             $startPoint = ($page - 1) * $limit;
             $limitTxt = ($startPoint >= 0) ? $startPoint .", " .$limit : "";
         }
