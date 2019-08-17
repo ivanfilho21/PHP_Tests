@@ -70,8 +70,9 @@
 <section class="topic">
 
     <?php foreach ($posts as $post): ?>
+        <?php $userData = array("user" => $post->getAuthor()) ?>
         <article class="post">
-            <?php $this->requireView("parts/user/user-info", array("user" => $post->getAuthor()), true) ?>
+            <?php $this->requireView("parts/user/user-info", $userData, true) ?>
 
             <div class="body">
                 <div class="flex justify-content-spc-btw">
@@ -94,6 +95,7 @@
                 </div>
 
                 <div class="content"><?= $post->getContent() ?></div>
+                <?php $this->requireView("parts/user/signature", $userData, true) ?>
             </div>
         </article>
     <?php endforeach ?>

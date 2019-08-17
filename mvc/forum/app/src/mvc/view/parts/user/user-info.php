@@ -24,7 +24,7 @@
     }
 
     .statistics {
-        background-color: lightgray;
+        /*background-color: lightgray;*/
     }
     
     .statistics .item {
@@ -56,6 +56,11 @@
 
         <div class="item">
             <span>Mensagens</span>
+            <span>-</span>
+        </div>
+
+        <div class="item">
+            <span>Likes Recebidos</span>
             <span>-</span>
         </div>
         
