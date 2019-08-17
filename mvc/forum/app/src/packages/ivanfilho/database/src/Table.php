@@ -40,7 +40,8 @@ define("CL", ":"); #Colon
 * Last Modified: Jul 23, 2019.
 */
 
-# Last modified Ago 16, 2019
+# Last modified Ago 17, 2019
+# Refactored some methods
 # Did refactoring in code
 # Returning lastInsertedId when operation is insert in prepareValues.
 # Updated get and getAll methods
@@ -130,18 +131,25 @@ abstract class Table
         $this->update($obj, $where);
     }
 
-    public function get($whereArray, $selectArray = array(), $order = array(), $asList = false)
+    public function get($whereArray, $selectArray = array(), $orderArray = array(), $asList = false)
     {
         $select = array();
+        $where = array();
+        $order = array();
+        $additional = array();
+        $limit = "1";
+
         foreach ($selectArray as $key => $value) {
             $select[] = Utils::createSelection($this, $key);
         }
 
-        $where = array();
         foreach ($whereArray as $key => $value) {
             $where[] = Utils::createCondition($this, $key, $value);
         }
-        return $this->selectOne($select, $where, $order, $asList);
+        // return $this->selectOne($select, $where, $order, $asList);
+        
+        $sql = $this->createSelectSQL($select, $where, $limit, $additional, $order);
+        return $this->select($sql, $where, $asList);
     }
 
     public function getAll($whereArray = array(), $selectArray = array(), $limitArray = array(), $orderArray = array(), $asList = true)
@@ -149,6 +157,7 @@ abstract class Table
         $select = array();
         $where = array();
         $order = array();
+        $additional = array();
         $limit = "";
 
         foreach ($selectArray as $key => $value) {
@@ -175,7 +184,10 @@ abstract class Table
 
             $order = array(array("column" => $column, "criteria" => $criteria));
         }
-        return $this->selectAll($select, $where, $limit, $order, $asList);
+        // return $this->selectAll($select, $where, $limit, $order, $asList);
+        
+        $sql = $this->createSelectSQL($select, $where, $limit, $additional, $order);
+        return $this->select($sql, $where, $asList);
     }
 
     public function remove($id)
@@ -194,7 +206,7 @@ abstract class Table
         $this->prepareValues("delete", null, $whereColumnArray);
     }
 
-    protected function selectOne($select = array(), $where = array(), $order = array(), $asList = false)
+    /*protected function selectOne($select = array(), $where = array(), $order = array(), $asList = false)
     {
         $limit = 1;
         $additional = array();
@@ -213,7 +225,7 @@ abstract class Table
     {
         $sql = $this->createSelectSQL($select, $where, $limit, $additionalSelect, $order);
         return $this->select($sql, $where, $asList);
-    }
+    }*/
 
     private function prepareValues($operation = "", $obj = null, $whereColumnArray = array(), $includePK = false)
     {
@@ -285,43 +297,7 @@ abstract class Table
 
     private function select($sql, $where = array(), $asList = false)
     {
-        // echo $sql ."<br>"; #die();
-
-        /*if (is_array($where) && count($where) > 0) {
-            $sql = $this->db->prepare($sql);
-
-            foreach ($where as $column) {
-                $value = $column->getValue();
-
-                if ($column->getExtra() == "like") {
-                    $value = QT ."%" .$column->getValue() ."%" .QT;
-                }
-                echo CL .$column->getName() ." = " .$value ."<br>";
-                $sql->bindValue(CL .$column->getName(), $value);
-            }
-
-            $sql->setFetchMode(PDO::FETCH_INTO, new $this->classType());
-            $sql->execute();
-
-            if ($sql->rowCount() == 1) {
-                $fetch = $sql->fetch(); // $sql->fetch(PDO::FETCH_ASSOC);
-                return ($asList) ? array($fetch) : $fetch;
-            }
-        }
-        else {
-            $object = new $this->classType();
-            $sql = $this->db->query($sql);
-
-            if ($sql->rowCount() == 1) {
-                $fetch = $sql->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, get_class($object));
-                return ($asList) ? array($fetch) : $fetch;
-            }
-            elseif ($sql->rowCount() > 1) {
-                return $sql->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, get_class($object));
-            }
-        }*/
-
-        if (is_array($where) && count($where) > 0) {
+        if (! empty($where)) {
             $sql = $this->db->prepare($sql);
 
             foreach ($where as $column) {

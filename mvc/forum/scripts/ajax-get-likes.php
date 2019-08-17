@@ -13,14 +13,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
     $select = array();
     $where = array("topic_id" => $topic->getId());
-    $limitTxt = "";
+    $limit = array("from" => $page, "qty" => $limit);
 
-    if (! empty($page)) {
-        $startPoint = ($page - 1) * $limit;
-        $limitTxt = ($startPoint >= 0) ? $startPoint .", " .$limit : "";
-    }
-
-    $posts = (empty($topic)) ? : $dba->getTable("posts")->getAll($where, $select, $limitTxt);
+    $posts = (empty($topic)) ? : $dba->getTable("posts")->getAll($where, $select, $limit);
     $allLikes = array();
 
     foreach ($posts as $post) {

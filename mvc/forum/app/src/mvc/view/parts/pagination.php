@@ -57,15 +57,11 @@
         <span class="caption">Página <?= $page ?> de <?= $pages ?></span>
 
         <ul>
-        <?php if ($page > 1): ?>
-            <li><a title="Página Anterior"<?= ($page > 1) ? "href='" .$baseUrl .($page - 1) ."'" : "class='disabled'" ?>>«</a></li>
-        <?php endif ?>
+        <li><a title="Página Anterior"<?= ($page > 1) ? "href='" .$baseUrl .($page - 1) ."'" : "class='disabled'" ?>>«</a></li>
         <?php for ($i = 1; $i <= $pages; $i++): ?>
             <li><a title="Ir para a página <?= $i ?>" href="<?= $baseUrl .$i ?>" <?= ($page == $i) ? "class='active'" : "" ?>><?= $i ?></a></li>
         <?php endfor ?>
-        <?php if ($page < $pages): ?>
-            <li><a title="Próxima Página"<?= ($page < $pages) ? "href='" .$baseUrl .($page + 1) ."'" : "class='disabled'" ?>>»</a></li>
-        <?php endif ?>
+        <li><a title="Próxima Página"<?= ($page < $pages) ? "href='" .$baseUrl .($page + 1) ."'" : "class='disabled'" ?>>»</a></li>
         </ul>
     </div>
 </nav>
