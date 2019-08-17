@@ -15,7 +15,7 @@ class TopicDAO extends Table
             new Column("type", INT, 1, false),
             new Column("title", VARCHAR, 150),
             new Column("views", INT),
-            new Column("url", VARCHAR, 60),
+            new Column("url", VARCHAR, 150),
             new Column("update_date", DATETIME),
             new Column("creation_date", DATETIME)
         ];

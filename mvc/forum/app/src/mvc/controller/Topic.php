@@ -90,7 +90,11 @@ class Topic extends Controller
 
         $this->title = "Novo Tópico";
         $this->pages[] = array("name" => "Início", "url" => URL);
-        // $this->pages[] = array("name" => $board->getName(), "url" => URL ."boards/" .$board->getUrl());
+
+        if (! empty($boardId)) {
+            $board = $this->dba->getTable("boards")->get(array("id" => $boardId));
+            $this->pages[] = array("name" => $board->getName(), "url" => URL ."boards/" .$board->getUrl());
+        }
         $this->pages[] = array("name" => $this->title, "url" => URL ."topic/create", "active" => true);
 
         $cats = $this->getCategoriesAndBoards();
@@ -113,9 +117,11 @@ class Topic extends Controller
         $board = $this->dba->getTable("boards")->get(array("id" => $topic->getBoardId()));
         if (empty($board)) redirect("home");
         
-        $firstPost = $this->dba->getTable("topics")->getPost($this->dba, $topic, $topic->getId());
+        $firstPost = $this->dba->getTable("posts")->get(array("topic_id" => $topic->getId()));
         if (empty($firstPost)) redirect("boards/" .$board->getUrl());
         $topic->setPost($firstPost);
+
+        require "scripts/topic-submit.php";
 
         $this->title = "Editar Tópico";
         $this->pages[] = array("name" => "Início", "url" => URL);
@@ -129,7 +135,6 @@ class Topic extends Controller
         $viewData["topic"] = $topic;
         $viewData["post"] = $topic->getPost();
 
-        require "scripts/topic-submit.php";
         $this->loadView("create-topic", $viewData);
     }
 

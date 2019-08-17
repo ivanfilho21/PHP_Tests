@@ -21,18 +21,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     # Check if Mode is a Correct value
     switch ($mode) {
-        case \Topic::MODE_OPEN_TOPIC: break;
-        case \Topic::MODE_LOCKED_TOPIC: break;
+        case \Topic::MODE_OPEN_TOPIC: $mode = \Topic::MODE_OPEN_TOPIC; break;
+        case \Topic::MODE_LOCKED_TOPIC: $mode = \Topic::MODE_LOCKED_TOPIC; break;
         default:
             $res = false;
             $_SESSION["error-msg"]["mode"] = "O <b>modo</b> escolhido é inválido.";
             break;
     }
 
+    # Only Mods and Admins can set the topic type
     # Check if Type is a Correct value
     switch ($type) {
-        case \Topic::TYPE_NORMAL_TOPIC: break;
-        case \Topic::TYPE_FIXED_TOPIC: break;
+        case \Topic::TYPE_NORMAL_TOPIC: $type = \Topic::TYPE_NORMAL_TOPIC; break;
+        case \Topic::TYPE_FIXED_TOPIC: $type = \Topic::TYPE_FIXED_TOPIC; break;
         default:
             $res = false;
             $_SESSION["error-msg"]["type"] = "O <b>tipo</b> de tópico escolhido é inválido.";
@@ -60,6 +61,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             redirect("boards/" .$board->getUrl());
         } elseif ($operation == "edit") {
+            $topic->setMode($mode);
+
+            if ($this->user->getType() != \User::TYPE_NORMAL_USER) {
+                $topic->setType($type);
+            }
+            
             $topic->setTitle($title);
             $topic->setBoardId($boardId);
             $topic->setUpdateDate($now);

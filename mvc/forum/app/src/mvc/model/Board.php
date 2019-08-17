@@ -7,10 +7,10 @@ class Board
         $this->id = $id;
         $this->moderator_id = $moderator_id;
         $this->category_id = $category_id;
-        $this->setName($name);
+        $this->name = $name;
         $this->description = $description;
         $this->creation_date = $creation_date;
-        
+        $this->setUrl();
         $this->latest_topic = new Topic();
         $this->moderator = new User();
     }
@@ -21,14 +21,14 @@ class Board
     public function getCategoryId() { return $this->category_id; }
     public function setModeratorId($moderator_id) { $this->moderator_id = $moderator_id; }
     public function getModeratorId() { return $this->moderator_id; }
-    public function setName($name) { $this->name = $name; $this->url = encodeUrlFromName($name); }
+    public function setName($name) { $this->name = $name; }
     public function getName() { return $this->name; }
     public function setDescription($description) { $this->description = $description; }
     public function getDescription() { return $this->description; }
     public function setCreationDate($creation_date) { $this->creation_date = $creation_date; }
     public function getCreationDate() { return $this->creation_date; }
 
-    public function setUrl($url) { $this->url = $url; }
+    public function setUrl() { $this->url = encodeUrlFromName($this->getName()); }
     public function getUrl() { return $this->url; }
     public function setModerator($moderator) { $this->moderator = $moderator; }
     public function getModerator() { return $this->moderator; }

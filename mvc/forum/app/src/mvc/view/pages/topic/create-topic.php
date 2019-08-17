@@ -1,6 +1,8 @@
 <section class="container-narrow">
     <h1>Novo Tópico</h1>
 
+    <h4>Operação <?= (empty($post)) ? "insert" : "edit" ?></h4>
+
     <form id="form" method="post" data-validation-url="<?= URL ?>scripts/topic.php">
 
         <input type="hidden" name="operation" value="<?= (empty($post)) ? "insert" : "edit" ?>">
@@ -54,7 +56,7 @@
                 </select>
             </div>
             <?php else: ?>
-            <input type="hidden" name="type" value="<?= \topic::TYPE_NORMAL_TOPIC ?>">
+            <input type="hidden" name="type" value="<?= (! empty($_POST["type"])) ? $_POST["type"] : ((! empty($topic)) ? $topic->getType() : \topic::TYPE_NORMAL_TOPIC) ?>">
             <?php endif ?>
         </div>
 

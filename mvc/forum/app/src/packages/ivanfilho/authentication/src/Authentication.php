@@ -17,9 +17,9 @@ class Authentication
         return $this->userDAO->get(array($field => $value)) !== false;
     }
 
-    public function getUser(array $fields)
+    public function getUser(array $where)
     {
-        return $this->userDAO->get($fields);
+        return $this->userDAO->get($where);
     }
 
     public function insertUser(User $user)

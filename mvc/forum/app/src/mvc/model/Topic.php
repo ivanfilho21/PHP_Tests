@@ -14,10 +14,11 @@ class Topic
         $this->board_id = $board_id;
         $this->mode = $mode;
         $this->type = $type;
-        $this->setTitle($title);
+        $this->title = $title;
         $this->update_date = $update_date;
         $this->creation_date = $creation_date;
         $this->views = $views;
+        $this->setUrl();
         $this->post = new Post();
         $this->author = new User();
         $this->latest_post = new Post();
@@ -33,7 +34,7 @@ class Topic
     public function getMode() { return $this->mode; }
     public function setType($type) { $this->type = $type; }
     public function getType() { return $this->type; }
-    public function setTitle($title) { $this->title = $title; $this->url = encodeUrlFromName($title); }
+    public function setTitle($title) { $this->title = $title; }
     public function getTitle() { return $this->title; }
     public function setUpdateDate($update_date) { $this->update_date = $update_date; }
     public function getUpdateDate() { return $this->update_date; }
@@ -42,7 +43,7 @@ class Topic
     public function setViews($views) { $this->views = $views; }
     public function getViews() { return $this->views; }
 
-    public function setUrl($url) { $this->url = $url; }
+    public function setUrl() { $this->url = encodeUrlFromName($this->getTitle()); }
     public function getUrl() { return $this->url; }
     public function setPost($post) { $this->post = $post; }
     public function getPost() { return $this->post; }

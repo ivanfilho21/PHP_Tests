@@ -13,6 +13,7 @@ class UserDAO extends Table
             new Column("username", VARCHAR, 12),
             new Column("email", VARCHAR, 100),
             new Column("password", VARCHAR, 32),
+            new Column("url", VARCHAR, 12),
             new Column("creation_date", DATETIME)
             // new Column("gender", INT, 1),
             // new Column("name", VARCHAR, 255),

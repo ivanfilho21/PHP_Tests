@@ -21,8 +21,8 @@ $routers["/topics/{url}/{page}/"] = "/topic/open/:url/:page";
 $routers["/topics/{url}/{page}/{post}"] = "/topic/open/:url/:page/:post";
 $routers["/topics/{url}/{page}/{post}/"] = "/topic/open/:url/:page/:post";
 
-$routers["/users/{id}"] = "/user/open/:id";
-$routers["/users/{id}/"] = "/user/open/:id";
+$routers["/users/{url}"] = "/profile/open/:url";
+$routers["/users/{url}/"] = "/profile/open/:url";
 
 $routers["/logout"] = "/authentication/logout";
 $routers["/logout/"] = "/authentication/logout";

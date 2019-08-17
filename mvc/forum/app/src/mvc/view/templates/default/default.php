@@ -28,8 +28,9 @@
         
         <nav>
             <ul>
-                <li><a href="<?= URL ?>">Home</a></li>
+                <li><a href="<?= URL ?>">Início</a></li>
             <?php if (! empty($this->user)): ?>
+                <li><a href="<?= URL ?>users/<?= $this->user->getUrl() ?>"><?= $this->user->getUsername() ?></a></li>
                 <li><a href="<?= URL ?>topic/create">Novo Tópico</a></li>
                 <li><a href="<?= URL ?>logout">Sair</a></li>
             <?php else: ?>

@@ -34,7 +34,7 @@ class Board extends Controller
         for ($i=0; $i < count($topics); $i++) {
             $author = $this->dba->getTable("topics")->getAuthor($this->dba, $topics[$i]);
             $topics[$i]->setAuthor($author);
-            $topics[$i]->setUrl(encodeUrlFromName($topics[$i]->getTitle()));
+            // $topics[$i]->setUrl(encodeUrlFromName($topics[$i]->getTitle()));
         }
 
         $topicsQty = count($this->dba->getTable("boards")->getTopics($this->dba, $board));

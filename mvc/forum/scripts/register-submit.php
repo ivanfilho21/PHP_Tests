@@ -23,14 +23,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($email)) {
+        $res = false;
+        $_SESSION["error-msg"]["username"] = "Digite um E-mail válido.";
+    } else {
         $reg = "/[a-zA-Z0-9-\.,]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]{2,3}(\.[a-zA-Z0-9-]+)*/";
         $res = preg_match($reg, $email);
         if (! $res) $_SESSION["error-msg"]["email"] = "Digite um E-mail válido.";
+        if ($this->auth->checkField("email", $email)) $_SESSION["error-msg"]["email"] = "O email \"<b>" .$email ."\"</b> já está em uso.";
     }
 
     $reg = "/[\w]{6,}/";
     $res = preg_match($reg, $pass);
-    if (! $res) $_SESSION["error-msg"]["password"] = "A senha deve conter no mínimo 6 caracteres.";
+    if (! $res) $_SESSION["error-msg"]["password"] = "As senhas devem conter no mínimo 6 caracteres.";
 
     $res = preg_match($reg, $pass2) && strcasecmp($pass, $pass2) == 0;
     if (! $res) $_SESSION["error-msg"]["password2"] = "As senhas devem ser iguais.";
