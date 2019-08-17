@@ -24,15 +24,11 @@ class BoardDAO extends Table
     {
         $select = array();
         $where = array("board_id" => $board->getId());
-        $limitTxt = "";
 
-        if (! empty($page)) {
-            $startPoint = ($page - 1) * $limit;
-            $limitTxt = ($startPoint >= 0) ? $startPoint .", " .$limit : "";
-        }
+        $limit = array("from" => $page, "qty" => $limit);
         $order = array(array("column" => $this->findColumn("id"), "criteria" => "DESC"));
 
-        $topics = $dba->getTable("topics")->getAll($where, $select, $limitTxt, $order);
+        $topics = $dba->getTable("topics")->getAll($where, $select, $limit, $order);
         $topics = (! empty($topics)) ? $topics : array();
         return $topics;
     }

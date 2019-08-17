@@ -141,10 +141,11 @@ abstract class Table
         return $this->selectOne($select, $where, $order, $asList);
     }
 
-    public function getAll($whereArray = array(), $selectArray = array(), $limit = "", $order = array(), $asList = true)
+    public function getAll($whereArray = array(), $selectArray = array(), $limitArray = array(), $order = array(), $asList = true)
     {
         $select = array();
         $where = array();
+        $limit = "";
 
         foreach ($selectArray as $key => $value) {
             $select[] = Utils::createSelection($this, $key);
@@ -152,6 +153,16 @@ abstract class Table
 
         foreach ($whereArray as $key => $value) {
             $where[] = Utils::createCondition($this, $key, $value);
+        }
+
+        if (! empty($limitArray)) {
+            $from = $limitArray["from"];
+            $qty = $limitArray["qty"];
+
+            if (! empty($from)) {
+                $start = ($from - 1) * $qty;
+                $limit = ($start >= 0) ? $start .", " .$qty : "";
+            }
         }
 
         return $this->selectAll($select, $where, $limit, $order, $asList);

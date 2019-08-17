@@ -51,17 +51,12 @@ class TopicDAO extends Table
     {
         $select = array();
         $where = array("topic_id" => $topic->getId());
-        $limitTxt = "";
 
-        if (! empty($page)) {
-            $startPoint = ($page - 1) * $limit;
-            $limitTxt = ($startPoint >= 0) ? $startPoint .", " .$limit : "";
-        }
+        $limit = array("from" => $page, "qty" => $limit);
         $order = array(array("column" => $this->findColumn("id"), "criteria" => "ASC"));
 
-        $posts = $dba->getTable("posts")->getAll($where, $select, $limitTxt, $order);
+        $posts = $dba->getTable("posts")->getAll($where, $select, $limit, $order);
         $posts = (! empty($posts)) ? $posts : array();
-        // var_dump($posts);
 
         for ($i=0; $i < count($posts); $i++) {
             $author = $dba->getTable("users")->get(array("id" => $posts[$i]->getAuthorId()));
