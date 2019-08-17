@@ -53,7 +53,8 @@ class TopicDAO extends Table
         $where = array("topic_id" => $topic->getId());
 
         $limit = array("from" => $page, "qty" => $limit);
-        $order = array(array("column" => $this->findColumn("id"), "criteria" => "ASC"));
+        $order = array("column" => "id", "criteria" => \IvanFilho\Database\Table::ORDER_ASC);
+        // $order = array(array("column" => $this->findColumn("id"), "criteria" => "ASC"));
 
         $posts = $dba->getTable("posts")->getAll($where, $select, $limit, $order);
         $posts = (! empty($posts)) ? $posts : array();

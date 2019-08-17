@@ -53,6 +53,9 @@ define("CL", ":"); #Colon
 
 abstract class Table
 {
+    const ORDER_ASC = "ASC";
+    const ORDER_DESC = "DESC";
+
     private $db;
     private $columns;
     private $tableName;
@@ -141,10 +144,11 @@ abstract class Table
         return $this->selectOne($select, $where, $order, $asList);
     }
 
-    public function getAll($whereArray = array(), $selectArray = array(), $limitArray = array(), $order = array(), $asList = true)
+    public function getAll($whereArray = array(), $selectArray = array(), $limitArray = array(), $orderArray = array(), $asList = true)
     {
         $select = array();
         $where = array();
+        $order = array();
         $limit = "";
 
         foreach ($selectArray as $key => $value) {
@@ -165,6 +169,12 @@ abstract class Table
             }
         }
 
+        if (! empty($orderArray)) {
+            $column = $this->findColumn($orderArray["column"]);
+            $criteria = $orderArray["criteria"];
+
+            $order = array(array("column" => $column, "criteria" => $criteria));
+        }
         return $this->selectAll($select, $where, $limit, $order, $asList);
     }
 

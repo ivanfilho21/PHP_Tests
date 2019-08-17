@@ -26,7 +26,8 @@ class BoardDAO extends Table
         $where = array("board_id" => $board->getId());
 
         $limit = array("from" => $page, "qty" => $limit);
-        $order = array(array("column" => $this->findColumn("id"), "criteria" => "DESC"));
+        $order = array("column" => "id", "criteria" => \IvanFilho\Database\Table::ORDER_DESC);
+        // $order = array(array("column" => $this->findColumn("id"), "criteria" => "DESC"));
 
         $topics = $dba->getTable("topics")->getAll($where, $select, $limit, $order);
         $topics = (! empty($topics)) ? $topics : array();
