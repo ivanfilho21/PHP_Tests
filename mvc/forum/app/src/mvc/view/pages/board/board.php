@@ -17,21 +17,15 @@
             <tr>
                 <td>
                     <?php
-                    $icon = "topic";
-                    // TODO:
-                    /*if ($topic->getMode() == \Topic::MODE_LOCKED_TOPIC) {
-                        $icon .= "-locked";
+
+                    $topicIcon = "topic";
+                    if ($topic->getMode() == \Topic::MODE_LOCKED_TOPIC) {
+                        $topicIcon .= "-locked";
+                    } elseif ($postsQty >= 10) {
+                        $topicIcon .= "-hot";
                     }
-                    if ($topic->getType() == \Topic::TYPE_FIXED_TOPIC) {
-                        $icon .= "-fixed";
-                    } else {
-                        if ($postsQty > 20) {
-                            $icon .= "-hot";
-                        }
-                    }*/
-                    
                     ?>
-                    <img src="<?= URL ?>assets/img/<?= $icon ?>.ico" alt="Topic Status Icon">
+                    <img src="<?= URL ?>assets/img/<?= $topicIcon ?>.ico" alt="Topic Status Icon">
                 </td>
 
                 <td width="50%" class="text-align-left">
@@ -65,25 +59,23 @@
     <?php $this->requireView("parts/pagination", array("page" => $page, "pages" => $pages, "baseUrl" => $baseUrl), true) ?>
 </div>
 
-<div>
-    <h4>Legenda</h4>
-    <div>
-        <img src="<?= URL ?>assets/img/topic.ico" alt="Board Icon" width="24">
-        <span>Tópico Normal.</span>
-    </div>
+<div class="category-wrapper" style="margin-top: 1rem; background-color: ghostwhite;">
+    <div class="container-wider flex flex-direction-col">
+        <h4 style="margin-top: 0">Legenda</h4>
 
-    <div>
-        <img src="<?= URL ?>assets/img/topic-hot.ico" alt="Board Icon" width="24">
-        <span>Tópico Quente (Mais de 20 postagens).</span>
-    </div>
+        <div class="flex align-items-center flex-children-ml">
+            <img src="<?= URL ?>assets/img/topic.ico" alt="Board Icon" width="24">
+            <span>Tópico Normal.</span>
+        </div>
+        
+        <div class="flex align-items-center flex-children-ml">
+            <img src="<?= URL ?>assets/img/topic-hot.ico" alt="Board Icon" width="24">
+            <span>Tópico Quente (Mais de 20 mensagens).</span>
+        </div>
 
-    <div>
-        <img src="<?= URL ?>assets/img/topic-locked.ico" alt="Board Icon" width="24">
-        <span>Tópico Trancado (Não recebe novas postagens).</span>
-    </div>
-
-    <div>
-        <img src="<?= URL ?>assets/img/topic-fixed.ico" alt="Board Icon" width="24">
-        <span>Tópico Fixo.</span>
+        <div class="flex align-items-center flex-children-ml">
+            <img src="<?= URL ?>assets/img/topic-locked.ico" alt="Board Icon" width="24">
+            <span>Tópico Trancado (Não recebe novas mensagens).</span>
+        </div>
     </div>
 </div>

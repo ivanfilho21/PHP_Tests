@@ -7,6 +7,10 @@ class Board extends Controller
     public function __construct()
     {
         parent::__construct("Board");
+        $this->styles[] = array(
+            "path" => ASSETS ."css/",
+            "name" => "forum"
+        );
     }
 
     public function index()

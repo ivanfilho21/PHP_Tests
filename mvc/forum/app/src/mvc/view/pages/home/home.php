@@ -56,16 +56,16 @@
 <?php endforeach ?>
 
 <div class="category-wrapper" style="margin-top: 1rem; background-color: ghostwhite;">
-    <div class="container-wider">
+    <div class="container-wider flex flex-direction-col">
         <h4 style="margin-top: 0">Legenda</h4>
 
         <div class="flex align-items-center flex-children-ml">
-            <img src="<?= URL ?>assets/img/board.ico" alt="Board Icon" width="32">
+            <img src="<?= URL ?>assets/img/board.ico" alt="Board Icon" width="24">
             <span>Não há novas mensagens.</span>
         </div>
         
         <div class="flex align-items-center flex-children-ml">
-            <img src="<?= URL ?>assets/img/board-messages.ico" alt="Board Icon" width="32">
+            <img src="<?= URL ?>assets/img/board-messages.ico" alt="Board Icon" width="24">
             <span>Há novas mensagens.</span>
         </div>
     </div>

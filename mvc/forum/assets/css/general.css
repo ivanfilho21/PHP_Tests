@@ -28,9 +28,12 @@
 .flex.flex-children-ml > * { margin-left: 0.5rem; }
 .flex.flex-children-ml > *:first-child { margin-left: 0; }
 .flex.align-items-center { align-items: center; }
+.flex.justify-content-center { justify-content: center; }
 .flex.justify-content-spc-ar { justify-content: space-around; }
 .flex.justify-content-spc-btw { justify-content: space-between; }
 .flex.justify-content-flex-end { justify-content: flex-end; }
+
+.flex.flex-direction-col { flex-direction: column; }
 
 /* CONTAINER */
 

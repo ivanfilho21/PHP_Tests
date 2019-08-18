@@ -5,7 +5,6 @@
 <!-- Styles -->
 <link rel="stylesheet" href="<?= ASSETS ?>css/reset.css">
 <link rel="stylesheet" href="<?= ASSETS ?>css/general.css">
-<link rel="stylesheet" href="<?= ASSETS ?>css/forum.css">
 <?php foreach ($this->styles as $style): ?>
 <link rel="stylesheet" href="<?= $style["path"] .$style["name"] ?>.css">
 <?php endforeach ?>

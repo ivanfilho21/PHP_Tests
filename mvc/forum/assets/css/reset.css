@@ -11,7 +11,7 @@ html {
 }
 
 body {
-    background-color: cadetblue;
+    background-color: whitesmoke;
 }
 
 ul {
@@ -43,14 +43,15 @@ th {
     padding-bottom: 0.35rem;
     font-size: 0.9rem;
     /*font-weight: normal;*/
+    vertical-align: middle;
 }
 th, td {
     padding-left: 1rem;
     padding-right: 1rem;
-    vertical-align: top;
     text-align: center;
 }
 td {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
+    vertical-align: top;
 }

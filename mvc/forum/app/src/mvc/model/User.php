@@ -6,7 +6,7 @@ class User
     const TYPE_MODERATOR_USER = 2;
     const TYPE_ADMIN_USER = 3;
 
-    public function __construct($id = 0, $type = self::TYPE_NORMAL_USER, $username = "", $email = "", $password = "", $creation_date = "", $url = "", $name = "", $last_seen = "", $birthday = "")
+    public function __construct($id = 0, $type = self::TYPE_NORMAL_USER, $username = "", $email = "", $password = "", $creation_date = "", $description = "", $signature = "", $url = "", $name = "", $last_seen = "", $birthday = "")
     {
         $this->id = $id;
         $this->type = $type;
@@ -14,6 +14,8 @@ class User
         $this->email = $email;
         $this->password = $password;
         $this->creation_date = $creation_date;
+        $this->description = $description;
+        $this->signature = $signature;
         $this->setUrl();
         $this->name = $name;
         $this->last_seen = $last_seen;
@@ -39,6 +41,10 @@ class User
     public function setCreationDate($creation_date) { $this->creation_date = $creation_date; }
     public function getCreationDate() { return $this->creation_date; }
 
+    public function setDescription($description) { $this->description = $description; }
+    public function getDescription() { return $this->description; }
+    public function setSignature($signature) { $this->signature = $signature; }
+    public function getSignature() { return $this->signature; }
     public function getUrl() { return $this->url; }
     public function setUrl() { $this->url = encodeUrlFromName($this->getUsername()); }
 }

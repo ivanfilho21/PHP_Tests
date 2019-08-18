@@ -7,15 +7,15 @@ class Topic extends Controller
     public function __construct()
     {
         parent::__construct("Topic");
-        $this->scripts[] = array(
-            "path" => ASSETS ."js/tinymce/",
-            "name" => "tinymce.min"
+        $this->styles[] = array(
+            "path" => ASSETS ."css/",
+            "name" => "forum"
         );
-        $this->scripts[] = array(
+        /*$this->scripts[] = array(
             "path" => ASSETS ."js/",
             "name" => "validation",
             "defer" => "on"
-        );
+        );*/
     }
 
     public function index()
@@ -100,6 +100,11 @@ class Topic extends Controller
 
         $viewData["boardId"] = (! empty($boardId)) ? $boardId : 0;
         $viewData["boards"] = $cats;
+
+        $this->scripts[] = array(
+            "path" => ASSETS ."js/tinymce/",
+            "name" => "tinymce.min"
+        );
 
         $this->loadView("create-topic", $viewData);
     }

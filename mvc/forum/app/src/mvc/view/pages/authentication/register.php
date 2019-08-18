@@ -56,12 +56,12 @@
                 <span class="info-icon" data-info="password" onmouseover="showInfoMessage.call(this)"><i class="fa fa-info-circle"></i></span>
             </div>
             <div class="input-wrapper">
-                <input type="password" name="password" maxlength="255">
+                <input type="password" name="password">
             </div>
 
             <label class="rf">Repita a Senha</label>
             <div class="input-wrapper">
-                <input type="password" name="password2" maxlength="255">
+                <input type="password" name="password2">
             </div>
 
             <p class="container legal-warning">

@@ -71,6 +71,10 @@
 
     <section class="topic">
         <?php foreach ($posts as $post): ?>
+            <?php
+            $likes = $this->dba->getTable("likes")->getAll(array("post_id" => $post->getId()));
+            $likes = (! empty($likes)) ? count($likes) : 0;
+            ?>
             <?php $userData = array("user" => $post->getAuthor()) ?>
             <article class="post">
                 <?php $this->requireView("parts/user/user-info", $userData, true) ?>
@@ -90,8 +94,10 @@
                         <?php if ($this->user->getId() == $post->getAuthorId()): ?>
                             <a href="<?= URL .(($cond) ? "topic/edit/" : "topics/") .$topic->getUrl() .(($cond) ? "" : "/" .$page ."/" .$post->getId()) ?>" class="btn <?= ($cond) ? "btn-default" : "" ?> edit-button">Editar<?= ($cond) ? " Tópico" : "" ?></a>
                         <?php endif ?>
-                            <button title="Gostei" class="btn like-button" onclick="likePost.call(this)" data-topic="<?= $topic->getId() ?>" data-post="<?= $post->getId() ?>"><i class="fa fa-thumbs-up"></i></button>
+                            <button title="Gostei" class="btn like-button" onclick="likePost.call(this)" data-topic="<?= $topic->getId() ?>" data-post="<?= $post->getId() ?>"><i class="fa fa-thumbs-up"></i><span class="likes"><?= $likes ?></span></button>
                         </div>
+                    <?php else: ?>
+                        <div class="like-button"><i class="fa fa-thumbs-up"></i><span class="likes"><?= $likes ?></span></div>
                     <?php endif ?>
                     </div>
 
@@ -140,7 +146,11 @@
 </div>
 
 <script>
+    let userLogged = "<?= (! empty($this->user)) ? 'true' : 'false' ?>";
+
     function updateLikes(topic) {
+        if (! userLogged) return;
+
         let limit = "<?= $limitPerPage ?>";
         let page = "<?= $page ?>";
         let callback = function(res) {
@@ -166,6 +176,7 @@
 
     function likePost() {
         if (! this) return;
+        if (! userLogged) return;
 
         let callback = function(res) {
             if (res != "true") alert(res);
@@ -195,7 +206,7 @@
             document.getElementById("reply-topic").scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
         }
         
-        let topic = "<?= $topic->getId() ?>";
-        updateLikes(topic);
+        // let topic = "<?= ''#$topic->getId() ?>";
+        // updateLikes(topic);
     }
 </script>

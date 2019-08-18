@@ -10,7 +10,7 @@
 
             <label class="rf">Senha</label>
             <div class="input-wrapper">
-                <input type="password" name="password" maxlength="255" value="<?= isset($_POST["password"]) ? $_POST["password"] : "" ?>">
+                <input type="password" name="password">
             </div>
 
             <label class="cb-wrapper">
