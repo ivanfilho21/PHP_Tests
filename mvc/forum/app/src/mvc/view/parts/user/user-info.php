@@ -1,5 +1,7 @@
 <?php
 
+$profilePicture = (! empty($user->getImage())) ? $user->getImage() : ASSETS ."img/no-profile-picture.png";
+
 $type = "";
 switch($user->getType()) {
     case \User::TYPE_NORMAL_USER: $type = "Membro"; break;
@@ -16,7 +18,6 @@ foreach ($posts as $post) {
     $likes += (! empty($l)) ? count($l) : 0;
 }
 
-
 $stats["msg"] = $msg;
 $stats["likes"] = $likes;
 ?>
@@ -28,6 +29,13 @@ $stats["likes"] = $likes;
         padding-bottom: 0.75rem;
         padding-left: 0.75rem;
         padding-right: 0.75rem;
+    }
+
+    .user-info > div {
+        margin-bottom: 0.5rem;
+    }
+    .user-info > div:last-child {
+        margin-bottom: 0;
     }
 
     .user-info .user {
@@ -61,26 +69,24 @@ $stats["likes"] = $likes;
 </style>
 
 <section class="user-info">
-    <div class="picture">Foto</div>
-
     <div class="user">
         <a href="<?= URL ?>users/<?= $user->getUsername() ?>"><?= $user->getUsername() ?></a>
     </div>
 
-    <div class="description quotes"><?= $user->getDescription() ?></div>
+    <div class="picture"><img src="<?= $profilePicture ?>" alt="Foto de Perfil"></div>
+
+
+    <div class="description"><?= (empty($user->getDescription())) ? "" : "<span class='quotes'>" .$user->getDescription() ."</span>" ?></div>
 
     <div class="type"><i class="fa fa-user-alt"></i> <?= $type ?></div>
-
-    <div class="statistics">
-
-        <div class="flex flex-children-ml align-items-center justify-content-center">
-            <span title="<?= $user->getUsername() ?> escreveu <?= $stats["msg"] .plural($stats["msg"], " mensagem") ?>"><i class="fa fa-comments"></i> <?= $stats["msg"] ?></span>
-            
-            <span title="<?= $user->getUsername() ?> recebeu <?= $stats["likes"] .plural($stats["likes"], " like") ?>"><i class="fa fa-thumbs-up"></i>  <?= $stats["likes"] ?></span>
-        </div>
+    
+    <div class="flex flex-children-ml align-items-center justify-content-center">
+        <span title="<?= $user->getUsername() ?> escreveu <?= $stats["msg"] .plural($stats["msg"], " mensagem") ?>"><i class="fa fa-comments"></i> <?= $stats["msg"] ?></span>
         
-        <div class="item">Visto por Último -</div>
-        
-        <div class="item">Registrado em <?= $this->date->translateToDate($user->getCreationDate()) ?></div>
+        <span title="<?= $user->getUsername() ?> recebeu <?= $stats["likes"] .plural($stats["likes"], " like") ?>"><i class="fa fa-thumbs-up"></i>  <?= $stats["likes"] ?></span>
     </div>
+
+    <div class="item">Visto por Último -</div>
+    
+    <div class="item">Registrado em <?= $this->date->translateToDate($user->getCreationDate()) ?></div>
 </section>

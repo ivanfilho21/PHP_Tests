@@ -8,6 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["submit"])) {
         $username = (empty($editUn)) ? "" : format($_POST["username"]);
         $pass = (empty($editPs)) ? "" : format($_POST["password"]);
+        $img = format($_POST["img-url"]);
         $desc = format($_POST["description"]);
         $sign = $_POST["signature"];
 
@@ -41,6 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($editPs) $user->setPassword($pass);
             $user->setDescription($desc);
             $user->setSignature($sign);
+            $user->setImage($img);
             $user->setUrl();
 
             // echo "<pre>" .var_export($user, true) ."</pre>";

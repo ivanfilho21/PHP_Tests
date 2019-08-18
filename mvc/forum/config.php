@@ -25,7 +25,7 @@ if (defined("ENVIRONMENT") && ENVIRONMENT === "dev") {
     define("ASSETS", URL ."assets/");
     define("REL_TEMPLATE", URL ."app/src/mvc/view/templates/");
     define("REL_PAGE", URL ."app/src/mvc/view/pages/");
-    define("SITE_NAME", "Fórum - [DEV MODE]");
+    define("SITE_NAME", "Fórum");
 } else {
     define("SITE_NAME", "Fórum");
 }

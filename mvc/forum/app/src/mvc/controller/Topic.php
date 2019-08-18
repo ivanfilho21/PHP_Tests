@@ -7,15 +7,11 @@ class Topic extends Controller
     public function __construct()
     {
         parent::__construct("Topic");
-        $this->styles[] = array(
-            "path" => ASSETS ."css/",
-            "name" => "forum"
+
+        $this->scripts[] = array(
+            "path" => ASSETS ."js/tinymce/",
+            "name" => "tinymce.min"
         );
-        /*$this->scripts[] = array(
-            "path" => ASSETS ."js/",
-            "name" => "validation",
-            "defer" => "on"
-        );*/
     }
 
     public function index()
@@ -36,7 +32,7 @@ class Topic extends Controller
         $topic->setPost($post);
 
 
-        $limitPerPage = 1;
+        $limitPerPage = 15;
         $board = $this->dba->getTable("boards")->get(array("id" => $topic->getBoardId()));
         if (empty($board)) redirect("home");
 
@@ -77,7 +73,11 @@ class Topic extends Controller
         $viewData["limitPerPage"] = $limitPerPage;
         $viewData["baseUrl"] = URL ."topics/" .$topic->getUrl() ."/";
 
-
+        $this->styles[] = array(
+            "path" => ASSETS ."css/",
+            "name" => "forum"
+        );
+        
         $this->loadView("topic", $viewData);
     }
 
@@ -100,11 +100,6 @@ class Topic extends Controller
 
         $viewData["boardId"] = (! empty($boardId)) ? $boardId : 0;
         $viewData["boards"] = $cats;
-
-        $this->scripts[] = array(
-            "path" => ASSETS ."js/tinymce/",
-            "name" => "tinymce.min"
-        );
 
         $this->loadView("topic-create", $viewData);
     }
@@ -130,7 +125,7 @@ class Topic extends Controller
         $this->title = "Editar Tópico";
         $this->pages[] = array("name" => "Início", "url" => URL);
         $this->pages[] = array("name" => $board->getName(), "url" => URL ."boards/" .$board->getUrl());
-        $this->pages[] = array("name" => $this->title, "url" => URL ."topic/create", "active" => true);
+        $this->pages[] = array("name" => $this->title, "url" => URL ."topic/edit/" .$topic->getUrl(), "active" => true);
 
         $cats = $this->getCategoriesAndBoards();
 
@@ -139,7 +134,7 @@ class Topic extends Controller
         $viewData["topic"] = $topic;
         $viewData["post"] = $topic->getPost();
 
-        $this->loadView("create-topic", $viewData);
+        $this->loadView("topic-create", $viewData);
     }
 
     private function getCategoriesAndBoards()

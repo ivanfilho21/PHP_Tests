@@ -1,8 +1,6 @@
 <section class="container-narrow">
     <h1>Novo Tópico</h1>
 
-    <h4>Operação <?= (empty($post)) ? "insert" : "edit" ?></h4>
-
     <form id="form" method="post" data-validation-url="<?= URL ?>scripts/topic.php">
         <?php showErrorMessages() ?>
 

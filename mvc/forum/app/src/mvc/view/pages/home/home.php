@@ -1,4 +1,4 @@
-<?php foreach($categories as $cat): ?>
+ <?php foreach($categories as $cat): ?>
 
 <div class="category-wrapper">
     <div class="category"><?= $cat->getName() ?></div>
@@ -17,7 +17,7 @@
             <?php if ($board->getCategoryId() == $cat->getId()): ?>
             <tr>
                 <td class="status-icon" width="24">
-                    <a title="Não há novas mensagens"><img src="<?= URL ?>assets/img/board.ico" alt="Board Status Icon"></a>
+                    <!-- <a title="Não há novas mensagens"><img src="<?= URL ?>assets/img/board.ico" alt="Board Status Icon"></a> -->
                 </td>
 
                 <td class="text-align-left" width="65%">
@@ -55,7 +55,7 @@
 
 <?php endforeach ?>
 
-<div class="category-wrapper" style="margin-top: 1rem; background-color: ghostwhite;">
+<!-- <div class="category-wrapper" style="margin-top: 1rem; background-color: ghostwhite;">
     <div class="container-wider flex flex-direction-col">
         <h4 style="margin-top: 0">Legenda</h4>
 
@@ -69,4 +69,4 @@
             <span>Há novas mensagens.</span>
         </div>
     </div>
-</div>
+</div> -->

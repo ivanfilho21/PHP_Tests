@@ -11,7 +11,11 @@ html {
 }
 
 body {
-    background-color: whitesmoke;
+    background-color: ghostwhite;
+}
+
+img {
+    max-width: 100%;
 }
 
 ul {
@@ -54,4 +58,8 @@ td {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
     vertical-align: top;
+}
+
+fieldset {
+    padding: 1rem;
 }

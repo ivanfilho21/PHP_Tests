@@ -1,0 +1,7 @@
+footer .container { padding-top: 0; }
+footer .site-credit {
+    padding: 0.5rem;
+    background-color: #333;
+    color: white;
+}
+footer .site-credit a { color: white; }
