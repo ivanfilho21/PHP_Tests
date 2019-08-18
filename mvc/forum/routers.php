@@ -23,6 +23,8 @@ $routers["/topics/{url}/{page}/{post}/"] = "/topic/open/:url/:page/:post";
 
 $routers["/users/{url}"] = "/profile/open/:url";
 $routers["/users/{url}/"] = "/profile/open/:url";
+$routers["/profile"] = "/profile/edit";
+$routers["/profile/"] = "/profile/edit";
 
 $routers["/logout"] = "/authentication/logout";
 $routers["/logout/"] = "/authentication/logout";

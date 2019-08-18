@@ -1,6 +1,14 @@
-<div class="signature">
-    Assinatura
-    <hr>
-    <img src="https://7img.net/users/4011/41/12/14/smiles/22986.png">
-    <?= "-" #$user->getSignature() ?>
-</div>
+<style>
+    .signature { margin-top: 1rem; }
+    .signature .content {
+        text-align: center;
+    }
+</style>
+
+<section class="signature">
+    <div class="title">Assinatura</div>
+    <div class="content">
+        <hr>
+        <?= $user->getSignature() ?>
+    </div>
+</section>

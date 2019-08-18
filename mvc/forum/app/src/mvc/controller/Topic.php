@@ -106,7 +106,7 @@ class Topic extends Controller
             "name" => "tinymce.min"
         );
 
-        $this->loadView("create-topic", $viewData);
+        $this->loadView("topic-create", $viewData);
     }
 
     public function edit($url = "")

@@ -22,7 +22,9 @@
         </section>
 
         <main class="main-info">
-            <a href="<?= URL ?>profile/edit/<?= $user->getUrl() ?>" class="btn btn-default">Editar Perfil</a>
+            <?php if (! empty($this->user) && $this->user->getId() == $user->getId()): ?>
+            <a href="<?= URL ?>profile" class="btn btn-default">Editar Perfil</a>
+            <?php endif ?>
             <?php $this->requireView("parts/user/signature", $userData, true) ?>
         </main>
     </section>

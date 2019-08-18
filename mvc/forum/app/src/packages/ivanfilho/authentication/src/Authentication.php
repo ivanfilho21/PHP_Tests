@@ -27,6 +27,11 @@ class Authentication
         $this->userDAO->insert($user);
     }
 
+    public function updateUser(User $user)
+    {
+        $this->userDAO->edit($user);
+    }
+
     public function register(User $user)
     {
         echo "Registration";

@@ -67,7 +67,7 @@ $stats["likes"] = $likes;
         <a href="<?= URL ?>users/<?= $user->getUsername() ?>"><?= $user->getUsername() ?></a>
     </div>
 
-    <div class="description">Descrição de Usuário</div>
+    <div class="description quotes"><?= $user->getDescription() ?></div>
 
     <div class="type"><i class="fa fa-user-alt"></i> <?= $type ?></div>
 

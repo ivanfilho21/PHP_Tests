@@ -11,7 +11,7 @@ class Profile extends Controller
 
     public function index()
     {
-        redirect("home");
+        redirect("profile/edit");
     }
 
     public function open($userUrl = "")
@@ -31,23 +31,23 @@ class Profile extends Controller
         $this->loadView("profile", $viewData);
     }
 
-    public function edit($userUrl = "")
+    public function edit()
     {
-        if (empty($userUrl)) redirect("home");
-
         if (empty($this->user)) redirect("home");
 
-        $user = $this->auth->getUser(array("id" => $this->user->getId(), "url" => $userUrl));
+        $user = $this->auth->getUser(array("id" => $this->user->getId()));
         if (empty($user)) redirect("home");
 
         $this->title = "Edital Perfil";
-        $this->pages[] = array("name" => "Perfil de " .$user->getUsername(), "url" => URL ."users/" .$userUrl);
-        $this->pages[] = array("name" => $this->title, "url" => URL ."profile/edit/" .$userUrl, "active" => true);
+        $this->pages[] = array("name" => "Perfil de " .$user->getUsername(), "url" => URL ."users/" .$user->getUrl());
+        $this->pages[] = array("name" => $this->title, "url" => URL ."profile/edit/" .$user->getUrl(), "active" => true);
 
         $this->scripts[] = array(
             "path" => ASSETS ."js/tinymce/",
             "name" => "tinymce.min"
         );
+
+        require "scripts/profile-submit.php";
 
         $viewData["user"] = $user;
         $this->loadView("profile-edit", $viewData);

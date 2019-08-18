@@ -104,6 +104,25 @@ function format(String $d)
     return $d;
 }
 
+function showErrorMessages()
+{
+    ?>
+    <?php if (! empty($_SESSION["error-msg"])): ?>
+    <div class="alert alert-danger">
+        <span class="b">Foram encontrados os seguintes erros:</span>
+        <ul class="ul ul-circle">
+        <?php foreach($_SESSION["error-msg"] as $err): ?>
+            <?php if (! empty($err)): ?>
+            <li><?= $err ?></li>
+            <?php endif ?>
+        <?php endforeach ?>
+        </ul>
+    </div>
+    <?php unset($_SESSION["error-msg"]) ?>
+    <?php endif ?>
+    <?php
+}
+
 function encodeUrlFromName($string)
 {
     $array = explode(" ", removeAccents(strtolower($string)));
