@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 use \Wilkins\PackageLoader\PackageLoader;
 
@@ -113,4 +113,22 @@ function encodeUrlFromName($string)
 function removeAccents($string)
 {
     return preg_replace(array("/(á|à|ã|â|ä)/","/(Á|À|Ã|Â|Ä)/","/(é|è|ê|ë)/","/(É|È|Ê|Ë)/","/(í|ì|î|ï)/","/(Í|Ì|Î|Ï)/","/(ó|ò|õ|ô|ö)/","/(Ó|Ò|Õ|Ô|Ö)/","/(ú|ù|û|ü)/","/(Ú|Ù|Û|Ü)/","/(ñ)/","/(Ñ)/"),explode(" ","a A e E i I o O u U n N"),$string);
+}
+
+function plural(int $n, $str)
+{
+    if ($n == 1) return $str;
+
+    $lc = substr($str, -1);
+    if ($lc == "m") {
+        $str = substr($str, 0, strlen($str) -1) ."n";
+    } elseif ($lc == "s") {
+        $str .= "e";
+    } elseif ($lc == "o") {
+        if (mb_substr($str, strlen($str) -4, strlen($str), "UTF-8") == "ão") {
+            $str = mb_substr($str, 0, strlen($str) -4, "UTF-8") ."õe";
+        }
+    }
+
+    return $str ."s";
 }

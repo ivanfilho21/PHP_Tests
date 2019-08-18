@@ -12,7 +12,6 @@ class Home extends Controller
     public function index()
     {
         $this->title = "";
-        $this->pages[] = array("name" => "Início", "url" => URL, "active" => true);
 
         $categories = $this->dba->getTable("categories")->getAll();
         $categories = ! empty($categories) ? $categories : array();
@@ -54,7 +53,5 @@ class Home extends Controller
         $viewData["postsQty"] = $postsQty;
        
         $this->loadView("home", $viewData);
-
-        echo (! empty($this->user)) ? "Bem vindo, " .$this->user->getUsername() : "";
     }
 }

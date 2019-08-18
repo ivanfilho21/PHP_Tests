@@ -63,79 +63,81 @@
     }
 </style>
 
-<div class="topic-title"><div class="container-wider title"><?= (($topic->getType() == \Topic::TYPE_FIXED_TOPIC) ? " [Fixo] " : "") .$topic->getTitle() .(($topic->getMode() == \Topic::MODE_LOCKED_TOPIC) ? " (Trancado)" : "") ?></div></div>
+<div class="category-wrapper">
+    <div class="topic-title">
+        <div class="container-wider title"><?= (($topic->getType() == \Topic::TYPE_FIXED_TOPIC) ? " [Fixo] " : "") .$topic->getTitle() .(($topic->getMode() == \Topic::MODE_LOCKED_TOPIC) ? " (Trancado)" : "") ?></div>
+        <!-- <?php $this->requireView("parts/pagination", array("page" => $page, "pages" => $pages, "baseUrl" => $baseUrl), true) ?> -->
+    </div>
 
-<?php $this->requireView("parts/pagination", array("page" => $page, "pages" => $pages, "baseUrl" => $baseUrl), true) ?>
+    <section class="topic">
+        <?php foreach ($posts as $post): ?>
+            <?php $userData = array("user" => $post->getAuthor()) ?>
+            <article class="post">
+                <?php $this->requireView("parts/user/user-info", $userData, true) ?>
 
-<section class="topic">
-
-    <?php foreach ($posts as $post): ?>
-        <?php $userData = array("user" => $post->getAuthor()) ?>
-        <article class="post">
-            <?php $this->requireView("parts/user/user-info", $userData, true) ?>
-
-            <div class="body">
-                <div class="flex justify-content-spc-btw">
-                    <div class="date">
-                        <?php if ($post->getCreationDate() == $post->getUpdateDate()): ?>
-                        <?= $this->date->translateTime($post->getCreationDate(), 1) ?> às <?= $this->date->translateToTime($post->getCreationDate()) ?>  
-                        <?php else: ?>
-                        Atualizado <?= $this->date->translateTime($post->getUpdateDate(), 1) ?> às <?= $this->date->translateToTime($post->getUpdateDate()) ?>
+                <div class="body">
+                    <div class="flex justify-content-spc-btw">
+                        <div class="date">
+                            <?php if ($post->getCreationDate() == $post->getUpdateDate()): ?>
+                            <?= $this->date->translateTime($post->getCreationDate(), 1) ?> às <?= $this->date->translateToTime($post->getCreationDate()) ?>  
+                            <?php else: ?>
+                            Atualizado <?= $this->date->translateTime($post->getUpdateDate(), 1) ?> às <?= $this->date->translateToTime($post->getUpdateDate()) ?>
+                            <?php endif ?>
+                        </div>
+                    <?php if (! empty($this->user)): ?>
+                        <div class="flex flex-children-ml">
+                        <?php $cond = ($topic->getPost()->getId() == $post->getId() && $this->user->getId() == $topic->getAuthorId() && $this->user->getId() == $post->getAuthorId()) ?>
+                        <?php if ($this->user->getId() == $post->getAuthorId()): ?>
+                            <a href="<?= URL .(($cond) ? "topic/edit/" : "topics/") .$topic->getUrl() .(($cond) ? "" : "/" .$page ."/" .$post->getId()) ?>" class="btn <?= ($cond) ? "btn-default" : "" ?> edit-button">Editar<?= ($cond) ? " Tópico" : "" ?></a>
                         <?php endif ?>
-                    </div>
-                <?php if (! empty($this->user)): ?>
-                    <div class="flex flex-children-ml">
-                    <?php $cond = ($topic->getPost()->getId() == $post->getId() && $this->user->getId() == $topic->getAuthorId() && $this->user->getId() == $post->getAuthorId()) ?>
-                    <?php if ($this->user->getId() == $post->getAuthorId()): ?>
-                        <a href="<?= URL .(($cond) ? "topic/edit/" : "topics/") .$topic->getUrl() .(($cond) ? "" : "/" .$page ."/" .$post->getId()) ?>" class="btn <?= ($cond) ? "btn-default" : "" ?> edit-button">Editar<?= ($cond) ? " Tópico" : "" ?></a>
+                            <button title="Gostei" class="btn like-button" onclick="likePost.call(this)" data-topic="<?= $topic->getId() ?>" data-post="<?= $post->getId() ?>"><i class="fa fa-thumbs-up"></i></button>
+                        </div>
                     <?php endif ?>
-                        <button title="Gostei" class="btn like-button" onclick="likePost.call(this)" data-topic="<?= $topic->getId() ?>" data-post="<?= $post->getId() ?>"><i class="fa fa-thumbs-up"></i></button>
                     </div>
-                <?php endif ?>
-                </div>
 
-                <div class="content"><?= $post->getContent() ?></div>
-                <?php $this->requireView("parts/user/signature", $userData, true) ?>
+                    <div class="content"><?= $post->getContent() ?></div>
+                    <?php $this->requireView("parts/user/signature", $userData, true) ?>
+                </div>
+            </article>
+        <?php endforeach ?>
+
+        <?php if (! empty($this->user) && $topic->getMode() != \Topic::MODE_LOCKED_TOPIC): ?>
+            <div id="reply-topic" class="reply-topic">
+                <form class="containerx" method="post">
+                    <?php if (! empty($_SESSION["error-msg"])): ?>
+                    <div class="alert alert-danger">
+                        <span class="b">Foram encontrados os seguintes erros:</span>
+                        <ul class="ul ul-circle">
+                        <?php foreach($_SESSION["error-msg"] as $err): ?>
+                            <?php if (! empty($err)): ?>
+                            <li><?= $err ?></li>
+                            <?php endif ?>
+                        <?php endforeach ?>
+                        </ul>
+                    </div>
+                    <?php unset($_SESSION["error-msg"]) ?>
+                    <?php endif ?>
+
+                    <input type="hidden" name="post-id" value="<?= (! empty($editPost)) ? $editPost->getId() : "" ?>">
+                    
+                    <!-- <label>Escreva sua resposta para o Tópico <span class="i">"<?= $topic->getTitle() ?>"</span>:</label> -->
+                    <textarea id="txtarea" name="post-content" rows="15"><?= (! empty($_POST["post-content"])) ? $_POST["post-content"] : (! empty($editPost) ? $editPost->getContent() : "") ?></textarea>
+
+                    <input class="btn btn-default" type="submit" name="submit" value="Responder">
+                </form>
+                <script>
+                    tinymce.init({
+                        selector: "#txtarea",
+                        language: "pt_BR",
+                        toolbar: "formatselect | bold italic forecolor strikethrough backcolor permanentpen formatpainter | link image media pageembed | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent | removeformat | addcomment"
+                    });
+                </script>
             </div>
-        </article>
-    <?php endforeach ?>
+        <?php endif ?>
+    </section>
 
-    <?php if (! empty($this->user) && $topic->getMode() != \Topic::MODE_LOCKED_TOPIC): ?>
-        <div id="reply-topic" class="reply-topic">
-            <form class="containerx" method="post">
-                <?php if (! empty($_SESSION["error-msg"])): ?>
-                <div class="alert alert-danger">
-                    <span class="b">Foram encontrados os seguintes erros:</span>
-                    <ul class="ul ul-circle">
-                    <?php foreach($_SESSION["error-msg"] as $err): ?>
-                        <?php if (! empty($err)): ?>
-                        <li><?= $err ?></li>
-                        <?php endif ?>
-                    <?php endforeach ?>
-                    </ul>
-                </div>
-                <?php unset($_SESSION["error-msg"]) ?>
-                <?php endif ?>
-
-                <input type="hidden" name="post-id" value="<?= (! empty($editPost)) ? $editPost->getId() : "" ?>">
-                
-                <!-- <label>Escreva sua resposta para o Tópico <span class="i">"<?= $topic->getTitle() ?>"</span>:</label> -->
-                <textarea id="txtarea" name="post-content" rows="15"><?= (! empty($_POST["post-content"])) ? $_POST["post-content"] : (! empty($editPost) ? $editPost->getContent() : "") ?></textarea>
-
-                <input class="btn btn-default" type="submit" name="submit" value="Responder">
-            </form>
-            <script>
-                tinymce.init({
-                    selector: "#txtarea",
-                    language: "pt_BR",
-                    toolbar: "formatselect | bold italic forecolor strikethrough backcolor permanentpen formatpainter | link image media pageembed | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent | removeformat | addcomment"
-                });
-            </script>
-        </div>
-    <?php endif ?>
-</section>
-
-<?php $this->requireView("parts/pagination", array("page" => $page, "pages" => $pages, "baseUrl" => $baseUrl), true) ?>
+    <?php $this->requireView("parts/pagination", array("page" => $page, "pages" => $pages, "baseUrl" => $baseUrl), true) ?>
+</div>
 
 <script>
     function updateLikes(topic) {

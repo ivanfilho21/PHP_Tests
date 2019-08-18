@@ -18,9 +18,8 @@
 .b { font-weight: bold; }
 .i { font-style: italic; }
 
-.text-align-center {
-    text-align: center;
-}
+.text-align-left { text-align: left; }
+.text-align-center { text-align: center; }
 
 /* FLEX */
 
@@ -28,6 +27,7 @@
 .flex-1 { flex: 1; }
 .flex.flex-children-ml > * { margin-left: 0.5rem; }
 .flex.flex-children-ml > *:first-child { margin-left: 0; }
+.flex.align-items-center { align-items: center; }
 .flex.justify-content-spc-ar { justify-content: space-around; }
 .flex.justify-content-spc-btw { justify-content: space-between; }
 .flex.justify-content-flex-end { justify-content: flex-end; }

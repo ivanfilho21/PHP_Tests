@@ -6,7 +6,7 @@ class Authentication extends Controller
 {
     public function __construct()
     {
-        parent::__construct("Authentication");
+        parent::__construct("Authentication", false);
         $this->styles[] = array(
             "path" => REL_PAGE .$this->controllerName ."css/",
             "name" => "auth-general"

@@ -20,7 +20,6 @@ class Profile extends Controller
         if (empty($user)) redirect("home");
 
         $this->title = "Perfil de " .$user->getUsername();
-        $this->pages[] = array("name" => "Início", "url" => URL);
         $this->pages[] = array("name" => $this->title, "url" => URL ."users/" .$userUrl, "active" => true);
 
         $viewData["user"] = $user;

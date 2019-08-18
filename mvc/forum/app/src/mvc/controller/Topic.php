@@ -41,7 +41,6 @@ class Topic extends Controller
         if (empty($board)) redirect("home");
 
         $this->title = $topic->getTitle();
-        $this->pages[] = array("name" => "Início", "url" => URL);
         $this->pages[] = array("name" => $board->getName(), "url" => URL ."boards/" .$board->getUrl());
         $this->pages[] = array("name" => $topic->getTitle(), "url" => URL ."topics/create", "active" => true);
 

@@ -1,70 +1,69 @@
-<div class="category"><?= $board->getName() ?></div>
-
-<table>
-    <thead>
-        <tr>
-            <th></th>
-            <th>Assunto</th>
-            <th>Respostas</th>
-            <th>Visualizações</th>
-            <th>Última Mensagem</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($topics as $topic): ?>
-        <?php $posts = $this->dba->getTable("topics")->getPosts($this->dba, $topic) ?>
-        <?php $postsQty = count($posts) ?>
-        <tr>
-            <td>
-                <?php
-                $icon = "topic";
-                // TODO:
-                /*if ($topic->getMode() == \Topic::MODE_LOCKED_TOPIC) {
-                    $icon .= "-locked";
-                }
-                if ($topic->getType() == \Topic::TYPE_FIXED_TOPIC) {
-                    $icon .= "-fixed";
-                } else {
-                    if ($postsQty > 20) {
-                        $icon .= "-hot";
+<div class="category-wrapper">
+    <div class="category"><?= $board->getName() ?></div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th class="text-align-left">Assunto</th>
+                <th>Estatíticas</th>
+                <th class="text-align-left">Última Mensagem</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($topics as $topic): ?>
+            <?php $posts = $this->dba->getTable("topics")->getPosts($this->dba, $topic) ?>
+            <?php $postsQty = count($posts) ?>
+            <tr>
+                <td>
+                    <?php
+                    $icon = "topic";
+                    // TODO:
+                    /*if ($topic->getMode() == \Topic::MODE_LOCKED_TOPIC) {
+                        $icon .= "-locked";
                     }
-                }*/
-                
-                ?>
-                <img src="<?= URL ?>assets/img/<?= $icon ?>.ico" alt="Topic Status Icon">
-            </td>
+                    if ($topic->getType() == \Topic::TYPE_FIXED_TOPIC) {
+                        $icon .= "-fixed";
+                    } else {
+                        if ($postsQty > 20) {
+                            $icon .= "-hot";
+                        }
+                    }*/
+                    
+                    ?>
+                    <img src="<?= URL ?>assets/img/<?= $icon ?>.ico" alt="Topic Status Icon">
+                </td>
 
-            <td width="50%">
-                <div>
-                    <a href="<?= URL ?>topics/<?= $topic->getUrl() ?>" class="title"><?= $topic->getTitle() ?></a>
-                    <div>Autor: <a href="<?= URL ?>users/<?= $topic->getAuthor()->getUsername() ?>"><?= $topic->getAuthor()->getUsername() ?></a></div>
-                </div>
-            </td>
+                <td width="50%" class="text-align-left">
+                    <div>
+                        <a href="<?= URL ?>topics/<?= $topic->getUrl() ?>" class="title"><?= $topic->getTitle() ?></a>
+                        <div>Autor: <a href="<?= URL ?>users/<?= $topic->getAuthor()->getUsername() ?>"><?= $topic->getAuthor()->getUsername() ?></a></div>
+                    </div>
+                </td>
 
-            <td>
-                <div><?= $postsQty ?></div>
-            </td>
+                <td>
+                    <div><?= $postsQty .plural($postsQty, " Mensagem") ?></div>
+                    <div><?= $topic->getViews() .plural($topic->getViews(), " Visualização") ?></div>
+                </td>
+                    
 
-            <td>
-                <div><?= $topic->getViews() ?></div>
-            </td>
+                <td class="text-align-left">
+                    <div>
+                    <?php if (! empty($posts)): ?>
+                        <div>por <a href="<?= URL ?>users/<?= $posts[$postsQty-1]->getAuthor()->getUsername() ?>"><?= $posts[$postsQty-1]->getAuthor()->getUsername() ?></a></div>
+                        <div title="<?= $this->date->translateToDateTime($posts[$postsQty-1]->getCreationDate(), "às") ?>"><?= $this->date->translateTime($posts[$postsQty-1]->getCreationDate(), 1) ?> às <?= $this->date->translateToTime($posts[$postsQty-1]->getCreationDate()) ?></div>
+                    <?php else: ?>
+                        <div>0</div>
+                    <?php endif ?>
+                    </div>
+                </td>
+            </tr>
+            <?php endforeach ?>
+        </tbody>
+    </table>
 
-            <td>
-                <div>
-                <?php if (! empty($posts)): ?>
-                    <div>por <a href="<?= URL ?>users/<?= $posts[$postsQty-1]->getAuthor()->getUsername() ?>"><?= $posts[$postsQty-1]->getAuthor()->getUsername() ?></a></div>
-                    <div title="<?= $this->date->translateToDateTime($posts[$postsQty-1]->getCreationDate(), "às") ?>"><?= $this->date->translateTime($posts[$postsQty-1]->getCreationDate(), 1) ?> às <?= $this->date->translateToTime($posts[$postsQty-1]->getCreationDate()) ?></div>
-                <?php else: ?>
-                    <div>0</div>
-                <?php endif ?>
-                </div>
-            </td>
-        </tr>
-        <?php endforeach ?>
-    </tbody>
-</table>
-
-<?php $this->requireView("parts/pagination", array("page" => $page, "pages" => $pages, "baseUrl" => $baseUrl), true) ?>
+    <?php $this->requireView("parts/pagination", array("page" => $page, "pages" => $pages, "baseUrl" => $baseUrl), true) ?>
+</div>
 
 <div>
     <h4>Legenda</h4>

@@ -11,9 +11,10 @@ abstract class Controller
     protected $styles = array();
     protected $scripts = array();
 
-    public function __construct($name = "")
+    public function __construct($name = "", $showMainPanel = true)
     {
         $this->controllerName = (! empty($name)) ? strtolower($name) ."/" : "";
+        $this->showMainPanel = $showMainPanel;
 
         global $dba, $auth, $date;
         $this->dba = $dba;

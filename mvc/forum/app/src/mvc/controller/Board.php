@@ -24,10 +24,9 @@ class Board extends Controller
         if (empty($board)) redirect("home");
 
         $this->title = $board->getName();
-        $this->pages[] = array("name" => "Início", "url" => URL);
         $this->pages[] = array("name" => $this->title, "url" => URL ."boards/" .$board->getUrl(), "active" => true);
 
-        $limitPerPage = 1;
+        $limitPerPage = 10;
         $topics = $this->dba->getTable("boards")->getTopics($this->dba, $board, $limitPerPage, $page);
         $category = $this->dba->getTable("categories")->get(array("id" => $board->getCategoryId()));
 

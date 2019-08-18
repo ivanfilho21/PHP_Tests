@@ -42,7 +42,11 @@
     </div>
 </header>
 
-
-<section class="container"><?php $this->requireView("parts/navigation", null, true) ?>
-<br>
-<?php $this->requireView($view, $data) ?></section></body></html>
+<section class="container">
+    <?php if ($this->showMainPanel): ?>
+    <section class="main-options">
+        <?php $this->requireView("parts/navigation", null, true) ?>
+    </section>
+    <?php endif ?>
+    <?php $this->requireView($view, $data) ?>
+</section></body></html>

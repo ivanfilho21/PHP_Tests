@@ -6,7 +6,7 @@ class NotFound extends Controller
 {
     public function __construct()
     {
-        parent::__construct("NotFound");
+        parent::__construct("NotFound", false);
         $this->template = "blank";
     }
 

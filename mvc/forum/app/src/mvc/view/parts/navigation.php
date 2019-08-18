@@ -1,24 +1,30 @@
 <style>
     .breadcrumb-nav {
-        margin-top: 1rem;
         padding: 0.5rem;
-        background-color: whitesmoke;
+        color: #176093;
     }
 
     .breadcrumb-nav ul {
         display: flex;
         font-size: 0.9rem;
     }
+
+    .breadcrumb-nav li {
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
     .breadcrumb-nav li a {
-        color: #176093;
+        /*color: #176093;*/
     }
 
-    .breadcrumb-nav li.active {
+    .breadcrumb-nav li.active a {
+        /*font-style: italic;*/
         font-weight: bold;
-        font-style: italic;
+        /*color: red;*/
     }
 
-    .breadcrumb-nav li::after {
+    .breadcrumb-nav li::before {
         content: "▶";
         position: relative;
         top: -15%;
@@ -27,6 +33,7 @@
     }
     .breadcrumb-nav li:first-child::before {
         content: "";
+        display: none;
     }
     .breadcrumb-nav li:last-child::after {
         content: "";
@@ -35,8 +42,9 @@
 
 <nav class="breadcrumb-nav">
     <ul>
+        <li <?= (count($this->pages) == 0) ? "class='active'" : "" ?>><a href="<?= URL ?>"><i class="fa fa-home"></i> <?= SITE_NAME ?></a></li>
     <?php foreach ($this->pages as $p): ?>
-        <li <?= (isset($p["active"])) ? "class='active'" : "" ?>><a href="<?= $p["url"] ?>"><?= $p["name"] ?></a></li>
+        <li <?= (! empty($p["active"])) ? "class='active'" : "" ?>><a href="<?= $p["url"] ?>"><?= $p["name"] ?></a></li>
     <?php endforeach ?>
     </ul>
 </nav>
