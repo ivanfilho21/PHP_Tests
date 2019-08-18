@@ -19,7 +19,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $reg = "/[a-z0-9-]{6,12}/";
         $res = preg_match($reg, $username);
         if (! $res) $_SESSION["error-msg"]["username"] = "O nome de usuário deve ter de 6 a 12 caracteres.";
-        if ($this->auth->checkField("username", $username)) $_SESSION["error-msg"]["username"] = "O nome de usuário \"<b>" .$username ."\"</b> já está em uso.";
+        if ($this->auth->checkField("username", $username)) {
+            $res = false;
+            $_SESSION["error-msg"]["username"] = "O nome de usuário \"<b>" .$username ."\"</b> já está em uso.";
+        }
     }
 
     if (empty($email)) {

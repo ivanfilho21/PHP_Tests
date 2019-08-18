@@ -4,22 +4,9 @@
     <h4>Operação <?= (empty($post)) ? "insert" : "edit" ?></h4>
 
     <form id="form" method="post" data-validation-url="<?= URL ?>scripts/topic.php">
+        <?php showErrorMessages() ?>
 
         <input type="hidden" name="operation" value="<?= (empty($post)) ? "insert" : "edit" ?>">
-
-        <?php if (! empty($_SESSION["error-msg"])): ?>
-        <div class="alert alert-danger">
-            <span class="b">Foram encontrados os seguintes erros:</span>
-            <ul class="ul ul-circle">
-            <?php foreach($_SESSION["error-msg"] as $err): ?>
-                <?php if (! empty($err)): ?>
-                <li><?= $err ?></li>
-                <?php endif ?>
-            <?php endforeach ?>
-            </ul>
-        </div>
-        <?php unset($_SESSION["error-msg"]) ?>
-        <?php endif ?>
 
         <div class="flex flex-children-ml">
             <div>
