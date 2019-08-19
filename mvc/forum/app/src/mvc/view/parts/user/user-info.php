@@ -8,6 +8,8 @@ switch($user->getType()) {
     case \User::TYPE_MODERATOR_USER: $type = "Moderador"; break;
     case \User::TYPE_ADMIN_USER: $type = "Administrador"; break;
 }
+$topics = $this->dba->getTable("topics")->getAll(array("author_id" => $user->getId()));
+$topics = (! empty($topics)) ? count($topics) : 0;
 
 $posts = $this->dba->getTable("posts")->getAll(array("author_id" => $user->getId()));
 $msg = (! empty($posts)) ? count($posts) : 0;
@@ -20,8 +22,7 @@ foreach ($posts as $post) {
 
 $stats["msg"] = $msg;
 $stats["likes"] = $likes;
-$stats["last-seen"]["date"] = $this->date->translateTime($user->getLastSeen(), 1);
-$stats["last-seen"]["time"] = $this->date->translateToTime($user->getLastSeen());
+$stats["topics"] = $topics;
 ?>
 
 <style>
@@ -54,6 +55,9 @@ $stats["last-seen"]["time"] = $this->date->translateToTime($user->getLastSeen())
 
     .picture {
         text-align: center;
+        border: ridge #ccc;
+        border-radius: 50%;
+        overflow: hidden;
     }
 
     .description {
@@ -83,12 +87,10 @@ $stats["last-seen"]["time"] = $this->date->translateToTime($user->getLastSeen())
     <div class="type"><i class="fa fa-user-alt"></i> <?= $type ?></div>
     
     <div class="flex flex-children-ml align-items-center justify-content-center">
+        <span title="<?= $user->getUsername() ?> criou <?= $stats["topics"] .plural($stats["topics"], " tópico") ?>"><i class="fa fa-list-alt"></i> <?= $stats["topics"] ?></span>
+
         <span title="<?= $user->getUsername() ?> escreveu <?= $stats["msg"] .plural($stats["msg"], " mensagem") ?>"><i class="fa fa-comments"></i> <?= $stats["msg"] ?></span>
         
-        <span title="<?= $user->getUsername() ?> recebeu <?= $stats["likes"] .plural($stats["likes"], " like") ?>"><i class="fa fa-thumbs-up"></i>  <?= $stats["likes"] ?></span>
+        <span title="<?= $user->getUsername() ?> recebeu <?= $stats["likes"] .plural($stats["likes"], " like") ?> em suas mensagens"><i class="fa fa-thumbs-up"></i>  <?= $stats["likes"] ?></span>
     </div>
-
-    <div class="item">Visto por Último: <span><?= (empty($stats["last-seen"]["date"]) || empty($stats["last-seen"]["time"])) ? "Nunca" : $stats["last-seen"]["date"] ." às " .$stats["last-seen"]["time"] ?></span></div>
-    
-    <div class="item">Registrado em <?= $this->date->translateToDate($user->getCreationDate()) ?></div>
 </section>
