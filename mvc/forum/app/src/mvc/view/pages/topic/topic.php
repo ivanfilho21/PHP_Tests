@@ -102,7 +102,11 @@
                     </div>
 
                     <div class="content"><?= $post->getContent() ?></div>
-                    <?php $this->requireView("parts/user/signature", $userData, true) ?>
+
+                    <?php if (! empty($userData["user"]->getSignature())): ?>
+                        <hr>
+                        <?php $this->requireView("parts/user/signature", $userData, true) ?>
+                    <?php endif ?>
                 </div>
             </article>
         <?php endforeach ?>
