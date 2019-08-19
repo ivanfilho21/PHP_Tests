@@ -2,6 +2,4 @@
 
 Sistema de Fórum em PHP.
 
-## Em progresso...
-
-![Screenshot](print.png)
+![Screenshot](print-forum.png)
