@@ -6,9 +6,7 @@
 </style>
 
 <section class="signature">
-    <div class="title">Assinatura</div>
     <div class="content">
-        <hr>
         <?= $user->getSignature() ?>
     </div>
 </section>
