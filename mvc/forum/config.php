@@ -47,17 +47,25 @@ $date = new \IvanFilho\Date\Date();
 
 
 
-# Default values
-/*$now = $date->getCurrentDateTime();
+/*# Default values
+$now = $date->getCurrentDateTime();
 
 #$u = new \User(0, \User::TYPE_ADMIN_USER, "admin", "", md5("prec"), $now);
 #$dba->getTable("users")->insert($u);
 
-$c = new \Category(0, "Categoria", $now);
-$dba->getTable("categories")->insert($c);
+$c1 = new \Category(0, format("Back-End"), $now);
+$c2 = new \Category(0, format("Front-End"), $now);
+$c3 = new \Category(0, format("Suporte Técnico"), $now);
+$dba->getTable("categories")->insert($c1);
+$dba->getTable("categories")->insert($c2);
+$dba->getTable("categories")->insert($c3);
 
-$b = new \Board(0, 1, 1, "Board de Exemplo", "Descrição da Board.", $now);
-$dba->getTable("boards")->insert($b);*/
+$b1 = new \Board(0, 1, 1, format("PHP"), format("Discussões relacionadas à linguagem PHP e seus componentes."), $now);
+$b2 = new \Board(0, 1, 1, format("Javascript"), format("Discussões sobre Javascript puro."), $now);
+$b3 = new \Board(0, 1, 1, format("SQL"), format("Discussões sobre a linguagem SQL."), $now);
+$dba->getTable("boards")->insert($b1);
+$dba->getTable("boards")->insert($b2);
+$dba->getTable("boards")->insert($b3);*/
 
 
 

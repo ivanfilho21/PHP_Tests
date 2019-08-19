@@ -1,17 +1,41 @@
 body {
-    background-color: cadetblue;
+    /*background-color: cadetblue;*/
 }
+
+.title-bar {
+    padding: 0.5rem 1rem;
+    background-color: #333;
+    color: white;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.content {
+    margin-top: 0.5rem;
+}
+
+.caption {
+    font-size: 0.85rem;
+    font-weight: normal;
+}
+
+.icon {
+    color: #444;
+}
+
+.description {
+    margin-top: 0.35rem;
+    margin-bottom: 0.15rem;
+}
+
 
 .main-options {
     margin: 0.5rem 0 1rem 0;
     padding: 0.5rem 1rem;
     border: 4px ridge;
     background-color: ghostwhite;
-}
-
-
-.title {
-    font-weight: bold;
 }
 
 .user {

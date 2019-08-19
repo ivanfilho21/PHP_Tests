@@ -32,7 +32,7 @@
 .flex-2 { flex: 2; }
 .flex-3 { flex: 3; }
 .flex-4 { flex: 4; }
-.flex.flex-children-ml > * { margin-left: 0.5rem; }
+.flex.flex-children-ml > * { margin-left: 0.75rem; }
 .flex.flex-children-ml > *:first-child { margin-left: 0; }
 .flex.align-items-center { align-items: center; }
 .flex.justify-content-center { justify-content: center; }
