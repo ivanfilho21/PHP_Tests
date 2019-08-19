@@ -6,7 +6,7 @@ class User
     const TYPE_MODERATOR_USER = 2;
     const TYPE_ADMIN_USER = 3;
 
-    public function __construct($id = 0, $type = self::TYPE_NORMAL_USER, $username = "", $email = "", $password = "", $creation_date = "", $description = "", $signature = "", $image = "", $url = "", $name = "", $last_seen = "", $birthday = "")
+    public function __construct($id = 0, $type = self::TYPE_NORMAL_USER, $username = "", $email = "", $password = "", $creation_date = "", $description = "", $signature = "", $image = "", $url = "", $last_seen = "", $name = "", $birthday = "")
     {
         $this->id = $id;
         $this->type = $type;
@@ -35,8 +35,6 @@ class User
     public function getEmail() { return $this->email; }
     public function setPassword($password) { $this->password = $password; }
     public function getPassword() { return $this->password; }
-    public function setLastSeen($last_seen) { $this->last_seen = $last_seen; }
-    public function getLastSeen() { return $this->last_seen; }
     public function setBirthday($birthday) { $this->birthday = $birthday; }
     public function getBirthday() { return $this->birthday; }
     public function setCreationDate($creation_date) { $this->creation_date = $creation_date; }
@@ -50,4 +48,6 @@ class User
     public function getImage() { return $this->image; }
     public function getUrl() { return $this->url; }
     public function setUrl() { $this->url = encodeUrlFromName($this->getUsername()); }
+    public function setLastSeen($last_seen) { $this->last_seen = $last_seen; }
+    public function getLastSeen() { return $this->last_seen; }
 }

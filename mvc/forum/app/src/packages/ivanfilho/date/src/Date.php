@@ -26,8 +26,9 @@ class Date
         return date("d/m/Y", strtotime($str));
     }
 
-    public function translateToTime(String $str)
+    public function translateToTime($str)
     {
+        if (empty($str)) return "";
         date_default_timezone_set("America/Sao_Paulo");
         return date("H:i", strtotime($str));
     }
@@ -38,8 +39,9 @@ class Date
         return date("d/m/Y\, H:i", strtotime($str));
     }
 
-    public function translateTime(String $str, $mode = 0)
+    public function translateTime($str, $mode = 0)
     {
+        if (empty($str)) return "";
         date_default_timezone_set("America/Sao_Paulo");
 
         $date = strtotime($str);

@@ -20,6 +20,8 @@ foreach ($posts as $post) {
 
 $stats["msg"] = $msg;
 $stats["likes"] = $likes;
+$stats["last-seen"]["date"] = $this->date->translateTime($user->getLastSeen(), 1);
+$stats["last-seen"]["time"] = $this->date->translateToTime($user->getLastSeen());
 ?>
 
 <style>
@@ -86,7 +88,7 @@ $stats["likes"] = $likes;
         <span title="<?= $user->getUsername() ?> recebeu <?= $stats["likes"] .plural($stats["likes"], " like") ?>"><i class="fa fa-thumbs-up"></i>  <?= $stats["likes"] ?></span>
     </div>
 
-    <div class="item">Visto por Último -</div>
+    <div class="item">Visto por Último: <span><?= (empty($stats["last-seen"]["date"]) || empty($stats["last-seen"]["time"])) ? "Nunca" : $stats["last-seen"]["date"] ." às " .$stats["last-seen"]["time"] ?></span></div>
     
     <div class="item">Registrado em <?= $this->date->translateToDate($user->getCreationDate()) ?></div>
 </section>

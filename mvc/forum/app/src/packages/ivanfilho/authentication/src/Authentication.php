@@ -113,6 +113,11 @@ class Authentication
         if (empty($user)) {
             $this->deleteUserSession();
             $this->deleteUserCookie();
+        } else {
+            global $date;
+            $now = $date->getCurrentDateTime();
+            $user->setLastSeen($now);
+            $this->updateUser($user);
         }
 
         return $user;

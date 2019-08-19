@@ -17,11 +17,11 @@ class UserDAO extends Table
             new Column("description", VARCHAR, 100),
             new Column("signature", TEXT),
             new Column("url", VARCHAR, 12),
+            new Column("last_seen", DATETIME),
             new Column("creation_date", DATETIME)
             // new Column("gender", INT, 1),
             // new Column("name", VARCHAR, 255),
             // new Column("birthday", DATE),
-            // new Column("last_seen", DATETIME),
         ];
 
         parent::__construct($pdo, "\User", "users", $columns);
