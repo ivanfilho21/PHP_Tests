@@ -25,6 +25,8 @@ $routers["/users/{url}"] = "/profile/open/:url";
 $routers["/users/{url}/"] = "/profile/open/:url";
 $routers["/profile"] = "/profile/edit";
 $routers["/profile/"] = "/profile/edit";
+$routers["/users/{url}/{section}"] = "/profile/open/:url/:section";
+$routers["/users/{url}/{section}/"] = "/profile/open/:url/:section";
 
 $routers["/logout"] = "/authentication/logout";
 $routers["/logout/"] = "/authentication/logout";
