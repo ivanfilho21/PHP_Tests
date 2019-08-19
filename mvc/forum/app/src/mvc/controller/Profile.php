@@ -14,7 +14,7 @@ class Profile extends Controller
         redirect("profile/edit");
     }
 
-    public function open($userUrl = "")
+    public function open($userUrl = "", $section = "basic-info")
     {
         $user = $this->auth->getUser(array("url" => $userUrl));
         if (empty($user)) redirect("home");
@@ -28,6 +28,7 @@ class Profile extends Controller
         );
 
         $viewData["user"] = $user;
+        $viewData["section"] = $section;
         $this->loadView("profile", $viewData);
     }
 
