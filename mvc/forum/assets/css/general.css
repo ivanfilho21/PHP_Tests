@@ -1,3 +1,9 @@
+.dark {
+    background: #333 !important;
+}
+.dark * { color: ghostwhite !important; }
+
+
 .ul {
 }
 

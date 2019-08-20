@@ -89,9 +89,9 @@ class Date
     {
         // echo $diff, ", ", DAY, " ";
         if ($diff < DAY - HOUR*12) {
-            return "Hoje";
+            return "hoje";
         } elseif ($diff < 2*DAY - HOUR*12) {
-            return "Ontem";
+            return "ontem";
         } else {
             return $this->translateToDate($date);
         }
