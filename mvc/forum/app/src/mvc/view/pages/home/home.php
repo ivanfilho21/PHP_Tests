@@ -4,7 +4,6 @@
     }
 
     .boards .board .top {
-        padding: 0.5rem;
         border-bottom: 1px solid #ccc;
         background-color: ghostwhite;
         border: 1px solid #bbb;
@@ -54,15 +53,18 @@
 
 <?php foreach($categories as $cat): ?>
 <?php $boards = $this->dba->getTable("categories")->getBoards($this->dba, $cat) ?>
-    <div class="title title-bar dark"><?= $cat->getName() ?></div>
+    <div class="dark flex flex-children-ml p-0.5">
+        <span class="icon"><i class="fa fa-folder"></i></span>
+        <span class="title"><?= $cat->getName() ?></span>
+    </div>
     <section class="boards">
 <?php if (empty($boards)): ?>
-    <div style="padding: 0.5rem">Ainda não há discussões.</div>
+    <div class="board"><div class="bottom p-0.5">Ainda não há discussões.</div></div>
 <?php else: ?>
     <?php foreach ($boards as $board): ?>
         <div class="board">
     <?php if (empty($board->getName())): ?>
-        <div class="top">Ainda não há tópicos.</div>
+        <div class="top p-0.5">Ainda não há tópicos.</div>
     <?php else: ?>
         <?php
         $topics = $this->dba->getTable("boards")->getTopics($this->dba, $board);
@@ -74,9 +76,9 @@
             $postsQty += count($posts);
         }
         ?>
-            <div class="top dark flex justify-content-spc-btw">
+            <div class="top dark-secondary flex justify-content-spc-btw p-0.5">
                 <div class="flex flex-children-ml">
-                    <span class="icon"><i class="fa fa-folder"></i></span>
+                    <span class="icon"><i class="fa fa-file-alt"></i></span>
                     <div class="title"><a href="<?= URL ?>boards/<?= $board->getUrl() ?>"><?= $board->getName() ?></a></div>
                 </div>
 

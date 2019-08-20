@@ -1,8 +1,8 @@
-.dark {
-    background: #333 !important;
-}
+.dark { background-color: #333 !important; }
 .dark * { color: ghostwhite !important; }
 
+.dark-secondary { background-color: #555 !important; }
+.dark-secondary * { color: white !important; }
 
 .ul {
 }
@@ -23,6 +23,8 @@
 
 .b { font-weight: bold; }
 .i { font-style: italic; }
+
+.p-0\.5 { padding: 0.5rem; }
 
 .quotes { font-style: italic; }
 .quotes::before,
