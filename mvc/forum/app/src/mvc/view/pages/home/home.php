@@ -5,7 +5,7 @@
 
     .boards .board .top {
         border-bottom: 1px solid #ccc;
-        background-color: ghostwhite;
+        background-color: #e3e4d3;
         border: 1px solid #bbb;
         border-top: none;
         border-bottom: none;
@@ -76,7 +76,7 @@
             $postsQty += count($posts);
         }
         ?>
-            <div class="top dark-secondary flex justify-content-spc-btw p-0.5">
+            <div class="top flex justify-content-spc-btw p-0.5">
                 <div class="flex flex-children-ml">
                     <span class="icon"><i class="fa fa-file-alt"></i></span>
                     <div class="title"><a href="<?= URL ?>boards/<?= $board->getUrl() ?>"><?= $board->getName() ?></a></div>
