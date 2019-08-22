@@ -3,39 +3,8 @@
         background-color: white;
     }
 
-    .boards .board .top {
-        border-bottom: 1px solid #ccc;
-        background-color: #e3e4d3;
-        border: 1px solid #bbb;
-        border-top: none;
-        border-bottom: none;
-    }
-    .boards .board .top:first-child { border: none; }
-    .boards .board:last-child { border-bottom: 1px solid #bbb; }
-
-    .boards .board .bottom {
-        display: flex;
-        flex-direction: column;
-        border: 1px solid #bbb;
-        border-top: none;
-        border-bottom: none;
-    }
-
-    .boards .board .content,
-    .boards .board .description {
-        margin: 0;
-        margin-bottom: 0.3rem;
-    }
-    .boards .board .content {
-        padding: 0.5rem;
-    }
-
-    .boards .board .latest-topic {
-        flex: 1;
-        display: flex;
-        padding: 0 0.5rem 0.5rem 0.5rem;
-        
-    }
+    .boards .board { border-bottom: 1px solid #ccc; }
+    .boards .board:last-child { border-bottom: none; }
 
     @media(min-width: 700px) {
         .boards .board .bottom {
@@ -45,8 +14,7 @@
 
         .boards .board .latest-topic {
             align-items: center;
-            padding: 0.5rem;
-            border-left: 1px solid #ccc;
+            border-left: 1px solid #eee;
         }
     }
 </style>
@@ -59,26 +27,28 @@
     </div>
     <section class="boards">
 <?php if (empty($boards)): ?>
-    <div class="board"><div class="bottom p-0.5">Ainda não há discussões.</div></div>
+        <div class="board p-tb-0.5">
+            <div class=" p-0.5">Ainda não há discussões.</div>
+        </div>
 <?php else: ?>
     <?php foreach ($boards as $board): ?>
-        <div class="board">
+        <div class="board p-tb-0.5">
     <?php if (empty($board->getName())): ?>
-        <div class="top p-0.5">Ainda não há tópicos.</div>
+            <div class="p-lr-0.5">Ainda não há tópicos.</div>
     <?php else: ?>
         <?php
-        $topics = $this->dba->getTable("boards")->getTopics($this->dba, $board);
-        $topicsQty = count($topics);
-        $postsQty = 0;
+            $topics = $this->dba->getTable("boards")->getTopics($this->dba, $board);
+            $topicsQty = count($topics);
+            $postsQty = 0;
 
-        foreach ($topics as $t) {
-            $posts = $this->dba->getTable("topics")->getPosts($this->dba, $t);
-            $postsQty += count($posts);
-        }
+            foreach ($topics as $t) {
+                $posts = $this->dba->getTable("topics")->getPosts($this->dba, $t);
+                $postsQty += count($posts);
+            }
         ?>
-            <div class="top flex justify-content-spc-btw p-0.5">
+            <div class="flex justify-content-spc-btw p-lr-0.5">
                 <div class="flex flex-children-ml">
-                    <span class="icon"><i class="fa fa-file-alt"></i></span>
+                    <span class="icon"><i class="fa fa-chalkboard"></i></span>
                     <div class="title"><a href="<?= URL ?>boards/<?= $board->getUrl() ?>"><?= $board->getName() ?></a></div>
                 </div>
 
@@ -90,15 +60,13 @@
 
             <div class="bottom">
                 <div class="flex-3">
-                    
-
-                    <div class="content">
+                    <div class="content p-lr-0.5">
                         <div class="description"><?= $board->getDescription() ?></div>
                         <div class="caption">Moderador: <a href="<?= URL ?>users/<?= $board->getModerator()->getUsername() ?>" class="caption"><?= $board->getModerator()->getUsername() ?></a></div>
                     </div>
                 </div>
 
-                <div class="latest-topic flex-1">
+                <div class="latest-topic flex-1 p-lr-0.5" style="margin-top: 0.5rem">
                 <?php $latestTopic = $board->getLatestTopic() ?>
                 <?php $date = $this->date->translateTime($latestTopic->getCreationDate(), 1) ?>
                 <?php $time = $this->date->translateToTime($latestTopic->getCreationDate()) ?>

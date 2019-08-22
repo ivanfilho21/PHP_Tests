@@ -25,6 +25,8 @@
 .i { font-style: italic; }
 
 .p-0\.5 { padding: 0.5rem; }
+.p-lr-0\.5 { padding-left: 0.5rem; padding-right: 0.5rem; }
+.p-tb-0\.5 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
 
 .quotes { font-style: italic; }
 .quotes::before,

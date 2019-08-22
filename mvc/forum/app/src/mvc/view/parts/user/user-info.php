@@ -34,10 +34,10 @@ $stats["topics"] = $topics;
         padding-right: 0.75rem;
     }
 
-    .user-info > div {
+    .user-info div {
         margin-bottom: 0.5rem;
     }
-    .user-info > div:last-child {
+    .user-info div:last-child {
         margin-bottom: 0;
     }
 
@@ -54,6 +54,8 @@ $stats["topics"] = $topics;
     }
 
     .picture {
+        width: 120px;
+        margin: 0 auto;
         text-align: center;
         border: ridge #ccc;
         border-radius: 50%;
