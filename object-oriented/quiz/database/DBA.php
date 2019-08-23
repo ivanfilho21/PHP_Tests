@@ -44,8 +44,8 @@ class DBA
     {
         $pdo = $this->getPDOConnection();
         $this->tables[] = new Quiz($pdo);
-        // $this->tables[] = new Question($pdo);
-        // $this->tables[] = new Answer($pdo);
+        $this->tables[] = new Question($pdo);
+        $this->tables[] = new Answer($pdo);
 
         $this->createTables();
     }

@@ -4,7 +4,7 @@
     "description": "Load composer file",
     "autoload": {
         "psr-4": {
-            "": ["../../", "mvc/model/", "mvc/model/database/", "mvc/controller/"],
+            "": ["", "class/"],
             "App\\": [""],
             "App\\Database\\": ["database/"],
             "IvanFilho\\Database\\": ["packages/ivanfilho/database/src/"]

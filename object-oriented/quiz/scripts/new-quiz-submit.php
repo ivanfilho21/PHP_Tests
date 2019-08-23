@@ -23,7 +23,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // echo "<pre>" .print_r($_POST, true) ."</pre>";
 
     if (isset($_POST["submit"])) {
-        #
+        $quiz = new \Quiz();
+        $quizId = $dba->getTable("quizes")->insert($quiz);
+
+        foreach ($questions as $i => $vq) {
+            $questObj = new Question(0, $quizId, $titles[$i]);
+            $questId = $dba->getTable("questions")->insert($questObj);
+
+            foreach ($options as $j => $va) {
+                $answerObj = new Answer(0, $questId, 0, $options[$i][$j]);
+                $dba->getTable("answers")->insert($answerObj);
+            }
+        }
     } else {
         if (isset($_POST["add-question"])) {
             $questions[] = "";
