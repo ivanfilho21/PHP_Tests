@@ -22,7 +22,7 @@ try {
 require "packages/wilkins/composer-file-loader/src/PackageLoader.php";
 
 $loader = new PackageLoader();
-$loader->load($relPath ."");
+$loader->load($relPath .".");
 
 # Database Admin object
 $dba = DBA::getInstance();
