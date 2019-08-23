@@ -18,17 +18,12 @@ if (empty($answers)) {
 $titles = (isset($_POST["title"])) ? $_POST["title"] : array();
 $options = (isset($_POST["answer"])) ? $_POST["answer"] : array();
 $rights = (isset($_POST["right"])) ? $_POST["right"] : array();
-/*
-$_SESSION["answers"] = (isset($_SESSION["answers"])) ? $_SESSION["answers"] : array(array(""));
-
-$answers = (isset($_SESSION["answers"])) ? $_SESSION["answers"] : ((isset($_POST["answer"])) ? $_POST["answer"] : array(array("")));
-*/
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // echo "<pre>" .print_r($_POST, true) ."</pre>";
 
     if (isset($_POST["submit"])) {
-        $titles = $_POST["title"];
+        #
     } else {
         if (isset($_POST["add-question"])) {
             $questions[] = "";

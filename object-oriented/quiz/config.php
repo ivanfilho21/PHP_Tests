@@ -1,5 +1,9 @@
 <?php
+
 session_start();
+
+use \Wilkins\PackageLoader\PackageLoader;
+use \App\Database\DBA;
 
 define("DB_TYPE", "mysql");
 define("DB_HOST", "127.0.0.1");
@@ -14,3 +18,11 @@ try {
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
 }
+
+require "packages/wilkins/composer-file-loader/src/PackageLoader.php";
+
+$loader = new PackageLoader();
+$loader->load($relPath ."");
+
+# Database Admin object
+$dba = DBA::getInstance();
