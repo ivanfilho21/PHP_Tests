@@ -1,66 +1,127 @@
 <?php
 
-// unset($_SESSION["questions"]); unset($_SESSION["answers"]);
+// unset($_SESSION["questions"]); unset($_SESSION["options"]);
 
-$_SESSION["questions"] = (isset($_SESSION["questions"])) ? $_SESSION["questions"] : array("");
-$questions = $_SESSION["questions"];
+if (isset($_SESSION["questions"])) {
+    // echo "<b>Session Questions:</b> <pre>" .print_r($_SESSION["questions"], true) ."</pre>";
+}
 
-$answers = (isset($_SESSION["answers"])) ? $_SESSION["answers"] : array();
-if (empty($answers)) {
-    foreach ($questions as $key => $value) {
-        $answers[$key][] = "";
+if (isset($_SESSION["options"])) {
+    // echo "<b>Session Options:</b> <pre>" .print_r($_SESSION["options"], true) ."</pre>";
+}
+
+if (isset($_SESSION["corrects"])) {
+    // echo "<b>Session Corrects:</b> <pre>" .print_r($_SESSION["corrects"], true) ."</pre>";
+}
+
+$questions = (isset($_SESSION["questions"])) ? $_SESSION["questions"] : (isset($_POST["title"]) ? $_POST["title"] : array(""));
+$options = (isset($_SESSION["options"])) ? $_SESSION["options"] : (isset($_POST["answer"]) ? $_POST["answer"] : "");
+$corrects = (isset($_SESSION["corrects"])) ? $_SESSION["corrects"] : (isset($_POST["correct"]) ? $_POST["correct"] : array());
+
+if (empty($options)) {
+    $options = array();
+    foreach ($questions as $i => $value) {
+        $options[$i][] = "";
     }
 }
 
-// echo "Questions: <pre>" .print_r($questions, true) ."</pre>";
-// echo "Answers: <pre>" .print_r($answers, true) ."</pre>";
+if (empty($corrects)) {
+    $corrects = array();
+    foreach ($questions as $i => $value) {
+        $corrects[$i] = "0";
+    }
+}
 
-$titles = (isset($_POST["title"])) ? $_POST["title"] : array();
-$options = (isset($_POST["answer"])) ? $_POST["answer"] : array();
-$rights = (isset($_POST["right"])) ? $_POST["right"] : array();
+// echo "<b>questions:</b> <pre>" .print_r($questions, true) ."</pre>";
+// echo "<b>answers:</b> <pre>" .print_r($options, true) ."</pre>";
+// echo "<b>corrects:</b> <pre>" .print_r($corrects, true) ."</pre>";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // echo "<pre>" .print_r($_POST, true) ."</pre>";
+    echo "<b>Post:</b> <pre>" .print_r($_POST, true) ."</pre>";
+    $questions = $_POST["title"];
+    $options = $_POST["answer"];
+    $correct = $_POST["correct"];
 
     if (isset($_POST["submit"])) {
         $quiz = new \Quiz();
         $quizId = $dba->getTable("quizes")->insert($quiz);
 
+        $questId = array();
         foreach ($questions as $i => $vq) {
-            $questObj = new Question(0, $quizId, $titles[$i]);
-            $questId = $dba->getTable("questions")->insert($questObj);
+            $questObj = new Question(0, $quizId, $questions[$i]);
+            $questId[$i] = $dba->getTable("questions")->insert($questObj);
+        }
 
-            foreach ($options as $j => $va) {
-                $answerObj = new Answer(0, $questId, 0, $options[$i][$j]);
+        foreach ($options as $i => $a) {
+            $corr = $corrects[$i];
+            foreach ($a as $j => $content) {
+                $c = ($corr == $j) ? 1 : 0;
+                $answerObj = new Answer(0, $questId[$i], $c, $content);
                 $dba->getTable("answers")->insert($answerObj);
             }
         }
+
+        unset($_SESSION["questions"]);
+        unset($_SESSION["options"]);
+
+        header("location: my-quizes.php");
+        die;
     } else {
         if (isset($_POST["add-question"])) {
+            # Questions
             $questions[] = "";
             $_SESSION["questions"] = $questions;
+            
+            # Answers
+            foreach ($questions as $i => $value) {
+                $options[$i] = (isset($options[$i])) ? $options[$i] : array("");
+            }
+            $_SESSION["options"] = $options;
+            // echo "<b>Session Options:</b> <pre>" .print_r($_SESSION["options"], true) ."</pre>";
+
+            $_SESSION["corrects"] = $corrects;
+            
+        } elseif (isset($_POST["add-answer"])) {
+            # Questions
+            $_SESSION["questions"] = $questions;
+            
+            # Answers
+            $qkey = $_POST["add-answer"];
+
+            foreach ($questions as $i => $value) {
+                $options[$i] = (isset($options[$i])) ? $options[$i] : array("");
+                
+                if ($i == $qkey) {
+                    $options[$i][] = "";
+                }
+            }
+            $_SESSION["options"] = $options;
+            // echo "<b>Session Options:</b> <pre>" .print_r($_SESSION["options"], true) ."</pre>";
+
+            $_SESSION["corrects"] = $corrects;
+
         } elseif (isset($_POST["remove-question"])) {
             $i = $_POST["remove-question"];
             if ($i > 0) {
                 unset($_SESSION["questions"][$i]);
             }
-        } elseif (isset($_POST["add-answer"])) {
-            $i = $_POST["add-answer"];
-            $answers[$i][] = "";
-            $_SESSION["answers"] = $answers;
         } elseif (isset($_POST["remove-answer"])) {
             $aux = $_POST["remove-answer"];
             $aux = explode(",", $aux);
+
             if (is_array($aux) && count($aux) > 0) {
                 $i = $aux[0];
                 $j = $aux[1];
 
                 if ($j > 0) {
                     // echo "rem ans"; die;
-                    unset($_SESSION["answers"][$i][$j]);
+                    unset($_SESSION["options"][$i][$j]);
                 }
             }
+        } else {
+            # Do nothing
         }
+
         header("location: new-quiz.php");
         die;
     }

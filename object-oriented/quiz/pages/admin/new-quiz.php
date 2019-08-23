@@ -11,15 +11,15 @@
     <br><br>
 
     <label>Title</label>
-    <input type="text" name="title[<?= $i ?>]" value="<?= isset($titles[$i]) ? $titles[$i] : "" ?>">
+    <input type="text" name="title[<?= $i ?>]" value="<?= isset($questions[$i]) ? $questions[$i] : "" ?>">
     <br>
 
     <label>Answers</label><br>
     <button type="submit" name="add-answer" value="<?= $i ?>">Add Answer</button>
-    <?php foreach ($answers[$i] as $j => $va): ?>
+    <?php foreach ($options[$i] as $j => $va): ?>
         <br>
         <input type="text" name="answer[<?= $i ?>][<?= $j ?>]" value="<?= isset($options[$i][$j]) ? $options[$i][$j] : "" ?>">
-        <label><input type="radio" name="right[<?= $i ?>]"> Right</label>
+        <label><input type="radio" name="correct[<?= $i ?>]" value="<?= $j ?>" <?= (isset($corrects[$i]) && $corrects[$i] == $j) ? "checked" : (($j == 0) ? "checked" : "") ?>> Correct</label>
 
         <br><br>
         <?php if ($j != 0): ?>
