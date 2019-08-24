@@ -26,3 +26,9 @@ $loader->load($relPath .".");
 
 # Database Admin object
 $dba = DBA::getInstance();
+
+function redirect($relativeUrl)
+{
+    header("location: " .$relPath .$relativeUrl);
+    exit();
+}

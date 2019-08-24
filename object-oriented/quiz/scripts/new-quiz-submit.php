@@ -64,8 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         unset($_SESSION["questions"]);
         unset($_SESSION["options"]);
 
-        header("location: my-quizes.php");
-        die;
+        redirect("new-quiz.php");
     } else {
         if (isset($_POST["add-question"])) {
             # Questions
@@ -122,7 +121,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             # Do nothing
         }
 
-        header("location: new-quiz.php");
-        die;
+        redirect("new-quiz.php");
     }
 }
