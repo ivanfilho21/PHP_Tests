@@ -17,4 +17,7 @@ class Question
 
     public function setTitle($title) { $this->title = $title; }
     public function getTitle() { return $this->title; }
+
+    public function setAnswers($answers) { $this->answers = $answers; }
+    public function getAnswers() { return $this->answers; }
 }

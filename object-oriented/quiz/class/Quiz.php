@@ -13,4 +13,7 @@ class Quiz
 
     public function setTitle($title) { $this->title = $title; }
     public function getTitle() { return $this->title; }
+
+    public function setQuestions($questions) { $this->questions = $questions; }
+    public function getQuestions() { return $this->questions; }
 }

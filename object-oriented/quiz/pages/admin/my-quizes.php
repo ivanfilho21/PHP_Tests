@@ -10,13 +10,6 @@
     <div>
         <a href="<?= $relPath ?>pages/quiz.php?id=<?= $quiz->getId() ?>"><?= $quiz->getTitle() ?></a>
     </div>
-    <br>
-    <?php foreach ($questions as $question): ?>
-    <?php $options = $dba->getTable("answers")->getAll(array("question_id" => $question->getId())) ?>
-    <div><?= $question->getTitle() ?></div>
-    <div><?= count($options) ?> options</div>
-    <br>
-    <?php endforeach ?>
 </div>
 <?php endforeach ?>
 <?php require $relPath ."pages/template/page-bottom.php" ?>
