@@ -13,10 +13,10 @@ if (isset($_SESSION["options"])) {
 if (isset($_SESSION["corrects"])) {
     // echo "<b>Session Corrects:</b> <pre>" .print_r($_SESSION["corrects"], true) ."</pre>";
 }
-
-$questions = (isset($_SESSION["questions"])) ? $_SESSION["questions"] : (isset($_POST["title"]) ? $_POST["title"] : array(""));
-$options = (isset($_SESSION["options"])) ? $_SESSION["options"] : (isset($_POST["answer"]) ? $_POST["answer"] : "");
-$corrects = (isset($_SESSION["corrects"])) ? $_SESSION["corrects"] : (isset($_POST["correct"]) ? $_POST["correct"] : array());
+$title = (isset($_SESSION["title"])) ? $_SESSION["title"] : "";
+$questions = (isset($_SESSION["questions"])) ? $_SESSION["questions"] : array("");#(isset($_POST["title"]) ? $_POST["title"] : array(""));
+$options = (isset($_SESSION["options"])) ? $_SESSION["options"] : "";#(isset($_POST["answer"]) ? $_POST["answer"] : "");
+$corrects = (isset($_SESSION["corrects"])) ? $_SESSION["corrects"] : array("");#(isset($_POST["correct"]) ? $_POST["correct"] : array());
 
 if (empty($options)) {
     $options = array();
@@ -37,13 +37,14 @@ if (empty($corrects)) {
 // echo "<b>corrects:</b> <pre>" .print_r($corrects, true) ."</pre>";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    echo "<b>Post:</b> <pre>" .print_r($_POST, true) ."</pre>";
+    $title = $_POST["quiz-title"];
     $questions = $_POST["title"];
     $options = $_POST["answer"];
     $correct = $_POST["correct"];
+    // echo "<b>Post:</b> <pre>" .print_r($_POST, true) ."</pre>";
 
     if (isset($_POST["submit"])) {
-        $quiz = new \Quiz();
+        $quiz = new \Quiz(0, $title);
         $quizId = $dba->getTable("quizes")->insert($quiz);
 
         $questId = array();
@@ -67,6 +68,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         redirect("new-quiz.php");
     } else {
         if (isset($_POST["add-question"])) {
+            # Title
+            $_SESSION["title"] = $title;
+
             # Questions
             $questions[] = "";
             $_SESSION["questions"] = $questions;
@@ -81,6 +85,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["corrects"] = $corrects;
             
         } elseif (isset($_POST["add-answer"])) {
+            # Title
+            $_SESSION["title"] = $title;
+
             # Questions
             $_SESSION["questions"] = $questions;
             
