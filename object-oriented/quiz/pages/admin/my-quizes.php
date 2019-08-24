@@ -8,7 +8,7 @@
 <?php $questions = $dba->getTable("questions")->getAll(array("quiz_id" => $quiz->getId())) ?>
 <div>
     <div>
-        <a href="<?= $relPath ?>pages/quiz.php?id=<?= $quiz->getId() ?>">Untitled Quiz</a>
+        <a href="<?= $relPath ?>pages/quiz.php?id=<?= $quiz->getId() ?>"><?= $quiz->getTitle() ?></a>
     </div>
     <br>
     <?php foreach ($questions as $question): ?>

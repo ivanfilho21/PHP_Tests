@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         unset($_SESSION["questions"]);
         unset($_SESSION["options"]);
 
-        redirect("new-quiz.php");
+        redirect("my-quizes.php");
     } else {
         if (isset($_POST["add-question"])) {
             # Title

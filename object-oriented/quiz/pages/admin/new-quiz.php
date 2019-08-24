@@ -2,6 +2,8 @@
 <?php require $relPath ."pages/template/page-top.php" ?>
 <?php require $relPath ."scripts/new-quiz-submit.php" ?>
 
+<?php $letters = array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z") ?>
+
 <h1>New Quiz</h1>
 
 <form method="post">
@@ -16,16 +18,19 @@
         <legend>Questions</legend>
         <br>
         <?php foreach ($questions as $i => $vq): ?>
-        <label>Title</label>
+        <label>Question:</label>
         <input type="text" name="title[<?= $i ?>]" value="<?= isset($questions[$i]) ? $questions[$i] : "" ?>">
+        <br><br>
+
+        <button type="submit" name="add-answer" value="<?= $i ?>">Add Answer</button>
         <br><br>
 
         <fieldset>
             <legend>Answers</legend>
-            <br>
-            <button type="submit" name="add-answer" value="<?= $i ?>">Add Answer</button>
+            
             <?php foreach ($options[$i] as $j => $va): ?>
                 <br>
+                <label><?= $letters[$j] .")" ?></label>
                 <input type="text" name="answer[<?= $i ?>][<?= $j ?>]" value="<?= isset($options[$i][$j]) ? $options[$i][$j] : "" ?>">
                 <label><input type="radio" name="correct[<?= $i ?>]" value="<?= $j ?>" <?= (isset($corrects[$i]) && $corrects[$i] == $j) ? "checked" : (($j == 0) ? "checked" : "") ?>> Correct</label>
 
