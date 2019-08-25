@@ -1,4 +1,5 @@
 <?php $relPath = "../" ?>
+<?php $title = "My Quizes" ?>
 <?php require $relPath ."pages/template/page-top.php" ?>
 <?php require $relPath ."scripts/quiz.php" ?>
 
