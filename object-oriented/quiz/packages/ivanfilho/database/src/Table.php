@@ -57,7 +57,7 @@ abstract class Table
     const ORDER_ASC = "ASC";
     const ORDER_DESC = "DESC";
 
-    private $db;
+    protected $db;
     private $columns;
     private $tableName;
     private $classType;
