@@ -3,17 +3,25 @@
 <?php require $relPath ."pages/template/page-top.php" ?>
 <?php require $relPath ."scripts/quiz.php" ?>
 
-<h1><?= $quiz->getTitle() ?></h1>
+<div class="card">
+    <div class="card-header">
+        <h1><?= $quiz->getTitle() ?></h1>
+    </div>
 
-<br>
-<?php foreach ($questions as $question): ?>
-<div><?= $question->getTitle() ?></div>
+    <div class="card-body">
+        <?php $i = 0 ?>
+        <?php foreach ($questions as $question): ?>
+        <?php $i++ ?>
+        <div><?= $i ?>) <?= $question->getTitle() ?></div>
 
-<?php foreach ($question->getAnswers() as $answer): ?>
-<div><?= $answer->getContent() ?></div>
-<?php endforeach ?>
-<br>
+        <?php foreach ($question->getAnswers() as $answer): ?>
+        <label style="font-size: 1rem; color: black;"><input type="radio" name="answer[<?= $i ?>]"> <?= $answer->getContent() ?></label>
+        <br>
+        <?php endforeach ?>
+        <br>
 
-<?php endforeach ?>
+        <?php endforeach ?>
+    </div>
+</div>
 
 <?php require $relPath ."pages/template/page-bottom.php" ?>

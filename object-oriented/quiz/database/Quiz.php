@@ -15,7 +15,7 @@ class Quiz extends Table
     }
 
     // Using stored procedure already created in phpmyadmin
-    public function get($where = array(), $select = array(), $limit = array(), $order = array(), $asList = false)
+    /*public function get($where = array(), $select = array(), $limit = array(), $order = array(), $asList = false)
     {
         $quiz = array();
 
@@ -35,5 +35,5 @@ class Quiz extends Table
     private function bind($sttm, $param, $value)
     {
         $sttm->bindParam($param, $value);
-    }
+    }*/
 }
