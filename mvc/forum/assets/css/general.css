@@ -52,6 +52,15 @@
 
 .flex.flex-direction-col { flex-direction: column; }
 
+
+.card {
+    margin: 1rem;
+    overflow: hidden;
+    border-radius: 6px;
+    background-color: white !important;
+    box-shadow: 0px 0px 6px #777;
+}
+
 /* CONTAINER */
 
 .container {
