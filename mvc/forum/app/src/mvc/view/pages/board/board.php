@@ -1,8 +1,8 @@
 <style>
-    .topics {
-        background-color: white;
+    .board {
+        margin: 0;
+        margin-bottom: 1rem;
     }
-
     .topics .topic { border-bottom: 1px solid #ccc; }
     .topics .topic:last-child { border-bottom: none; }
 
@@ -19,52 +19,54 @@
     }
 </style>
 
-<div class="dark flex flex-children-ml p-0.5">
-    <span class="icon"><i class="fa fa-chalkboard"></i></span>
-    <span class="title"><?= $board->getName() ?></span>
-</div>
-
-<section class="topics">
-<?php if (empty($topics)): ?>
-    <div class="topic p-tb-0.5">
-        <div class="p-0.5">Ainda não há tópicos.</div>
+<section class="board card">
+    <div class="dark flex flex-children-ml p-0.5">
+        <span class="icon"><i class="fa fa-chalkboard"></i></span>
+        <span class="title"><?= $board->getName() ?></span>
     </div>
-<?php else: ?>
-    <?php foreach ($topics as $topic): ?>
-    <?php $posts = $this->dba->getTable("topics")->getPosts($this->dba, $topic) ?>
-    <?php $postsQty = count($posts) ?>
+
+    <section class="topics">
+    <?php if (empty($topics)): ?>
         <div class="topic p-tb-0.5">
-            <div class="flex justify-content-spc-btw p-lr-0.5">
-                <div class="flex flex-children-ml">
-                    <span class="icon"><i class="fa fa-chalkboard"></i></span>
-                    <div class="title"><a href="<?= URL ?>topics/<?= $topic->getUrl() ?>" class="title"><?= $topic->getTitle() ?></a></div>
-                </div>
+            <div class="p-0.5">Ainda não há tópicos.</div>
+        </div>
+    <?php else: ?>
+        <?php foreach ($topics as $topic): ?>
+        <?php $posts = $this->dba->getTable("topics")->getPosts($this->dba, $topic) ?>
+        <?php $postsQty = count($posts) ?>
+            <div class="topic p-tb-0.5">
+                <div class="flex justify-content-spc-btw p-lr-0.5">
+                    <div class="flex flex-children-ml">
+                        <span class="icon"><i class="fa fa-chalkboard"></i></span>
+                        <div class="title"><a href="<?= URL ?>topics/<?= $topic->getUrl() ?>" class="title"><?= $topic->getTitle() ?></a></div>
+                    </div>
 
-                <div class="flex flex-children-ml">
-                    <span title="Mensagens"><i class="fa fa-comments"></i> <?= $postsQty ?></span>
-                    <span title="Visualizações"><i class="fa fa-eye"></i> <?= $topic->getViews() ?></span>
-                </div>
-            </div>
-
-            <div class="bottom">
-                <div class="flex-3">
-                    <div class="content p-lr-0.5">
-                        <div class="description"><?= $board->getDescription() ?></div>
-                        <div class="caption">Autor: <a href="<?= URL ?>users/<?= $topic->getAuthor()->getUsername() ?>" class="caption"><?= $topic->getAuthor()->getUsername() ?></a></div>
+                    <div class="flex flex-children-ml">
+                        <span title="Mensagens"><i class="fa fa-comments"></i> <?= $postsQty ?></span>
+                        <span title="Visualizações"><i class="fa fa-eye"></i> <?= $topic->getViews() ?></span>
                     </div>
                 </div>
 
-                <div class="latest-msg flex-1 p-lr-0.5" style="margin-top: 0.5rem">
-                <?php if (! empty($posts)): ?>
-                    <div>Última mensagem por <a href="<?= URL ?>users/<?= $posts[$postsQty-1]->getAuthor()->getUsername() ?>"><?= $posts[$postsQty-1]->getAuthor()->getUsername() ?></a> em <?= $this->date->translateTime($posts[$postsQty-1]->getCreationDate(), 1) ?> às <?= $this->date->translateToTime($posts[$postsQty-1]->getCreationDate()) ?></div>
-                <?php else: ?>
-                    <div>0</div>
-                <?php endif ?>
+                <div class="bottom">
+                    <div class="flex-3">
+                        <div class="content p-lr-0.5">
+                            <div class="description"><?= $board->getDescription() ?></div>
+                            <div class="caption">Autor: <a href="<?= URL ?>users/<?= $topic->getAuthor()->getUsername() ?>" class="caption"><?= $topic->getAuthor()->getUsername() ?></a></div>
+                        </div>
+                    </div>
+
+                    <div class="latest-msg flex-1 p-lr-0.5" style="margin-top: 0.5rem">
+                    <?php if (! empty($posts)): ?>
+                        <div>Última mensagem por <a href="<?= URL ?>users/<?= $posts[$postsQty-1]->getAuthor()->getUsername() ?>"><?= $posts[$postsQty-1]->getAuthor()->getUsername() ?></a> em <?= $this->date->translateTime($posts[$postsQty-1]->getCreationDate(), 1) ?> às <?= $this->date->translateToTime($posts[$postsQty-1]->getCreationDate()) ?></div>
+                    <?php else: ?>
+                        <div>0</div>
+                    <?php endif ?>
+                    </div>
                 </div>
             </div>
-        </div>
-    <?php endforeach ?>
-<?php endif ?>
+        <?php endforeach ?>
+    <?php endif ?>
+    </section>
 </section>
 <!-- 
 <br>
