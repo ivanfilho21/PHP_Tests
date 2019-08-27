@@ -5,7 +5,7 @@
 
 <div class="card">
     <div class="card-header">
-        <h1><?= $quiz->getTitle() ?></h1>
+        <h1><?= utf8_encode($quiz->getTitle()) ?></h1>
     </div>
 
     <div class="card-body">
