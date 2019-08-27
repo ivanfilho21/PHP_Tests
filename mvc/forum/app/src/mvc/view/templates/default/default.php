@@ -1,5 +1,5 @@
 <?php
-$this->styles[] = array("path" => REL_TEMPLATE .$this->template ."/css/", "name" => "win98-header");
+$this->styles[] = array("path" => REL_TEMPLATE .$this->template ."/css/", "name" => "header");
 $this->styles[] = array("path" => REL_TEMPLATE .$this->template ."/css/", "name" => "footer");
 ?>
 <!DOCTYPE html><html lang="pt-br"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, user-scalable=1.0, initial-scale=1.0">
@@ -46,7 +46,7 @@ $this->styles[] = array("path" => REL_TEMPLATE .$this->template ."/css/", "name"
 
 <section class="container">
     <?php if ($this->showMainPanel): ?>
-    <section class="main-options">
+    <section class="main-options card">
         <?php $this->requireView("parts/navigation", null, true) ?>
     </section>
     <?php endif ?>
