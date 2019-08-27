@@ -1,8 +1,9 @@
 <style>
-    .boards {
-        background-color: white;
-    }
 
+    .category {
+        margin: 0rem;
+        margin-bottom: 1rem;
+    }
     .boards .board { border-bottom: 1px solid #ccc; }
     .boards .board:last-child { border-bottom: none; }
 
@@ -20,6 +21,7 @@
 </style>
 
 <?php foreach($categories as $cat): ?>
+<section class="category card">
 <?php $boards = $this->dba->getTable("categories")->getBoards($this->dba, $cat) ?>
     <div class="dark flex flex-children-ml p-0.5">
         <span class="icon"><i class="fa fa-folder"></i></span>
@@ -86,5 +88,5 @@
     <?php endforeach ?>
 <?php endif ?>
     </section>
-    <br>
+</section>
 <?php endforeach ?>
