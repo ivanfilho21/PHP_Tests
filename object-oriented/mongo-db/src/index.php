@@ -1,17 +1,12 @@
+<?php $title = "Sorteios da MegaSena" ?>
+<?php require "template-header.php" ?>
+
 <?php
-
-require "../vendor/autoload.php";
-use MongoDB\Client as MongoDB;
-
-$conn = new MongoDB("mongodb://localhost:27017");
 
 $db = $conn->test;
 $megasena = $db->megasena;
 $docs = $megasena->find();
 ?>
-
-<?php $title = "Sorteios da MegaSena" ?>
-<?php require "template-header.php" ?>
 
 <h1>Sorteios da MegaSena</h1>
 <h4>Quantidade: <?= $megasena->count() ?></h4>

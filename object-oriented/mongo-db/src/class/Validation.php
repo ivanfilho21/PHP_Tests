@@ -44,7 +44,9 @@ class Validation
 
         if ($res) {
             $cd = $conn->test->megasena->find(array("Concurso" => intval($number)));
-            if (! empty($cd->toArray())) {
+            
+            $doc = $cd->toArray();
+            if (! empty($doc)) {
                 $res = false;
                 $_SESSION["error"]["number"] = "Já existe um sorteio com esse número.";
             }
