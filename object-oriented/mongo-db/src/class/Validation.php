@@ -40,9 +40,14 @@ class Validation
     {
         $regex = "/^[1-9]+([0-9]*)$/";
         $res = preg_match($regex, $number);
+        global $conn;
 
         if ($res) {
-            // TODO: check in DB if number already exists, false if true
+            $cd = $conn->test->megasena->find(array("Concurso" => intval($number)));
+            if (! empty($cd->toArray())) {
+                $res = false;
+                $_SESSION["error"]["number"] = "Já existe um sorteio com esse número.";
+            }
         } else {
             $_SESSION["error"]["number"] = "Digite um número maior que Zero.";
         }
