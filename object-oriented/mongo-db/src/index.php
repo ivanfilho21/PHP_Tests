@@ -33,9 +33,9 @@ $docs = $megasena->find();
 			<td><?= $doc["Data Sorteio"] ?></td>
 
 			<td>
-				<a class="btn btn-info" href="view.php?<?= $doc["_id"] ?>">View</a>
-				<a class="btn btn-warning" href="edit.php?<?= $doc["_id"] ?>">Edit</a>
-				<a class="btn btn-danger" href="delete.php?<?= $doc["_id"] ?>">Delete</a>
+				<a class="btn btn-info" href="view.php?id=<?= $doc["_id"] ?>">View</a>
+				<a class="btn btn-warning" href="edit.php?id=<?= $doc["_id"] ?>">Edit</a>
+				<a class="btn btn-danger" href="delete.php?id=<?= $doc["_id"] ?>">Delete</a>
 			</td>
 		</tr>
 		<?php endforeach ?>
