@@ -2,7 +2,6 @@
 
 session_start();
 
-require "../vendor/autoload.php";
-use MongoDB\Client as MongoDB;
+require "src/class/DB.php";
 
-$conn = new MongoDB("mongodb://localhost:27017");
+$conn = DB::getConnection();
