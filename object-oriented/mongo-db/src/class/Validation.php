@@ -2,7 +2,18 @@
 
 class Validation
 {
-    
+    static function sanitizeInt(String $int)
+    {
+        $int = intval($int);
+        return filter_var($int, FILTER_SANITIZE_NUMBER_INT);
+    }
+
+    static function sanitizeMoney(String $float)
+    {
+        $float = floatval($float);
+        return number_format($float, 2, ',', '.');
+    }
+
     static function validateDate(String $date)
     {
         $res = true;
