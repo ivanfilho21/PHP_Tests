@@ -96,13 +96,18 @@ switch ($uf["g"]) {
 
 <?php
 $date = explode("/", $doc["Data Sorteio"]);
-$month = (is_array($date) && count($date) == 3) ? $date[1] : 0;
-$month = substr($month, 1, 2);
-$date[1] = lcfirst($months[$month]);
 
-$date = implode(" de ", $date);
+if (is_array($date) && count($date) == 3) {
+    $month = substr($date[1], 1, 2);
+    $date[1] = lcfirst($months[$month]);
+    
+    $date = implode(" de ", $date);
+} else {
+    $date = $date[0];
+}
 // echo $date;
 ?>
+
 <p>
     Sorteio realizado <?= $article ?> <?= $uf["name"] ?> em <?= $date ?>.
 </p>
@@ -111,6 +116,8 @@ $date = implode(" de ", $date);
     Houve ao todo <?= $gan ?> ganhador<?= $gan == 1 ? "" : "es" ?>.
 </p>
 
+
+<?php if (! empty($doc["1ª Dezena"])): ?>
 <h4>Dezenas Sorteadas</h4>
 
 <div class="balls d-flex flex-wrap">
@@ -118,23 +125,29 @@ $date = implode(" de ", $date);
     <div class="ball mr-3 mb-3"><?= $doc[($i + 1) ."ª Dezena"] ." " ?></div>
     <?php endfor ?>
 </div>
+<?php endif ?>
+
 
 <h4>Premiação</h4>
 
 <?php $g = $doc["Ganhadores_Sena"] ?>
-<?php if (! empty($g)): ?>
 <h5>Sena <span class="small text-muted">(6 números acertados)</span></h5>
 
+<?php if (empty($g)): ?>
+<p>Não houve acertadores.</p>
+<?php else: ?>
 <ul>
-    <li><?= $g ." ganhador " .($g == 1 ? "" : "es") ?></li>
+    <li><?= $g ." ganhador" .($g == 1 ? "" : "es") ?></li>
     <li>Valor do Rateio: R$ <?= $doc["Rateio_Sena"] ?></li>
 </ul>
 <?php endif ?>
 
-<?php $g = $doc["Ganhadores_Quina"] ?>
-<?php if (! empty($g)): ?>
-<h5>Quina <span class="small text-muted">(5 números acertados)</span></h5>
 
+<?php $g = $doc["Ganhadores_Quina"] ?>
+<h5>Quina <span class="small text-muted">(5 números acertados)</span></h5>
+<?php if (empty($g)): ?>
+<p>Não houve acertadores.</p>
+<?php else: ?>
 <ul>
     <li><?= $g ." ganhador" .($g == 1 ? "" : "es") ?></li>
     <li>Valor do Rateio: R$ <?= $doc["Rateio_Quina"] ?></li>
@@ -142,9 +155,10 @@ $date = implode(" de ", $date);
 <?php endif ?>
 
 <?php $g = $doc["Ganhadores_Quadra"] ?>
-<?php if (! empty($g)): ?>
 <h5>Quadra <span class="small text-muted">(4 números acertados)</span></h5>
-
+<?php if (empty($g)): ?>
+<p>Não houve acertadores.</p>
+<?php else: ?>
 <ul>
     <li><?= $g ." ganhador" .($g == 1 ? "" : "es") ?></li>
     <li>Valor do Rateio: R$ <?= $doc["Rateio_Quadra"] ?></li>
