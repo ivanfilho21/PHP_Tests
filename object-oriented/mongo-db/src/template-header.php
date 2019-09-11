@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <script defer src="../bootstrap/js/jquery.min.js"></script>
     <script defer src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <style>
+        pre {
+            color: white;
+        }
+    </style>
 </head>
 <body class="bg-dark text-light">
     <section class="container">
