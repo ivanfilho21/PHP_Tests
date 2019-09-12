@@ -67,7 +67,7 @@ if (is_array($date) && count($date) == 3) {
 ?>
 
 <p>
-    Sorteio realizado <?= $article ?> <?= $uf["name"] ?> em <?= $date ?>.
+    Sorteio realizado <?= ! empty($doc["Cidade"]) ? " em " .$doc["Cidade"] : "" ?> <?= $article ?> <?= $uf["name"] ?> em <?= $date ?>.
 </p>
 
 <p>
