@@ -5,24 +5,42 @@ require "class/Util.php";
 $dbMan = new MongoDB\Driver\Manager();
 $bulkWrite = new MongoDB\Driver\BulkWrite;
 
-# Init variables
-$number = ! empty($_POST["number"]) ? $_POST["number"] : 0;
-$date = ! empty($_POST["date"]) ? $_POST["date"] : date("Y-m-d");
-$city = ! empty($_POST["city"]) ? $_POST["city"] : "";
-$uf = ! empty($_POST["uf"]) ? $_POST["uf"] : "";
-$ac = ! empty($_POST["ac"]) && $_POST["ac"] === "1" ? "SIM" : "NÃO";
-$dezenas = ! empty($_POST["dezena"]) ? $_POST["dezena"] : array();
-for ($i = 0; $i < count($dezenas); $i++) {
-    $dezenas[$i] = $dezenas[$i];
+$doc = array();
+
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    $id = empty($_GET["id"]) ? 0 : $_GET["id"];
+
+    if (! empty($id)) {
+        $cd = $conn->test->megasena->find(array("_id" => DB::getObjectId($id)));   
+        $doc = $cd->toArray();
+        $doc = $doc[0];
+        if (empty($doc)) redirect("index");
+
+        echo "<pre>" .var_export($doc, true) ."</pre>";
+    }
 }
 
-$senaQty = ! empty($_POST["sena-qty"]) ? $_POST["sena-qty"] : 0;
-$quinaQty = ! empty($_POST["quina-qty"]) ? $_POST["quina-qty"] : 0;
-$quadraQty = ! empty($_POST["quadra-qty"]) ? $_POST["quadra-qty"] : 0;
+# Init variables
+$number = ! empty($_POST["number"]) ? $_POST["number"] : (! empty($doc["Concurso"]) ? $doc["Concurso"] : 0);
+$date = ! empty($_POST["date"]) ? $_POST["date"] : (! empty($doc["Data_Sorteio"]) ? $doc["Data_Sorteio"] : date("Y-m-d"));
+$city = ! empty($_POST["city"]) ? $_POST["city"] : (! empty($doc["Cidade"]) ? $doc["Cidade"] : "");
+$uf = ! empty($_POST["uf"]) ? $_POST["uf"] : (! empty($doc["UF"]) ? $doc["UF"] : "");
+$ac = ! empty($_POST["ac"]) && $_POST["ac"] === "1" ? "SIM" : (! empty($doc["Acumulado"]) ? $doc["Acumulado"] : "NÃO");
+$dezenas = ! empty($_POST["dezena"]) ? $_POST["dezena"] : array();
 
-$prizeSena = ! empty($_POST["prize-sena"]) ? $_POST["prize-sena"] : "";
-$prizeQuina = ! empty($_POST["prize-quina"]) ? $_POST["prize-quina"] : "";
-$prizeQuadra = ! empty($_POST["prize-quadra"]) ? $_POST["prize-quadra"] : "";
+if (! empty($doc["1ª Dezena"])) {
+    for ($i = 0; $i < 6; $i++) {
+        $dezenas[$i] = (empty($doc[($i + 1) ."ª Dezena"])) ? 0 : $doc[($i + 1) ."ª Dezena"];
+    }
+}
+
+$senaQty = ! empty($_POST["sena-qty"]) ? $_POST["sena-qty"] : (! empty($doc["Ganhadores_Sena"]) ? $doc["Ganhadores_Sena"] : 0);
+$quinaQty = ! empty($_POST["quina-qty"]) ? $_POST["quina-qty"] : (! empty($doc["Ganhadores_Quina"]) ? $doc["Ganhadores_Quina"] : 0);
+$quadraQty = ! empty($_POST["quadra-qty"]) ? $_POST["quadra-qty"] : (! empty($doc["Ganhadores_Quadra"]) ? $doc["Ganhadores_Quadra"] : 0);
+
+$prizeSena = ! empty($_POST["prize-sena"]) ? $_POST["prize-sena"] : (! empty($doc["Rateio_Sena"]) ? $doc["Rateio_Sena"] : "");
+$prizeQuina = ! empty($_POST["prize-quina"]) ? $_POST["prize-quina"] : (! empty($doc["Rateio_Quina"]) ? $doc["Rateio_Quina"] : "");
+$prizeQuadra = ! empty($_POST["prize-quadra"]) ? $_POST["prize-quadra"] : (! empty($doc["Rateio_Quadra"]) ? $doc["Rateio_Quadra"] : "");
 
 // echo "<pre>" .var_export($_POST, true) ."</pre>";
 
@@ -44,6 +62,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"/*  && ! empty($_POST["submit"]) */) {
         $d = array(
             "Concurso" => $number,
             "Data Sorteio" => convertToBrazilianDateFormat($date),
+            "Cidade" => $city,
+            "UF" => $uf,
             "Acumulado" => $ac,
             "Ganhadores_Sena" => $senaQty,
             "Ganhadores_Quina" => $quinaQty,
@@ -181,12 +201,12 @@ function validation()
         $error["prize-sena"] = "Especifique o valor do prêmio.";
     }
 
-    if ($quinaQty > 0 && $prizequina <= 0) {
+    if ($quinaQty > 0 && $prizeQuina <= 0) {
         $res = false;
         $error["prize-quina"] = "Especifique o valor do prêmio.";
     }
 
-    if ($quadraQty > 0 && $prizequadra <= 0) {
+    if ($quadraQty > 0 && $prizeQuadra <= 0) {
         $res = false;
         $error["prize-quadra"] = "Especifique o valor do prêmio.";
     }
