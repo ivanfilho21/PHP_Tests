@@ -7,17 +7,14 @@ $bulkWrite = new MongoDB\Driver\BulkWrite;
 
 $doc = array();
 
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    $id = empty($_GET["id"]) ? 0 : $_GET["id"];
+$id = empty($_GET["id"]) ? 0 : $_GET["id"];
+if (! empty($id)) {
+    $cd = $conn->test->megasena->find(array("_id" => DB::getObjectId($id)));
+    $doc = $cd->toArray();
+    $doc = $doc[0];
+    if (empty($doc)) redirect("index");
 
-    if (! empty($id)) {
-        $cd = $conn->test->megasena->find(array("_id" => DB::getObjectId($id)));   
-        $doc = $cd->toArray();
-        $doc = $doc[0];
-        if (empty($doc)) redirect("index");
-
-        echo "<pre>" .var_export($doc, true) ."</pre>";
-    }
+    echo "<pre>" .var_export($doc, true) ."</pre>";
 }
 
 # Init variables
@@ -77,11 +74,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"/*  && ! empty($_POST["submit"]) */) {
             $d[($i + 1) ."ª Dezena"] = $dezenas[$i];
         }
 
-        // echo "<pre>" .var_export($d, true) ."</pre>";
+        echo "<pre>" .var_export($d, true) ."</pre>";
+
         
-        $bulkWrite->insert($d);
-        $dbMan->executeBulkWrite("test.megasena", $bulkWrite);
-        
+        if (empty($doc)) {
+            # INSERT
+            $bulkWrite->insert($d);
+            $dbMan->executeBulkWrite("test.megasena", $bulkWrite);
+        } else {
+            # EDIT
+            $bulkWrite->update(array("_id" => DB::getObjectId($doc["_id"])), $d);
+            $dbMan->executeBulkWrite("test.megasena", $bulkWrite);
+        }
         redirect("index");
     }
 }
@@ -89,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"/*  && ! empty($_POST["submit"]) */) {
 function validation()
 {
     global $number, $date, $city, $uf, $dezenas, $senaQty, $quinaQty, $quadraQty, $prizeSena, $prizeQuina, $prizeQuadra;
-    global $conn, $error;
+    global $conn, $error, $doc;
     $res = true;
 
     # Check if the number has a acceptable format
@@ -104,11 +108,14 @@ function validation()
             $error["number"] = "Valor inválido.";
         } else {
             # Check if draw number is already being used
-            $cd = $conn->test->megasena->find(array("Concurso" => intval($number)));   
-            $doc = $cd->toArray();
-            if (! empty($doc)) {
-                $res = false;
-                $error["number"] = "Já existe um sorteio com esse número.";
+
+            if ($doc["Concurso"] != $number) {
+                $db = $conn->test->megasena->find(array("Concurso" => intval($number)));   
+                $sorteio = $db->toArray();
+                if (! empty($sorteio)) {
+                    $res = false;
+                    $error["number"] = "Já existe um sorteio com esse número.";
+                }
             }
         }
     }

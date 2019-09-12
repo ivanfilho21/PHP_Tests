@@ -10,7 +10,7 @@
 
 <h1>Novo Sorteio</h1>
 
-<form class="mb-5" action="<?= $_SERVER["PHP_SELF"] ?>" method="post">
+<form class="mb-5" method="post">
     <div class="row">
         <div class="col-md-5">
             <div class="form-group">
