@@ -16,6 +16,7 @@ class DB
 
     static function getObjectId(String $id)
     {
+        if (empty($id)) return 0;
         return new ObjectId($id);
     }
 }
