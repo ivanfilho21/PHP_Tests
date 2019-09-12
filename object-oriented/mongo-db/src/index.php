@@ -11,7 +11,7 @@ $docs = $megasena->find();
 <h1>Sorteios da MegaSena</h1>
 <h4>Quantidade: <?= $megasena->count() ?></h4>
 
-<a class="btn btn-primary" href="create.php">Novo Sorteio</a>
+<a class="btn btn-primary" href="sorteio.php">Novo Sorteio</a>
 
 <table class="table table-light table-striped">
 	<thead>
@@ -34,7 +34,7 @@ $docs = $megasena->find();
 
 			<td>
 				<a class="btn btn-info" href="view.php?id=<?= $doc["_id"] ?>">View</a>
-				<a class="btn btn-warning" href="edit.php?id=<?= $doc["_id"] ?>">Edit</a>
+				<a class="btn btn-warning" href="sorteio.php?id=<?= $doc["_id"] ?>">Edit</a>
 				<a class="btn btn-danger" href="delete.php?id=<?= $doc["_id"] ?>">Delete</a>
 			</td>
 		</tr>
