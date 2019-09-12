@@ -10,13 +10,16 @@
 
 <h1>Novo Sorteio</h1>
 
-<form action="<?= $_SERVER["PHP_SELF"] ?>" method="post">
+<form class="mb-5" action="<?= $_SERVER["PHP_SELF"] ?>" method="post">
     <div class="row">
         <div class="col-md-5">
             <div class="form-group">
                 <label>Número do Sorteio:</label>
-                <input class="form-control" type="number" name="number" value="<?= $number ?>">
-                <span class="text-danger"><?= (! isset($_SESSION["error"]["number"])) ? "" : $_SESSION["error"]["number"] ?></span>
+                <input class="form-control" type="number" name="number" autofocus="on" value="<?= $number ?>">
+
+                <?php if (! empty($error["number"])): ?>
+                <span class="text-danger"><?= (! isset($error["number"])) ? "" : $error["number"] ?></span>
+                <?php endif ?>
             </div>
         </div>
 
@@ -24,7 +27,10 @@
             <div class="form-group">
                 <label>Data do Sorteio:</label>
                 <input class="form-control" type="date" name="date" value="<?= $date ?>">
-                <span class="text-danger"><?= (! isset($_SESSION["error"]["date"])) ? "" : $_SESSION["error"]["date"] ?></span>
+
+                <?php if (! empty($error["date"])): ?>
+                <span class="text-danger"><?= (! isset($error["date"])) ? "" : $error["date"] ?></span>
+                <?php endif ?>
             </div>
         </div>
     </div>
@@ -38,11 +44,17 @@
     </div>
 
     <div class="form-group">
-        <label>Dezenas Sorteadas:</label>
+        <label>Dezenas Sorteadas: <span class="small text-muted">(Números entre 1 e 60)</span></label>
+
         <div class="row">
             <?php for ($i = 0; $i < 6; $i++): ?>
             <div class="col-sm">
-                <input class="form-control" type="number" name="dezena[]" min="1" max="60" value="<?= (! empty($dezenas[$i])) ? $dezenas[$i] : "1" ?>">
+                <input class="form-control" type="number" name="dezena[]" min="1" max="60" value="<?= (! empty($dezenas[$i])) ? $dezenas[$i] : "0" ?>">
+                
+                <?php if (! empty($error["dezena"][$i])): ?>
+                <span class="text-danger"><?= $error["dezena"][$i] ?></span>
+                <br>
+                <?php endif ?>
                 <br>
             </div>
             <?php endfor ?>
@@ -54,7 +66,11 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label>Ganhadores:</label>
-                <input class="form-control" type="number" name="sena-qty" value="<?= (! empty($senaQty)) ? $senaQty : 0 ?>">
+                <input class="form-control" type="number" name="sena-qty" value="<?= $senaQty ?>">
+
+                <?php if (! empty($error["sena-qty"])): ?>
+                <span class="text-danger"><?= (! isset($error["sena-qty"])) ? "" : $error["sena-qty"] ?></span>
+                <?php endif ?>
             </div>
 
         </div>
@@ -62,7 +78,11 @@
             <div class="form-group">
                 <label>Valor do Prêmio:</label>
                 <input class="form-control" type="text" name="prize-sena" placeholder="R$ 999888,00" value="<?= $prizeSena ?>">
-                <span class="text-danger"><?= (! isset($_SESSION["error"]["prize"])) ? "" : $_SESSION["error"]["prize"] ?></span>
+                <span class="text-danger"><?= (! isset($error["prize"])) ? "" : $error["prize"] ?></span>
+
+                <?php if (! empty($error["prize-sena"])): ?>
+                <span class="text-danger"><?= (! isset($error["prize-sena"])) ? "" : $error["prize-sena"] ?></span>
+                <?php endif ?>
             </div>
         </div>
     </div>
@@ -73,6 +93,10 @@
             <div class="form-group">
                 <label>Ganhadores:</label>
                 <input class="form-control" type="number" name="quina-qty" value="<?= (! empty($quinaQty)) ? $quinaQty : 0 ?>">
+
+                <?php if (! empty($error["quina-qty"])): ?>
+                <span class="text-danger"><?= (! isset($error["quina-qty"])) ? "" : $error["quina-qty"] ?></span>
+                <?php endif ?>
             </div>
 
         </div>
@@ -80,7 +104,11 @@
             <div class="form-group">
                 <label>Valor do Prêmio:</label>
                 <input class="form-control" type="text" name="prize-quina" placeholder="R$ 999888,00" value="<?= $prizeQuina ?>">
-                <span class="text-danger"><?= (! isset($_SESSION["error"]["prize"])) ? "" : $_SESSION["error"]["prize"] ?></span>
+                <span class="text-danger"><?= (! isset($error["prize"])) ? "" : $error["prize"] ?></span>
+
+                <?php if (! empty($error["prize-quina"])): ?>
+                <span class="text-danger"><?= (! isset($error["prize-quina"])) ? "" : $error["prize-quina"] ?></span>
+                <?php endif ?>
             </div>
         </div>
     </div>
@@ -91,6 +119,10 @@
             <div class="form-group">
                 <label>Ganhadores:</label>
                 <input class="form-control" type="number" name="quadra-qty" value="<?= (! empty($quadraQty)) ? $quadraQty : 0 ?>">
+
+                <?php if (! empty($error["quadra-qty"])): ?>
+                <span class="text-danger"><?= (! isset($error["quadra-qty"])) ? "" : $error["quadra-qty"] ?></span>
+                <?php endif ?>
             </div>
 
         </div>
@@ -98,12 +130,16 @@
             <div class="form-group">
                 <label>Valor do Prêmio:</label>
                 <input class="form-control" type="text" name="prize-quadra" placeholder="R$ 999888,00" value="<?= $prizeQuadra ?>">
-                <span class="text-danger"><?= (! isset($_SESSION["error"]["prize"])) ? "" : $_SESSION["error"]["prize"] ?></span>
+                <span class="text-danger"><?= (! isset($error["prize"])) ? "" : $error["prize"] ?></span>
+
+                <?php if (! empty($error["prize-quadra"])): ?>
+                <span class="text-danger"><?= (! isset($error["prize-quadra"])) ? "" : $error["prize-quadra"] ?></span>
+                <?php endif ?>
             </div>
         </div>
     </div>
 
-    <div class="row justify-content-center">
+    <div class="row mt-3 justify-content-center">
         <div class="col col-md-6 text-center">
             <button class="btn btn-success btn-block" type="submit">Salvar</button>
         </div>
