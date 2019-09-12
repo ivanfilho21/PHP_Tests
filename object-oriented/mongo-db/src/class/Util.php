@@ -31,4 +31,19 @@ class Util
         "SE" => ["name" => "Sergipe", "g" => "n"],
         "TO" => ["name" => "Tocantins", "g" => "n"],
     );
+    public static $months = array(
+        "",
+        "Janeiro",
+        "Fevereiro",
+        "Março",
+        "Abril",
+        "Maio",
+        "Junho",
+        "Julho",
+        "Agosto",
+        "Setembro",
+        "Outubro",
+        "Novembro",
+        "Dezembro",
+    );
 }
