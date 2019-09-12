@@ -105,7 +105,6 @@
             <div class="form-group">
                 <label>Valor do Prêmio:</label>
                 <input class="form-control" type="text" name="prize-sena" placeholder="R$ 999888,00" value="<?= $prizeSena ?>">
-                <span class="text-danger"><?= $error["prize"] ?></span>
 
                 <?php if (! empty($error["prize-sena"])): ?>
                 <span class="text-danger"><?= $error["prize-sena"] ?></span>
@@ -131,7 +130,6 @@
             <div class="form-group">
                 <label>Valor do Prêmio:</label>
                 <input class="form-control" type="text" name="prize-quina" placeholder="R$ 999888,00" value="<?= $prizeQuina ?>">
-                <span class="text-danger"><?= $error["prize"] ?></span>
 
                 <?php if (! empty($error["prize-quina"])): ?>
                 <span class="text-danger"><?= $error["prize-quina"] ?></span>
@@ -173,5 +171,4 @@
     </div>
 </form>
 
-<?php Validation::resetMessages() ?>
 <?php require "template-footer.php" ?>
