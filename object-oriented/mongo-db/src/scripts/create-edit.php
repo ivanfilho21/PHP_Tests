@@ -1,11 +1,15 @@
 <?php
 
+require "class/Util.php";
+
 $dbMan = new MongoDB\Driver\Manager();
 $bulkWrite = new MongoDB\Driver\BulkWrite;
 
 # Init variables
-$date = ! empty($_POST["date"]) ? $_POST["date"] : date("Y-m-d");
 $number = ! empty($_POST["number"]) ? $_POST["number"] : 0;
+$date = ! empty($_POST["date"]) ? $_POST["date"] : date("Y-m-d");
+$city = ! empty($_POST["city"]) ? $_POST["city"] : "";
+$uf = ! empty($_POST["uf"]) ? $_POST["uf"] : "";
 $ac = ! empty($_POST["ac"]) && $_POST["ac"] === "1" ? "SIM" : "NÃO";
 $dezenas = ! empty($_POST["dezena"]) ? $_POST["dezena"] : array();
 for ($i = 0; $i < count($dezenas); $i++) {
@@ -27,8 +31,6 @@ $error = array();
 if ($_SERVER["REQUEST_METHOD"] == "POST"/*  && ! empty($_POST["submit"]) */) {
     # String Sanitization
     filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-    
-    // echo "<pre>" .var_export($error, true) ."</pre>";
 
     if (validation()) {
         $prizeSena = str_replace(",", ".", $prizeSena);
@@ -66,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"/*  && ! empty($_POST["submit"]) */) {
 
 function validation()
 {
-    global $number, $date, $dezenas, $senaQty, $quinaQty, $quadraQty, $prizeSena, $prizeQuina, $prizeQuadra;
+    global $number, $date, $city, $uf, $dezenas, $senaQty, $quinaQty, $quadraQty, $prizeSena, $prizeQuina, $prizeQuadra;
     global $conn, $error;
     $res = true;
 
@@ -101,6 +103,31 @@ function validation()
             $res = false;
             $error["date"] = "Formato de data inválida.";
         }
+    }
+
+    # Validating City and UF
+    if (empty($uf)) {
+        $res = false;
+        $error["uf"] = "Selecione o estado onde ocorreu o sorteio.";
+    } else {
+        # Check if it is a valid UF
+        $resLocal = false;
+        foreach (Util::$ufList as $key => $state) {
+            if ($uf == $key) {
+                $resLocal = true;
+                break;
+            }
+        }
+
+        if (! $resLocal) {
+            $res = false;
+            $error["uf"] = "Selecione um estado válido.";
+        }
+    }
+
+    if (empty($city)) {
+        $res = false;
+        $error["city"] = "Especifique a cidade onde ocorreu o sorteio.";
     }
 
     # Validating dezenas
@@ -148,6 +175,23 @@ function validation()
         $res = false;
         $error["prize-quadra"] = "Valor inválido.";
     }
+
+    if ($senaQty > 0 && $prizeSena <= 0) {
+        $res = false;
+        $error["prize-sena"] = "Especifique o valor do prêmio.";
+    }
+
+    if ($quinaQty > 0 && $prizequina <= 0) {
+        $res = false;
+        $error["prize-quina"] = "Especifique o valor do prêmio.";
+    }
+
+    if ($quadraQty > 0 && $prizequadra <= 0) {
+        $res = false;
+        $error["prize-quadra"] = "Especifique o valor do prêmio.";
+    }
+
+    // echo "<pre>" .var_export($error, true) ."</pre>";
 
     return $res;
 }
