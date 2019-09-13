@@ -16,7 +16,9 @@ class DB
 
     static function getObjectId(String $id)
     {
-        if (empty($id)) return 0;
-        return new ObjectId($id);
+        if (preg_match("/^[0-9a-f]{24}$/i", $id)) {
+            return new ObjectId($id);
+        }
+        return 0;        
     }
 }
