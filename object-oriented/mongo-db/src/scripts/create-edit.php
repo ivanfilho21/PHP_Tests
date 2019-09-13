@@ -14,7 +14,11 @@ if (! empty($id)) {
     $doc = $doc[0];
     if (empty($doc)) redirect("index");
 
-    echo "<pre>" .var_export($doc, true) ."</pre>";
+    ?>
+    <script>document.title = "Mega-Sena - Concurso <?= $doc["Concurso"] ?>"</script>
+    <?php
+
+    // echo "<pre>" .var_export($doc, true) ."</pre>";
 }
 
 # Init variables
@@ -39,7 +43,7 @@ $prizeSena = ! empty($_POST["prize-sena"]) ? $_POST["prize-sena"] : (! empty($do
 $prizeQuina = ! empty($_POST["prize-quina"]) ? $_POST["prize-quina"] : (! empty($doc["Rateio_Quina"]) ? $doc["Rateio_Quina"] : "");
 $prizeQuadra = ! empty($_POST["prize-quadra"]) ? $_POST["prize-quadra"] : (! empty($doc["Rateio_Quadra"]) ? $doc["Rateio_Quadra"] : "");
 
-// echo "<pre>" .var_export($_POST, true) ."</pre>";
+echo "<pre>" .var_export($_POST, true) ."</pre>";
 
 $error = array();
 
