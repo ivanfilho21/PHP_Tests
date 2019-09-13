@@ -232,10 +232,3 @@ function convertToBrazilianDateFormat(String $date)
     }
     return $brdate;
 }
-
-function redirect(String $url)
-{
-	$url .= (strpos(".php", $url) === false) ? ".php" : "";
-	header("Location: " .$url);
-	exit();
-}
