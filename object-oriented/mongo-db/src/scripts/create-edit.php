@@ -23,7 +23,14 @@ if (! empty($id)) {
 
 # Init variables
 $number = ! empty($_POST["number"]) ? $_POST["number"] : (! empty($doc["Concurso"]) ? $doc["Concurso"] : 0);
-$date = ! empty($_POST["date"]) ? $_POST["date"] : (! empty($doc["Data_Sorteio"]) ? $doc["Data_Sorteio"] : date("Y-m-d"));
+
+$date = ! empty($_POST["date"]) ? $_POST["date"] : date("Y-m-d");
+if (! empty($doc["Data Sorteio"])) {
+    $date = decodeDateFromBrazilianFormat($doc["Data Sorteio"]);
+    $time = strtotime($date);
+    $date = date("Y-m-d", $time);
+}
+
 $city = ! empty($_POST["city"]) ? $_POST["city"] : (! empty($doc["Cidade"]) ? $doc["Cidade"] : "");
 $uf = ! empty($_POST["uf"]) ? $_POST["uf"] : (! empty($doc["UF"]) ? $doc["UF"] : "");
 $ac = ! empty($_POST["ac"]) && $_POST["ac"] === "1" ? "SIM" : (! empty($doc["Acumulado"]) ? $doc["Acumulado"] : "NÃO");
@@ -229,10 +236,20 @@ function validation()
 
 function convertToBrazilianDateFormat(String $date)
 {
-    $brdate = $date;
+    $brdate = "";
     $dateArray = explode("-", $date);
     if (is_array($dateArray) && count($dateArray) == 3) {
         $brdate = $dateArray[2] ."/" .$dateArray[1] ."/" .$dateArray[0];
     }
     return $brdate;
+}
+
+function decodeDateFromBrazilianFormat(String $brdate)
+{
+    $date = "";
+    $dateArray = explode("/", $brdate);
+    if (is_array($dateArray) && count($dateArray) == 3) {
+        $date = $dateArray[2] ."/" .$dateArray[1] ."/" .$dateArray[0];
+    }
+    return $date;
 }
