@@ -24,13 +24,13 @@ $months = Util::$months;
 $docs = $conn->test->megasena->find(array("_id" => DB::getObjectId($id)));
 $doc = $docs->toArray()[0];
 
-// echo "<pre>" .print_r($doc, true) ."</pre>";
+echo "<pre>" .print_r($doc, true) ."</pre>";
 ?>
 
 <h1>Resultado<span class="small"> Concurso <?= $doc["Concurso"] ?></span></h1>
 
 <?php $gan = $doc["Ganhadores_Sena"] + $doc["Ganhadores_Quina"] + $doc["Ganhadores_Quadra"] ?>
-<?php $uf = $ufList[$doc["UF"]] ?>
+<?php $uf = (empty($ufList[$doc["UF"]])) ? array("name" => "", "g" => "") : $ufList[$doc["UF"]] ?>
 <?php
 switch ($uf["g"]) {
     case "m":
