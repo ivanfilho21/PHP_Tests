@@ -9,13 +9,13 @@ $doc = array();
 
 $id = empty($_GET["id"]) ? 0 : $_GET["id"];
 if (! empty($id)) {
-    $cd = $conn->test->megasena->find(array("_id" => DB::getObjectId($id)));
+    $cd = DB::find("megasena", array("_id" => DB::getObjectId($id)));
     $doc = $cd->toArray();
     $doc = $doc[0];
     if (empty($doc)) redirect("index");
 
     ?>
-    <script>document.title = "Mega-Sena - Concurso <?= $doc["Concurso"] ?>"</script>
+    <script>document.title = "Editar Concurso <?= $doc["Concurso"] ?>"</script>
     <?php
 
     // echo "<pre>" .var_export($doc, true) ."</pre>";
@@ -43,7 +43,7 @@ $prizeSena = ! empty($_POST["prize-sena"]) ? $_POST["prize-sena"] : (! empty($do
 $prizeQuina = ! empty($_POST["prize-quina"]) ? $_POST["prize-quina"] : (! empty($doc["Rateio_Quina"]) ? $doc["Rateio_Quina"] : "");
 $prizeQuadra = ! empty($_POST["prize-quadra"]) ? $_POST["prize-quadra"] : (! empty($doc["Rateio_Quadra"]) ? $doc["Rateio_Quadra"] : "");
 
-echo "<pre>" .var_export($_POST, true) ."</pre>";
+// echo "<pre>" .var_export($_POST, true) ."</pre>";
 
 $error = array();
 
@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"/*  && ! empty($_POST["submit"]) */) {
             $d[($i + 1) ."ª Dezena"] = $dezenas[$i];
         }
 
-        echo "<pre>" .var_export($d, true) ."</pre>";
+        // echo "<pre>" .var_export($d, true) ."</pre>";
 
         
         if (empty($doc)) {
