@@ -18,13 +18,19 @@
 $id = isset($_GET["id"]) ? $_GET["id"] : 0;
 if (empty($id)) header("Location: index.php");
 
+$docs = $conn->test->megasena->find(array("_id" => DB::getObjectId($id)));
+$docs = $docs->toArray();
+if (empty($docs[0])) redirect("index");
+$doc = $docs[0];
+
+?>
+<script>document.title = "Mega-Sena - Concurso <?= $doc["Concurso"] ?>"</script>
+<?php
+
 $ufList = Util::$ufList;
 $months = Util::$months;
 
-$docs = $conn->test->megasena->find(array("_id" => DB::getObjectId($id)));
-$doc = $docs->toArray()[0];
-
-echo "<pre>" .print_r($doc, true) ."</pre>";
+// echo "<pre>" .print_r($doc, true) ."</pre>";
 ?>
 
 <h1>Resultado<span class="small"> Concurso <?= $doc["Concurso"] ?></span></h1>
