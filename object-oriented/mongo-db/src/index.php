@@ -1,15 +1,9 @@
 <?php $title = "Sorteios da MegaSena" ?>
 <?php require "template-header.php" ?>
 
-<?php
-
-$db = $conn->test;
-$megasena = $db->megasena;
-$docs = $megasena->find();
-?>
+<?php $docs = DB::find("megasena", array(), "Concurso", 0, 13) ?>
 
 <h1>Sorteios da MegaSena</h1>
-<h4>Quantidade: <?= $megasena->count() ?></h4>
 
 <a class="btn btn-primary" href="sorteio.php">Novo Sorteio</a>
 
