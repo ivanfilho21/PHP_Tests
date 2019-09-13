@@ -21,4 +21,20 @@ class DB
         }
         return 0;        
     }
+
+    static function find(
+        String $collection,
+        array $filter = array(),
+        String $sortColum = "_id",
+        int $skip = 0,
+        int $limit = 0)
+    {
+        $options = array(
+            "sort" => array($sortColum => 1),
+            "skip" => $skip,
+            "limit" => $limit
+        );
+
+        return self::getConnection()->test->$collection->find($filter, $options);
+    }
 }
