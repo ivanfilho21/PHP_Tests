@@ -22,6 +22,11 @@ class DB
         return 0;        
     }
 
+    static function count(String $collection)
+    {
+        return self::getConnection()->test->$collection->count();
+    }
+
     static function find(
         String $collection,
         array $filter = array(),
