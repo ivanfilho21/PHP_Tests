@@ -8,7 +8,7 @@
     }
 </style>
 
-<h1>Novo Sorteio</h1>
+<h1><?= (empty($doc)) ? "Novo Sorteio" : "Sorteio " .$doc["Concurso"] ?></h1>
 
 <form class="mb-5" method="post">
     <div class="row">
