@@ -16,4 +16,20 @@
     </style>
 </head>
 <body class="bg-dark text-light">
+        <style>
+            .navbar a {
+                color: white;
+            }
+            .navbar-brand {
+                font-weight: bold;
+            }
+        </style>
+        <nav class="navbar navbar-default bg-secondary text-light">
+            <div class="container-fluid">
+            <div class="navbar-header"><a class="navbar-brand" href="#">MegaSena CRUD</a></div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Novo Sorteio</a></li>
+            </ul>
+            </div>
+        </nav>
     <section class="container">
